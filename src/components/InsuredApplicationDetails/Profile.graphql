@@ -1,0 +1,252 @@
+#import "./Base.graphql"
+
+fragment ProfileFields on insurance_application {
+  ...ApplicationBase
+  effective_date
+  expiration_date
+  organization_type
+  insured_organization {
+    id
+    name
+    address
+    city
+    state
+    zip
+    insured_organization_contacts(limit: 10) {
+      id
+      name
+      email
+      type
+    }
+  }
+  broker_agency {
+    id
+    name
+  }
+  domain
+  employees
+  industry
+  revenue
+  naics_code
+  rentals_data
+}
+
+query applicationProfile($id: uuid!) {
+  insurance_application_by_pk(id: $id) {
+    ...ProfileFields
+  }
+}
+
+query getBrokerAgencyList {
+  broker_agency {
+    id
+    name
+  }
+}
+
+mutation createInsuredApplication($object: UIInsuredApplicationInput!) {
+  createInsuredApplicationFromUI(object: $object) {
+    id
+    created_organization {
+      insurance_applications(order_by: { idx: desc }, limit: 1) {
+        id
+      }
+    }
+  }
+}
+
+query getIndustryData {
+  organization_industry(distinct_on: industry, where: {status: {_eq: "enabled"}}) {
+    id
+    industry
+    naics_codes(limit: 1) {
+      id
+      naics
+    }
+    status
+  }
+}
+
+query getImsCompanyBusinessTypeData {
+  ims_company_business_type(order_by: {dnb_desc: asc}) {
+    dnb_id
+    dnb_desc
+    ims_desc
+    ims_id
+  }
+}
+
+query organizationContactsList($orgId: Int!) {
+  insured_organization_contact(
+    where: { insured_organization_id: { _eq: $orgId } }
+  ) {
+    email
+    id
+    name
+    insured_organization_id
+    type
+  }
+}
+
+mutation addOrganizationContact(
+  $objects: [insured_organization_contact_insert_input!] = {}
+) {
+  insert_insured_organization_contact(objects: $objects) {
+    affected_rows
+  }
+}
+mutation getOrgDetailByDomain($domain: String!) {
+  searchDnB(domain: $domain) {
+    address
+    city
+    naics
+    employees
+    industry
+    insured_name
+    revenue
+    state
+    zip
+    dnbCode
+    dnbDescription
+    naics_icdb {
+      naics
+      organization_industry {
+        industry
+        icb
+      }
+    }
+  }
+}
+
+mutation deleteInsuredOrgContactMutation($id: Int!) {
+  delete_insured_organization_contact_by_pk(id: $id) {
+    id
+  }
+}
+
+mutation createInsuredOrganizationApplicationUI (
+  $insured_name: String!
+  $city: String
+  $state: String
+  $zip: String
+  $address: String
+  $domain: String!
+  $employees: Int!
+  $industry: String!
+  $revenue: money!
+  $insured_contacts: [insured_organization_contact_insert_input!] = []
+  $stage: String
+  $quotes: [insurance_quote_insert_input!] = []
+  #$created_by_user_id: String
+  $naics_code: String
+  $organization_type: String
+  $broker_agency_id: Int!
+  $rentals_data: jsonb
+) {
+  insert_insured_organization_one(
+    object: {
+      name: $insured_name
+      city: $city
+      state: $state
+      zip: $zip
+      address: $address
+      insurance_applications: {
+        data: {
+          domain: $domain
+          employees: $employees
+          stage: $stage
+          industry: $industry
+          revenue: $revenue
+          organization_type: $organization_type
+          insurance_quotes: {
+            data: $quotes
+            # on_conflict: {
+            #   constraint: insurance_quote_insurance_application_id_policy_limit_deductibl
+            #   update_columns: [
+            #     premium
+            #     base_premium
+            #     total_premium
+            #     tax_percentage
+            #     other_deductibles
+            #     commission_percentage
+            #     other_deductibles
+            #     updated_at
+            #     taxes
+            #     fees
+            #     sub_limits
+            #   ]
+            # }
+          }
+          rentals_data: $rentals_data
+          #created_by_user_id: $created_by_user_id
+          broker_agency_id: $broker_agency_id
+          naics_code: $naics_code
+        }
+        on_conflict: {
+          constraint: insurance_application_insured_organization_id_effective_date_ex
+          update_columns: [
+            domain
+            revenue
+            employees
+            industry
+            naics_code
+            stage
+            updated_at
+          ]
+        }
+      }
+      insured_organization_contacts: {
+        data: $insured_contacts
+        on_conflict: {
+          constraint: insured_organization_contact_insured_organization_id_email_type
+          update_columns: [
+            name
+            email
+            phone
+            type
+          ]
+        }
+      }
+      #created_by_user_id: $created_by_user_id
+      broker_agency_id: $broker_agency_id
+    }
+    on_conflict: {
+      constraint: insured_organization_name_broker_agency_id_key
+      update_columns: [
+        updated_at
+        name
+        city
+        state
+        zip
+        address
+      ]
+    }
+  ) {
+    id
+    insurance_applications(order_by: { idx: desc }, limit: 1) {
+      id
+    }
+  }
+}
+
+mutation generateQuotes(
+  $revenue: String
+  $industry: String
+  $state: String
+  $employees: String
+  $paymentOption: String
+  $calculateFee: Boolean
+  $calculateTax: Boolean
+) {
+  generateQuotes(
+    revenue: $revenue
+    industry: $industry
+    state: $state
+    employees: $employees
+    paymentOption: $paymentOption
+    calculateFee: $calculateFee
+    calculateTax: $calculateTax
+  ) {
+    quotes
+  }
+}

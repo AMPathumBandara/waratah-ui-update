@@ -1,0 +1,188 @@
+#import "./Base.graphql"
+
+query summaryInsuranceApplication($id: uuid!) {
+  insurance_application_by_pk(id: $id) {
+    id
+    domain
+    effective_date
+    expiration_date
+    revenue
+    industry
+    insured_organization {
+      id
+      address
+      city
+      state
+      zip
+      name
+    }
+    insurance_quote_selection {
+      insurance_quote {
+        id
+        base_premium
+        commission_percentage
+        deductible
+        other_deductibles
+        premium
+        policy_limit
+        tax_percentage
+        total_premium
+        fees
+        taxes
+      }
+      insurance_policy {
+        id
+        long_policy_number
+        policy_number
+        canary_token
+      }
+      id
+    }
+    employees
+    external_scans(limit: 1, order_by: { updated_at: desc }) {
+      id
+      risk_score
+      scan_result
+      external_id
+    }
+    broker_agency {
+      id
+      payment_option
+    }
+  }
+}
+
+subscription watchSummaryInsuranceApplication($id: uuid!) {
+  insurance_application_by_pk(id: $id) {
+    id
+    domain
+    effective_date
+    expiration_date
+    revenue
+    industry
+    insured_organization {
+      id
+      address
+      city
+      state
+      zip
+      name
+    }
+    insurance_quote_selection {
+      insurance_quote {
+        id
+        base_premium
+        commission_percentage
+        deductible
+        other_deductibles
+        premium
+        policy_limit
+        tax_percentage
+        total_premium
+        fees
+        taxes
+      }
+      insurance_policy {
+        id
+        long_policy_number
+        policy_number
+        canary_token
+      }
+      id
+    }
+    employees
+    external_scans(limit: 1, order_by: { updated_at: desc }) {
+      id
+      risk_score
+      scan_result
+      external_id
+    }
+    broker_agency {
+      id
+      payment_option
+    }
+  }
+}
+
+mutation bindApplication(
+  $applicationId: uuid!
+  $insuranceQuoteSelectionId: Int!
+  $brokerEmail: String!
+  $payer: String!
+) {
+  handleIpfsIntegration(
+    applicationId: $applicationId
+    insuranceQuoteSelectionId: $insuranceQuoteSelectionId
+    brokerEmail: $brokerEmail
+    payer: $payer
+  ) {
+    id
+  }
+}
+
+subscription insuranceArtifact($applicationId: uuid!) {
+  insurance_application_artifact: latest_app_artifacts_quote_policy(where: {application_id: {_eq: $applicationId}}) {
+    application_id
+    created_at
+    file_type
+    file_uri
+    id
+    updated_at
+  }
+}
+
+
+query getIpfsFile($filename: String!) {
+  getIpfsFile(filename: $filename) {
+    filedata
+  }
+}
+
+query getApplicationPaymentDataQ($id: uuid!) {
+  insurance_policy(
+    where: { insurance_quote_selection: { application_id: { _eq: $id } } }
+  ) {
+    id
+    agent_signed
+    insured_signed
+    payment_collected
+    policy_number
+    long_policy_number
+    canary_token
+    insurance_quote_selection {
+      insurance_application {
+        id
+        stage
+      }
+    }
+    waratah_report
+  }
+}
+
+subscription getApplicationPaymentData($id: uuid!) {
+  insurance_policy(
+    where: { insurance_quote_selection: { application_id: { _eq: $id } } }
+  ) {
+    id
+    agent_signed
+    insured_signed
+    payment_collected
+    policy_number
+    long_policy_number
+    canary_token
+    insurance_quote_selection {
+      id
+      insurance_application {
+        id
+        stage
+      }
+    }
+    waratah_report
+  }
+}
+
+mutation agentBindApplication($applicationId: uuid!, $insuranceQuoteSelectionId: String!) {
+  handleAgentBind(applicationId: $applicationId, insuranceQuoteSelectionId: $insuranceQuoteSelectionId) {
+    id
+  }
+}

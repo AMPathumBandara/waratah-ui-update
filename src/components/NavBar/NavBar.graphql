@@ -1,0 +1,57 @@
+query brokerAgencyName($auth0Id: String!) {
+  user(where: { auth0_id: { _eq: $auth0Id } }) {
+    broker_agent {
+      broker_agency {
+        name
+      }
+    }
+  }
+}
+
+query me @cached {
+  me {
+    auth0_id
+    name
+    email
+    broker_producer {
+      broker_agency {
+        id
+        name
+        tenant_id
+        payment_option
+        calculate_fee
+        calculate_tax
+        tenant {
+          logo
+          primary_color
+          secondary_color
+        }
+        commission_rate
+      }
+      commission_rate
+    }
+    tenant_admin {
+      tenant_id
+    }
+  }
+  rqb_system(where: {key: {_eq: "release_version"}}, limit: 1) {
+    id
+    key
+    value
+  }
+}
+
+
+query getLogoLink($key: String!) {
+  getLogo(key: $key) {
+    filelink
+  }
+}
+
+subscription ReleseVersion {
+  rqb_system(where: {key: {_eq: "release_version"}}, limit: 1) {
+    id
+    key
+    value
+  }
+}

@@ -1,0 +1,146 @@
+query getBrokerList(
+  $limit: Int = 10
+  $offset: Int = 0
+  $name: String
+  $tenant_id: Int!
+) {
+  broker_agency(
+    limit: $limit
+    offset: $offset
+    order_by: { created_at: desc }
+    where: { name: { _ilike: $name }, tenant_id: { _eq: $tenant_id } }
+  ) {
+    name
+    id
+  }
+}
+
+query getBrokerListCount($name: String, $tenant_id: Int!) {
+  broker_agency_aggregate(
+    where: { name: { _ilike: $name }, tenant_id: { _eq: $tenant_id } }
+  ) {
+    aggregate {
+      count
+    }
+  }
+}
+
+mutation insertBrokerAgency(
+  $zip: String!
+  $state: String!
+  $name: String!
+  $country: String!
+  $city: String!
+  $address: String!
+  $tenant_id: Int!
+  $id: Int
+) {
+  insert_broker_agency_one(
+    object: {
+      address: $address
+      city: $city
+      country: $country
+      name: $name
+      state: $state
+      zip: $zip
+      tenant_id: $tenant_id
+      id: $id
+    }
+    on_conflict: {
+      constraint: broker_agency_tenant_id_name_key
+      update_columns: [zip, state, name, country, city, address]
+    }
+  ) {
+    id
+  }
+}
+
+query getBrokerAgencies(
+  $id: Int!
+  $offset: Int = 0
+  $limit: Int = 10
+  $name: String
+  $order_by: [broker_agency_order_by!] = {}
+) {
+  tenant_by_pk(id: $id) {
+    id
+    name
+    broker_agencies(
+      offset: $offset
+      limit: $limit
+      order_by: $order_by
+      where: { name: { _ilike: $name } }
+    ) {
+      id
+      name
+      address
+      created_at
+      payment_option
+      broker_producers_aggregate {
+        aggregate {
+          count
+        }
+      }
+    }
+    broker_agencies_aggregate(
+      where: { tenant_id: { _eq: $id }, name: { _ilike: $name } }
+    ) {
+      aggregate {
+        count
+      }
+    }
+  }
+}
+
+mutation updateBrokerAgencyMutation(
+  $id: Int!
+  $_set: broker_agency_set_input = {}
+) {
+  update_broker_agency_by_pk(pk_columns: { id: $id }, _set: $_set) {
+    id
+  }
+}
+
+query getBrokerAgencyOne($id: Int!) {
+  broker_agency(where: { id: { _eq: $id } }) {
+    city
+    country
+    address
+    state
+    name
+    zip
+    tenant_id
+    broker_program_id
+    payment_option
+    commission_rate
+    quote_template_id
+    calculate_fee
+    calculate_tax
+  }
+}
+
+mutation CreateUpdateBroker($objects: broker_agency_insert_input = {}) {
+  insert_broker_agency_one(
+    object: $objects
+    on_conflict: {
+      constraint: broker_agency_pkey
+      update_columns: [
+        zip
+        state
+        name
+        country
+        city
+        address
+        broker_program_id
+        payment_option
+        commission_rate
+        quote_template_id
+        calculate_fee
+        calculate_tax
+      ]
+    }
+  ) {
+    id
+    name
+  }
+}

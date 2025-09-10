@@ -1,0 +1,12 @@
+query getUserBranding($email: String) {
+  tenant(
+    where: {
+      broker_agencies: {
+        broker_producers: { user: { email: { _eq: $email } } }
+      }
+    }
+  ) {
+    primary_color
+    secondary_color
+  }
+}

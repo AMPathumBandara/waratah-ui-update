@@ -1,0 +1,5 @@
+VITE_GRAPHQL_HTTP_URL=https://visionx-demo.hasura.app/v1/graphql
+VITE_GRAPHQL_WS_URL=wss://visionx-demo.hasura.app/v1/graphql
+VITE_USER_POOL_ID=us-east-1_pJMLMdRUT
+VITE_USER_POOL_WEB_CLIENT_ID=n0kp5oobsevrrfi6sls5tl5pm
+HASURA_ADMIN_SECRET=DT42f2AGrZ9DELq90UQg1l8D6dHy7mhZjLeBiq1bchfWLFzlY0R0ealqy8TXi0G7

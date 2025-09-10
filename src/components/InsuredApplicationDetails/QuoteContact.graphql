@@ -1,0 +1,39 @@
+mutation CreateQuoteEmailContact($object: insurance_quote_email_insert_input!) {
+  insert_insurance_quote_email_one(object: $object) {
+    id
+  }
+}
+
+mutation updateInsuranceQuoteEmail($id: Int!, $email: String!, $name: String!) {
+  update_insurance_quote_email(where: {id: {_eq: $id}}, _set: {email: $email, name: $name}) {
+    returning {
+      id
+    }
+  }
+}
+
+mutation deleteInsuranceQuoteEmail($id: Int!) {
+  delete_insurance_quote_email(where: {id: {_eq: $id}}) {
+    returning {
+      id
+    }
+    affected_rows
+  }
+}
+
+
+subscription getInsuranceQuoteEmail($applicationid_id: uuid!) {
+  insurance_quote_email(where: {application_id: {_eq: $applicationid_id}}, order_by: {id: asc}, limit: 100) {
+    application_id
+    created_at
+    created_by_user_id
+    email
+    email_sent_at
+    id
+    name
+    org_name
+    quote_number
+    updated_at
+    status
+  }
+}

@@ -1,0 +1,134 @@
+query organizationList(
+  $limit: Int = 10
+  $offset: Int = 0
+  $orgWhere: insured_organization_bool_exp = {}
+  $applicationWhere: insurance_application_bool_exp = {}
+  $order_by: order_by
+) {
+  insured_organization(
+    limit: $limit
+    offset: $offset
+    order_by: { insurance_applications_aggregate: { max: { idx: $order_by } } }
+    where: $orgWhere
+  ) {
+    id
+    name
+    insurance_applications(
+      order_by: { idx: desc }
+      limit: 1
+      where: $applicationWhere
+    ) {
+      id
+      stage
+      effective_date
+      expiration_date
+      broker_agency {
+        name
+      }
+      insurance_quote_selection {
+        id
+        insurance_policy {
+          id
+          insured_signed
+          agent_signed
+          payment_collected
+        }
+      }
+    }
+  }
+  insured_organization_aggregate(where: $orgWhere) {
+    aggregate {
+      count
+    }
+  }
+}
+
+query latestInsuranceApplications(
+  $limit: Int
+  $offset: Int = 0
+  $applicationWhere: latest_insurance_applications_bool_exp = {}
+  $order_by: [latest_insurance_applications_order_by!] = {}
+  $where: latest_insurance_applications_bool_exp = {}
+) {
+  latest_insurance_applications(
+    limit: $limit
+    offset: $offset
+    order_by: $order_by
+    where: $applicationWhere
+  ) {
+    insured_organization {
+      id
+      name
+    }
+    insurance_quote_selection {
+      insurance_quote {
+        premium
+      }
+      insurance_policy {
+        id
+        insured_signed
+        agent_signed
+        payment_collected
+      }
+    }
+    effective_date
+    expiration_date
+    id
+    stage
+  }
+  latest_insurance_applications_aggregate(where: $applicationWhere) {
+    aggregate {
+      count
+    }
+  }
+}
+
+subscription watchUpdateApplications {
+  latest_insurance_applications(
+    order_by: { updated_at: desc_nulls_last }
+    limit: 1
+  ) {
+    id
+    stage
+    updated_at
+    insured_organization {
+      id
+      name
+    }
+  }
+}
+
+subscription subscriptionLatestInsuranceApplications(
+  $limit: Int
+  $offset: Int = 0
+  $applicationWhere: latest_insurance_applications_bool_exp = {}
+  $order_by: [latest_insurance_applications_order_by!] = {}
+  $where: latest_insurance_applications_bool_exp = {}
+) {
+  latest_insurance_applications(
+    limit: $limit
+    offset: $offset
+    order_by: $order_by
+    where: $applicationWhere
+  ) {
+    insured_organization {
+      id
+      name
+    }
+    insurance_quote_selection {
+      insurance_quote {
+        premium
+      }
+      insurance_policy {
+        id
+        insured_signed
+        agent_signed
+        payment_collected
+      }
+    }
+    effective_date
+    expiration_date
+    id
+    stage
+  }
+}

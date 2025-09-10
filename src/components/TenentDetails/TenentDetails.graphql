@@ -1,0 +1,154 @@
+query GetTenent($id: Int!) {
+  tenant_by_pk(id: $id) {
+    id
+    logo
+    name
+    primary_color
+    secondary_color
+    report_template_Id
+    scan_required
+    class_of_business
+  }
+}
+
+query getConnectedAgancies($id: Int!) {
+  tenant_by_pk(id: $id) {
+    id
+    broker_agencies {
+      id
+      name
+      address
+      broker_producers_aggregate {
+        aggregate {
+          count
+        }
+      }
+    }
+  }
+}
+
+mutation UpdateTenant(
+  $id: Int!
+  $logo: String!
+  $name: String!
+  $primary_color: String!
+  $report_template_Id: String!
+  $secondary_color: String!
+  $scan_required: Boolean = false
+) {
+  update_tenant_by_pk(
+    pk_columns: { id: $id }
+    _set: {
+      logo: $logo
+      name: $name
+      primary_color: $primary_color
+      report_template_Id: $report_template_Id
+      secondary_color: $secondary_color
+      scan_required: $scan_required
+    }
+  ) {
+    id
+  }
+}
+
+mutation createTenant(
+  $logo: String!
+  $name: String!
+  $primary_color: String!
+  $report_template_Id: String!
+  $secondary_color: String!
+  $scan_required: Boolean = false
+) {
+  insert_tenant_one(
+    object: {
+      logo: $logo
+      name: $name
+      primary_color: $primary_color
+      report_template_Id: $report_template_Id
+      secondary_color: $secondary_color
+      scan_required: $scan_required
+    }
+  ) {
+    id
+  }
+}
+
+mutation uploadLogo($type: String!, $base64str: String!, $tenant_id: String!) {
+  logoUpload(base64str: $base64str, tenant_id: $tenant_id, type: $type) {
+    file_path
+  }
+}
+
+mutation CreateUpdateTenant($object: tenant_insert_input = {}) {
+  insert_tenant_one(
+    object: $object
+    on_conflict: {
+      constraint: Tenent_pkey
+      update_columns: [
+        logo
+        name
+        primary_color
+        scan_required
+        secondary_color
+        report_template_Id
+        class_of_business
+      ]
+    }
+  ) {
+    id
+    name
+  }
+}
+
+mutation CreateTenantAdmin($input: [CreateTenantAdminInput!]!) {
+  createTenantAdmins(input: $input) {
+    id
+  }
+}
+
+query TenantAdminList(
+  $limit: Int = 10
+  $offset: Int = 0
+  $order_by: [tenant_admin_order_by!] = {}
+  $tenant_id: Int!
+  $name: String
+) {
+  tenant_admin(
+    limit: $limit
+    offset: $offset
+    order_by: $order_by
+    where: { tenant_id: { _eq: $tenant_id }, user: { name: { _ilike: $name } } }
+  ) {
+    user {
+      name
+      id
+      created_at
+      email
+    }
+  }
+  tenant_admin_aggregate(
+    where: { tenant_id: { _eq: $tenant_id }, user: { name: { _ilike: $name } } }
+  ) {
+    aggregate {
+      count
+    }
+  }
+}
+
+query GetTenantAdminData($user_id: Int!) {
+  tenant_admin(where: { user_id: { _eq: $user_id } }) {
+    user {
+      email
+      id
+      name
+    }
+  }
+}
+mutation tenantUserUpdate($id: Int!, $name: String!, $email: String!) {
+  update_user(
+    where: { id: { _eq: $id }, _and: { email: { _eq: $email } } }
+    _set: { name: $name }
+  ) {
+    affected_rows
+  }
+}

@@ -1,0 +1,107 @@
+query getConnectedBrokerProducerList($broker_agency_id: Int!) {
+  broker_producer(where: { broker_agency_id: { _eq: $broker_agency_id } }) {
+    user {
+      id
+      email
+      name
+      cognito_status
+    }
+  }
+  broker_agency_by_pk(id: $broker_agency_id) {
+    id
+    name
+    tenant {
+      name
+    }
+  }
+}
+
+mutation createBrokerProducer($input: [CreateBrokerUserInput!]!) {
+  createBrokerUsers(input: $input) {
+    id
+  }
+}
+
+mutation brokerProducerUpdate($id: Int!, $name: String!, $email: String!, $commission_rate: numeric) {
+  update_user(where: {id: {_eq: $id}, _and: {email: {_eq: $email}}}, _set: {name: $name}) {
+    affected_rows
+  }
+  update_broker_producer(where: {user_id: {_eq: $id}}, _set: {commission_rate: $commission_rate}) {
+    affected_rows
+  }
+}
+
+query getBrokerProducer($userId: Int!) {
+  broker_producer(where: { user_id: { _eq: $userId } }) {
+    user {
+      email
+      name
+      id
+    }
+    user_id
+    commission_rate
+  }
+}
+
+query getBrokerProducerList(
+  $broker_agency_id: Int!
+  $offset: Int = 0
+  $limit: Int = 10
+  $name: String!
+  $order_by: [broker_producer_order_by!] = {}
+) {
+  broker_producer(
+    where: {
+      broker_agency_id: { _eq: $broker_agency_id }
+      _and: { user: { name: { _ilike: $name } } }
+    }
+    offset: $offset
+    limit: $limit
+    order_by: $order_by
+  ) {
+    user {
+      id
+      auth0_id
+      email
+      name
+      created_at
+      cognito_status
+      user_password_resets(limit: 1, order_by: {id: desc}) {
+        created_at
+        requested_user {
+          name
+        }
+      }
+    }
+    commission_rate
+  }
+  broker_producer_aggregate(
+    where: {
+      broker_agency_id: { _eq: $broker_agency_id }
+      _and: { user: { name: { _ilike: $name } } }
+    }
+  ) {
+    aggregate {
+      count
+    }
+  }
+  broker_agency_by_pk(id: $broker_agency_id) {
+    id
+    name
+    tenant {
+      name
+    }
+  }
+}
+
+mutation updateUserStatus($userAuthId: String!, $status: user_status_enum!) {
+  updateUserStatus(input: {status: $status, userAuthId: $userAuthId}) {
+    message
+  }
+}
+
+mutation resetPassword($email: String!, $userAuthId: String!) {
+  adminResetPassword(input: {email: $email, userAuthId: $userAuthId}) {
+    message
+  }
+}

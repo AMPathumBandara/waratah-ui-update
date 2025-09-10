@@ -1,0 +1,118 @@
+fragment ApplicationBase on insurance_application {
+  id
+  stage
+  insurance_quote_selection {
+    id
+    quote_id
+  }
+}
+
+fragment ApplicationDetails on insurance_application {
+  id
+  effective_date
+  expiration_date
+  insured_organization {
+    id
+    name
+    state
+    broker_agency {
+      id
+      name
+    }
+  }
+  insurance_quote_selection {
+    id
+    insurance_policy {
+      id
+      waratah_report
+    }
+  }
+}
+
+fragment ExternalApplicationStage on insurance_application {
+  external_scans(limit: 1, order_by: { updated_at: desc }) {
+    id
+    status
+  }
+}
+
+query applicationStage($id: uuid!) {
+  insurance_application_by_pk(id: $id) {
+    ...ApplicationBase
+    ...ApplicationDetails
+    ...ExternalApplicationStage
+  }
+}
+
+query connectedInsuaranceApplications($id: uuid) {
+  insurance_application(
+    where: {
+      insured_organization: { insurance_applications: { id: { _eq: $id } } }
+    }
+    order_by: { idx: desc }
+  ) {
+    id
+    effective_date
+    expiration_date
+  }
+}
+
+subscription getScanStatus($id: uuid!) {
+  external_scan(
+    limit: 1
+    order_by: { updated_at: desc }
+    where: { application_id: { _eq: $id } }
+  ) {
+    id
+    risk_score
+    scan_result
+    status
+    external_id
+  }
+}
+
+query getScanStatusQ($id: uuid!) {
+  external_scan(
+    limit: 1
+    order_by: { updated_at: desc }
+    where: { application_id: { _eq: $id } }
+  ) {
+    id
+    risk_score
+    scan_result
+    status
+    external_id
+  }
+}
+
+subscription getIpfsStatus($applicationId: uuid!) {
+  insurance_policy(
+    where: {
+      insurance_quote_selection: { application_id: { _eq: $applicationId } }
+    }
+  ) {
+    id
+    policy_number
+    ipfs_report
+    stage
+    electronic_signature_url
+    ipfs_quote_data
+    waratah_report
+  }
+}
+
+query getIpfsStatusQ($applicationId: uuid!) {
+  insurance_policy(
+    where: {
+      insurance_quote_selection: { application_id: { _eq: $applicationId } }
+    }
+  ) {
+    id
+    policy_number
+    ipfs_report
+    stage
+    electronic_signature_url
+    ipfs_quote_data
+    waratah_report
+  }
+}

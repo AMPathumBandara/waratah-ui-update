@@ -1,0 +1,237 @@
+#import "./Base.graphql"
+
+fragment QuoteFields on insurance_quote {
+  id
+  deductible
+  commission_percentage
+  base_premium
+  other_deductibles
+  policy_limit
+  premium
+  tax_percentage
+  total_premium
+  fees
+  taxes
+  sub_limits
+}
+
+fragment ApplicationQuoteFields on insurance_application {
+  ...ApplicationBase
+  ...ApplicationDetails
+  insurance_quotes(order_by: [{policy_limit: asc}, {deductible: desc}]) {
+    ...QuoteFields
+  }
+}
+
+query applicationQuote($id: uuid!) {
+  insurance_application_by_pk(id: $id) {
+    ...ApplicationQuoteFields
+  }
+}
+
+mutation updateInsuranceDates(
+  $id: uuid!
+  $expiration_date: date!
+  $effective_date: date!
+  $stage: String!
+  $quote_id: Int!
+) {
+  update_insurance_application_by_pk(
+    pk_columns: { id: $id }
+    _set: {
+      expiration_date: $expiration_date
+      effective_date: $effective_date
+      stage: $stage
+    }
+  ) {
+    id
+  }
+  insert_insurance_quote_selection_one(
+    object: { application_id: $id, quote_id: $quote_id }
+    on_conflict: {
+      constraint: insurance_quote_selection_application_id_key
+      update_columns: quote_id
+    }
+  ) {
+    application_id
+    id
+    quote_id
+  }
+}
+
+mutation newInsuranceQuote(
+  $base_premium: money!
+  $commission_percentage: Int!
+  $deductible: money!
+  $insurance_application_id: uuid!
+  $other_deductibles: money!
+  $policy_limit: money!
+  $premium: money!
+  $tax_percentage: numeric = 0
+  $total_premium: money!
+  $stage: String = "quote"
+) {
+  insert_insurance_quote(
+    objects: {
+      base_premium: $base_premium
+      commission_percentage: $commission_percentage
+      deductible: $deductible
+      insurance_application_id: $insurance_application_id
+      other_deductibles: $other_deductibles
+      policy_limit: $policy_limit
+      premium: $premium
+      tax_percentage: $tax_percentage
+      total_premium: $total_premium
+    }
+  ) {
+    affected_rows
+  }
+  update_insurance_application_by_pk(
+    pk_columns: { id: $insurance_application_id }
+    _set: { stage: $stage }
+  ) {
+    id
+  }
+}
+
+mutation updateInsuranceQuote(
+  $id: bigint!
+  $base_premium: money
+  $commission_percentage: Int
+  $deductible: money
+  $insurance_application_id: uuid
+  $other_deductibles: money
+  $policy_limit: money
+  $premium: money
+  $tax_percentage: numeric
+  $total_premium: money
+) {
+  update_insurance_quote_by_pk(
+    pk_columns: { id: $id }
+    _set: {
+      base_premium: $base_premium
+      commission_percentage: $commission_percentage
+      deductible: $deductible
+      other_deductibles: $other_deductibles
+      policy_limit: $policy_limit
+      premium: $premium
+      tax_percentage: $tax_percentage
+      total_premium: $total_premium
+    }
+  ) {
+    base_premium
+    commission_percentage
+    deductible
+    id
+    policy_limit
+    premium
+    tax_percentage
+    total_premium
+    other_deductibles
+  }
+}
+
+mutation deleteInsuranceQuote($id: bigint!) {
+  delete_insurance_quote_by_pk(id: $id) {
+    id
+  }
+}
+
+query getTenantSettings {
+  me {
+    broker_producer {
+      broker_agency {
+        tenant {
+          scan_required
+        }
+      }
+    }
+    id
+  }
+}
+subscription WatchScanResult($applicationId: uuid!) {
+  external_scan(where: { application_id: { _eq: $applicationId } }, order_by: {id: desc}) {
+    scan_result
+    status
+  }
+}
+query ScanVerdictResult($external_id: uuid!) {
+  getScanResult(external_id: $external_id) {
+    domain
+    status
+    verdict
+    connector_results
+  }
+}
+
+mutation sendQuotePdfEmail($object: EmailRecipientInput!) {
+  sendQuotePDFEmailsFromUI(object: $object) {
+    count
+  }
+}
+
+mutation resendQuotePdfEmail($object: ResendInput!) {
+  resendQuotePDFEmailFromUI(object: $object) {
+    id
+  }
+}
+
+mutation updatePremiumData($object: UpdatePremiumInput!) {
+  updatePremium(object: $object) {
+    id
+  }
+}
+
+subscription WatchQuotes($applicationId: uuid!) {
+  insurance_quote(where: {insurance_application_id: {_eq: $applicationId}}, order_by: [{policy_limit: asc}, {deductible: desc}]) {
+    ...QuoteFields
+  }
+}
+
+query GetArtifactByAppIdAndQuoteNumber($applicationid_id: uuid!, $quote_number: String!) {
+  insurance_application_artifact(where: {_and: {application_id: {_eq: $applicationid_id}, file_uri: {_like: $quote_number}}}) {
+    file_type
+    file_uri
+    id
+  }
+}
+
+query GetCustomPolicyLimits {
+  getCustomPolicies {
+    customPolicyLimits
+  }
+}
+
+mutation GetUnusedRetentions($object: UnusedRetentionsInput!) {
+  getUnusedRetentions(object: $object) {
+    notUsedDeductibles
+  }
+}
+
+mutation CreateCustomQuote($object: CustomQuoteInput!) {
+  createCustomQuote(object: $object) {
+    id
+  }
+}
+
+mutation CreatePDFQuoteSelection($input: CreateQuotePDFSelectionInput!) {
+  createPDFQuoteSelection(object: $input) {
+    id
+  }
+}
+
+subscription WatchLatestQuotePDFQuoteIdsByAppId($applicationId: uuid!) {
+  insurance_application_artifact(order_by: {updated_at: desc}, where: {file_type: {_eq: "quote"}, application_id: {_eq: $applicationId}}, limit: 1) {
+    insurance_quote_pdf_selection_artifacts {
+      insurance_quote_pdf_selections {
+        quote_id
+      }
+    }
+  }
+}
+
+mutation manualTriggerScan($applicationId: uuid!) {
+  manualTriggerScan(applicationId: $applicationId) {
+    id
+  }
+}

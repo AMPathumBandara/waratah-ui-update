@@ -1,0 +1,24239 @@
+import { gql } from '@apollo/client';
+import * as Apollo from '@apollo/client';
+export type Maybe<T> = T | null;
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+const defaultOptions =  {}
+/** All built-in and custom scalars, mapped to their actual values */
+export type Scalars = {
+  ID: string;
+  String: string;
+  Boolean: boolean;
+  Int: number;
+  Float: number;
+  bigint: any;
+  date: any;
+  json: any;
+  jsonb: any;
+  money: any;
+  numeric: any;
+  time: any;
+  timestamptz: any;
+  uuid: any;
+};
+
+export type AgentBindPolicyOutput = {
+  __typename?: 'AgentBindPolicyOutput';
+  agent_created_policy?: Maybe<Insurance_Policy>;
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
+export type Boolean_Comparison_Exp = {
+  _eq?: Maybe<Scalars['Boolean']>;
+  _gt?: Maybe<Scalars['Boolean']>;
+  _gte?: Maybe<Scalars['Boolean']>;
+  _in?: Maybe<Array<Scalars['Boolean']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['Boolean']>;
+  _lte?: Maybe<Scalars['Boolean']>;
+  _neq?: Maybe<Scalars['Boolean']>;
+  _nin?: Maybe<Array<Scalars['Boolean']>>;
+};
+
+export type Contact = {
+  email?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type CreateBrokerUserInput = {
+  broker_agency_id: Scalars['Int'];
+  commission_rate?: Maybe<Scalars['numeric']>;
+  email: Scalars['String'];
+  name: Scalars['String'];
+};
+
+export type CreateBrokerUserOutput = {
+  __typename?: 'CreateBrokerUserOutput';
+  id: Scalars['uuid'];
+  users: Array<User>;
+  users_aggregate: User_Aggregate;
+};
+
+
+export type CreateBrokerUserOutputUsersArgs = {
+  distinct_on?: Maybe<Array<User_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<User_Order_By>>;
+  where?: Maybe<User_Bool_Exp>;
+};
+
+
+export type CreateBrokerUserOutputUsers_AggregateArgs = {
+  distinct_on?: Maybe<Array<User_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<User_Order_By>>;
+  where?: Maybe<User_Bool_Exp>;
+};
+
+export type CreateQuotePdfSelectionInput = {
+  applicationId: Scalars['uuid'];
+  quoteIds: Array<Maybe<Scalars['Int']>>;
+};
+
+export type CreateQuotePdfSelectionOutput = {
+  __typename?: 'CreateQuotePDFSelectionOutput';
+  id: Scalars['uuid'];
+};
+
+export type CreateTenantAdminInput = {
+  email: Scalars['String'];
+  name: Scalars['String'];
+  tenant_id: Scalars['Int'];
+};
+
+export type CreateTenantAdminOutput = {
+  __typename?: 'CreateTenantAdminOutput';
+  id: Scalars['uuid'];
+  users: Array<User>;
+  users_aggregate: User_Aggregate;
+};
+
+
+export type CreateTenantAdminOutputUsersArgs = {
+  distinct_on?: Maybe<Array<User_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<User_Order_By>>;
+  where?: Maybe<User_Bool_Exp>;
+};
+
+
+export type CreateTenantAdminOutputUsers_AggregateArgs = {
+  distinct_on?: Maybe<Array<User_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<User_Order_By>>;
+  where?: Maybe<User_Bool_Exp>;
+};
+
+export type CustomPolicyOutput = {
+  __typename?: 'CustomPolicyOutput';
+  customPolicyLimits?: Maybe<Array<Maybe<Scalars['Float']>>>;
+};
+
+export type CustomQuoteInput = {
+  applicationId: Scalars['uuid'];
+  deductible: Scalars['Float'];
+  limit: Scalars['Float'];
+};
+
+export type CustomQuoteOutput = {
+  __typename?: 'CustomQuoteOutput';
+  id: Scalars['Int'];
+};
+
+export type DnBOutput = {
+  __typename?: 'DnBOutput';
+  address?: Maybe<Scalars['String']>;
+  city?: Maybe<Scalars['String']>;
+  dnbCode?: Maybe<Scalars['Int']>;
+  dnbDescription?: Maybe<Scalars['String']>;
+  employees?: Maybe<Scalars['Int']>;
+  industry?: Maybe<Scalars['String']>;
+  insured_name?: Maybe<Scalars['String']>;
+  naics?: Maybe<Scalars['String']>;
+  naics_icdb?: Maybe<Naics_Code>;
+  revenue?: Maybe<Scalars['Int']>;
+  state?: Maybe<Scalars['String']>;
+  zip?: Maybe<Scalars['String']>;
+};
+
+export type EmailRecipientInput = {
+  application_id: Scalars['uuid'];
+  recipients?: Maybe<Array<Maybe<Recipient>>>;
+};
+
+export type EmailRecipientOutput = {
+  __typename?: 'EmailRecipientOutput';
+  count: Scalars['Int'];
+};
+
+export type FileLink = {
+  __typename?: 'FileLink';
+  filelink: Scalars['String'];
+};
+
+export type FileOutput = {
+  __typename?: 'FileOutput';
+  file_path: Scalars['String'];
+};
+
+export type ForgotPasswordInput = {
+  email: Scalars['String'];
+};
+
+export type InsuredApplicationInput = {
+  address?: Maybe<Scalars['String']>;
+  broker_agency?: Maybe<Scalars['String']>;
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  city?: Maybe<Scalars['String']>;
+  contact_email?: Maybe<Scalars['String']>;
+  contact_name?: Maybe<Scalars['String']>;
+  contacts?: Maybe<Array<Maybe<Contact>>>;
+  domain?: Maybe<Scalars['String']>;
+  effective_date?: Maybe<Scalars['String']>;
+  employees?: Maybe<Scalars['Int']>;
+  expiration_date?: Maybe<Scalars['String']>;
+  industry?: Maybe<Scalars['String']>;
+  insured_name?: Maybe<Scalars['String']>;
+  naics_code?: Maybe<Scalars['String']>;
+  organization_type?: Maybe<Scalars['String']>;
+  rentals_data?: Maybe<RentalsData>;
+  revenue?: Maybe<Scalars['Int']>;
+  state: Scalars['String'];
+  tenant_id?: Maybe<Scalars['Int']>;
+  zip?: Maybe<Scalars['String']>;
+};
+
+export type InsuredOutput = {
+  __typename?: 'InsuredOutput';
+  created_organization?: Maybe<Insured_Organization>;
+  created_policy?: Maybe<Insurance_Policy>;
+  id: Scalars['Int'];
+};
+
+/** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
+export type Int_Comparison_Exp = {
+  _eq?: Maybe<Scalars['Int']>;
+  _gt?: Maybe<Scalars['Int']>;
+  _gte?: Maybe<Scalars['Int']>;
+  _in?: Maybe<Array<Scalars['Int']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['Int']>;
+  _lte?: Maybe<Scalars['Int']>;
+  _neq?: Maybe<Scalars['Int']>;
+  _nin?: Maybe<Array<Scalars['Int']>>;
+};
+
+export type IpfsFileOutput = {
+  __typename?: 'IpfsFileOutput';
+  filedata: Scalars['String'];
+};
+
+export type ManualTriggerQuotePdfOutput = {
+  __typename?: 'ManualTriggerQuotePDFOutput';
+  id?: Maybe<Scalars['uuid']>;
+};
+
+export type ManualTriggerScanOutput = {
+  __typename?: 'ManualTriggerScanOutput';
+  id: Scalars['uuid'];
+};
+
+export type PolicyOutput = {
+  __typename?: 'PolicyOutput';
+  created_policy?: Maybe<Insurance_Policy>;
+  id: Scalars['Int'];
+};
+
+export type Property = {
+  construction_type?: Maybe<Scalars['String']>;
+  dwelling_type?: Maybe<Scalars['String']>;
+  safety_deadbolt?: Maybe<Scalars['Boolean']>;
+  safety_smoke_detector?: Maybe<Scalars['Boolean']>;
+  safety_sprinkler?: Maybe<Scalars['Boolean']>;
+  year_built?: Maybe<Scalars['String']>;
+};
+
+export type QuotesOutput = {
+  __typename?: 'QuotesOutput';
+  quotes?: Maybe<Scalars['jsonb']>;
+};
+
+export type Recipient = {
+  email: Scalars['String'];
+  id: Scalars['Int'];
+  name: Scalars['String'];
+};
+
+export type RentalsData = {
+  date_of_birth?: Maybe<Scalars['String']>;
+  full_name?: Maybe<Scalars['String']>;
+  income?: Maybe<Scalars['String']>;
+  occupation_name?: Maybe<Scalars['String']>;
+  propertyInfo?: Maybe<Property>;
+  ssn?: Maybe<Scalars['String']>;
+};
+
+export type ResendInput = {
+  id: Scalars['Int'];
+};
+
+export type ResendOutput = {
+  __typename?: 'ResendOutput';
+  id: Scalars['Int'];
+};
+
+export type ResetPasswordInput = {
+  email: Scalars['String'];
+  userAuthId: Scalars['String'];
+};
+
+export type ResetPasswordOutput = {
+  __typename?: 'ResetPasswordOutput';
+  message: Scalars['String'];
+};
+
+export type ScanOutput = {
+  __typename?: 'ScanOutput';
+  connector_results?: Maybe<Scalars['jsonb']>;
+  created_at?: Maybe<Scalars['Int']>;
+  domain?: Maybe<Scalars['String']>;
+  employees?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['String']>;
+  industry?: Maybe<Scalars['String']>;
+  revenue?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['Int']>;
+  verdict?: Maybe<Scalars['String']>;
+};
+
+export type SendPremiumOutput = {
+  __typename?: 'SendPremiumOutput';
+  id: Scalars['Int'];
+};
+
+/** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
+export type String_Comparison_Exp = {
+  _eq?: Maybe<Scalars['String']>;
+  _gt?: Maybe<Scalars['String']>;
+  _gte?: Maybe<Scalars['String']>;
+  /** does the column match the given case-insensitive pattern */
+  _ilike?: Maybe<Scalars['String']>;
+  _in?: Maybe<Array<Scalars['String']>>;
+  /** does the column match the given POSIX regular expression, case insensitive */
+  _iregex?: Maybe<Scalars['String']>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  /** does the column match the given pattern */
+  _like?: Maybe<Scalars['String']>;
+  _lt?: Maybe<Scalars['String']>;
+  _lte?: Maybe<Scalars['String']>;
+  _neq?: Maybe<Scalars['String']>;
+  /** does the column NOT match the given case-insensitive pattern */
+  _nilike?: Maybe<Scalars['String']>;
+  _nin?: Maybe<Array<Scalars['String']>>;
+  /** does the column NOT match the given POSIX regular expression, case insensitive */
+  _niregex?: Maybe<Scalars['String']>;
+  /** does the column NOT match the given pattern */
+  _nlike?: Maybe<Scalars['String']>;
+  /** does the column NOT match the given POSIX regular expression, case sensitive */
+  _nregex?: Maybe<Scalars['String']>;
+  /** does the column NOT match the given SQL regular expression */
+  _nsimilar?: Maybe<Scalars['String']>;
+  /** does the column match the given POSIX regular expression, case sensitive */
+  _regex?: Maybe<Scalars['String']>;
+  /** does the column match the given SQL regular expression */
+  _similar?: Maybe<Scalars['String']>;
+};
+
+export type UiInsuredApplicationInput = {
+  address?: Maybe<Scalars['String']>;
+  broker_agency_id: Scalars['Int'];
+  city?: Maybe<Scalars['String']>;
+  contact_email?: Maybe<Scalars['String']>;
+  contact_name?: Maybe<Scalars['String']>;
+  contacts?: Maybe<Array<Maybe<Contact>>>;
+  domain?: Maybe<Scalars['String']>;
+  domain_scan_id?: Maybe<Scalars['Int']>;
+  effective_date?: Maybe<Scalars['String']>;
+  employees?: Maybe<Scalars['Int']>;
+  expiration_date?: Maybe<Scalars['String']>;
+  industry?: Maybe<Scalars['String']>;
+  insured_name?: Maybe<Scalars['String']>;
+  naics_code?: Maybe<Scalars['String']>;
+  next_stage?: Maybe<Scalars['String']>;
+  organization_type?: Maybe<Scalars['String']>;
+  rentals_data?: Maybe<RentalsData>;
+  revenue?: Maybe<Scalars['Int']>;
+  state?: Maybe<Scalars['String']>;
+  zip?: Maybe<Scalars['String']>;
+};
+
+export type UiInsuredOutput = {
+  __typename?: 'UIInsuredOutput';
+  created_organization?: Maybe<Insured_Organization>;
+  id: Scalars['Int'];
+};
+
+export type UnusedRetentionsInput = {
+  applicationId: Scalars['uuid'];
+  limit: Scalars['Float'];
+};
+
+export type UnusedRetentionsOutput = {
+  __typename?: 'UnusedRetentionsOutput';
+  notUsedDeductibles?: Maybe<Array<Maybe<Scalars['Float']>>>;
+};
+
+export type UpdatePremiumInput = {
+  excess: Scalars['Float'];
+  id: Scalars['Int'];
+  inPDFIds: Array<Maybe<Scalars['Int']>>;
+  policyLimit: Scalars['Float'];
+  premium: Scalars['Float'];
+};
+
+export type UserStatusInput = {
+  status: User_Status_Enum;
+  userAuthId: Scalars['String'];
+};
+
+export type UserStatusOutput = {
+  __typename?: 'UserStatusOutput';
+  message: Scalars['String'];
+};
+
+/** Boolean expression to compare columns of type "bigint". All fields are combined with logical 'AND'. */
+export type Bigint_Comparison_Exp = {
+  _eq?: Maybe<Scalars['bigint']>;
+  _gt?: Maybe<Scalars['bigint']>;
+  _gte?: Maybe<Scalars['bigint']>;
+  _in?: Maybe<Array<Scalars['bigint']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['bigint']>;
+  _lte?: Maybe<Scalars['bigint']>;
+  _neq?: Maybe<Scalars['bigint']>;
+  _nin?: Maybe<Array<Scalars['bigint']>>;
+};
+
+/** columns and relationships of "broker_agency" */
+export type Broker_Agency = {
+  __typename?: 'broker_agency';
+  address?: Maybe<Scalars['String']>;
+  agent_calculate_tax?: Maybe<Scalars['Boolean']>;
+  /** An array relationship */
+  broker_producers: Array<Broker_Producer>;
+  /** An aggregate relationship */
+  broker_producers_aggregate: Broker_Producer_Aggregate;
+  broker_program_id?: Maybe<Scalars['String']>;
+  calculate_fee?: Maybe<Scalars['Boolean']>;
+  calculate_tax?: Maybe<Scalars['Boolean']>;
+  city?: Maybe<Scalars['String']>;
+  commission_rate?: Maybe<Scalars['numeric']>;
+  country?: Maybe<Scalars['String']>;
+  created_at: Scalars['timestamptz'];
+  created_by_user_id?: Maybe<Scalars['String']>;
+  external_id?: Maybe<Scalars['String']>;
+  id: Scalars['Int'];
+  /** An array relationship */
+  insurance_applications: Array<Insurance_Application>;
+  /** An aggregate relationship */
+  insurance_applications_aggregate: Insurance_Application_Aggregate;
+  /** An array relationship */
+  insured_organizations: Array<Insured_Organization>;
+  /** An aggregate relationship */
+  insured_organizations_aggregate: Insured_Organization_Aggregate;
+  name: Scalars['String'];
+  payment_option: Scalars['String'];
+  quote_template_id?: Maybe<Scalars['String']>;
+  state?: Maybe<Scalars['String']>;
+  /** An object relationship */
+  tenant?: Maybe<Tenant>;
+  tenant_id?: Maybe<Scalars['Int']>;
+  /** An array relationship */
+  underwriter_broker_agencies: Array<Underwriter_Broker_Agencies>;
+  /** An aggregate relationship */
+  underwriter_broker_agencies_aggregate: Underwriter_Broker_Agencies_Aggregate;
+  updated_at: Scalars['timestamptz'];
+  zip?: Maybe<Scalars['String']>;
+};
+
+
+/** columns and relationships of "broker_agency" */
+export type Broker_AgencyBroker_ProducersArgs = {
+  distinct_on?: Maybe<Array<Broker_Producer_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Broker_Producer_Order_By>>;
+  where?: Maybe<Broker_Producer_Bool_Exp>;
+};
+
+
+/** columns and relationships of "broker_agency" */
+export type Broker_AgencyBroker_Producers_AggregateArgs = {
+  distinct_on?: Maybe<Array<Broker_Producer_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Broker_Producer_Order_By>>;
+  where?: Maybe<Broker_Producer_Bool_Exp>;
+};
+
+
+/** columns and relationships of "broker_agency" */
+export type Broker_AgencyInsurance_ApplicationsArgs = {
+  distinct_on?: Maybe<Array<Insurance_Application_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Application_Order_By>>;
+  where?: Maybe<Insurance_Application_Bool_Exp>;
+};
+
+
+/** columns and relationships of "broker_agency" */
+export type Broker_AgencyInsurance_Applications_AggregateArgs = {
+  distinct_on?: Maybe<Array<Insurance_Application_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Application_Order_By>>;
+  where?: Maybe<Insurance_Application_Bool_Exp>;
+};
+
+
+/** columns and relationships of "broker_agency" */
+export type Broker_AgencyInsured_OrganizationsArgs = {
+  distinct_on?: Maybe<Array<Insured_Organization_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insured_Organization_Order_By>>;
+  where?: Maybe<Insured_Organization_Bool_Exp>;
+};
+
+
+/** columns and relationships of "broker_agency" */
+export type Broker_AgencyInsured_Organizations_AggregateArgs = {
+  distinct_on?: Maybe<Array<Insured_Organization_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insured_Organization_Order_By>>;
+  where?: Maybe<Insured_Organization_Bool_Exp>;
+};
+
+
+/** columns and relationships of "broker_agency" */
+export type Broker_AgencyUnderwriter_Broker_AgenciesArgs = {
+  distinct_on?: Maybe<Array<Underwriter_Broker_Agencies_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Underwriter_Broker_Agencies_Order_By>>;
+  where?: Maybe<Underwriter_Broker_Agencies_Bool_Exp>;
+};
+
+
+/** columns and relationships of "broker_agency" */
+export type Broker_AgencyUnderwriter_Broker_Agencies_AggregateArgs = {
+  distinct_on?: Maybe<Array<Underwriter_Broker_Agencies_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Underwriter_Broker_Agencies_Order_By>>;
+  where?: Maybe<Underwriter_Broker_Agencies_Bool_Exp>;
+};
+
+/** aggregated selection of "broker_agency" */
+export type Broker_Agency_Aggregate = {
+  __typename?: 'broker_agency_aggregate';
+  aggregate?: Maybe<Broker_Agency_Aggregate_Fields>;
+  nodes: Array<Broker_Agency>;
+};
+
+export type Broker_Agency_Aggregate_Bool_Exp = {
+  bool_and?: Maybe<Broker_Agency_Aggregate_Bool_Exp_Bool_And>;
+  bool_or?: Maybe<Broker_Agency_Aggregate_Bool_Exp_Bool_Or>;
+  count?: Maybe<Broker_Agency_Aggregate_Bool_Exp_Count>;
+};
+
+export type Broker_Agency_Aggregate_Bool_Exp_Bool_And = {
+  arguments: Broker_Agency_Select_Column_Broker_Agency_Aggregate_Bool_Exp_Bool_And_Arguments_Columns;
+  distinct?: Maybe<Scalars['Boolean']>;
+  filter?: Maybe<Broker_Agency_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type Broker_Agency_Aggregate_Bool_Exp_Bool_Or = {
+  arguments: Broker_Agency_Select_Column_Broker_Agency_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns;
+  distinct?: Maybe<Scalars['Boolean']>;
+  filter?: Maybe<Broker_Agency_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type Broker_Agency_Aggregate_Bool_Exp_Count = {
+  arguments?: Maybe<Array<Broker_Agency_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+  filter?: Maybe<Broker_Agency_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "broker_agency" */
+export type Broker_Agency_Aggregate_Fields = {
+  __typename?: 'broker_agency_aggregate_fields';
+  avg?: Maybe<Broker_Agency_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Broker_Agency_Max_Fields>;
+  min?: Maybe<Broker_Agency_Min_Fields>;
+  stddev?: Maybe<Broker_Agency_Stddev_Fields>;
+  stddev_pop?: Maybe<Broker_Agency_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Broker_Agency_Stddev_Samp_Fields>;
+  sum?: Maybe<Broker_Agency_Sum_Fields>;
+  var_pop?: Maybe<Broker_Agency_Var_Pop_Fields>;
+  var_samp?: Maybe<Broker_Agency_Var_Samp_Fields>;
+  variance?: Maybe<Broker_Agency_Variance_Fields>;
+};
+
+
+/** aggregate fields of "broker_agency" */
+export type Broker_Agency_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Broker_Agency_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "broker_agency" */
+export type Broker_Agency_Aggregate_Order_By = {
+  avg?: Maybe<Broker_Agency_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Broker_Agency_Max_Order_By>;
+  min?: Maybe<Broker_Agency_Min_Order_By>;
+  stddev?: Maybe<Broker_Agency_Stddev_Order_By>;
+  stddev_pop?: Maybe<Broker_Agency_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Broker_Agency_Stddev_Samp_Order_By>;
+  sum?: Maybe<Broker_Agency_Sum_Order_By>;
+  var_pop?: Maybe<Broker_Agency_Var_Pop_Order_By>;
+  var_samp?: Maybe<Broker_Agency_Var_Samp_Order_By>;
+  variance?: Maybe<Broker_Agency_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "broker_agency" */
+export type Broker_Agency_Arr_Rel_Insert_Input = {
+  data: Array<Broker_Agency_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: Maybe<Broker_Agency_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Broker_Agency_Avg_Fields = {
+  __typename?: 'broker_agency_avg_fields';
+  commission_rate?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  tenant_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "broker_agency" */
+export type Broker_Agency_Avg_Order_By = {
+  commission_rate?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "broker_agency". All fields are combined with a logical 'AND'. */
+export type Broker_Agency_Bool_Exp = {
+  _and?: Maybe<Array<Broker_Agency_Bool_Exp>>;
+  _not?: Maybe<Broker_Agency_Bool_Exp>;
+  _or?: Maybe<Array<Broker_Agency_Bool_Exp>>;
+  address?: Maybe<String_Comparison_Exp>;
+  agent_calculate_tax?: Maybe<Boolean_Comparison_Exp>;
+  broker_producers?: Maybe<Broker_Producer_Bool_Exp>;
+  broker_producers_aggregate?: Maybe<Broker_Producer_Aggregate_Bool_Exp>;
+  broker_program_id?: Maybe<String_Comparison_Exp>;
+  calculate_fee?: Maybe<Boolean_Comparison_Exp>;
+  calculate_tax?: Maybe<Boolean_Comparison_Exp>;
+  city?: Maybe<String_Comparison_Exp>;
+  commission_rate?: Maybe<Numeric_Comparison_Exp>;
+  country?: Maybe<String_Comparison_Exp>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  created_by_user_id?: Maybe<String_Comparison_Exp>;
+  external_id?: Maybe<String_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  insurance_applications?: Maybe<Insurance_Application_Bool_Exp>;
+  insurance_applications_aggregate?: Maybe<Insurance_Application_Aggregate_Bool_Exp>;
+  insured_organizations?: Maybe<Insured_Organization_Bool_Exp>;
+  insured_organizations_aggregate?: Maybe<Insured_Organization_Aggregate_Bool_Exp>;
+  name?: Maybe<String_Comparison_Exp>;
+  payment_option?: Maybe<String_Comparison_Exp>;
+  quote_template_id?: Maybe<String_Comparison_Exp>;
+  state?: Maybe<String_Comparison_Exp>;
+  tenant?: Maybe<Tenant_Bool_Exp>;
+  tenant_id?: Maybe<Int_Comparison_Exp>;
+  underwriter_broker_agencies?: Maybe<Underwriter_Broker_Agencies_Bool_Exp>;
+  underwriter_broker_agencies_aggregate?: Maybe<Underwriter_Broker_Agencies_Aggregate_Bool_Exp>;
+  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+  zip?: Maybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "broker_agency" */
+export enum Broker_Agency_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  BrokerAgencyPkey = 'broker_agency_pkey',
+  /** unique or primary key constraint on columns "name", "tenant_id" */
+  BrokerAgencyTenantIdNameKey = 'broker_agency_tenant_id_name_key'
+}
+
+/** input type for incrementing numeric columns in table "broker_agency" */
+export type Broker_Agency_Inc_Input = {
+  commission_rate?: Maybe<Scalars['numeric']>;
+  id?: Maybe<Scalars['Int']>;
+  tenant_id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "broker_agency" */
+export type Broker_Agency_Insert_Input = {
+  address?: Maybe<Scalars['String']>;
+  agent_calculate_tax?: Maybe<Scalars['Boolean']>;
+  broker_producers?: Maybe<Broker_Producer_Arr_Rel_Insert_Input>;
+  broker_program_id?: Maybe<Scalars['String']>;
+  calculate_fee?: Maybe<Scalars['Boolean']>;
+  calculate_tax?: Maybe<Scalars['Boolean']>;
+  city?: Maybe<Scalars['String']>;
+  commission_rate?: Maybe<Scalars['numeric']>;
+  country?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  external_id?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  insurance_applications?: Maybe<Insurance_Application_Arr_Rel_Insert_Input>;
+  insured_organizations?: Maybe<Insured_Organization_Arr_Rel_Insert_Input>;
+  name?: Maybe<Scalars['String']>;
+  payment_option?: Maybe<Scalars['String']>;
+  quote_template_id?: Maybe<Scalars['String']>;
+  state?: Maybe<Scalars['String']>;
+  tenant?: Maybe<Tenant_Obj_Rel_Insert_Input>;
+  tenant_id?: Maybe<Scalars['Int']>;
+  underwriter_broker_agencies?: Maybe<Underwriter_Broker_Agencies_Arr_Rel_Insert_Input>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  zip?: Maybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Broker_Agency_Max_Fields = {
+  __typename?: 'broker_agency_max_fields';
+  address?: Maybe<Scalars['String']>;
+  broker_program_id?: Maybe<Scalars['String']>;
+  city?: Maybe<Scalars['String']>;
+  commission_rate?: Maybe<Scalars['numeric']>;
+  country?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  external_id?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  payment_option?: Maybe<Scalars['String']>;
+  quote_template_id?: Maybe<Scalars['String']>;
+  state?: Maybe<Scalars['String']>;
+  tenant_id?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  zip?: Maybe<Scalars['String']>;
+};
+
+/** order by max() on columns of table "broker_agency" */
+export type Broker_Agency_Max_Order_By = {
+  address?: Maybe<Order_By>;
+  broker_program_id?: Maybe<Order_By>;
+  city?: Maybe<Order_By>;
+  commission_rate?: Maybe<Order_By>;
+  country?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  created_by_user_id?: Maybe<Order_By>;
+  external_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
+  payment_option?: Maybe<Order_By>;
+  quote_template_id?: Maybe<Order_By>;
+  state?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+  zip?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Broker_Agency_Min_Fields = {
+  __typename?: 'broker_agency_min_fields';
+  address?: Maybe<Scalars['String']>;
+  broker_program_id?: Maybe<Scalars['String']>;
+  city?: Maybe<Scalars['String']>;
+  commission_rate?: Maybe<Scalars['numeric']>;
+  country?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  external_id?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  payment_option?: Maybe<Scalars['String']>;
+  quote_template_id?: Maybe<Scalars['String']>;
+  state?: Maybe<Scalars['String']>;
+  tenant_id?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  zip?: Maybe<Scalars['String']>;
+};
+
+/** order by min() on columns of table "broker_agency" */
+export type Broker_Agency_Min_Order_By = {
+  address?: Maybe<Order_By>;
+  broker_program_id?: Maybe<Order_By>;
+  city?: Maybe<Order_By>;
+  commission_rate?: Maybe<Order_By>;
+  country?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  created_by_user_id?: Maybe<Order_By>;
+  external_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
+  payment_option?: Maybe<Order_By>;
+  quote_template_id?: Maybe<Order_By>;
+  state?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+  zip?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "broker_agency" */
+export type Broker_Agency_Mutation_Response = {
+  __typename?: 'broker_agency_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Broker_Agency>;
+};
+
+/** input type for inserting object relation for remote table "broker_agency" */
+export type Broker_Agency_Obj_Rel_Insert_Input = {
+  data: Broker_Agency_Insert_Input;
+  /** upsert condition */
+  on_conflict?: Maybe<Broker_Agency_On_Conflict>;
+};
+
+/** on_conflict condition type for table "broker_agency" */
+export type Broker_Agency_On_Conflict = {
+  constraint: Broker_Agency_Constraint;
+  update_columns?: Array<Broker_Agency_Update_Column>;
+  where?: Maybe<Broker_Agency_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "broker_agency". */
+export type Broker_Agency_Order_By = {
+  address?: Maybe<Order_By>;
+  agent_calculate_tax?: Maybe<Order_By>;
+  broker_producers_aggregate?: Maybe<Broker_Producer_Aggregate_Order_By>;
+  broker_program_id?: Maybe<Order_By>;
+  calculate_fee?: Maybe<Order_By>;
+  calculate_tax?: Maybe<Order_By>;
+  city?: Maybe<Order_By>;
+  commission_rate?: Maybe<Order_By>;
+  country?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  created_by_user_id?: Maybe<Order_By>;
+  external_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  insurance_applications_aggregate?: Maybe<Insurance_Application_Aggregate_Order_By>;
+  insured_organizations_aggregate?: Maybe<Insured_Organization_Aggregate_Order_By>;
+  name?: Maybe<Order_By>;
+  payment_option?: Maybe<Order_By>;
+  quote_template_id?: Maybe<Order_By>;
+  state?: Maybe<Order_By>;
+  tenant?: Maybe<Tenant_Order_By>;
+  tenant_id?: Maybe<Order_By>;
+  underwriter_broker_agencies_aggregate?: Maybe<Underwriter_Broker_Agencies_Aggregate_Order_By>;
+  updated_at?: Maybe<Order_By>;
+  zip?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: broker_agency */
+export type Broker_Agency_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "broker_agency" */
+export enum Broker_Agency_Select_Column {
+  /** column name */
+  Address = 'address',
+  /** column name */
+  AgentCalculateTax = 'agent_calculate_tax',
+  /** column name */
+  BrokerProgramId = 'broker_program_id',
+  /** column name */
+  CalculateFee = 'calculate_fee',
+  /** column name */
+  CalculateTax = 'calculate_tax',
+  /** column name */
+  City = 'city',
+  /** column name */
+  CommissionRate = 'commission_rate',
+  /** column name */
+  Country = 'country',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedByUserId = 'created_by_user_id',
+  /** column name */
+  ExternalId = 'external_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  PaymentOption = 'payment_option',
+  /** column name */
+  QuoteTemplateId = 'quote_template_id',
+  /** column name */
+  State = 'state',
+  /** column name */
+  TenantId = 'tenant_id',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  Zip = 'zip'
+}
+
+/** select "broker_agency_aggregate_bool_exp_bool_and_arguments_columns" columns of table "broker_agency" */
+export enum Broker_Agency_Select_Column_Broker_Agency_Aggregate_Bool_Exp_Bool_And_Arguments_Columns {
+  /** column name */
+  AgentCalculateTax = 'agent_calculate_tax',
+  /** column name */
+  CalculateFee = 'calculate_fee',
+  /** column name */
+  CalculateTax = 'calculate_tax'
+}
+
+/** select "broker_agency_aggregate_bool_exp_bool_or_arguments_columns" columns of table "broker_agency" */
+export enum Broker_Agency_Select_Column_Broker_Agency_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns {
+  /** column name */
+  AgentCalculateTax = 'agent_calculate_tax',
+  /** column name */
+  CalculateFee = 'calculate_fee',
+  /** column name */
+  CalculateTax = 'calculate_tax'
+}
+
+/** input type for updating data in table "broker_agency" */
+export type Broker_Agency_Set_Input = {
+  address?: Maybe<Scalars['String']>;
+  agent_calculate_tax?: Maybe<Scalars['Boolean']>;
+  broker_program_id?: Maybe<Scalars['String']>;
+  calculate_fee?: Maybe<Scalars['Boolean']>;
+  calculate_tax?: Maybe<Scalars['Boolean']>;
+  city?: Maybe<Scalars['String']>;
+  commission_rate?: Maybe<Scalars['numeric']>;
+  country?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  external_id?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  payment_option?: Maybe<Scalars['String']>;
+  quote_template_id?: Maybe<Scalars['String']>;
+  state?: Maybe<Scalars['String']>;
+  tenant_id?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  zip?: Maybe<Scalars['String']>;
+};
+
+/** aggregate stddev on columns */
+export type Broker_Agency_Stddev_Fields = {
+  __typename?: 'broker_agency_stddev_fields';
+  commission_rate?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  tenant_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "broker_agency" */
+export type Broker_Agency_Stddev_Order_By = {
+  commission_rate?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Broker_Agency_Stddev_Pop_Fields = {
+  __typename?: 'broker_agency_stddev_pop_fields';
+  commission_rate?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  tenant_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "broker_agency" */
+export type Broker_Agency_Stddev_Pop_Order_By = {
+  commission_rate?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Broker_Agency_Stddev_Samp_Fields = {
+  __typename?: 'broker_agency_stddev_samp_fields';
+  commission_rate?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  tenant_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "broker_agency" */
+export type Broker_Agency_Stddev_Samp_Order_By = {
+  commission_rate?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+};
+
+/** Streaming cursor of the table "broker_agency" */
+export type Broker_Agency_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Broker_Agency_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Broker_Agency_Stream_Cursor_Value_Input = {
+  address?: Maybe<Scalars['String']>;
+  agent_calculate_tax?: Maybe<Scalars['Boolean']>;
+  broker_program_id?: Maybe<Scalars['String']>;
+  calculate_fee?: Maybe<Scalars['Boolean']>;
+  calculate_tax?: Maybe<Scalars['Boolean']>;
+  city?: Maybe<Scalars['String']>;
+  commission_rate?: Maybe<Scalars['numeric']>;
+  country?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  external_id?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  payment_option?: Maybe<Scalars['String']>;
+  quote_template_id?: Maybe<Scalars['String']>;
+  state?: Maybe<Scalars['String']>;
+  tenant_id?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  zip?: Maybe<Scalars['String']>;
+};
+
+/** aggregate sum on columns */
+export type Broker_Agency_Sum_Fields = {
+  __typename?: 'broker_agency_sum_fields';
+  commission_rate?: Maybe<Scalars['numeric']>;
+  id?: Maybe<Scalars['Int']>;
+  tenant_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "broker_agency" */
+export type Broker_Agency_Sum_Order_By = {
+  commission_rate?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+};
+
+/** update columns of table "broker_agency" */
+export enum Broker_Agency_Update_Column {
+  /** column name */
+  Address = 'address',
+  /** column name */
+  AgentCalculateTax = 'agent_calculate_tax',
+  /** column name */
+  BrokerProgramId = 'broker_program_id',
+  /** column name */
+  CalculateFee = 'calculate_fee',
+  /** column name */
+  CalculateTax = 'calculate_tax',
+  /** column name */
+  City = 'city',
+  /** column name */
+  CommissionRate = 'commission_rate',
+  /** column name */
+  Country = 'country',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedByUserId = 'created_by_user_id',
+  /** column name */
+  ExternalId = 'external_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  PaymentOption = 'payment_option',
+  /** column name */
+  QuoteTemplateId = 'quote_template_id',
+  /** column name */
+  State = 'state',
+  /** column name */
+  TenantId = 'tenant_id',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  Zip = 'zip'
+}
+
+export type Broker_Agency_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: Maybe<Broker_Agency_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<Broker_Agency_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Broker_Agency_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Broker_Agency_Var_Pop_Fields = {
+  __typename?: 'broker_agency_var_pop_fields';
+  commission_rate?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  tenant_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "broker_agency" */
+export type Broker_Agency_Var_Pop_Order_By = {
+  commission_rate?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Broker_Agency_Var_Samp_Fields = {
+  __typename?: 'broker_agency_var_samp_fields';
+  commission_rate?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  tenant_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "broker_agency" */
+export type Broker_Agency_Var_Samp_Order_By = {
+  commission_rate?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Broker_Agency_Variance_Fields = {
+  __typename?: 'broker_agency_variance_fields';
+  commission_rate?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  tenant_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "broker_agency" */
+export type Broker_Agency_Variance_Order_By = {
+  commission_rate?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+};
+
+/** columns and relationships of "broker_producer" */
+export type Broker_Producer = {
+  __typename?: 'broker_producer';
+  /** An object relationship */
+  broker_agency: Broker_Agency;
+  broker_agency_id: Scalars['Int'];
+  commission_rate?: Maybe<Scalars['numeric']>;
+  created_at: Scalars['timestamptz'];
+  id: Scalars['Int'];
+  /** An object relationship */
+  user: User;
+  user_id: Scalars['Int'];
+};
+
+/** aggregated selection of "broker_producer" */
+export type Broker_Producer_Aggregate = {
+  __typename?: 'broker_producer_aggregate';
+  aggregate?: Maybe<Broker_Producer_Aggregate_Fields>;
+  nodes: Array<Broker_Producer>;
+};
+
+export type Broker_Producer_Aggregate_Bool_Exp = {
+  count?: Maybe<Broker_Producer_Aggregate_Bool_Exp_Count>;
+};
+
+export type Broker_Producer_Aggregate_Bool_Exp_Count = {
+  arguments?: Maybe<Array<Broker_Producer_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+  filter?: Maybe<Broker_Producer_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "broker_producer" */
+export type Broker_Producer_Aggregate_Fields = {
+  __typename?: 'broker_producer_aggregate_fields';
+  avg?: Maybe<Broker_Producer_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Broker_Producer_Max_Fields>;
+  min?: Maybe<Broker_Producer_Min_Fields>;
+  stddev?: Maybe<Broker_Producer_Stddev_Fields>;
+  stddev_pop?: Maybe<Broker_Producer_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Broker_Producer_Stddev_Samp_Fields>;
+  sum?: Maybe<Broker_Producer_Sum_Fields>;
+  var_pop?: Maybe<Broker_Producer_Var_Pop_Fields>;
+  var_samp?: Maybe<Broker_Producer_Var_Samp_Fields>;
+  variance?: Maybe<Broker_Producer_Variance_Fields>;
+};
+
+
+/** aggregate fields of "broker_producer" */
+export type Broker_Producer_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Broker_Producer_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "broker_producer" */
+export type Broker_Producer_Aggregate_Order_By = {
+  avg?: Maybe<Broker_Producer_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Broker_Producer_Max_Order_By>;
+  min?: Maybe<Broker_Producer_Min_Order_By>;
+  stddev?: Maybe<Broker_Producer_Stddev_Order_By>;
+  stddev_pop?: Maybe<Broker_Producer_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Broker_Producer_Stddev_Samp_Order_By>;
+  sum?: Maybe<Broker_Producer_Sum_Order_By>;
+  var_pop?: Maybe<Broker_Producer_Var_Pop_Order_By>;
+  var_samp?: Maybe<Broker_Producer_Var_Samp_Order_By>;
+  variance?: Maybe<Broker_Producer_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "broker_producer" */
+export type Broker_Producer_Arr_Rel_Insert_Input = {
+  data: Array<Broker_Producer_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: Maybe<Broker_Producer_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Broker_Producer_Avg_Fields = {
+  __typename?: 'broker_producer_avg_fields';
+  broker_agency_id?: Maybe<Scalars['Float']>;
+  commission_rate?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "broker_producer" */
+export type Broker_Producer_Avg_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  commission_rate?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "broker_producer". All fields are combined with a logical 'AND'. */
+export type Broker_Producer_Bool_Exp = {
+  _and?: Maybe<Array<Broker_Producer_Bool_Exp>>;
+  _not?: Maybe<Broker_Producer_Bool_Exp>;
+  _or?: Maybe<Array<Broker_Producer_Bool_Exp>>;
+  broker_agency?: Maybe<Broker_Agency_Bool_Exp>;
+  broker_agency_id?: Maybe<Int_Comparison_Exp>;
+  commission_rate?: Maybe<Numeric_Comparison_Exp>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  user?: Maybe<User_Bool_Exp>;
+  user_id?: Maybe<Int_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "broker_producer" */
+export enum Broker_Producer_Constraint {
+  /** unique or primary key constraint on columns "user_id", "broker_agency_id" */
+  BrokerAgentUserIdBrokerOrganizationIdKey = 'broker_agent_user_id_broker_organization_id_key',
+  /** unique or primary key constraint on columns "id" */
+  BrokerProducerPkey = 'broker_producer_pkey',
+  /** unique or primary key constraint on columns "user_id" */
+  BrokerProducerUserIdKey = 'broker_producer_user_id_key'
+}
+
+/** input type for incrementing numeric columns in table "broker_producer" */
+export type Broker_Producer_Inc_Input = {
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  commission_rate?: Maybe<Scalars['numeric']>;
+  id?: Maybe<Scalars['Int']>;
+  user_id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "broker_producer" */
+export type Broker_Producer_Insert_Input = {
+  broker_agency?: Maybe<Broker_Agency_Obj_Rel_Insert_Input>;
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  commission_rate?: Maybe<Scalars['numeric']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  user?: Maybe<User_Obj_Rel_Insert_Input>;
+  user_id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate max on columns */
+export type Broker_Producer_Max_Fields = {
+  __typename?: 'broker_producer_max_fields';
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  commission_rate?: Maybe<Scalars['numeric']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  user_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by max() on columns of table "broker_producer" */
+export type Broker_Producer_Max_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  commission_rate?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Broker_Producer_Min_Fields = {
+  __typename?: 'broker_producer_min_fields';
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  commission_rate?: Maybe<Scalars['numeric']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  user_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by min() on columns of table "broker_producer" */
+export type Broker_Producer_Min_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  commission_rate?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "broker_producer" */
+export type Broker_Producer_Mutation_Response = {
+  __typename?: 'broker_producer_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Broker_Producer>;
+};
+
+/** input type for inserting object relation for remote table "broker_producer" */
+export type Broker_Producer_Obj_Rel_Insert_Input = {
+  data: Broker_Producer_Insert_Input;
+  /** upsert condition */
+  on_conflict?: Maybe<Broker_Producer_On_Conflict>;
+};
+
+/** on_conflict condition type for table "broker_producer" */
+export type Broker_Producer_On_Conflict = {
+  constraint: Broker_Producer_Constraint;
+  update_columns?: Array<Broker_Producer_Update_Column>;
+  where?: Maybe<Broker_Producer_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "broker_producer". */
+export type Broker_Producer_Order_By = {
+  broker_agency?: Maybe<Broker_Agency_Order_By>;
+  broker_agency_id?: Maybe<Order_By>;
+  commission_rate?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  user?: Maybe<User_Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: broker_producer */
+export type Broker_Producer_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "broker_producer" */
+export enum Broker_Producer_Select_Column {
+  /** column name */
+  BrokerAgencyId = 'broker_agency_id',
+  /** column name */
+  CommissionRate = 'commission_rate',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  UserId = 'user_id'
+}
+
+/** input type for updating data in table "broker_producer" */
+export type Broker_Producer_Set_Input = {
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  commission_rate?: Maybe<Scalars['numeric']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  user_id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate stddev on columns */
+export type Broker_Producer_Stddev_Fields = {
+  __typename?: 'broker_producer_stddev_fields';
+  broker_agency_id?: Maybe<Scalars['Float']>;
+  commission_rate?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "broker_producer" */
+export type Broker_Producer_Stddev_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  commission_rate?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Broker_Producer_Stddev_Pop_Fields = {
+  __typename?: 'broker_producer_stddev_pop_fields';
+  broker_agency_id?: Maybe<Scalars['Float']>;
+  commission_rate?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "broker_producer" */
+export type Broker_Producer_Stddev_Pop_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  commission_rate?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Broker_Producer_Stddev_Samp_Fields = {
+  __typename?: 'broker_producer_stddev_samp_fields';
+  broker_agency_id?: Maybe<Scalars['Float']>;
+  commission_rate?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "broker_producer" */
+export type Broker_Producer_Stddev_Samp_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  commission_rate?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** Streaming cursor of the table "broker_producer" */
+export type Broker_Producer_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Broker_Producer_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Broker_Producer_Stream_Cursor_Value_Input = {
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  commission_rate?: Maybe<Scalars['numeric']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  user_id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate sum on columns */
+export type Broker_Producer_Sum_Fields = {
+  __typename?: 'broker_producer_sum_fields';
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  commission_rate?: Maybe<Scalars['numeric']>;
+  id?: Maybe<Scalars['Int']>;
+  user_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "broker_producer" */
+export type Broker_Producer_Sum_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  commission_rate?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** update columns of table "broker_producer" */
+export enum Broker_Producer_Update_Column {
+  /** column name */
+  BrokerAgencyId = 'broker_agency_id',
+  /** column name */
+  CommissionRate = 'commission_rate',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  UserId = 'user_id'
+}
+
+export type Broker_Producer_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: Maybe<Broker_Producer_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<Broker_Producer_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Broker_Producer_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Broker_Producer_Var_Pop_Fields = {
+  __typename?: 'broker_producer_var_pop_fields';
+  broker_agency_id?: Maybe<Scalars['Float']>;
+  commission_rate?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "broker_producer" */
+export type Broker_Producer_Var_Pop_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  commission_rate?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Broker_Producer_Var_Samp_Fields = {
+  __typename?: 'broker_producer_var_samp_fields';
+  broker_agency_id?: Maybe<Scalars['Float']>;
+  commission_rate?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "broker_producer" */
+export type Broker_Producer_Var_Samp_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  commission_rate?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Broker_Producer_Variance_Fields = {
+  __typename?: 'broker_producer_variance_fields';
+  broker_agency_id?: Maybe<Scalars['Float']>;
+  commission_rate?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "broker_producer" */
+export type Broker_Producer_Variance_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  commission_rate?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+export type Check_Tld_Exclusion_Args = {
+  domain_name?: Maybe<Scalars['String']>;
+};
+
+/** ordering argument of a cursor */
+export enum Cursor_Ordering {
+  /** ascending ordering of the cursor */
+  Asc = 'ASC',
+  /** descending ordering of the cursor */
+  Desc = 'DESC'
+}
+
+/** Boolean expression to compare columns of type "date". All fields are combined with logical 'AND'. */
+export type Date_Comparison_Exp = {
+  _eq?: Maybe<Scalars['date']>;
+  _gt?: Maybe<Scalars['date']>;
+  _gte?: Maybe<Scalars['date']>;
+  _in?: Maybe<Array<Scalars['date']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['date']>;
+  _lte?: Maybe<Scalars['date']>;
+  _neq?: Maybe<Scalars['date']>;
+  _nin?: Maybe<Array<Scalars['date']>>;
+};
+
+/** This table contains the state specific policy template mappings */
+export type Document_Forms = {
+  __typename?: 'document_forms';
+  created_at: Scalars['timestamptz'];
+  edition_date: Scalars['String'];
+  file_uri?: Maybe<Scalars['String']>;
+  form_number: Scalars['String'];
+  id: Scalars['Int'];
+  state: Scalars['String'];
+  /** An object relationship */
+  tenant: Tenant;
+  tenant_id: Scalars['Int'];
+  title: Scalars['String'];
+  type?: Maybe<Scalars['String']>;
+};
+
+/** aggregated selection of "document_forms" */
+export type Document_Forms_Aggregate = {
+  __typename?: 'document_forms_aggregate';
+  aggregate?: Maybe<Document_Forms_Aggregate_Fields>;
+  nodes: Array<Document_Forms>;
+};
+
+export type Document_Forms_Aggregate_Bool_Exp = {
+  count?: Maybe<Document_Forms_Aggregate_Bool_Exp_Count>;
+};
+
+export type Document_Forms_Aggregate_Bool_Exp_Count = {
+  arguments?: Maybe<Array<Document_Forms_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+  filter?: Maybe<Document_Forms_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "document_forms" */
+export type Document_Forms_Aggregate_Fields = {
+  __typename?: 'document_forms_aggregate_fields';
+  avg?: Maybe<Document_Forms_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Document_Forms_Max_Fields>;
+  min?: Maybe<Document_Forms_Min_Fields>;
+  stddev?: Maybe<Document_Forms_Stddev_Fields>;
+  stddev_pop?: Maybe<Document_Forms_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Document_Forms_Stddev_Samp_Fields>;
+  sum?: Maybe<Document_Forms_Sum_Fields>;
+  var_pop?: Maybe<Document_Forms_Var_Pop_Fields>;
+  var_samp?: Maybe<Document_Forms_Var_Samp_Fields>;
+  variance?: Maybe<Document_Forms_Variance_Fields>;
+};
+
+
+/** aggregate fields of "document_forms" */
+export type Document_Forms_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Document_Forms_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "document_forms" */
+export type Document_Forms_Aggregate_Order_By = {
+  avg?: Maybe<Document_Forms_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Document_Forms_Max_Order_By>;
+  min?: Maybe<Document_Forms_Min_Order_By>;
+  stddev?: Maybe<Document_Forms_Stddev_Order_By>;
+  stddev_pop?: Maybe<Document_Forms_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Document_Forms_Stddev_Samp_Order_By>;
+  sum?: Maybe<Document_Forms_Sum_Order_By>;
+  var_pop?: Maybe<Document_Forms_Var_Pop_Order_By>;
+  var_samp?: Maybe<Document_Forms_Var_Samp_Order_By>;
+  variance?: Maybe<Document_Forms_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "document_forms" */
+export type Document_Forms_Arr_Rel_Insert_Input = {
+  data: Array<Document_Forms_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: Maybe<Document_Forms_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Document_Forms_Avg_Fields = {
+  __typename?: 'document_forms_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+  tenant_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "document_forms" */
+export type Document_Forms_Avg_Order_By = {
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "document_forms". All fields are combined with a logical 'AND'. */
+export type Document_Forms_Bool_Exp = {
+  _and?: Maybe<Array<Document_Forms_Bool_Exp>>;
+  _not?: Maybe<Document_Forms_Bool_Exp>;
+  _or?: Maybe<Array<Document_Forms_Bool_Exp>>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  edition_date?: Maybe<String_Comparison_Exp>;
+  file_uri?: Maybe<String_Comparison_Exp>;
+  form_number?: Maybe<String_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  state?: Maybe<String_Comparison_Exp>;
+  tenant?: Maybe<Tenant_Bool_Exp>;
+  tenant_id?: Maybe<Int_Comparison_Exp>;
+  title?: Maybe<String_Comparison_Exp>;
+  type?: Maybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "document_forms" */
+export enum Document_Forms_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  DocumentFormsPkey = 'document_forms_pkey',
+  /** unique or primary key constraint on columns "form_number", "tenant_id", "edition_date" */
+  DocumentFormsTenantIdFormNumberEditionDateKey = 'document_forms_tenant_id_form_number_edition_date_key'
+}
+
+/** input type for incrementing numeric columns in table "document_forms" */
+export type Document_Forms_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+  tenant_id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "document_forms" */
+export type Document_Forms_Insert_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  edition_date?: Maybe<Scalars['String']>;
+  file_uri?: Maybe<Scalars['String']>;
+  form_number?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  state?: Maybe<Scalars['String']>;
+  tenant?: Maybe<Tenant_Obj_Rel_Insert_Input>;
+  tenant_id?: Maybe<Scalars['Int']>;
+  title?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Document_Forms_Max_Fields = {
+  __typename?: 'document_forms_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  edition_date?: Maybe<Scalars['String']>;
+  file_uri?: Maybe<Scalars['String']>;
+  form_number?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  state?: Maybe<Scalars['String']>;
+  tenant_id?: Maybe<Scalars['Int']>;
+  title?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+/** order by max() on columns of table "document_forms" */
+export type Document_Forms_Max_Order_By = {
+  created_at?: Maybe<Order_By>;
+  edition_date?: Maybe<Order_By>;
+  file_uri?: Maybe<Order_By>;
+  form_number?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  state?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+  title?: Maybe<Order_By>;
+  type?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Document_Forms_Min_Fields = {
+  __typename?: 'document_forms_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  edition_date?: Maybe<Scalars['String']>;
+  file_uri?: Maybe<Scalars['String']>;
+  form_number?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  state?: Maybe<Scalars['String']>;
+  tenant_id?: Maybe<Scalars['Int']>;
+  title?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+/** order by min() on columns of table "document_forms" */
+export type Document_Forms_Min_Order_By = {
+  created_at?: Maybe<Order_By>;
+  edition_date?: Maybe<Order_By>;
+  file_uri?: Maybe<Order_By>;
+  form_number?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  state?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+  title?: Maybe<Order_By>;
+  type?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "document_forms" */
+export type Document_Forms_Mutation_Response = {
+  __typename?: 'document_forms_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Document_Forms>;
+};
+
+/** on_conflict condition type for table "document_forms" */
+export type Document_Forms_On_Conflict = {
+  constraint: Document_Forms_Constraint;
+  update_columns?: Array<Document_Forms_Update_Column>;
+  where?: Maybe<Document_Forms_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "document_forms". */
+export type Document_Forms_Order_By = {
+  created_at?: Maybe<Order_By>;
+  edition_date?: Maybe<Order_By>;
+  file_uri?: Maybe<Order_By>;
+  form_number?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  state?: Maybe<Order_By>;
+  tenant?: Maybe<Tenant_Order_By>;
+  tenant_id?: Maybe<Order_By>;
+  title?: Maybe<Order_By>;
+  type?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: document_forms */
+export type Document_Forms_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "document_forms" */
+export enum Document_Forms_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  EditionDate = 'edition_date',
+  /** column name */
+  FileUri = 'file_uri',
+  /** column name */
+  FormNumber = 'form_number',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  State = 'state',
+  /** column name */
+  TenantId = 'tenant_id',
+  /** column name */
+  Title = 'title',
+  /** column name */
+  Type = 'type'
+}
+
+/** input type for updating data in table "document_forms" */
+export type Document_Forms_Set_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  edition_date?: Maybe<Scalars['String']>;
+  file_uri?: Maybe<Scalars['String']>;
+  form_number?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  state?: Maybe<Scalars['String']>;
+  tenant_id?: Maybe<Scalars['Int']>;
+  title?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+/** aggregate stddev on columns */
+export type Document_Forms_Stddev_Fields = {
+  __typename?: 'document_forms_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+  tenant_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "document_forms" */
+export type Document_Forms_Stddev_Order_By = {
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Document_Forms_Stddev_Pop_Fields = {
+  __typename?: 'document_forms_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  tenant_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "document_forms" */
+export type Document_Forms_Stddev_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Document_Forms_Stddev_Samp_Fields = {
+  __typename?: 'document_forms_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  tenant_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "document_forms" */
+export type Document_Forms_Stddev_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+};
+
+/** Streaming cursor of the table "document_forms" */
+export type Document_Forms_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Document_Forms_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Document_Forms_Stream_Cursor_Value_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  edition_date?: Maybe<Scalars['String']>;
+  file_uri?: Maybe<Scalars['String']>;
+  form_number?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  state?: Maybe<Scalars['String']>;
+  tenant_id?: Maybe<Scalars['Int']>;
+  title?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+/** aggregate sum on columns */
+export type Document_Forms_Sum_Fields = {
+  __typename?: 'document_forms_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+  tenant_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "document_forms" */
+export type Document_Forms_Sum_Order_By = {
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+};
+
+/** update columns of table "document_forms" */
+export enum Document_Forms_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  EditionDate = 'edition_date',
+  /** column name */
+  FileUri = 'file_uri',
+  /** column name */
+  FormNumber = 'form_number',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  State = 'state',
+  /** column name */
+  TenantId = 'tenant_id',
+  /** column name */
+  Title = 'title',
+  /** column name */
+  Type = 'type'
+}
+
+export type Document_Forms_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: Maybe<Document_Forms_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<Document_Forms_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Document_Forms_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Document_Forms_Var_Pop_Fields = {
+  __typename?: 'document_forms_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  tenant_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "document_forms" */
+export type Document_Forms_Var_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Document_Forms_Var_Samp_Fields = {
+  __typename?: 'document_forms_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  tenant_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "document_forms" */
+export type Document_Forms_Var_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Document_Forms_Variance_Fields = {
+  __typename?: 'document_forms_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+  tenant_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "document_forms" */
+export type Document_Forms_Variance_Order_By = {
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+};
+
+/** columns and relationships of "domain_scan" */
+export type Domain_Scan = {
+  __typename?: 'domain_scan';
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at: Scalars['timestamptz'];
+  /** An object relationship */
+  domain: Domains;
+  domain_id: Scalars['Int'];
+  external_id?: Maybe<Scalars['uuid']>;
+  id: Scalars['Int'];
+  /** An object relationship */
+  insurance_application?: Maybe<Insurance_Application>;
+  progress?: Maybe<Scalars['Int']>;
+  status: Scalars['String'];
+  updated_at: Scalars['timestamptz'];
+  verdict?: Maybe<Scalars['String']>;
+};
+
+/** aggregated selection of "domain_scan" */
+export type Domain_Scan_Aggregate = {
+  __typename?: 'domain_scan_aggregate';
+  aggregate?: Maybe<Domain_Scan_Aggregate_Fields>;
+  nodes: Array<Domain_Scan>;
+};
+
+export type Domain_Scan_Aggregate_Bool_Exp = {
+  count?: Maybe<Domain_Scan_Aggregate_Bool_Exp_Count>;
+};
+
+export type Domain_Scan_Aggregate_Bool_Exp_Count = {
+  arguments?: Maybe<Array<Domain_Scan_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+  filter?: Maybe<Domain_Scan_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "domain_scan" */
+export type Domain_Scan_Aggregate_Fields = {
+  __typename?: 'domain_scan_aggregate_fields';
+  avg?: Maybe<Domain_Scan_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Domain_Scan_Max_Fields>;
+  min?: Maybe<Domain_Scan_Min_Fields>;
+  stddev?: Maybe<Domain_Scan_Stddev_Fields>;
+  stddev_pop?: Maybe<Domain_Scan_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Domain_Scan_Stddev_Samp_Fields>;
+  sum?: Maybe<Domain_Scan_Sum_Fields>;
+  var_pop?: Maybe<Domain_Scan_Var_Pop_Fields>;
+  var_samp?: Maybe<Domain_Scan_Var_Samp_Fields>;
+  variance?: Maybe<Domain_Scan_Variance_Fields>;
+};
+
+
+/** aggregate fields of "domain_scan" */
+export type Domain_Scan_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Domain_Scan_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "domain_scan" */
+export type Domain_Scan_Aggregate_Order_By = {
+  avg?: Maybe<Domain_Scan_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Domain_Scan_Max_Order_By>;
+  min?: Maybe<Domain_Scan_Min_Order_By>;
+  stddev?: Maybe<Domain_Scan_Stddev_Order_By>;
+  stddev_pop?: Maybe<Domain_Scan_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Domain_Scan_Stddev_Samp_Order_By>;
+  sum?: Maybe<Domain_Scan_Sum_Order_By>;
+  var_pop?: Maybe<Domain_Scan_Var_Pop_Order_By>;
+  var_samp?: Maybe<Domain_Scan_Var_Samp_Order_By>;
+  variance?: Maybe<Domain_Scan_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "domain_scan" */
+export type Domain_Scan_Arr_Rel_Insert_Input = {
+  data: Array<Domain_Scan_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: Maybe<Domain_Scan_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Domain_Scan_Avg_Fields = {
+  __typename?: 'domain_scan_avg_fields';
+  domain_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  progress?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "domain_scan" */
+export type Domain_Scan_Avg_Order_By = {
+  domain_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  progress?: Maybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "domain_scan". All fields are combined with a logical 'AND'. */
+export type Domain_Scan_Bool_Exp = {
+  _and?: Maybe<Array<Domain_Scan_Bool_Exp>>;
+  _not?: Maybe<Domain_Scan_Bool_Exp>;
+  _or?: Maybe<Array<Domain_Scan_Bool_Exp>>;
+  application_id?: Maybe<Uuid_Comparison_Exp>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  domain?: Maybe<Domains_Bool_Exp>;
+  domain_id?: Maybe<Int_Comparison_Exp>;
+  external_id?: Maybe<Uuid_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  insurance_application?: Maybe<Insurance_Application_Bool_Exp>;
+  progress?: Maybe<Int_Comparison_Exp>;
+  status?: Maybe<String_Comparison_Exp>;
+  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+  verdict?: Maybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "domain_scan" */
+export enum Domain_Scan_Constraint {
+  /** unique or primary key constraint on columns "external_id", "domain_id" */
+  DomainScanDomainIdExternalIdKey = 'domain_scan_domain_id_external_id_key',
+  /** unique or primary key constraint on columns "external_id" */
+  DomainScanExternalIdKey = 'domain_scan_external_id_key',
+  /** unique or primary key constraint on columns "id" */
+  DomainScanPkey = 'domain_scan_pkey',
+  /** unique or primary key constraint on columns "external_id", "domain_id" */
+  UniqueDomainIdExternalId = 'unique_domain_id_external_id',
+  /** unique or primary key constraint on columns "domain_id" */
+  UniqueDomainIdNullExternalId = 'unique_domain_id_null_external_id'
+}
+
+/** input type for incrementing numeric columns in table "domain_scan" */
+export type Domain_Scan_Inc_Input = {
+  domain_id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  progress?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "domain_scan" */
+export type Domain_Scan_Insert_Input = {
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  domain?: Maybe<Domains_Obj_Rel_Insert_Input>;
+  domain_id?: Maybe<Scalars['Int']>;
+  external_id?: Maybe<Scalars['uuid']>;
+  id?: Maybe<Scalars['Int']>;
+  insurance_application?: Maybe<Insurance_Application_Obj_Rel_Insert_Input>;
+  progress?: Maybe<Scalars['Int']>;
+  status?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  verdict?: Maybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Domain_Scan_Max_Fields = {
+  __typename?: 'domain_scan_max_fields';
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  domain_id?: Maybe<Scalars['Int']>;
+  external_id?: Maybe<Scalars['uuid']>;
+  id?: Maybe<Scalars['Int']>;
+  progress?: Maybe<Scalars['Int']>;
+  status?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  verdict?: Maybe<Scalars['String']>;
+};
+
+/** order by max() on columns of table "domain_scan" */
+export type Domain_Scan_Max_Order_By = {
+  application_id?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  domain_id?: Maybe<Order_By>;
+  external_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  progress?: Maybe<Order_By>;
+  status?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+  verdict?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Domain_Scan_Min_Fields = {
+  __typename?: 'domain_scan_min_fields';
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  domain_id?: Maybe<Scalars['Int']>;
+  external_id?: Maybe<Scalars['uuid']>;
+  id?: Maybe<Scalars['Int']>;
+  progress?: Maybe<Scalars['Int']>;
+  status?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  verdict?: Maybe<Scalars['String']>;
+};
+
+/** order by min() on columns of table "domain_scan" */
+export type Domain_Scan_Min_Order_By = {
+  application_id?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  domain_id?: Maybe<Order_By>;
+  external_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  progress?: Maybe<Order_By>;
+  status?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+  verdict?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "domain_scan" */
+export type Domain_Scan_Mutation_Response = {
+  __typename?: 'domain_scan_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Domain_Scan>;
+};
+
+/** input type for inserting object relation for remote table "domain_scan" */
+export type Domain_Scan_Obj_Rel_Insert_Input = {
+  data: Domain_Scan_Insert_Input;
+  /** upsert condition */
+  on_conflict?: Maybe<Domain_Scan_On_Conflict>;
+};
+
+/** on_conflict condition type for table "domain_scan" */
+export type Domain_Scan_On_Conflict = {
+  constraint: Domain_Scan_Constraint;
+  update_columns?: Array<Domain_Scan_Update_Column>;
+  where?: Maybe<Domain_Scan_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "domain_scan". */
+export type Domain_Scan_Order_By = {
+  application_id?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  domain?: Maybe<Domains_Order_By>;
+  domain_id?: Maybe<Order_By>;
+  external_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  insurance_application?: Maybe<Insurance_Application_Order_By>;
+  progress?: Maybe<Order_By>;
+  status?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+  verdict?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: domain_scan */
+export type Domain_Scan_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "domain_scan" */
+export enum Domain_Scan_Select_Column {
+  /** column name */
+  ApplicationId = 'application_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  DomainId = 'domain_id',
+  /** column name */
+  ExternalId = 'external_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Progress = 'progress',
+  /** column name */
+  Status = 'status',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  Verdict = 'verdict'
+}
+
+/** input type for updating data in table "domain_scan" */
+export type Domain_Scan_Set_Input = {
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  domain_id?: Maybe<Scalars['Int']>;
+  external_id?: Maybe<Scalars['uuid']>;
+  id?: Maybe<Scalars['Int']>;
+  progress?: Maybe<Scalars['Int']>;
+  status?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  verdict?: Maybe<Scalars['String']>;
+};
+
+/** aggregate stddev on columns */
+export type Domain_Scan_Stddev_Fields = {
+  __typename?: 'domain_scan_stddev_fields';
+  domain_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  progress?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "domain_scan" */
+export type Domain_Scan_Stddev_Order_By = {
+  domain_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  progress?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Domain_Scan_Stddev_Pop_Fields = {
+  __typename?: 'domain_scan_stddev_pop_fields';
+  domain_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  progress?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "domain_scan" */
+export type Domain_Scan_Stddev_Pop_Order_By = {
+  domain_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  progress?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Domain_Scan_Stddev_Samp_Fields = {
+  __typename?: 'domain_scan_stddev_samp_fields';
+  domain_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  progress?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "domain_scan" */
+export type Domain_Scan_Stddev_Samp_Order_By = {
+  domain_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  progress?: Maybe<Order_By>;
+};
+
+/** Streaming cursor of the table "domain_scan" */
+export type Domain_Scan_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Domain_Scan_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Domain_Scan_Stream_Cursor_Value_Input = {
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  domain_id?: Maybe<Scalars['Int']>;
+  external_id?: Maybe<Scalars['uuid']>;
+  id?: Maybe<Scalars['Int']>;
+  progress?: Maybe<Scalars['Int']>;
+  status?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  verdict?: Maybe<Scalars['String']>;
+};
+
+/** aggregate sum on columns */
+export type Domain_Scan_Sum_Fields = {
+  __typename?: 'domain_scan_sum_fields';
+  domain_id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  progress?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "domain_scan" */
+export type Domain_Scan_Sum_Order_By = {
+  domain_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  progress?: Maybe<Order_By>;
+};
+
+/** update columns of table "domain_scan" */
+export enum Domain_Scan_Update_Column {
+  /** column name */
+  ApplicationId = 'application_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  DomainId = 'domain_id',
+  /** column name */
+  ExternalId = 'external_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Progress = 'progress',
+  /** column name */
+  Status = 'status',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  Verdict = 'verdict'
+}
+
+export type Domain_Scan_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: Maybe<Domain_Scan_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<Domain_Scan_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Domain_Scan_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Domain_Scan_Var_Pop_Fields = {
+  __typename?: 'domain_scan_var_pop_fields';
+  domain_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  progress?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "domain_scan" */
+export type Domain_Scan_Var_Pop_Order_By = {
+  domain_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  progress?: Maybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Domain_Scan_Var_Samp_Fields = {
+  __typename?: 'domain_scan_var_samp_fields';
+  domain_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  progress?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "domain_scan" */
+export type Domain_Scan_Var_Samp_Order_By = {
+  domain_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  progress?: Maybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Domain_Scan_Variance_Fields = {
+  __typename?: 'domain_scan_variance_fields';
+  domain_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  progress?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "domain_scan" */
+export type Domain_Scan_Variance_Order_By = {
+  domain_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  progress?: Maybe<Order_By>;
+};
+
+/** columns and relationships of "domains" */
+export type Domains = {
+  __typename?: 'domains';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  domain_name: Scalars['String'];
+  /** An array relationship */
+  domain_scans: Array<Domain_Scan>;
+  /** An aggregate relationship */
+  domain_scans_aggregate: Domain_Scan_Aggregate;
+  id: Scalars['Int'];
+  /** An array relationship */
+  organization_domains: Array<Organization_Domains>;
+  /** An aggregate relationship */
+  organization_domains_aggregate: Organization_Domains_Aggregate;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+
+/** columns and relationships of "domains" */
+export type DomainsDomain_ScansArgs = {
+  distinct_on?: Maybe<Array<Domain_Scan_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Domain_Scan_Order_By>>;
+  where?: Maybe<Domain_Scan_Bool_Exp>;
+};
+
+
+/** columns and relationships of "domains" */
+export type DomainsDomain_Scans_AggregateArgs = {
+  distinct_on?: Maybe<Array<Domain_Scan_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Domain_Scan_Order_By>>;
+  where?: Maybe<Domain_Scan_Bool_Exp>;
+};
+
+
+/** columns and relationships of "domains" */
+export type DomainsOrganization_DomainsArgs = {
+  distinct_on?: Maybe<Array<Organization_Domains_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Organization_Domains_Order_By>>;
+  where?: Maybe<Organization_Domains_Bool_Exp>;
+};
+
+
+/** columns and relationships of "domains" */
+export type DomainsOrganization_Domains_AggregateArgs = {
+  distinct_on?: Maybe<Array<Organization_Domains_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Organization_Domains_Order_By>>;
+  where?: Maybe<Organization_Domains_Bool_Exp>;
+};
+
+/** aggregated selection of "domains" */
+export type Domains_Aggregate = {
+  __typename?: 'domains_aggregate';
+  aggregate?: Maybe<Domains_Aggregate_Fields>;
+  nodes: Array<Domains>;
+};
+
+/** aggregate fields of "domains" */
+export type Domains_Aggregate_Fields = {
+  __typename?: 'domains_aggregate_fields';
+  avg?: Maybe<Domains_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Domains_Max_Fields>;
+  min?: Maybe<Domains_Min_Fields>;
+  stddev?: Maybe<Domains_Stddev_Fields>;
+  stddev_pop?: Maybe<Domains_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Domains_Stddev_Samp_Fields>;
+  sum?: Maybe<Domains_Sum_Fields>;
+  var_pop?: Maybe<Domains_Var_Pop_Fields>;
+  var_samp?: Maybe<Domains_Var_Samp_Fields>;
+  variance?: Maybe<Domains_Variance_Fields>;
+};
+
+
+/** aggregate fields of "domains" */
+export type Domains_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Domains_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Domains_Avg_Fields = {
+  __typename?: 'domains_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "domains". All fields are combined with a logical 'AND'. */
+export type Domains_Bool_Exp = {
+  _and?: Maybe<Array<Domains_Bool_Exp>>;
+  _not?: Maybe<Domains_Bool_Exp>;
+  _or?: Maybe<Array<Domains_Bool_Exp>>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  domain_name?: Maybe<String_Comparison_Exp>;
+  domain_scans?: Maybe<Domain_Scan_Bool_Exp>;
+  domain_scans_aggregate?: Maybe<Domain_Scan_Aggregate_Bool_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  organization_domains?: Maybe<Organization_Domains_Bool_Exp>;
+  organization_domains_aggregate?: Maybe<Organization_Domains_Aggregate_Bool_Exp>;
+  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "domains" */
+export enum Domains_Constraint {
+  /** unique or primary key constraint on columns "domain_name" */
+  DomainsDomainNameKey = 'domains_domain_name_key',
+  /** unique or primary key constraint on columns "id" */
+  DomainsPkey = 'domains_pkey'
+}
+
+/** input type for incrementing numeric columns in table "domains" */
+export type Domains_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "domains" */
+export type Domains_Insert_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  domain_name?: Maybe<Scalars['String']>;
+  domain_scans?: Maybe<Domain_Scan_Arr_Rel_Insert_Input>;
+  id?: Maybe<Scalars['Int']>;
+  organization_domains?: Maybe<Organization_Domains_Arr_Rel_Insert_Input>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type Domains_Max_Fields = {
+  __typename?: 'domains_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  domain_name?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate min on columns */
+export type Domains_Min_Fields = {
+  __typename?: 'domains_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  domain_name?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** response of any mutation on the table "domains" */
+export type Domains_Mutation_Response = {
+  __typename?: 'domains_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Domains>;
+};
+
+/** input type for inserting object relation for remote table "domains" */
+export type Domains_Obj_Rel_Insert_Input = {
+  data: Domains_Insert_Input;
+  /** upsert condition */
+  on_conflict?: Maybe<Domains_On_Conflict>;
+};
+
+/** on_conflict condition type for table "domains" */
+export type Domains_On_Conflict = {
+  constraint: Domains_Constraint;
+  update_columns?: Array<Domains_Update_Column>;
+  where?: Maybe<Domains_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "domains". */
+export type Domains_Order_By = {
+  created_at?: Maybe<Order_By>;
+  domain_name?: Maybe<Order_By>;
+  domain_scans_aggregate?: Maybe<Domain_Scan_Aggregate_Order_By>;
+  id?: Maybe<Order_By>;
+  organization_domains_aggregate?: Maybe<Organization_Domains_Aggregate_Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: domains */
+export type Domains_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "domains" */
+export enum Domains_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  DomainName = 'domain_name',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "domains" */
+export type Domains_Set_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  domain_name?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate stddev on columns */
+export type Domains_Stddev_Fields = {
+  __typename?: 'domains_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Domains_Stddev_Pop_Fields = {
+  __typename?: 'domains_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Domains_Stddev_Samp_Fields = {
+  __typename?: 'domains_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Streaming cursor of the table "domains" */
+export type Domains_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Domains_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Domains_Stream_Cursor_Value_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  domain_name?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate sum on columns */
+export type Domains_Sum_Fields = {
+  __typename?: 'domains_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "domains" */
+export enum Domains_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  DomainName = 'domain_name',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+export type Domains_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: Maybe<Domains_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<Domains_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Domains_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Domains_Var_Pop_Fields = {
+  __typename?: 'domains_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Domains_Var_Samp_Fields = {
+  __typename?: 'domains_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Domains_Variance_Fields = {
+  __typename?: 'domains_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** columns and relationships of "external_scan" */
+export type External_Scan = {
+  __typename?: 'external_scan';
+  application_id: Scalars['uuid'];
+  created_at: Scalars['timestamptz'];
+  external_id?: Maybe<Scalars['String']>;
+  id: Scalars['Int'];
+  /** An object relationship */
+  insurance_application: Insurance_Application;
+  request?: Maybe<Scalars['jsonb']>;
+  risk_score?: Maybe<Scalars['String']>;
+  scan_result?: Maybe<Scalars['jsonb']>;
+  status: Scalars['String'];
+  updated_at: Scalars['timestamptz'];
+};
+
+
+/** columns and relationships of "external_scan" */
+export type External_ScanRequestArgs = {
+  path?: Maybe<Scalars['String']>;
+};
+
+
+/** columns and relationships of "external_scan" */
+export type External_ScanScan_ResultArgs = {
+  path?: Maybe<Scalars['String']>;
+};
+
+/** aggregated selection of "external_scan" */
+export type External_Scan_Aggregate = {
+  __typename?: 'external_scan_aggregate';
+  aggregate?: Maybe<External_Scan_Aggregate_Fields>;
+  nodes: Array<External_Scan>;
+};
+
+export type External_Scan_Aggregate_Bool_Exp = {
+  count?: Maybe<External_Scan_Aggregate_Bool_Exp_Count>;
+};
+
+export type External_Scan_Aggregate_Bool_Exp_Count = {
+  arguments?: Maybe<Array<External_Scan_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+  filter?: Maybe<External_Scan_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "external_scan" */
+export type External_Scan_Aggregate_Fields = {
+  __typename?: 'external_scan_aggregate_fields';
+  avg?: Maybe<External_Scan_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<External_Scan_Max_Fields>;
+  min?: Maybe<External_Scan_Min_Fields>;
+  stddev?: Maybe<External_Scan_Stddev_Fields>;
+  stddev_pop?: Maybe<External_Scan_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<External_Scan_Stddev_Samp_Fields>;
+  sum?: Maybe<External_Scan_Sum_Fields>;
+  var_pop?: Maybe<External_Scan_Var_Pop_Fields>;
+  var_samp?: Maybe<External_Scan_Var_Samp_Fields>;
+  variance?: Maybe<External_Scan_Variance_Fields>;
+};
+
+
+/** aggregate fields of "external_scan" */
+export type External_Scan_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<External_Scan_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "external_scan" */
+export type External_Scan_Aggregate_Order_By = {
+  avg?: Maybe<External_Scan_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<External_Scan_Max_Order_By>;
+  min?: Maybe<External_Scan_Min_Order_By>;
+  stddev?: Maybe<External_Scan_Stddev_Order_By>;
+  stddev_pop?: Maybe<External_Scan_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<External_Scan_Stddev_Samp_Order_By>;
+  sum?: Maybe<External_Scan_Sum_Order_By>;
+  var_pop?: Maybe<External_Scan_Var_Pop_Order_By>;
+  var_samp?: Maybe<External_Scan_Var_Samp_Order_By>;
+  variance?: Maybe<External_Scan_Variance_Order_By>;
+};
+
+/** append existing jsonb value of filtered columns with new jsonb value */
+export type External_Scan_Append_Input = {
+  request?: Maybe<Scalars['jsonb']>;
+  scan_result?: Maybe<Scalars['jsonb']>;
+};
+
+/** input type for inserting array relation for remote table "external_scan" */
+export type External_Scan_Arr_Rel_Insert_Input = {
+  data: Array<External_Scan_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: Maybe<External_Scan_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type External_Scan_Avg_Fields = {
+  __typename?: 'external_scan_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "external_scan" */
+export type External_Scan_Avg_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "external_scan". All fields are combined with a logical 'AND'. */
+export type External_Scan_Bool_Exp = {
+  _and?: Maybe<Array<External_Scan_Bool_Exp>>;
+  _not?: Maybe<External_Scan_Bool_Exp>;
+  _or?: Maybe<Array<External_Scan_Bool_Exp>>;
+  application_id?: Maybe<Uuid_Comparison_Exp>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  external_id?: Maybe<String_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  insurance_application?: Maybe<Insurance_Application_Bool_Exp>;
+  request?: Maybe<Jsonb_Comparison_Exp>;
+  risk_score?: Maybe<String_Comparison_Exp>;
+  scan_result?: Maybe<Jsonb_Comparison_Exp>;
+  status?: Maybe<String_Comparison_Exp>;
+  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "external_scan" */
+export enum External_Scan_Constraint {
+  /** unique or primary key constraint on columns "external_id" */
+  ExternalScanExternalIdKey = 'external_scan_external_id_key',
+  /** unique or primary key constraint on columns "id" */
+  ExternalScanPkey = 'external_scan_pkey'
+}
+
+/** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+export type External_Scan_Delete_At_Path_Input = {
+  request?: Maybe<Array<Scalars['String']>>;
+  scan_result?: Maybe<Array<Scalars['String']>>;
+};
+
+/** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+export type External_Scan_Delete_Elem_Input = {
+  request?: Maybe<Scalars['Int']>;
+  scan_result?: Maybe<Scalars['Int']>;
+};
+
+/** delete key/value pair or string element. key/value pairs are matched based on their key value */
+export type External_Scan_Delete_Key_Input = {
+  request?: Maybe<Scalars['String']>;
+  scan_result?: Maybe<Scalars['String']>;
+};
+
+/** input type for incrementing numeric columns in table "external_scan" */
+export type External_Scan_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "external_scan" */
+export type External_Scan_Insert_Input = {
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  external_id?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  insurance_application?: Maybe<Insurance_Application_Obj_Rel_Insert_Input>;
+  request?: Maybe<Scalars['jsonb']>;
+  risk_score?: Maybe<Scalars['String']>;
+  scan_result?: Maybe<Scalars['jsonb']>;
+  status?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type External_Scan_Max_Fields = {
+  __typename?: 'external_scan_max_fields';
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  external_id?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  risk_score?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** order by max() on columns of table "external_scan" */
+export type External_Scan_Max_Order_By = {
+  application_id?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  external_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  risk_score?: Maybe<Order_By>;
+  status?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type External_Scan_Min_Fields = {
+  __typename?: 'external_scan_min_fields';
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  external_id?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  risk_score?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** order by min() on columns of table "external_scan" */
+export type External_Scan_Min_Order_By = {
+  application_id?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  external_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  risk_score?: Maybe<Order_By>;
+  status?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "external_scan" */
+export type External_Scan_Mutation_Response = {
+  __typename?: 'external_scan_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<External_Scan>;
+};
+
+/** on_conflict condition type for table "external_scan" */
+export type External_Scan_On_Conflict = {
+  constraint: External_Scan_Constraint;
+  update_columns?: Array<External_Scan_Update_Column>;
+  where?: Maybe<External_Scan_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "external_scan". */
+export type External_Scan_Order_By = {
+  application_id?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  external_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  insurance_application?: Maybe<Insurance_Application_Order_By>;
+  request?: Maybe<Order_By>;
+  risk_score?: Maybe<Order_By>;
+  scan_result?: Maybe<Order_By>;
+  status?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: external_scan */
+export type External_Scan_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** prepend existing jsonb value of filtered columns with new jsonb value */
+export type External_Scan_Prepend_Input = {
+  request?: Maybe<Scalars['jsonb']>;
+  scan_result?: Maybe<Scalars['jsonb']>;
+};
+
+/** select columns of table "external_scan" */
+export enum External_Scan_Select_Column {
+  /** column name */
+  ApplicationId = 'application_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  ExternalId = 'external_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Request = 'request',
+  /** column name */
+  RiskScore = 'risk_score',
+  /** column name */
+  ScanResult = 'scan_result',
+  /** column name */
+  Status = 'status',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "external_scan" */
+export type External_Scan_Set_Input = {
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  external_id?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  request?: Maybe<Scalars['jsonb']>;
+  risk_score?: Maybe<Scalars['String']>;
+  scan_result?: Maybe<Scalars['jsonb']>;
+  status?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate stddev on columns */
+export type External_Scan_Stddev_Fields = {
+  __typename?: 'external_scan_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "external_scan" */
+export type External_Scan_Stddev_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type External_Scan_Stddev_Pop_Fields = {
+  __typename?: 'external_scan_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "external_scan" */
+export type External_Scan_Stddev_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type External_Scan_Stddev_Samp_Fields = {
+  __typename?: 'external_scan_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "external_scan" */
+export type External_Scan_Stddev_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** Streaming cursor of the table "external_scan" */
+export type External_Scan_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: External_Scan_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type External_Scan_Stream_Cursor_Value_Input = {
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  external_id?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  request?: Maybe<Scalars['jsonb']>;
+  risk_score?: Maybe<Scalars['String']>;
+  scan_result?: Maybe<Scalars['jsonb']>;
+  status?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate sum on columns */
+export type External_Scan_Sum_Fields = {
+  __typename?: 'external_scan_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "external_scan" */
+export type External_Scan_Sum_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** update columns of table "external_scan" */
+export enum External_Scan_Update_Column {
+  /** column name */
+  ApplicationId = 'application_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  ExternalId = 'external_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Request = 'request',
+  /** column name */
+  RiskScore = 'risk_score',
+  /** column name */
+  ScanResult = 'scan_result',
+  /** column name */
+  Status = 'status',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+export type External_Scan_Updates = {
+  /** append existing jsonb value of filtered columns with new jsonb value */
+  _append?: Maybe<External_Scan_Append_Input>;
+  /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+  _delete_at_path?: Maybe<External_Scan_Delete_At_Path_Input>;
+  /** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+  _delete_elem?: Maybe<External_Scan_Delete_Elem_Input>;
+  /** delete key/value pair or string element. key/value pairs are matched based on their key value */
+  _delete_key?: Maybe<External_Scan_Delete_Key_Input>;
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: Maybe<External_Scan_Inc_Input>;
+  /** prepend existing jsonb value of filtered columns with new jsonb value */
+  _prepend?: Maybe<External_Scan_Prepend_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<External_Scan_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: External_Scan_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type External_Scan_Var_Pop_Fields = {
+  __typename?: 'external_scan_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "external_scan" */
+export type External_Scan_Var_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type External_Scan_Var_Samp_Fields = {
+  __typename?: 'external_scan_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "external_scan" */
+export type External_Scan_Var_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type External_Scan_Variance_Fields = {
+  __typename?: 'external_scan_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "external_scan" */
+export type External_Scan_Variance_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** columns and relationships of "ims_applications_not_taken_up" */
+export type Ims_Applications_Not_Taken_Up = {
+  __typename?: 'ims_applications_not_taken_up';
+  application_id: Scalars['uuid'];
+  created_at: Scalars['timestamptz'];
+  created_by?: Maybe<Scalars['uuid']>;
+  /** An object relationship */
+  insurance_application: Insurance_Application;
+};
+
+/** aggregated selection of "ims_applications_not_taken_up" */
+export type Ims_Applications_Not_Taken_Up_Aggregate = {
+  __typename?: 'ims_applications_not_taken_up_aggregate';
+  aggregate?: Maybe<Ims_Applications_Not_Taken_Up_Aggregate_Fields>;
+  nodes: Array<Ims_Applications_Not_Taken_Up>;
+};
+
+export type Ims_Applications_Not_Taken_Up_Aggregate_Bool_Exp = {
+  count?: Maybe<Ims_Applications_Not_Taken_Up_Aggregate_Bool_Exp_Count>;
+};
+
+export type Ims_Applications_Not_Taken_Up_Aggregate_Bool_Exp_Count = {
+  arguments?: Maybe<Array<Ims_Applications_Not_Taken_Up_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+  filter?: Maybe<Ims_Applications_Not_Taken_Up_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "ims_applications_not_taken_up" */
+export type Ims_Applications_Not_Taken_Up_Aggregate_Fields = {
+  __typename?: 'ims_applications_not_taken_up_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Ims_Applications_Not_Taken_Up_Max_Fields>;
+  min?: Maybe<Ims_Applications_Not_Taken_Up_Min_Fields>;
+};
+
+
+/** aggregate fields of "ims_applications_not_taken_up" */
+export type Ims_Applications_Not_Taken_Up_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Ims_Applications_Not_Taken_Up_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "ims_applications_not_taken_up" */
+export type Ims_Applications_Not_Taken_Up_Aggregate_Order_By = {
+  count?: Maybe<Order_By>;
+  max?: Maybe<Ims_Applications_Not_Taken_Up_Max_Order_By>;
+  min?: Maybe<Ims_Applications_Not_Taken_Up_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "ims_applications_not_taken_up" */
+export type Ims_Applications_Not_Taken_Up_Arr_Rel_Insert_Input = {
+  data: Array<Ims_Applications_Not_Taken_Up_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: Maybe<Ims_Applications_Not_Taken_Up_On_Conflict>;
+};
+
+/** Boolean expression to filter rows from the table "ims_applications_not_taken_up". All fields are combined with a logical 'AND'. */
+export type Ims_Applications_Not_Taken_Up_Bool_Exp = {
+  _and?: Maybe<Array<Ims_Applications_Not_Taken_Up_Bool_Exp>>;
+  _not?: Maybe<Ims_Applications_Not_Taken_Up_Bool_Exp>;
+  _or?: Maybe<Array<Ims_Applications_Not_Taken_Up_Bool_Exp>>;
+  application_id?: Maybe<Uuid_Comparison_Exp>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  created_by?: Maybe<Uuid_Comparison_Exp>;
+  insurance_application?: Maybe<Insurance_Application_Bool_Exp>;
+};
+
+/** unique or primary key constraints on table "ims_applications_not_taken_up" */
+export enum Ims_Applications_Not_Taken_Up_Constraint {
+  /** unique or primary key constraint on columns "application_id" */
+  ImsApplicationsNotTakenUpPkey = 'ims_applications_not_taken_up_pkey'
+}
+
+/** input type for inserting data into table "ims_applications_not_taken_up" */
+export type Ims_Applications_Not_Taken_Up_Insert_Input = {
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by?: Maybe<Scalars['uuid']>;
+  insurance_application?: Maybe<Insurance_Application_Obj_Rel_Insert_Input>;
+};
+
+/** aggregate max on columns */
+export type Ims_Applications_Not_Taken_Up_Max_Fields = {
+  __typename?: 'ims_applications_not_taken_up_max_fields';
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by?: Maybe<Scalars['uuid']>;
+};
+
+/** order by max() on columns of table "ims_applications_not_taken_up" */
+export type Ims_Applications_Not_Taken_Up_Max_Order_By = {
+  application_id?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  created_by?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Ims_Applications_Not_Taken_Up_Min_Fields = {
+  __typename?: 'ims_applications_not_taken_up_min_fields';
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by?: Maybe<Scalars['uuid']>;
+};
+
+/** order by min() on columns of table "ims_applications_not_taken_up" */
+export type Ims_Applications_Not_Taken_Up_Min_Order_By = {
+  application_id?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  created_by?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "ims_applications_not_taken_up" */
+export type Ims_Applications_Not_Taken_Up_Mutation_Response = {
+  __typename?: 'ims_applications_not_taken_up_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Ims_Applications_Not_Taken_Up>;
+};
+
+/** on_conflict condition type for table "ims_applications_not_taken_up" */
+export type Ims_Applications_Not_Taken_Up_On_Conflict = {
+  constraint: Ims_Applications_Not_Taken_Up_Constraint;
+  update_columns?: Array<Ims_Applications_Not_Taken_Up_Update_Column>;
+  where?: Maybe<Ims_Applications_Not_Taken_Up_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "ims_applications_not_taken_up". */
+export type Ims_Applications_Not_Taken_Up_Order_By = {
+  application_id?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  created_by?: Maybe<Order_By>;
+  insurance_application?: Maybe<Insurance_Application_Order_By>;
+};
+
+/** primary key columns input for table: ims_applications_not_taken_up */
+export type Ims_Applications_Not_Taken_Up_Pk_Columns_Input = {
+  application_id: Scalars['uuid'];
+};
+
+/** select columns of table "ims_applications_not_taken_up" */
+export enum Ims_Applications_Not_Taken_Up_Select_Column {
+  /** column name */
+  ApplicationId = 'application_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedBy = 'created_by'
+}
+
+/** input type for updating data in table "ims_applications_not_taken_up" */
+export type Ims_Applications_Not_Taken_Up_Set_Input = {
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by?: Maybe<Scalars['uuid']>;
+};
+
+/** Streaming cursor of the table "ims_applications_not_taken_up" */
+export type Ims_Applications_Not_Taken_Up_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Ims_Applications_Not_Taken_Up_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Ims_Applications_Not_Taken_Up_Stream_Cursor_Value_Input = {
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by?: Maybe<Scalars['uuid']>;
+};
+
+/** update columns of table "ims_applications_not_taken_up" */
+export enum Ims_Applications_Not_Taken_Up_Update_Column {
+  /** column name */
+  ApplicationId = 'application_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedBy = 'created_by'
+}
+
+export type Ims_Applications_Not_Taken_Up_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<Ims_Applications_Not_Taken_Up_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Ims_Applications_Not_Taken_Up_Bool_Exp;
+};
+
+/** IMS charge codes with state id */
+export type Ims_Charge = {
+  __typename?: 'ims_charge';
+  charge_code: Scalars['Int'];
+  charge_name: Scalars['String'];
+  state_id: Scalars['String'];
+};
+
+/** aggregated selection of "ims_charge" */
+export type Ims_Charge_Aggregate = {
+  __typename?: 'ims_charge_aggregate';
+  aggregate?: Maybe<Ims_Charge_Aggregate_Fields>;
+  nodes: Array<Ims_Charge>;
+};
+
+/** aggregate fields of "ims_charge" */
+export type Ims_Charge_Aggregate_Fields = {
+  __typename?: 'ims_charge_aggregate_fields';
+  avg?: Maybe<Ims_Charge_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Ims_Charge_Max_Fields>;
+  min?: Maybe<Ims_Charge_Min_Fields>;
+  stddev?: Maybe<Ims_Charge_Stddev_Fields>;
+  stddev_pop?: Maybe<Ims_Charge_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Ims_Charge_Stddev_Samp_Fields>;
+  sum?: Maybe<Ims_Charge_Sum_Fields>;
+  var_pop?: Maybe<Ims_Charge_Var_Pop_Fields>;
+  var_samp?: Maybe<Ims_Charge_Var_Samp_Fields>;
+  variance?: Maybe<Ims_Charge_Variance_Fields>;
+};
+
+
+/** aggregate fields of "ims_charge" */
+export type Ims_Charge_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Ims_Charge_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Ims_Charge_Avg_Fields = {
+  __typename?: 'ims_charge_avg_fields';
+  charge_code?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "ims_charge". All fields are combined with a logical 'AND'. */
+export type Ims_Charge_Bool_Exp = {
+  _and?: Maybe<Array<Ims_Charge_Bool_Exp>>;
+  _not?: Maybe<Ims_Charge_Bool_Exp>;
+  _or?: Maybe<Array<Ims_Charge_Bool_Exp>>;
+  charge_code?: Maybe<Int_Comparison_Exp>;
+  charge_name?: Maybe<String_Comparison_Exp>;
+  state_id?: Maybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "ims_charge" */
+export enum Ims_Charge_Constraint {
+  /** unique or primary key constraint on columns "charge_code" */
+  ImsChargePkey = 'ims_charge_pkey'
+}
+
+/** input type for incrementing numeric columns in table "ims_charge" */
+export type Ims_Charge_Inc_Input = {
+  charge_code?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "ims_charge" */
+export type Ims_Charge_Insert_Input = {
+  charge_code?: Maybe<Scalars['Int']>;
+  charge_name?: Maybe<Scalars['String']>;
+  state_id?: Maybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Ims_Charge_Max_Fields = {
+  __typename?: 'ims_charge_max_fields';
+  charge_code?: Maybe<Scalars['Int']>;
+  charge_name?: Maybe<Scalars['String']>;
+  state_id?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type Ims_Charge_Min_Fields = {
+  __typename?: 'ims_charge_min_fields';
+  charge_code?: Maybe<Scalars['Int']>;
+  charge_name?: Maybe<Scalars['String']>;
+  state_id?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "ims_charge" */
+export type Ims_Charge_Mutation_Response = {
+  __typename?: 'ims_charge_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Ims_Charge>;
+};
+
+/** on_conflict condition type for table "ims_charge" */
+export type Ims_Charge_On_Conflict = {
+  constraint: Ims_Charge_Constraint;
+  update_columns?: Array<Ims_Charge_Update_Column>;
+  where?: Maybe<Ims_Charge_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "ims_charge". */
+export type Ims_Charge_Order_By = {
+  charge_code?: Maybe<Order_By>;
+  charge_name?: Maybe<Order_By>;
+  state_id?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: ims_charge */
+export type Ims_Charge_Pk_Columns_Input = {
+  charge_code: Scalars['Int'];
+};
+
+/** select columns of table "ims_charge" */
+export enum Ims_Charge_Select_Column {
+  /** column name */
+  ChargeCode = 'charge_code',
+  /** column name */
+  ChargeName = 'charge_name',
+  /** column name */
+  StateId = 'state_id'
+}
+
+/** input type for updating data in table "ims_charge" */
+export type Ims_Charge_Set_Input = {
+  charge_code?: Maybe<Scalars['Int']>;
+  charge_name?: Maybe<Scalars['String']>;
+  state_id?: Maybe<Scalars['String']>;
+};
+
+/** aggregate stddev on columns */
+export type Ims_Charge_Stddev_Fields = {
+  __typename?: 'ims_charge_stddev_fields';
+  charge_code?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Ims_Charge_Stddev_Pop_Fields = {
+  __typename?: 'ims_charge_stddev_pop_fields';
+  charge_code?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Ims_Charge_Stddev_Samp_Fields = {
+  __typename?: 'ims_charge_stddev_samp_fields';
+  charge_code?: Maybe<Scalars['Float']>;
+};
+
+/** Streaming cursor of the table "ims_charge" */
+export type Ims_Charge_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Ims_Charge_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Ims_Charge_Stream_Cursor_Value_Input = {
+  charge_code?: Maybe<Scalars['Int']>;
+  charge_name?: Maybe<Scalars['String']>;
+  state_id?: Maybe<Scalars['String']>;
+};
+
+/** aggregate sum on columns */
+export type Ims_Charge_Sum_Fields = {
+  __typename?: 'ims_charge_sum_fields';
+  charge_code?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "ims_charge" */
+export enum Ims_Charge_Update_Column {
+  /** column name */
+  ChargeCode = 'charge_code',
+  /** column name */
+  ChargeName = 'charge_name',
+  /** column name */
+  StateId = 'state_id'
+}
+
+export type Ims_Charge_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: Maybe<Ims_Charge_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<Ims_Charge_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Ims_Charge_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Ims_Charge_Var_Pop_Fields = {
+  __typename?: 'ims_charge_var_pop_fields';
+  charge_code?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Ims_Charge_Var_Samp_Fields = {
+  __typename?: 'ims_charge_var_samp_fields';
+  charge_code?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Ims_Charge_Variance_Fields = {
+  __typename?: 'ims_charge_variance_fields';
+  charge_code?: Maybe<Scalars['Float']>;
+};
+
+/** This table contains the mapping between IMS and DnB business types */
+export type Ims_Company_Business_Type = {
+  __typename?: 'ims_company_business_type';
+  dnb_desc: Scalars['String'];
+  dnb_id: Scalars['String'];
+  id: Scalars['Int'];
+  ims_desc: Scalars['String'];
+  ims_id: Scalars['String'];
+};
+
+/** aggregated selection of "ims_company_business_type" */
+export type Ims_Company_Business_Type_Aggregate = {
+  __typename?: 'ims_company_business_type_aggregate';
+  aggregate?: Maybe<Ims_Company_Business_Type_Aggregate_Fields>;
+  nodes: Array<Ims_Company_Business_Type>;
+};
+
+/** aggregate fields of "ims_company_business_type" */
+export type Ims_Company_Business_Type_Aggregate_Fields = {
+  __typename?: 'ims_company_business_type_aggregate_fields';
+  avg?: Maybe<Ims_Company_Business_Type_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Ims_Company_Business_Type_Max_Fields>;
+  min?: Maybe<Ims_Company_Business_Type_Min_Fields>;
+  stddev?: Maybe<Ims_Company_Business_Type_Stddev_Fields>;
+  stddev_pop?: Maybe<Ims_Company_Business_Type_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Ims_Company_Business_Type_Stddev_Samp_Fields>;
+  sum?: Maybe<Ims_Company_Business_Type_Sum_Fields>;
+  var_pop?: Maybe<Ims_Company_Business_Type_Var_Pop_Fields>;
+  var_samp?: Maybe<Ims_Company_Business_Type_Var_Samp_Fields>;
+  variance?: Maybe<Ims_Company_Business_Type_Variance_Fields>;
+};
+
+
+/** aggregate fields of "ims_company_business_type" */
+export type Ims_Company_Business_Type_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Ims_Company_Business_Type_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Ims_Company_Business_Type_Avg_Fields = {
+  __typename?: 'ims_company_business_type_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "ims_company_business_type". All fields are combined with a logical 'AND'. */
+export type Ims_Company_Business_Type_Bool_Exp = {
+  _and?: Maybe<Array<Ims_Company_Business_Type_Bool_Exp>>;
+  _not?: Maybe<Ims_Company_Business_Type_Bool_Exp>;
+  _or?: Maybe<Array<Ims_Company_Business_Type_Bool_Exp>>;
+  dnb_desc?: Maybe<String_Comparison_Exp>;
+  dnb_id?: Maybe<String_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  ims_desc?: Maybe<String_Comparison_Exp>;
+  ims_id?: Maybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "ims_company_business_type" */
+export enum Ims_Company_Business_Type_Constraint {
+  /** unique or primary key constraint on columns "dnb_desc" */
+  ImsCompanyBusinessTypeDnbDescKey = 'ims_company_business_type_dnb_desc_key',
+  /** unique or primary key constraint on columns "dnb_id" */
+  ImsCompanyBusinessTypeDnbIdKey = 'ims_company_business_type_dnb_id_key',
+  /** unique or primary key constraint on columns "ims_desc" */
+  ImsCompanyBusinessTypeImsDescKey = 'ims_company_business_type_ims_desc_key',
+  /** unique or primary key constraint on columns "ims_id" */
+  ImsCompanyBusinessTypeImsIdKey = 'ims_company_business_type_ims_id_key',
+  /** unique or primary key constraint on columns "id" */
+  ImsCompanyBusinessTypePkey = 'ims_company_business_type_pkey'
+}
+
+/** input type for incrementing numeric columns in table "ims_company_business_type" */
+export type Ims_Company_Business_Type_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "ims_company_business_type" */
+export type Ims_Company_Business_Type_Insert_Input = {
+  dnb_desc?: Maybe<Scalars['String']>;
+  dnb_id?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  ims_desc?: Maybe<Scalars['String']>;
+  ims_id?: Maybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Ims_Company_Business_Type_Max_Fields = {
+  __typename?: 'ims_company_business_type_max_fields';
+  dnb_desc?: Maybe<Scalars['String']>;
+  dnb_id?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  ims_desc?: Maybe<Scalars['String']>;
+  ims_id?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type Ims_Company_Business_Type_Min_Fields = {
+  __typename?: 'ims_company_business_type_min_fields';
+  dnb_desc?: Maybe<Scalars['String']>;
+  dnb_id?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  ims_desc?: Maybe<Scalars['String']>;
+  ims_id?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "ims_company_business_type" */
+export type Ims_Company_Business_Type_Mutation_Response = {
+  __typename?: 'ims_company_business_type_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Ims_Company_Business_Type>;
+};
+
+/** input type for inserting object relation for remote table "ims_company_business_type" */
+export type Ims_Company_Business_Type_Obj_Rel_Insert_Input = {
+  data: Ims_Company_Business_Type_Insert_Input;
+  /** upsert condition */
+  on_conflict?: Maybe<Ims_Company_Business_Type_On_Conflict>;
+};
+
+/** on_conflict condition type for table "ims_company_business_type" */
+export type Ims_Company_Business_Type_On_Conflict = {
+  constraint: Ims_Company_Business_Type_Constraint;
+  update_columns?: Array<Ims_Company_Business_Type_Update_Column>;
+  where?: Maybe<Ims_Company_Business_Type_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "ims_company_business_type". */
+export type Ims_Company_Business_Type_Order_By = {
+  dnb_desc?: Maybe<Order_By>;
+  dnb_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  ims_desc?: Maybe<Order_By>;
+  ims_id?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: ims_company_business_type */
+export type Ims_Company_Business_Type_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "ims_company_business_type" */
+export enum Ims_Company_Business_Type_Select_Column {
+  /** column name */
+  DnbDesc = 'dnb_desc',
+  /** column name */
+  DnbId = 'dnb_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  ImsDesc = 'ims_desc',
+  /** column name */
+  ImsId = 'ims_id'
+}
+
+/** input type for updating data in table "ims_company_business_type" */
+export type Ims_Company_Business_Type_Set_Input = {
+  dnb_desc?: Maybe<Scalars['String']>;
+  dnb_id?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  ims_desc?: Maybe<Scalars['String']>;
+  ims_id?: Maybe<Scalars['String']>;
+};
+
+/** aggregate stddev on columns */
+export type Ims_Company_Business_Type_Stddev_Fields = {
+  __typename?: 'ims_company_business_type_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Ims_Company_Business_Type_Stddev_Pop_Fields = {
+  __typename?: 'ims_company_business_type_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Ims_Company_Business_Type_Stddev_Samp_Fields = {
+  __typename?: 'ims_company_business_type_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Streaming cursor of the table "ims_company_business_type" */
+export type Ims_Company_Business_Type_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Ims_Company_Business_Type_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Ims_Company_Business_Type_Stream_Cursor_Value_Input = {
+  dnb_desc?: Maybe<Scalars['String']>;
+  dnb_id?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  ims_desc?: Maybe<Scalars['String']>;
+  ims_id?: Maybe<Scalars['String']>;
+};
+
+/** aggregate sum on columns */
+export type Ims_Company_Business_Type_Sum_Fields = {
+  __typename?: 'ims_company_business_type_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "ims_company_business_type" */
+export enum Ims_Company_Business_Type_Update_Column {
+  /** column name */
+  DnbDesc = 'dnb_desc',
+  /** column name */
+  DnbId = 'dnb_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  ImsDesc = 'ims_desc',
+  /** column name */
+  ImsId = 'ims_id'
+}
+
+export type Ims_Company_Business_Type_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: Maybe<Ims_Company_Business_Type_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<Ims_Company_Business_Type_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Ims_Company_Business_Type_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Ims_Company_Business_Type_Var_Pop_Fields = {
+  __typename?: 'ims_company_business_type_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Ims_Company_Business_Type_Var_Samp_Fields = {
+  __typename?: 'ims_company_business_type_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Ims_Company_Business_Type_Variance_Fields = {
+  __typename?: 'ims_company_business_type_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** This table contains GUIDs generated by the IMS API */
+export type Ims_Responses = {
+  __typename?: 'ims_responses';
+  application_id: Scalars['uuid'];
+  created_at: Scalars['time'];
+  created_by_user_id?: Maybe<Scalars['String']>;
+  current_stage?: Maybe<Scalars['jsonb']>;
+  id: Scalars['Int'];
+  /** An object relationship */
+  insurance_application: Insurance_Application;
+  quote_guid?: Maybe<Scalars['String']>;
+  quote_option_guid?: Maybe<Scalars['String']>;
+  submission_guid?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  updated_by_user_id?: Maybe<Scalars['String']>;
+};
+
+
+/** This table contains GUIDs generated by the IMS API */
+export type Ims_ResponsesCurrent_StageArgs = {
+  path?: Maybe<Scalars['String']>;
+};
+
+/** aggregated selection of "ims_responses" */
+export type Ims_Responses_Aggregate = {
+  __typename?: 'ims_responses_aggregate';
+  aggregate?: Maybe<Ims_Responses_Aggregate_Fields>;
+  nodes: Array<Ims_Responses>;
+};
+
+export type Ims_Responses_Aggregate_Bool_Exp = {
+  count?: Maybe<Ims_Responses_Aggregate_Bool_Exp_Count>;
+};
+
+export type Ims_Responses_Aggregate_Bool_Exp_Count = {
+  arguments?: Maybe<Array<Ims_Responses_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+  filter?: Maybe<Ims_Responses_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "ims_responses" */
+export type Ims_Responses_Aggregate_Fields = {
+  __typename?: 'ims_responses_aggregate_fields';
+  avg?: Maybe<Ims_Responses_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Ims_Responses_Max_Fields>;
+  min?: Maybe<Ims_Responses_Min_Fields>;
+  stddev?: Maybe<Ims_Responses_Stddev_Fields>;
+  stddev_pop?: Maybe<Ims_Responses_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Ims_Responses_Stddev_Samp_Fields>;
+  sum?: Maybe<Ims_Responses_Sum_Fields>;
+  var_pop?: Maybe<Ims_Responses_Var_Pop_Fields>;
+  var_samp?: Maybe<Ims_Responses_Var_Samp_Fields>;
+  variance?: Maybe<Ims_Responses_Variance_Fields>;
+};
+
+
+/** aggregate fields of "ims_responses" */
+export type Ims_Responses_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Ims_Responses_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "ims_responses" */
+export type Ims_Responses_Aggregate_Order_By = {
+  avg?: Maybe<Ims_Responses_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Ims_Responses_Max_Order_By>;
+  min?: Maybe<Ims_Responses_Min_Order_By>;
+  stddev?: Maybe<Ims_Responses_Stddev_Order_By>;
+  stddev_pop?: Maybe<Ims_Responses_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Ims_Responses_Stddev_Samp_Order_By>;
+  sum?: Maybe<Ims_Responses_Sum_Order_By>;
+  var_pop?: Maybe<Ims_Responses_Var_Pop_Order_By>;
+  var_samp?: Maybe<Ims_Responses_Var_Samp_Order_By>;
+  variance?: Maybe<Ims_Responses_Variance_Order_By>;
+};
+
+/** append existing jsonb value of filtered columns with new jsonb value */
+export type Ims_Responses_Append_Input = {
+  current_stage?: Maybe<Scalars['jsonb']>;
+};
+
+/** input type for inserting array relation for remote table "ims_responses" */
+export type Ims_Responses_Arr_Rel_Insert_Input = {
+  data: Array<Ims_Responses_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: Maybe<Ims_Responses_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Ims_Responses_Avg_Fields = {
+  __typename?: 'ims_responses_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "ims_responses" */
+export type Ims_Responses_Avg_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "ims_responses". All fields are combined with a logical 'AND'. */
+export type Ims_Responses_Bool_Exp = {
+  _and?: Maybe<Array<Ims_Responses_Bool_Exp>>;
+  _not?: Maybe<Ims_Responses_Bool_Exp>;
+  _or?: Maybe<Array<Ims_Responses_Bool_Exp>>;
+  application_id?: Maybe<Uuid_Comparison_Exp>;
+  created_at?: Maybe<Time_Comparison_Exp>;
+  created_by_user_id?: Maybe<String_Comparison_Exp>;
+  current_stage?: Maybe<Jsonb_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  insurance_application?: Maybe<Insurance_Application_Bool_Exp>;
+  quote_guid?: Maybe<String_Comparison_Exp>;
+  quote_option_guid?: Maybe<String_Comparison_Exp>;
+  submission_guid?: Maybe<String_Comparison_Exp>;
+  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+  updated_by_user_id?: Maybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "ims_responses" */
+export enum Ims_Responses_Constraint {
+  /** unique or primary key constraint on columns "application_id" */
+  ImsResponsesApplicationIdKey = 'ims_responses_application_id_key',
+  /** unique or primary key constraint on columns "id" */
+  ImsResponsesPkey = 'ims_responses_pkey'
+}
+
+/** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+export type Ims_Responses_Delete_At_Path_Input = {
+  current_stage?: Maybe<Array<Scalars['String']>>;
+};
+
+/** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+export type Ims_Responses_Delete_Elem_Input = {
+  current_stage?: Maybe<Scalars['Int']>;
+};
+
+/** delete key/value pair or string element. key/value pairs are matched based on their key value */
+export type Ims_Responses_Delete_Key_Input = {
+  current_stage?: Maybe<Scalars['String']>;
+};
+
+/** input type for incrementing numeric columns in table "ims_responses" */
+export type Ims_Responses_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "ims_responses" */
+export type Ims_Responses_Insert_Input = {
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['time']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  current_stage?: Maybe<Scalars['jsonb']>;
+  id?: Maybe<Scalars['Int']>;
+  insurance_application?: Maybe<Insurance_Application_Obj_Rel_Insert_Input>;
+  quote_guid?: Maybe<Scalars['String']>;
+  quote_option_guid?: Maybe<Scalars['String']>;
+  submission_guid?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  updated_by_user_id?: Maybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Ims_Responses_Max_Fields = {
+  __typename?: 'ims_responses_max_fields';
+  application_id?: Maybe<Scalars['uuid']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  quote_guid?: Maybe<Scalars['String']>;
+  quote_option_guid?: Maybe<Scalars['String']>;
+  submission_guid?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  updated_by_user_id?: Maybe<Scalars['String']>;
+};
+
+/** order by max() on columns of table "ims_responses" */
+export type Ims_Responses_Max_Order_By = {
+  application_id?: Maybe<Order_By>;
+  created_by_user_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  quote_guid?: Maybe<Order_By>;
+  quote_option_guid?: Maybe<Order_By>;
+  submission_guid?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+  updated_by_user_id?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Ims_Responses_Min_Fields = {
+  __typename?: 'ims_responses_min_fields';
+  application_id?: Maybe<Scalars['uuid']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  quote_guid?: Maybe<Scalars['String']>;
+  quote_option_guid?: Maybe<Scalars['String']>;
+  submission_guid?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  updated_by_user_id?: Maybe<Scalars['String']>;
+};
+
+/** order by min() on columns of table "ims_responses" */
+export type Ims_Responses_Min_Order_By = {
+  application_id?: Maybe<Order_By>;
+  created_by_user_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  quote_guid?: Maybe<Order_By>;
+  quote_option_guid?: Maybe<Order_By>;
+  submission_guid?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+  updated_by_user_id?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "ims_responses" */
+export type Ims_Responses_Mutation_Response = {
+  __typename?: 'ims_responses_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Ims_Responses>;
+};
+
+/** on_conflict condition type for table "ims_responses" */
+export type Ims_Responses_On_Conflict = {
+  constraint: Ims_Responses_Constraint;
+  update_columns?: Array<Ims_Responses_Update_Column>;
+  where?: Maybe<Ims_Responses_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "ims_responses". */
+export type Ims_Responses_Order_By = {
+  application_id?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  created_by_user_id?: Maybe<Order_By>;
+  current_stage?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  insurance_application?: Maybe<Insurance_Application_Order_By>;
+  quote_guid?: Maybe<Order_By>;
+  quote_option_guid?: Maybe<Order_By>;
+  submission_guid?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+  updated_by_user_id?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: ims_responses */
+export type Ims_Responses_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** prepend existing jsonb value of filtered columns with new jsonb value */
+export type Ims_Responses_Prepend_Input = {
+  current_stage?: Maybe<Scalars['jsonb']>;
+};
+
+/** select columns of table "ims_responses" */
+export enum Ims_Responses_Select_Column {
+  /** column name */
+  ApplicationId = 'application_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedByUserId = 'created_by_user_id',
+  /** column name */
+  CurrentStage = 'current_stage',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  QuoteGuid = 'quote_guid',
+  /** column name */
+  QuoteOptionGuid = 'quote_option_guid',
+  /** column name */
+  SubmissionGuid = 'submission_guid',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  UpdatedByUserId = 'updated_by_user_id'
+}
+
+/** input type for updating data in table "ims_responses" */
+export type Ims_Responses_Set_Input = {
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['time']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  current_stage?: Maybe<Scalars['jsonb']>;
+  id?: Maybe<Scalars['Int']>;
+  quote_guid?: Maybe<Scalars['String']>;
+  quote_option_guid?: Maybe<Scalars['String']>;
+  submission_guid?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  updated_by_user_id?: Maybe<Scalars['String']>;
+};
+
+/** aggregate stddev on columns */
+export type Ims_Responses_Stddev_Fields = {
+  __typename?: 'ims_responses_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "ims_responses" */
+export type Ims_Responses_Stddev_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Ims_Responses_Stddev_Pop_Fields = {
+  __typename?: 'ims_responses_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "ims_responses" */
+export type Ims_Responses_Stddev_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Ims_Responses_Stddev_Samp_Fields = {
+  __typename?: 'ims_responses_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "ims_responses" */
+export type Ims_Responses_Stddev_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** Streaming cursor of the table "ims_responses" */
+export type Ims_Responses_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Ims_Responses_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Ims_Responses_Stream_Cursor_Value_Input = {
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['time']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  current_stage?: Maybe<Scalars['jsonb']>;
+  id?: Maybe<Scalars['Int']>;
+  quote_guid?: Maybe<Scalars['String']>;
+  quote_option_guid?: Maybe<Scalars['String']>;
+  submission_guid?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  updated_by_user_id?: Maybe<Scalars['String']>;
+};
+
+/** aggregate sum on columns */
+export type Ims_Responses_Sum_Fields = {
+  __typename?: 'ims_responses_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "ims_responses" */
+export type Ims_Responses_Sum_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** update columns of table "ims_responses" */
+export enum Ims_Responses_Update_Column {
+  /** column name */
+  ApplicationId = 'application_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedByUserId = 'created_by_user_id',
+  /** column name */
+  CurrentStage = 'current_stage',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  QuoteGuid = 'quote_guid',
+  /** column name */
+  QuoteOptionGuid = 'quote_option_guid',
+  /** column name */
+  SubmissionGuid = 'submission_guid',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  UpdatedByUserId = 'updated_by_user_id'
+}
+
+export type Ims_Responses_Updates = {
+  /** append existing jsonb value of filtered columns with new jsonb value */
+  _append?: Maybe<Ims_Responses_Append_Input>;
+  /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+  _delete_at_path?: Maybe<Ims_Responses_Delete_At_Path_Input>;
+  /** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+  _delete_elem?: Maybe<Ims_Responses_Delete_Elem_Input>;
+  /** delete key/value pair or string element. key/value pairs are matched based on their key value */
+  _delete_key?: Maybe<Ims_Responses_Delete_Key_Input>;
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: Maybe<Ims_Responses_Inc_Input>;
+  /** prepend existing jsonb value of filtered columns with new jsonb value */
+  _prepend?: Maybe<Ims_Responses_Prepend_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<Ims_Responses_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Ims_Responses_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Ims_Responses_Var_Pop_Fields = {
+  __typename?: 'ims_responses_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "ims_responses" */
+export type Ims_Responses_Var_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Ims_Responses_Var_Samp_Fields = {
+  __typename?: 'ims_responses_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "ims_responses" */
+export type Ims_Responses_Var_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Ims_Responses_Variance_Fields = {
+  __typename?: 'ims_responses_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "ims_responses" */
+export type Ims_Responses_Variance_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** IMS API states with application stages */
+export type Ims_State = {
+  __typename?: 'ims_state';
+  id: Scalars['Int'];
+  ims_string: Scalars['String'];
+  stage?: Maybe<Scalars['String']>;
+};
+
+/** aggregated selection of "ims_state" */
+export type Ims_State_Aggregate = {
+  __typename?: 'ims_state_aggregate';
+  aggregate?: Maybe<Ims_State_Aggregate_Fields>;
+  nodes: Array<Ims_State>;
+};
+
+/** aggregate fields of "ims_state" */
+export type Ims_State_Aggregate_Fields = {
+  __typename?: 'ims_state_aggregate_fields';
+  avg?: Maybe<Ims_State_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Ims_State_Max_Fields>;
+  min?: Maybe<Ims_State_Min_Fields>;
+  stddev?: Maybe<Ims_State_Stddev_Fields>;
+  stddev_pop?: Maybe<Ims_State_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Ims_State_Stddev_Samp_Fields>;
+  sum?: Maybe<Ims_State_Sum_Fields>;
+  var_pop?: Maybe<Ims_State_Var_Pop_Fields>;
+  var_samp?: Maybe<Ims_State_Var_Samp_Fields>;
+  variance?: Maybe<Ims_State_Variance_Fields>;
+};
+
+
+/** aggregate fields of "ims_state" */
+export type Ims_State_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Ims_State_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Ims_State_Avg_Fields = {
+  __typename?: 'ims_state_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "ims_state". All fields are combined with a logical 'AND'. */
+export type Ims_State_Bool_Exp = {
+  _and?: Maybe<Array<Ims_State_Bool_Exp>>;
+  _not?: Maybe<Ims_State_Bool_Exp>;
+  _or?: Maybe<Array<Ims_State_Bool_Exp>>;
+  id?: Maybe<Int_Comparison_Exp>;
+  ims_string?: Maybe<String_Comparison_Exp>;
+  stage?: Maybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "ims_state" */
+export enum Ims_State_Constraint {
+  /** unique or primary key constraint on columns "ims_string" */
+  ImsStateImsStateKey = 'ims_state_ims_state_key',
+  /** unique or primary key constraint on columns "id" */
+  ImsStatePkey = 'ims_state_pkey',
+  /** unique or primary key constraint on columns "stage" */
+  ImsStateStageKey = 'ims_state_stage_key'
+}
+
+/** input type for incrementing numeric columns in table "ims_state" */
+export type Ims_State_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "ims_state" */
+export type Ims_State_Insert_Input = {
+  id?: Maybe<Scalars['Int']>;
+  ims_string?: Maybe<Scalars['String']>;
+  stage?: Maybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Ims_State_Max_Fields = {
+  __typename?: 'ims_state_max_fields';
+  id?: Maybe<Scalars['Int']>;
+  ims_string?: Maybe<Scalars['String']>;
+  stage?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type Ims_State_Min_Fields = {
+  __typename?: 'ims_state_min_fields';
+  id?: Maybe<Scalars['Int']>;
+  ims_string?: Maybe<Scalars['String']>;
+  stage?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "ims_state" */
+export type Ims_State_Mutation_Response = {
+  __typename?: 'ims_state_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Ims_State>;
+};
+
+/** on_conflict condition type for table "ims_state" */
+export type Ims_State_On_Conflict = {
+  constraint: Ims_State_Constraint;
+  update_columns?: Array<Ims_State_Update_Column>;
+  where?: Maybe<Ims_State_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "ims_state". */
+export type Ims_State_Order_By = {
+  id?: Maybe<Order_By>;
+  ims_string?: Maybe<Order_By>;
+  stage?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: ims_state */
+export type Ims_State_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "ims_state" */
+export enum Ims_State_Select_Column {
+  /** column name */
+  Id = 'id',
+  /** column name */
+  ImsString = 'ims_string',
+  /** column name */
+  Stage = 'stage'
+}
+
+/** input type for updating data in table "ims_state" */
+export type Ims_State_Set_Input = {
+  id?: Maybe<Scalars['Int']>;
+  ims_string?: Maybe<Scalars['String']>;
+  stage?: Maybe<Scalars['String']>;
+};
+
+/** aggregate stddev on columns */
+export type Ims_State_Stddev_Fields = {
+  __typename?: 'ims_state_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Ims_State_Stddev_Pop_Fields = {
+  __typename?: 'ims_state_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Ims_State_Stddev_Samp_Fields = {
+  __typename?: 'ims_state_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Streaming cursor of the table "ims_state" */
+export type Ims_State_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Ims_State_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Ims_State_Stream_Cursor_Value_Input = {
+  id?: Maybe<Scalars['Int']>;
+  ims_string?: Maybe<Scalars['String']>;
+  stage?: Maybe<Scalars['String']>;
+};
+
+/** aggregate sum on columns */
+export type Ims_State_Sum_Fields = {
+  __typename?: 'ims_state_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "ims_state" */
+export enum Ims_State_Update_Column {
+  /** column name */
+  Id = 'id',
+  /** column name */
+  ImsString = 'ims_string',
+  /** column name */
+  Stage = 'stage'
+}
+
+export type Ims_State_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: Maybe<Ims_State_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<Ims_State_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Ims_State_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Ims_State_Var_Pop_Fields = {
+  __typename?: 'ims_state_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Ims_State_Var_Samp_Fields = {
+  __typename?: 'ims_state_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Ims_State_Variance_Fields = {
+  __typename?: 'ims_state_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** columns and relationships of "insurance_application" */
+export type Insurance_Application = {
+  __typename?: 'insurance_application';
+  /** An object relationship */
+  broker_agency?: Maybe<Broker_Agency>;
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  created_at: Scalars['timestamptz'];
+  created_by_user_id?: Maybe<Scalars['String']>;
+  /** An object relationship */
+  created_user?: Maybe<User>;
+  domain?: Maybe<Scalars['String']>;
+  /** An object relationship */
+  domain_scan?: Maybe<Domain_Scan>;
+  effective_date?: Maybe<Scalars['date']>;
+  employees?: Maybe<Scalars['Int']>;
+  expiration_date?: Maybe<Scalars['date']>;
+  /** An array relationship */
+  external_scans: Array<External_Scan>;
+  /** An aggregate relationship */
+  external_scans_aggregate: External_Scan_Aggregate;
+  id: Scalars['uuid'];
+  idx: Scalars['Int'];
+  /** An array relationship */
+  ims_applications_not_taken_ups: Array<Ims_Applications_Not_Taken_Up>;
+  /** An aggregate relationship */
+  ims_applications_not_taken_ups_aggregate: Ims_Applications_Not_Taken_Up_Aggregate;
+  /** An object relationship */
+  ims_company_business_type?: Maybe<Ims_Company_Business_Type>;
+  /** An array relationship */
+  ims_responses: Array<Ims_Responses>;
+  /** An aggregate relationship */
+  ims_responses_aggregate: Ims_Responses_Aggregate;
+  industry: Scalars['String'];
+  /** An array relationship */
+  insurance_application_artifacts: Array<Insurance_Application_Artifact>;
+  /** An aggregate relationship */
+  insurance_application_artifacts_aggregate: Insurance_Application_Artifact_Aggregate;
+  /** An object relationship */
+  insurance_quote_selection?: Maybe<Insurance_Quote_Selection>;
+  /** An array relationship */
+  insurance_quotes: Array<Insurance_Quote>;
+  /** An aggregate relationship */
+  insurance_quotes_aggregate: Insurance_Quote_Aggregate;
+  /** An object relationship */
+  insured_organization?: Maybe<Insured_Organization>;
+  insured_organization_id?: Maybe<Scalars['Int']>;
+  naics_code?: Maybe<Scalars['String']>;
+  organization_type?: Maybe<Scalars['String']>;
+  rentals_data?: Maybe<Scalars['jsonb']>;
+  revenue?: Maybe<Scalars['money']>;
+  stage?: Maybe<Scalars['String']>;
+  updated_at: Scalars['timestamptz'];
+};
+
+
+/** columns and relationships of "insurance_application" */
+export type Insurance_ApplicationExternal_ScansArgs = {
+  distinct_on?: Maybe<Array<External_Scan_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<External_Scan_Order_By>>;
+  where?: Maybe<External_Scan_Bool_Exp>;
+};
+
+
+/** columns and relationships of "insurance_application" */
+export type Insurance_ApplicationExternal_Scans_AggregateArgs = {
+  distinct_on?: Maybe<Array<External_Scan_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<External_Scan_Order_By>>;
+  where?: Maybe<External_Scan_Bool_Exp>;
+};
+
+
+/** columns and relationships of "insurance_application" */
+export type Insurance_ApplicationIms_Applications_Not_Taken_UpsArgs = {
+  distinct_on?: Maybe<Array<Ims_Applications_Not_Taken_Up_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Ims_Applications_Not_Taken_Up_Order_By>>;
+  where?: Maybe<Ims_Applications_Not_Taken_Up_Bool_Exp>;
+};
+
+
+/** columns and relationships of "insurance_application" */
+export type Insurance_ApplicationIms_Applications_Not_Taken_Ups_AggregateArgs = {
+  distinct_on?: Maybe<Array<Ims_Applications_Not_Taken_Up_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Ims_Applications_Not_Taken_Up_Order_By>>;
+  where?: Maybe<Ims_Applications_Not_Taken_Up_Bool_Exp>;
+};
+
+
+/** columns and relationships of "insurance_application" */
+export type Insurance_ApplicationIms_ResponsesArgs = {
+  distinct_on?: Maybe<Array<Ims_Responses_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Ims_Responses_Order_By>>;
+  where?: Maybe<Ims_Responses_Bool_Exp>;
+};
+
+
+/** columns and relationships of "insurance_application" */
+export type Insurance_ApplicationIms_Responses_AggregateArgs = {
+  distinct_on?: Maybe<Array<Ims_Responses_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Ims_Responses_Order_By>>;
+  where?: Maybe<Ims_Responses_Bool_Exp>;
+};
+
+
+/** columns and relationships of "insurance_application" */
+export type Insurance_ApplicationInsurance_Application_ArtifactsArgs = {
+  distinct_on?: Maybe<Array<Insurance_Application_Artifact_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Application_Artifact_Order_By>>;
+  where?: Maybe<Insurance_Application_Artifact_Bool_Exp>;
+};
+
+
+/** columns and relationships of "insurance_application" */
+export type Insurance_ApplicationInsurance_Application_Artifacts_AggregateArgs = {
+  distinct_on?: Maybe<Array<Insurance_Application_Artifact_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Application_Artifact_Order_By>>;
+  where?: Maybe<Insurance_Application_Artifact_Bool_Exp>;
+};
+
+
+/** columns and relationships of "insurance_application" */
+export type Insurance_ApplicationInsurance_QuotesArgs = {
+  distinct_on?: Maybe<Array<Insurance_Quote_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Quote_Order_By>>;
+  where?: Maybe<Insurance_Quote_Bool_Exp>;
+};
+
+
+/** columns and relationships of "insurance_application" */
+export type Insurance_ApplicationInsurance_Quotes_AggregateArgs = {
+  distinct_on?: Maybe<Array<Insurance_Quote_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Quote_Order_By>>;
+  where?: Maybe<Insurance_Quote_Bool_Exp>;
+};
+
+
+/** columns and relationships of "insurance_application" */
+export type Insurance_ApplicationRentals_DataArgs = {
+  path?: Maybe<Scalars['String']>;
+};
+
+/** aggregated selection of "insurance_application" */
+export type Insurance_Application_Aggregate = {
+  __typename?: 'insurance_application_aggregate';
+  aggregate?: Maybe<Insurance_Application_Aggregate_Fields>;
+  nodes: Array<Insurance_Application>;
+};
+
+export type Insurance_Application_Aggregate_Bool_Exp = {
+  count?: Maybe<Insurance_Application_Aggregate_Bool_Exp_Count>;
+};
+
+export type Insurance_Application_Aggregate_Bool_Exp_Count = {
+  arguments?: Maybe<Array<Insurance_Application_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+  filter?: Maybe<Insurance_Application_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "insurance_application" */
+export type Insurance_Application_Aggregate_Fields = {
+  __typename?: 'insurance_application_aggregate_fields';
+  avg?: Maybe<Insurance_Application_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Insurance_Application_Max_Fields>;
+  min?: Maybe<Insurance_Application_Min_Fields>;
+  stddev?: Maybe<Insurance_Application_Stddev_Fields>;
+  stddev_pop?: Maybe<Insurance_Application_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Insurance_Application_Stddev_Samp_Fields>;
+  sum?: Maybe<Insurance_Application_Sum_Fields>;
+  var_pop?: Maybe<Insurance_Application_Var_Pop_Fields>;
+  var_samp?: Maybe<Insurance_Application_Var_Samp_Fields>;
+  variance?: Maybe<Insurance_Application_Variance_Fields>;
+};
+
+
+/** aggregate fields of "insurance_application" */
+export type Insurance_Application_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Insurance_Application_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "insurance_application" */
+export type Insurance_Application_Aggregate_Order_By = {
+  avg?: Maybe<Insurance_Application_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Insurance_Application_Max_Order_By>;
+  min?: Maybe<Insurance_Application_Min_Order_By>;
+  stddev?: Maybe<Insurance_Application_Stddev_Order_By>;
+  stddev_pop?: Maybe<Insurance_Application_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Insurance_Application_Stddev_Samp_Order_By>;
+  sum?: Maybe<Insurance_Application_Sum_Order_By>;
+  var_pop?: Maybe<Insurance_Application_Var_Pop_Order_By>;
+  var_samp?: Maybe<Insurance_Application_Var_Samp_Order_By>;
+  variance?: Maybe<Insurance_Application_Variance_Order_By>;
+};
+
+/** append existing jsonb value of filtered columns with new jsonb value */
+export type Insurance_Application_Append_Input = {
+  rentals_data?: Maybe<Scalars['jsonb']>;
+};
+
+/** input type for inserting array relation for remote table "insurance_application" */
+export type Insurance_Application_Arr_Rel_Insert_Input = {
+  data: Array<Insurance_Application_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: Maybe<Insurance_Application_On_Conflict>;
+};
+
+/** columns and relationships of "insurance_application_artifact" */
+export type Insurance_Application_Artifact = {
+  __typename?: 'insurance_application_artifact';
+  application_id: Scalars['uuid'];
+  created_at: Scalars['timestamptz'];
+  file_type: Scalars['String'];
+  file_uri: Scalars['String'];
+  id: Scalars['Int'];
+  /** An object relationship */
+  insurance_application: Insurance_Application;
+  /** An array relationship */
+  insurance_quote_pdf_selection_artifacts: Array<Insurance_Quote_Pdf_Selection_Artifact>;
+  /** An aggregate relationship */
+  insurance_quote_pdf_selection_artifacts_aggregate: Insurance_Quote_Pdf_Selection_Artifact_Aggregate;
+  updated_at: Scalars['timestamptz'];
+};
+
+
+/** columns and relationships of "insurance_application_artifact" */
+export type Insurance_Application_ArtifactInsurance_Quote_Pdf_Selection_ArtifactsArgs = {
+  distinct_on?: Maybe<Array<Insurance_Quote_Pdf_Selection_Artifact_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Quote_Pdf_Selection_Artifact_Order_By>>;
+  where?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Bool_Exp>;
+};
+
+
+/** columns and relationships of "insurance_application_artifact" */
+export type Insurance_Application_ArtifactInsurance_Quote_Pdf_Selection_Artifacts_AggregateArgs = {
+  distinct_on?: Maybe<Array<Insurance_Quote_Pdf_Selection_Artifact_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Quote_Pdf_Selection_Artifact_Order_By>>;
+  where?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Bool_Exp>;
+};
+
+/** aggregated selection of "insurance_application_artifact" */
+export type Insurance_Application_Artifact_Aggregate = {
+  __typename?: 'insurance_application_artifact_aggregate';
+  aggregate?: Maybe<Insurance_Application_Artifact_Aggregate_Fields>;
+  nodes: Array<Insurance_Application_Artifact>;
+};
+
+export type Insurance_Application_Artifact_Aggregate_Bool_Exp = {
+  count?: Maybe<Insurance_Application_Artifact_Aggregate_Bool_Exp_Count>;
+};
+
+export type Insurance_Application_Artifact_Aggregate_Bool_Exp_Count = {
+  arguments?: Maybe<Array<Insurance_Application_Artifact_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+  filter?: Maybe<Insurance_Application_Artifact_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "insurance_application_artifact" */
+export type Insurance_Application_Artifact_Aggregate_Fields = {
+  __typename?: 'insurance_application_artifact_aggregate_fields';
+  avg?: Maybe<Insurance_Application_Artifact_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Insurance_Application_Artifact_Max_Fields>;
+  min?: Maybe<Insurance_Application_Artifact_Min_Fields>;
+  stddev?: Maybe<Insurance_Application_Artifact_Stddev_Fields>;
+  stddev_pop?: Maybe<Insurance_Application_Artifact_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Insurance_Application_Artifact_Stddev_Samp_Fields>;
+  sum?: Maybe<Insurance_Application_Artifact_Sum_Fields>;
+  var_pop?: Maybe<Insurance_Application_Artifact_Var_Pop_Fields>;
+  var_samp?: Maybe<Insurance_Application_Artifact_Var_Samp_Fields>;
+  variance?: Maybe<Insurance_Application_Artifact_Variance_Fields>;
+};
+
+
+/** aggregate fields of "insurance_application_artifact" */
+export type Insurance_Application_Artifact_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Insurance_Application_Artifact_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "insurance_application_artifact" */
+export type Insurance_Application_Artifact_Aggregate_Order_By = {
+  avg?: Maybe<Insurance_Application_Artifact_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Insurance_Application_Artifact_Max_Order_By>;
+  min?: Maybe<Insurance_Application_Artifact_Min_Order_By>;
+  stddev?: Maybe<Insurance_Application_Artifact_Stddev_Order_By>;
+  stddev_pop?: Maybe<Insurance_Application_Artifact_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Insurance_Application_Artifact_Stddev_Samp_Order_By>;
+  sum?: Maybe<Insurance_Application_Artifact_Sum_Order_By>;
+  var_pop?: Maybe<Insurance_Application_Artifact_Var_Pop_Order_By>;
+  var_samp?: Maybe<Insurance_Application_Artifact_Var_Samp_Order_By>;
+  variance?: Maybe<Insurance_Application_Artifact_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "insurance_application_artifact" */
+export type Insurance_Application_Artifact_Arr_Rel_Insert_Input = {
+  data: Array<Insurance_Application_Artifact_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: Maybe<Insurance_Application_Artifact_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Insurance_Application_Artifact_Avg_Fields = {
+  __typename?: 'insurance_application_artifact_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "insurance_application_artifact" */
+export type Insurance_Application_Artifact_Avg_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "insurance_application_artifact". All fields are combined with a logical 'AND'. */
+export type Insurance_Application_Artifact_Bool_Exp = {
+  _and?: Maybe<Array<Insurance_Application_Artifact_Bool_Exp>>;
+  _not?: Maybe<Insurance_Application_Artifact_Bool_Exp>;
+  _or?: Maybe<Array<Insurance_Application_Artifact_Bool_Exp>>;
+  application_id?: Maybe<Uuid_Comparison_Exp>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  file_type?: Maybe<String_Comparison_Exp>;
+  file_uri?: Maybe<String_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  insurance_application?: Maybe<Insurance_Application_Bool_Exp>;
+  insurance_quote_pdf_selection_artifacts?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Bool_Exp>;
+  insurance_quote_pdf_selection_artifacts_aggregate?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Aggregate_Bool_Exp>;
+  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "insurance_application_artifact" */
+export enum Insurance_Application_Artifact_Constraint {
+  /** unique or primary key constraint on columns "file_uri", "application_id" */
+  InsuranceApplicationArtifactApplicationIdFileUriKey = 'insurance_application_artifact_application_id_file_uri_key',
+  /** unique or primary key constraint on columns "id" */
+  InsuranceApplicationArtifactPkey = 'insurance_application_artifact_pkey'
+}
+
+/** input type for incrementing numeric columns in table "insurance_application_artifact" */
+export type Insurance_Application_Artifact_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "insurance_application_artifact" */
+export type Insurance_Application_Artifact_Insert_Input = {
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  file_type?: Maybe<Scalars['String']>;
+  file_uri?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  insurance_application?: Maybe<Insurance_Application_Obj_Rel_Insert_Input>;
+  insurance_quote_pdf_selection_artifacts?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Arr_Rel_Insert_Input>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type Insurance_Application_Artifact_Max_Fields = {
+  __typename?: 'insurance_application_artifact_max_fields';
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  file_type?: Maybe<Scalars['String']>;
+  file_uri?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** order by max() on columns of table "insurance_application_artifact" */
+export type Insurance_Application_Artifact_Max_Order_By = {
+  application_id?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  file_type?: Maybe<Order_By>;
+  file_uri?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Insurance_Application_Artifact_Min_Fields = {
+  __typename?: 'insurance_application_artifact_min_fields';
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  file_type?: Maybe<Scalars['String']>;
+  file_uri?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** order by min() on columns of table "insurance_application_artifact" */
+export type Insurance_Application_Artifact_Min_Order_By = {
+  application_id?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  file_type?: Maybe<Order_By>;
+  file_uri?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "insurance_application_artifact" */
+export type Insurance_Application_Artifact_Mutation_Response = {
+  __typename?: 'insurance_application_artifact_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Insurance_Application_Artifact>;
+};
+
+/** input type for inserting object relation for remote table "insurance_application_artifact" */
+export type Insurance_Application_Artifact_Obj_Rel_Insert_Input = {
+  data: Insurance_Application_Artifact_Insert_Input;
+  /** upsert condition */
+  on_conflict?: Maybe<Insurance_Application_Artifact_On_Conflict>;
+};
+
+/** on_conflict condition type for table "insurance_application_artifact" */
+export type Insurance_Application_Artifact_On_Conflict = {
+  constraint: Insurance_Application_Artifact_Constraint;
+  update_columns?: Array<Insurance_Application_Artifact_Update_Column>;
+  where?: Maybe<Insurance_Application_Artifact_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "insurance_application_artifact". */
+export type Insurance_Application_Artifact_Order_By = {
+  application_id?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  file_type?: Maybe<Order_By>;
+  file_uri?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  insurance_application?: Maybe<Insurance_Application_Order_By>;
+  insurance_quote_pdf_selection_artifacts_aggregate?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Aggregate_Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: insurance_application_artifact */
+export type Insurance_Application_Artifact_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "insurance_application_artifact" */
+export enum Insurance_Application_Artifact_Select_Column {
+  /** column name */
+  ApplicationId = 'application_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  FileType = 'file_type',
+  /** column name */
+  FileUri = 'file_uri',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "insurance_application_artifact" */
+export type Insurance_Application_Artifact_Set_Input = {
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  file_type?: Maybe<Scalars['String']>;
+  file_uri?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate stddev on columns */
+export type Insurance_Application_Artifact_Stddev_Fields = {
+  __typename?: 'insurance_application_artifact_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "insurance_application_artifact" */
+export type Insurance_Application_Artifact_Stddev_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Insurance_Application_Artifact_Stddev_Pop_Fields = {
+  __typename?: 'insurance_application_artifact_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "insurance_application_artifact" */
+export type Insurance_Application_Artifact_Stddev_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Insurance_Application_Artifact_Stddev_Samp_Fields = {
+  __typename?: 'insurance_application_artifact_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "insurance_application_artifact" */
+export type Insurance_Application_Artifact_Stddev_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** Streaming cursor of the table "insurance_application_artifact" */
+export type Insurance_Application_Artifact_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Insurance_Application_Artifact_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Insurance_Application_Artifact_Stream_Cursor_Value_Input = {
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  file_type?: Maybe<Scalars['String']>;
+  file_uri?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate sum on columns */
+export type Insurance_Application_Artifact_Sum_Fields = {
+  __typename?: 'insurance_application_artifact_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "insurance_application_artifact" */
+export type Insurance_Application_Artifact_Sum_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** update columns of table "insurance_application_artifact" */
+export enum Insurance_Application_Artifact_Update_Column {
+  /** column name */
+  ApplicationId = 'application_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  FileType = 'file_type',
+  /** column name */
+  FileUri = 'file_uri',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+export type Insurance_Application_Artifact_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: Maybe<Insurance_Application_Artifact_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<Insurance_Application_Artifact_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Insurance_Application_Artifact_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Insurance_Application_Artifact_Var_Pop_Fields = {
+  __typename?: 'insurance_application_artifact_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "insurance_application_artifact" */
+export type Insurance_Application_Artifact_Var_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Insurance_Application_Artifact_Var_Samp_Fields = {
+  __typename?: 'insurance_application_artifact_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "insurance_application_artifact" */
+export type Insurance_Application_Artifact_Var_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Insurance_Application_Artifact_Variance_Fields = {
+  __typename?: 'insurance_application_artifact_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "insurance_application_artifact" */
+export type Insurance_Application_Artifact_Variance_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate avg on columns */
+export type Insurance_Application_Avg_Fields = {
+  __typename?: 'insurance_application_avg_fields';
+  broker_agency_id?: Maybe<Scalars['Float']>;
+  employees?: Maybe<Scalars['Float']>;
+  idx?: Maybe<Scalars['Float']>;
+  insured_organization_id?: Maybe<Scalars['Float']>;
+  revenue?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "insurance_application" */
+export type Insurance_Application_Avg_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  employees?: Maybe<Order_By>;
+  idx?: Maybe<Order_By>;
+  insured_organization_id?: Maybe<Order_By>;
+  revenue?: Maybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "insurance_application". All fields are combined with a logical 'AND'. */
+export type Insurance_Application_Bool_Exp = {
+  _and?: Maybe<Array<Insurance_Application_Bool_Exp>>;
+  _not?: Maybe<Insurance_Application_Bool_Exp>;
+  _or?: Maybe<Array<Insurance_Application_Bool_Exp>>;
+  broker_agency?: Maybe<Broker_Agency_Bool_Exp>;
+  broker_agency_id?: Maybe<Int_Comparison_Exp>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  created_by_user_id?: Maybe<String_Comparison_Exp>;
+  created_user?: Maybe<User_Bool_Exp>;
+  domain?: Maybe<String_Comparison_Exp>;
+  domain_scan?: Maybe<Domain_Scan_Bool_Exp>;
+  effective_date?: Maybe<Date_Comparison_Exp>;
+  employees?: Maybe<Int_Comparison_Exp>;
+  expiration_date?: Maybe<Date_Comparison_Exp>;
+  external_scans?: Maybe<External_Scan_Bool_Exp>;
+  external_scans_aggregate?: Maybe<External_Scan_Aggregate_Bool_Exp>;
+  id?: Maybe<Uuid_Comparison_Exp>;
+  idx?: Maybe<Int_Comparison_Exp>;
+  ims_applications_not_taken_ups?: Maybe<Ims_Applications_Not_Taken_Up_Bool_Exp>;
+  ims_applications_not_taken_ups_aggregate?: Maybe<Ims_Applications_Not_Taken_Up_Aggregate_Bool_Exp>;
+  ims_company_business_type?: Maybe<Ims_Company_Business_Type_Bool_Exp>;
+  ims_responses?: Maybe<Ims_Responses_Bool_Exp>;
+  ims_responses_aggregate?: Maybe<Ims_Responses_Aggregate_Bool_Exp>;
+  industry?: Maybe<String_Comparison_Exp>;
+  insurance_application_artifacts?: Maybe<Insurance_Application_Artifact_Bool_Exp>;
+  insurance_application_artifacts_aggregate?: Maybe<Insurance_Application_Artifact_Aggregate_Bool_Exp>;
+  insurance_quote_selection?: Maybe<Insurance_Quote_Selection_Bool_Exp>;
+  insurance_quotes?: Maybe<Insurance_Quote_Bool_Exp>;
+  insurance_quotes_aggregate?: Maybe<Insurance_Quote_Aggregate_Bool_Exp>;
+  insured_organization?: Maybe<Insured_Organization_Bool_Exp>;
+  insured_organization_id?: Maybe<Int_Comparison_Exp>;
+  naics_code?: Maybe<String_Comparison_Exp>;
+  organization_type?: Maybe<String_Comparison_Exp>;
+  rentals_data?: Maybe<Jsonb_Comparison_Exp>;
+  revenue?: Maybe<Money_Comparison_Exp>;
+  stage?: Maybe<String_Comparison_Exp>;
+  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "insurance_application" */
+export enum Insurance_Application_Constraint {
+  /** unique or primary key constraint on columns "idx" */
+  InsuranceApplicationIdxKey = 'insurance_application_idx_key',
+  /** unique or primary key constraint on columns "expiration_date", "effective_date", "insured_organization_id" */
+  InsuranceApplicationInsuredOrganizationIdEffectiveDateEx = 'insurance_application_insured_organization_id_effective_date_ex',
+  /** unique or primary key constraint on columns "id" */
+  InsuranceApplicationPkey = 'insurance_application_pkey'
+}
+
+/** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+export type Insurance_Application_Delete_At_Path_Input = {
+  rentals_data?: Maybe<Array<Scalars['String']>>;
+};
+
+/** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+export type Insurance_Application_Delete_Elem_Input = {
+  rentals_data?: Maybe<Scalars['Int']>;
+};
+
+/** delete key/value pair or string element. key/value pairs are matched based on their key value */
+export type Insurance_Application_Delete_Key_Input = {
+  rentals_data?: Maybe<Scalars['String']>;
+};
+
+/** input type for incrementing numeric columns in table "insurance_application" */
+export type Insurance_Application_Inc_Input = {
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  employees?: Maybe<Scalars['Int']>;
+  idx?: Maybe<Scalars['Int']>;
+  insured_organization_id?: Maybe<Scalars['Int']>;
+  revenue?: Maybe<Scalars['money']>;
+};
+
+/** input type for inserting data into table "insurance_application" */
+export type Insurance_Application_Insert_Input = {
+  broker_agency?: Maybe<Broker_Agency_Obj_Rel_Insert_Input>;
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  created_user?: Maybe<User_Obj_Rel_Insert_Input>;
+  domain?: Maybe<Scalars['String']>;
+  domain_scan?: Maybe<Domain_Scan_Obj_Rel_Insert_Input>;
+  effective_date?: Maybe<Scalars['date']>;
+  employees?: Maybe<Scalars['Int']>;
+  expiration_date?: Maybe<Scalars['date']>;
+  external_scans?: Maybe<External_Scan_Arr_Rel_Insert_Input>;
+  id?: Maybe<Scalars['uuid']>;
+  idx?: Maybe<Scalars['Int']>;
+  ims_applications_not_taken_ups?: Maybe<Ims_Applications_Not_Taken_Up_Arr_Rel_Insert_Input>;
+  ims_company_business_type?: Maybe<Ims_Company_Business_Type_Obj_Rel_Insert_Input>;
+  ims_responses?: Maybe<Ims_Responses_Arr_Rel_Insert_Input>;
+  industry?: Maybe<Scalars['String']>;
+  insurance_application_artifacts?: Maybe<Insurance_Application_Artifact_Arr_Rel_Insert_Input>;
+  insurance_quote_selection?: Maybe<Insurance_Quote_Selection_Obj_Rel_Insert_Input>;
+  insurance_quotes?: Maybe<Insurance_Quote_Arr_Rel_Insert_Input>;
+  insured_organization?: Maybe<Insured_Organization_Obj_Rel_Insert_Input>;
+  insured_organization_id?: Maybe<Scalars['Int']>;
+  naics_code?: Maybe<Scalars['String']>;
+  organization_type?: Maybe<Scalars['String']>;
+  rentals_data?: Maybe<Scalars['jsonb']>;
+  revenue?: Maybe<Scalars['money']>;
+  stage?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type Insurance_Application_Max_Fields = {
+  __typename?: 'insurance_application_max_fields';
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  domain?: Maybe<Scalars['String']>;
+  effective_date?: Maybe<Scalars['date']>;
+  employees?: Maybe<Scalars['Int']>;
+  expiration_date?: Maybe<Scalars['date']>;
+  id?: Maybe<Scalars['uuid']>;
+  idx?: Maybe<Scalars['Int']>;
+  industry?: Maybe<Scalars['String']>;
+  insured_organization_id?: Maybe<Scalars['Int']>;
+  naics_code?: Maybe<Scalars['String']>;
+  organization_type?: Maybe<Scalars['String']>;
+  revenue?: Maybe<Scalars['money']>;
+  stage?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** order by max() on columns of table "insurance_application" */
+export type Insurance_Application_Max_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  created_by_user_id?: Maybe<Order_By>;
+  domain?: Maybe<Order_By>;
+  effective_date?: Maybe<Order_By>;
+  employees?: Maybe<Order_By>;
+  expiration_date?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  idx?: Maybe<Order_By>;
+  industry?: Maybe<Order_By>;
+  insured_organization_id?: Maybe<Order_By>;
+  naics_code?: Maybe<Order_By>;
+  organization_type?: Maybe<Order_By>;
+  revenue?: Maybe<Order_By>;
+  stage?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Insurance_Application_Min_Fields = {
+  __typename?: 'insurance_application_min_fields';
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  domain?: Maybe<Scalars['String']>;
+  effective_date?: Maybe<Scalars['date']>;
+  employees?: Maybe<Scalars['Int']>;
+  expiration_date?: Maybe<Scalars['date']>;
+  id?: Maybe<Scalars['uuid']>;
+  idx?: Maybe<Scalars['Int']>;
+  industry?: Maybe<Scalars['String']>;
+  insured_organization_id?: Maybe<Scalars['Int']>;
+  naics_code?: Maybe<Scalars['String']>;
+  organization_type?: Maybe<Scalars['String']>;
+  revenue?: Maybe<Scalars['money']>;
+  stage?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** order by min() on columns of table "insurance_application" */
+export type Insurance_Application_Min_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  created_by_user_id?: Maybe<Order_By>;
+  domain?: Maybe<Order_By>;
+  effective_date?: Maybe<Order_By>;
+  employees?: Maybe<Order_By>;
+  expiration_date?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  idx?: Maybe<Order_By>;
+  industry?: Maybe<Order_By>;
+  insured_organization_id?: Maybe<Order_By>;
+  naics_code?: Maybe<Order_By>;
+  organization_type?: Maybe<Order_By>;
+  revenue?: Maybe<Order_By>;
+  stage?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "insurance_application" */
+export type Insurance_Application_Mutation_Response = {
+  __typename?: 'insurance_application_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Insurance_Application>;
+};
+
+/** input type for inserting object relation for remote table "insurance_application" */
+export type Insurance_Application_Obj_Rel_Insert_Input = {
+  data: Insurance_Application_Insert_Input;
+  /** upsert condition */
+  on_conflict?: Maybe<Insurance_Application_On_Conflict>;
+};
+
+/** on_conflict condition type for table "insurance_application" */
+export type Insurance_Application_On_Conflict = {
+  constraint: Insurance_Application_Constraint;
+  update_columns?: Array<Insurance_Application_Update_Column>;
+  where?: Maybe<Insurance_Application_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "insurance_application". */
+export type Insurance_Application_Order_By = {
+  broker_agency?: Maybe<Broker_Agency_Order_By>;
+  broker_agency_id?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  created_by_user_id?: Maybe<Order_By>;
+  created_user?: Maybe<User_Order_By>;
+  domain?: Maybe<Order_By>;
+  domain_scan?: Maybe<Domain_Scan_Order_By>;
+  effective_date?: Maybe<Order_By>;
+  employees?: Maybe<Order_By>;
+  expiration_date?: Maybe<Order_By>;
+  external_scans_aggregate?: Maybe<External_Scan_Aggregate_Order_By>;
+  id?: Maybe<Order_By>;
+  idx?: Maybe<Order_By>;
+  ims_applications_not_taken_ups_aggregate?: Maybe<Ims_Applications_Not_Taken_Up_Aggregate_Order_By>;
+  ims_company_business_type?: Maybe<Ims_Company_Business_Type_Order_By>;
+  ims_responses_aggregate?: Maybe<Ims_Responses_Aggregate_Order_By>;
+  industry?: Maybe<Order_By>;
+  insurance_application_artifacts_aggregate?: Maybe<Insurance_Application_Artifact_Aggregate_Order_By>;
+  insurance_quote_selection?: Maybe<Insurance_Quote_Selection_Order_By>;
+  insurance_quotes_aggregate?: Maybe<Insurance_Quote_Aggregate_Order_By>;
+  insured_organization?: Maybe<Insured_Organization_Order_By>;
+  insured_organization_id?: Maybe<Order_By>;
+  naics_code?: Maybe<Order_By>;
+  organization_type?: Maybe<Order_By>;
+  rentals_data?: Maybe<Order_By>;
+  revenue?: Maybe<Order_By>;
+  stage?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: insurance_application */
+export type Insurance_Application_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** prepend existing jsonb value of filtered columns with new jsonb value */
+export type Insurance_Application_Prepend_Input = {
+  rentals_data?: Maybe<Scalars['jsonb']>;
+};
+
+/** select columns of table "insurance_application" */
+export enum Insurance_Application_Select_Column {
+  /** column name */
+  BrokerAgencyId = 'broker_agency_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedByUserId = 'created_by_user_id',
+  /** column name */
+  Domain = 'domain',
+  /** column name */
+  EffectiveDate = 'effective_date',
+  /** column name */
+  Employees = 'employees',
+  /** column name */
+  ExpirationDate = 'expiration_date',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Idx = 'idx',
+  /** column name */
+  Industry = 'industry',
+  /** column name */
+  InsuredOrganizationId = 'insured_organization_id',
+  /** column name */
+  NaicsCode = 'naics_code',
+  /** column name */
+  OrganizationType = 'organization_type',
+  /** column name */
+  RentalsData = 'rentals_data',
+  /** column name */
+  Revenue = 'revenue',
+  /** column name */
+  Stage = 'stage',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "insurance_application" */
+export type Insurance_Application_Set_Input = {
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  domain?: Maybe<Scalars['String']>;
+  effective_date?: Maybe<Scalars['date']>;
+  employees?: Maybe<Scalars['Int']>;
+  expiration_date?: Maybe<Scalars['date']>;
+  id?: Maybe<Scalars['uuid']>;
+  idx?: Maybe<Scalars['Int']>;
+  industry?: Maybe<Scalars['String']>;
+  insured_organization_id?: Maybe<Scalars['Int']>;
+  naics_code?: Maybe<Scalars['String']>;
+  organization_type?: Maybe<Scalars['String']>;
+  rentals_data?: Maybe<Scalars['jsonb']>;
+  revenue?: Maybe<Scalars['money']>;
+  stage?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate stddev on columns */
+export type Insurance_Application_Stddev_Fields = {
+  __typename?: 'insurance_application_stddev_fields';
+  broker_agency_id?: Maybe<Scalars['Float']>;
+  employees?: Maybe<Scalars['Float']>;
+  idx?: Maybe<Scalars['Float']>;
+  insured_organization_id?: Maybe<Scalars['Float']>;
+  revenue?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "insurance_application" */
+export type Insurance_Application_Stddev_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  employees?: Maybe<Order_By>;
+  idx?: Maybe<Order_By>;
+  insured_organization_id?: Maybe<Order_By>;
+  revenue?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Insurance_Application_Stddev_Pop_Fields = {
+  __typename?: 'insurance_application_stddev_pop_fields';
+  broker_agency_id?: Maybe<Scalars['Float']>;
+  employees?: Maybe<Scalars['Float']>;
+  idx?: Maybe<Scalars['Float']>;
+  insured_organization_id?: Maybe<Scalars['Float']>;
+  revenue?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "insurance_application" */
+export type Insurance_Application_Stddev_Pop_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  employees?: Maybe<Order_By>;
+  idx?: Maybe<Order_By>;
+  insured_organization_id?: Maybe<Order_By>;
+  revenue?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Insurance_Application_Stddev_Samp_Fields = {
+  __typename?: 'insurance_application_stddev_samp_fields';
+  broker_agency_id?: Maybe<Scalars['Float']>;
+  employees?: Maybe<Scalars['Float']>;
+  idx?: Maybe<Scalars['Float']>;
+  insured_organization_id?: Maybe<Scalars['Float']>;
+  revenue?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "insurance_application" */
+export type Insurance_Application_Stddev_Samp_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  employees?: Maybe<Order_By>;
+  idx?: Maybe<Order_By>;
+  insured_organization_id?: Maybe<Order_By>;
+  revenue?: Maybe<Order_By>;
+};
+
+/** Streaming cursor of the table "insurance_application" */
+export type Insurance_Application_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Insurance_Application_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Insurance_Application_Stream_Cursor_Value_Input = {
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  domain?: Maybe<Scalars['String']>;
+  effective_date?: Maybe<Scalars['date']>;
+  employees?: Maybe<Scalars['Int']>;
+  expiration_date?: Maybe<Scalars['date']>;
+  id?: Maybe<Scalars['uuid']>;
+  idx?: Maybe<Scalars['Int']>;
+  industry?: Maybe<Scalars['String']>;
+  insured_organization_id?: Maybe<Scalars['Int']>;
+  naics_code?: Maybe<Scalars['String']>;
+  organization_type?: Maybe<Scalars['String']>;
+  rentals_data?: Maybe<Scalars['jsonb']>;
+  revenue?: Maybe<Scalars['money']>;
+  stage?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate sum on columns */
+export type Insurance_Application_Sum_Fields = {
+  __typename?: 'insurance_application_sum_fields';
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  employees?: Maybe<Scalars['Int']>;
+  idx?: Maybe<Scalars['Int']>;
+  insured_organization_id?: Maybe<Scalars['Int']>;
+  revenue?: Maybe<Scalars['money']>;
+};
+
+/** order by sum() on columns of table "insurance_application" */
+export type Insurance_Application_Sum_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  employees?: Maybe<Order_By>;
+  idx?: Maybe<Order_By>;
+  insured_organization_id?: Maybe<Order_By>;
+  revenue?: Maybe<Order_By>;
+};
+
+/** update columns of table "insurance_application" */
+export enum Insurance_Application_Update_Column {
+  /** column name */
+  BrokerAgencyId = 'broker_agency_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedByUserId = 'created_by_user_id',
+  /** column name */
+  Domain = 'domain',
+  /** column name */
+  EffectiveDate = 'effective_date',
+  /** column name */
+  Employees = 'employees',
+  /** column name */
+  ExpirationDate = 'expiration_date',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Idx = 'idx',
+  /** column name */
+  Industry = 'industry',
+  /** column name */
+  InsuredOrganizationId = 'insured_organization_id',
+  /** column name */
+  NaicsCode = 'naics_code',
+  /** column name */
+  OrganizationType = 'organization_type',
+  /** column name */
+  RentalsData = 'rentals_data',
+  /** column name */
+  Revenue = 'revenue',
+  /** column name */
+  Stage = 'stage',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+export type Insurance_Application_Updates = {
+  /** append existing jsonb value of filtered columns with new jsonb value */
+  _append?: Maybe<Insurance_Application_Append_Input>;
+  /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+  _delete_at_path?: Maybe<Insurance_Application_Delete_At_Path_Input>;
+  /** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+  _delete_elem?: Maybe<Insurance_Application_Delete_Elem_Input>;
+  /** delete key/value pair or string element. key/value pairs are matched based on their key value */
+  _delete_key?: Maybe<Insurance_Application_Delete_Key_Input>;
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: Maybe<Insurance_Application_Inc_Input>;
+  /** prepend existing jsonb value of filtered columns with new jsonb value */
+  _prepend?: Maybe<Insurance_Application_Prepend_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<Insurance_Application_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Insurance_Application_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Insurance_Application_Var_Pop_Fields = {
+  __typename?: 'insurance_application_var_pop_fields';
+  broker_agency_id?: Maybe<Scalars['Float']>;
+  employees?: Maybe<Scalars['Float']>;
+  idx?: Maybe<Scalars['Float']>;
+  insured_organization_id?: Maybe<Scalars['Float']>;
+  revenue?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "insurance_application" */
+export type Insurance_Application_Var_Pop_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  employees?: Maybe<Order_By>;
+  idx?: Maybe<Order_By>;
+  insured_organization_id?: Maybe<Order_By>;
+  revenue?: Maybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Insurance_Application_Var_Samp_Fields = {
+  __typename?: 'insurance_application_var_samp_fields';
+  broker_agency_id?: Maybe<Scalars['Float']>;
+  employees?: Maybe<Scalars['Float']>;
+  idx?: Maybe<Scalars['Float']>;
+  insured_organization_id?: Maybe<Scalars['Float']>;
+  revenue?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "insurance_application" */
+export type Insurance_Application_Var_Samp_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  employees?: Maybe<Order_By>;
+  idx?: Maybe<Order_By>;
+  insured_organization_id?: Maybe<Order_By>;
+  revenue?: Maybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Insurance_Application_Variance_Fields = {
+  __typename?: 'insurance_application_variance_fields';
+  broker_agency_id?: Maybe<Scalars['Float']>;
+  employees?: Maybe<Scalars['Float']>;
+  idx?: Maybe<Scalars['Float']>;
+  insured_organization_id?: Maybe<Scalars['Float']>;
+  revenue?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "insurance_application" */
+export type Insurance_Application_Variance_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  employees?: Maybe<Order_By>;
+  idx?: Maybe<Order_By>;
+  insured_organization_id?: Maybe<Order_By>;
+  revenue?: Maybe<Order_By>;
+};
+
+export type Insurance_Applications_From_N_Days_Ago_Args = {
+  days?: Maybe<Scalars['Int']>;
+};
+
+/** columns and relationships of "insurance_policy" */
+export type Insurance_Policy = {
+  __typename?: 'insurance_policy';
+  agent_signed?: Maybe<Scalars['Boolean']>;
+  canary_token?: Maybe<Scalars['String']>;
+  created_at: Scalars['timestamptz'];
+  created_by_user_id?: Maybe<Scalars['String']>;
+  effective_date?: Maybe<Scalars['timestamptz']>;
+  electronic_signature_url?: Maybe<Scalars['String']>;
+  expiration_date?: Maybe<Scalars['timestamptz']>;
+  exported?: Maybe<Scalars['Boolean']>;
+  id: Scalars['Int'];
+  /** An object relationship */
+  insurance_quote_selection: Insurance_Quote_Selection;
+  insurance_quote_selection_id: Scalars['Int'];
+  insured_signed?: Maybe<Scalars['Boolean']>;
+  ipfs_quote_data?: Maybe<Scalars['jsonb']>;
+  ipfs_quote_number?: Maybe<Scalars['String']>;
+  ipfs_report?: Maybe<Scalars['String']>;
+  long_policy_number?: Maybe<Scalars['String']>;
+  payment_collected?: Maybe<Scalars['Boolean']>;
+  payment_state?: Maybe<Scalars['String']>;
+  policy_number?: Maybe<Scalars['String']>;
+  /** An object relationship */
+  policy_payment?: Maybe<Policy_Payment>;
+  policy_seq?: Maybe<Scalars['Int']>;
+  stage: Scalars['String'];
+  updated_at: Scalars['timestamptz'];
+  waratah_report?: Maybe<Scalars['String']>;
+};
+
+
+/** columns and relationships of "insurance_policy" */
+export type Insurance_PolicyIpfs_Quote_DataArgs = {
+  path?: Maybe<Scalars['String']>;
+};
+
+/** aggregated selection of "insurance_policy" */
+export type Insurance_Policy_Aggregate = {
+  __typename?: 'insurance_policy_aggregate';
+  aggregate?: Maybe<Insurance_Policy_Aggregate_Fields>;
+  nodes: Array<Insurance_Policy>;
+};
+
+/** aggregate fields of "insurance_policy" */
+export type Insurance_Policy_Aggregate_Fields = {
+  __typename?: 'insurance_policy_aggregate_fields';
+  avg?: Maybe<Insurance_Policy_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Insurance_Policy_Max_Fields>;
+  min?: Maybe<Insurance_Policy_Min_Fields>;
+  stddev?: Maybe<Insurance_Policy_Stddev_Fields>;
+  stddev_pop?: Maybe<Insurance_Policy_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Insurance_Policy_Stddev_Samp_Fields>;
+  sum?: Maybe<Insurance_Policy_Sum_Fields>;
+  var_pop?: Maybe<Insurance_Policy_Var_Pop_Fields>;
+  var_samp?: Maybe<Insurance_Policy_Var_Samp_Fields>;
+  variance?: Maybe<Insurance_Policy_Variance_Fields>;
+};
+
+
+/** aggregate fields of "insurance_policy" */
+export type Insurance_Policy_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Insurance_Policy_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** append existing jsonb value of filtered columns with new jsonb value */
+export type Insurance_Policy_Append_Input = {
+  ipfs_quote_data?: Maybe<Scalars['jsonb']>;
+};
+
+/** aggregate avg on columns */
+export type Insurance_Policy_Avg_Fields = {
+  __typename?: 'insurance_policy_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+  insurance_quote_selection_id?: Maybe<Scalars['Float']>;
+  policy_seq?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "insurance_policy". All fields are combined with a logical 'AND'. */
+export type Insurance_Policy_Bool_Exp = {
+  _and?: Maybe<Array<Insurance_Policy_Bool_Exp>>;
+  _not?: Maybe<Insurance_Policy_Bool_Exp>;
+  _or?: Maybe<Array<Insurance_Policy_Bool_Exp>>;
+  agent_signed?: Maybe<Boolean_Comparison_Exp>;
+  canary_token?: Maybe<String_Comparison_Exp>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  created_by_user_id?: Maybe<String_Comparison_Exp>;
+  effective_date?: Maybe<Timestamptz_Comparison_Exp>;
+  electronic_signature_url?: Maybe<String_Comparison_Exp>;
+  expiration_date?: Maybe<Timestamptz_Comparison_Exp>;
+  exported?: Maybe<Boolean_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  insurance_quote_selection?: Maybe<Insurance_Quote_Selection_Bool_Exp>;
+  insurance_quote_selection_id?: Maybe<Int_Comparison_Exp>;
+  insured_signed?: Maybe<Boolean_Comparison_Exp>;
+  ipfs_quote_data?: Maybe<Jsonb_Comparison_Exp>;
+  ipfs_quote_number?: Maybe<String_Comparison_Exp>;
+  ipfs_report?: Maybe<String_Comparison_Exp>;
+  long_policy_number?: Maybe<String_Comparison_Exp>;
+  payment_collected?: Maybe<Boolean_Comparison_Exp>;
+  payment_state?: Maybe<String_Comparison_Exp>;
+  policy_number?: Maybe<String_Comparison_Exp>;
+  policy_payment?: Maybe<Policy_Payment_Bool_Exp>;
+  policy_seq?: Maybe<Int_Comparison_Exp>;
+  stage?: Maybe<String_Comparison_Exp>;
+  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+  waratah_report?: Maybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "insurance_policy" */
+export enum Insurance_Policy_Constraint {
+  /** unique or primary key constraint on columns "canary_token" */
+  InsurancePolicyCanaryTokenKey = 'insurance_policy_canary_token_key',
+  /** unique or primary key constraint on columns "insurance_quote_selection_id" */
+  InsurancePolicyInsuranceQuoteSelectionIdKey = 'insurance_policy_insurance_quote_selection_id_key',
+  /** unique or primary key constraint on columns "ipfs_quote_number" */
+  InsurancePolicyIpfsQuoteNumberKey = 'insurance_policy_ipfs_quote_number_key',
+  /** unique or primary key constraint on columns "id" */
+  InsurancePolicyPkey = 'insurance_policy_pkey',
+  /** unique or primary key constraint on columns "policy_number" */
+  InsurancePolicyPolicyNumberKey = 'insurance_policy_policy_number_key',
+  /** unique or primary key constraint on columns "policy_seq" */
+  InsurancePolicyPolicySeqKey = 'insurance_policy_policy_seq_key',
+  /** unique or primary key constraint on columns "long_policy_number" */
+  InsurancePolicyShortPolicyNumberKey = 'insurance_policy_short_policy_number_key'
+}
+
+/** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+export type Insurance_Policy_Delete_At_Path_Input = {
+  ipfs_quote_data?: Maybe<Array<Scalars['String']>>;
+};
+
+/** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+export type Insurance_Policy_Delete_Elem_Input = {
+  ipfs_quote_data?: Maybe<Scalars['Int']>;
+};
+
+/** delete key/value pair or string element. key/value pairs are matched based on their key value */
+export type Insurance_Policy_Delete_Key_Input = {
+  ipfs_quote_data?: Maybe<Scalars['String']>;
+};
+
+/** input type for incrementing numeric columns in table "insurance_policy" */
+export type Insurance_Policy_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+  insurance_quote_selection_id?: Maybe<Scalars['Int']>;
+  policy_seq?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "insurance_policy" */
+export type Insurance_Policy_Insert_Input = {
+  agent_signed?: Maybe<Scalars['Boolean']>;
+  canary_token?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  effective_date?: Maybe<Scalars['timestamptz']>;
+  electronic_signature_url?: Maybe<Scalars['String']>;
+  expiration_date?: Maybe<Scalars['timestamptz']>;
+  exported?: Maybe<Scalars['Boolean']>;
+  id?: Maybe<Scalars['Int']>;
+  insurance_quote_selection?: Maybe<Insurance_Quote_Selection_Obj_Rel_Insert_Input>;
+  insurance_quote_selection_id?: Maybe<Scalars['Int']>;
+  insured_signed?: Maybe<Scalars['Boolean']>;
+  ipfs_quote_data?: Maybe<Scalars['jsonb']>;
+  ipfs_quote_number?: Maybe<Scalars['String']>;
+  ipfs_report?: Maybe<Scalars['String']>;
+  long_policy_number?: Maybe<Scalars['String']>;
+  payment_collected?: Maybe<Scalars['Boolean']>;
+  payment_state?: Maybe<Scalars['String']>;
+  policy_number?: Maybe<Scalars['String']>;
+  policy_payment?: Maybe<Policy_Payment_Obj_Rel_Insert_Input>;
+  policy_seq?: Maybe<Scalars['Int']>;
+  stage?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  waratah_report?: Maybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Insurance_Policy_Max_Fields = {
+  __typename?: 'insurance_policy_max_fields';
+  canary_token?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  effective_date?: Maybe<Scalars['timestamptz']>;
+  electronic_signature_url?: Maybe<Scalars['String']>;
+  expiration_date?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  insurance_quote_selection_id?: Maybe<Scalars['Int']>;
+  ipfs_quote_number?: Maybe<Scalars['String']>;
+  ipfs_report?: Maybe<Scalars['String']>;
+  long_policy_number?: Maybe<Scalars['String']>;
+  payment_state?: Maybe<Scalars['String']>;
+  policy_number?: Maybe<Scalars['String']>;
+  policy_seq?: Maybe<Scalars['Int']>;
+  stage?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  waratah_report?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type Insurance_Policy_Min_Fields = {
+  __typename?: 'insurance_policy_min_fields';
+  canary_token?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  effective_date?: Maybe<Scalars['timestamptz']>;
+  electronic_signature_url?: Maybe<Scalars['String']>;
+  expiration_date?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  insurance_quote_selection_id?: Maybe<Scalars['Int']>;
+  ipfs_quote_number?: Maybe<Scalars['String']>;
+  ipfs_report?: Maybe<Scalars['String']>;
+  long_policy_number?: Maybe<Scalars['String']>;
+  payment_state?: Maybe<Scalars['String']>;
+  policy_number?: Maybe<Scalars['String']>;
+  policy_seq?: Maybe<Scalars['Int']>;
+  stage?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  waratah_report?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "insurance_policy" */
+export type Insurance_Policy_Mutation_Response = {
+  __typename?: 'insurance_policy_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Insurance_Policy>;
+};
+
+/** input type for inserting object relation for remote table "insurance_policy" */
+export type Insurance_Policy_Obj_Rel_Insert_Input = {
+  data: Insurance_Policy_Insert_Input;
+  /** upsert condition */
+  on_conflict?: Maybe<Insurance_Policy_On_Conflict>;
+};
+
+/** on_conflict condition type for table "insurance_policy" */
+export type Insurance_Policy_On_Conflict = {
+  constraint: Insurance_Policy_Constraint;
+  update_columns?: Array<Insurance_Policy_Update_Column>;
+  where?: Maybe<Insurance_Policy_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "insurance_policy". */
+export type Insurance_Policy_Order_By = {
+  agent_signed?: Maybe<Order_By>;
+  canary_token?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  created_by_user_id?: Maybe<Order_By>;
+  effective_date?: Maybe<Order_By>;
+  electronic_signature_url?: Maybe<Order_By>;
+  expiration_date?: Maybe<Order_By>;
+  exported?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  insurance_quote_selection?: Maybe<Insurance_Quote_Selection_Order_By>;
+  insurance_quote_selection_id?: Maybe<Order_By>;
+  insured_signed?: Maybe<Order_By>;
+  ipfs_quote_data?: Maybe<Order_By>;
+  ipfs_quote_number?: Maybe<Order_By>;
+  ipfs_report?: Maybe<Order_By>;
+  long_policy_number?: Maybe<Order_By>;
+  payment_collected?: Maybe<Order_By>;
+  payment_state?: Maybe<Order_By>;
+  policy_number?: Maybe<Order_By>;
+  policy_payment?: Maybe<Policy_Payment_Order_By>;
+  policy_seq?: Maybe<Order_By>;
+  stage?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+  waratah_report?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: insurance_policy */
+export type Insurance_Policy_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** prepend existing jsonb value of filtered columns with new jsonb value */
+export type Insurance_Policy_Prepend_Input = {
+  ipfs_quote_data?: Maybe<Scalars['jsonb']>;
+};
+
+/** select columns of table "insurance_policy" */
+export enum Insurance_Policy_Select_Column {
+  /** column name */
+  AgentSigned = 'agent_signed',
+  /** column name */
+  CanaryToken = 'canary_token',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedByUserId = 'created_by_user_id',
+  /** column name */
+  EffectiveDate = 'effective_date',
+  /** column name */
+  ElectronicSignatureUrl = 'electronic_signature_url',
+  /** column name */
+  ExpirationDate = 'expiration_date',
+  /** column name */
+  Exported = 'exported',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  InsuranceQuoteSelectionId = 'insurance_quote_selection_id',
+  /** column name */
+  InsuredSigned = 'insured_signed',
+  /** column name */
+  IpfsQuoteData = 'ipfs_quote_data',
+  /** column name */
+  IpfsQuoteNumber = 'ipfs_quote_number',
+  /** column name */
+  IpfsReport = 'ipfs_report',
+  /** column name */
+  LongPolicyNumber = 'long_policy_number',
+  /** column name */
+  PaymentCollected = 'payment_collected',
+  /** column name */
+  PaymentState = 'payment_state',
+  /** column name */
+  PolicyNumber = 'policy_number',
+  /** column name */
+  PolicySeq = 'policy_seq',
+  /** column name */
+  Stage = 'stage',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  WaratahReport = 'waratah_report'
+}
+
+/** input type for updating data in table "insurance_policy" */
+export type Insurance_Policy_Set_Input = {
+  agent_signed?: Maybe<Scalars['Boolean']>;
+  canary_token?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  effective_date?: Maybe<Scalars['timestamptz']>;
+  electronic_signature_url?: Maybe<Scalars['String']>;
+  expiration_date?: Maybe<Scalars['timestamptz']>;
+  exported?: Maybe<Scalars['Boolean']>;
+  id?: Maybe<Scalars['Int']>;
+  insurance_quote_selection_id?: Maybe<Scalars['Int']>;
+  insured_signed?: Maybe<Scalars['Boolean']>;
+  ipfs_quote_data?: Maybe<Scalars['jsonb']>;
+  ipfs_quote_number?: Maybe<Scalars['String']>;
+  ipfs_report?: Maybe<Scalars['String']>;
+  long_policy_number?: Maybe<Scalars['String']>;
+  payment_collected?: Maybe<Scalars['Boolean']>;
+  payment_state?: Maybe<Scalars['String']>;
+  policy_number?: Maybe<Scalars['String']>;
+  policy_seq?: Maybe<Scalars['Int']>;
+  stage?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  waratah_report?: Maybe<Scalars['String']>;
+};
+
+/** aggregate stddev on columns */
+export type Insurance_Policy_Stddev_Fields = {
+  __typename?: 'insurance_policy_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+  insurance_quote_selection_id?: Maybe<Scalars['Float']>;
+  policy_seq?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Insurance_Policy_Stddev_Pop_Fields = {
+  __typename?: 'insurance_policy_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  insurance_quote_selection_id?: Maybe<Scalars['Float']>;
+  policy_seq?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Insurance_Policy_Stddev_Samp_Fields = {
+  __typename?: 'insurance_policy_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  insurance_quote_selection_id?: Maybe<Scalars['Float']>;
+  policy_seq?: Maybe<Scalars['Float']>;
+};
+
+/** Streaming cursor of the table "insurance_policy" */
+export type Insurance_Policy_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Insurance_Policy_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Insurance_Policy_Stream_Cursor_Value_Input = {
+  agent_signed?: Maybe<Scalars['Boolean']>;
+  canary_token?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  effective_date?: Maybe<Scalars['timestamptz']>;
+  electronic_signature_url?: Maybe<Scalars['String']>;
+  expiration_date?: Maybe<Scalars['timestamptz']>;
+  exported?: Maybe<Scalars['Boolean']>;
+  id?: Maybe<Scalars['Int']>;
+  insurance_quote_selection_id?: Maybe<Scalars['Int']>;
+  insured_signed?: Maybe<Scalars['Boolean']>;
+  ipfs_quote_data?: Maybe<Scalars['jsonb']>;
+  ipfs_quote_number?: Maybe<Scalars['String']>;
+  ipfs_report?: Maybe<Scalars['String']>;
+  long_policy_number?: Maybe<Scalars['String']>;
+  payment_collected?: Maybe<Scalars['Boolean']>;
+  payment_state?: Maybe<Scalars['String']>;
+  policy_number?: Maybe<Scalars['String']>;
+  policy_seq?: Maybe<Scalars['Int']>;
+  stage?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  waratah_report?: Maybe<Scalars['String']>;
+};
+
+/** aggregate sum on columns */
+export type Insurance_Policy_Sum_Fields = {
+  __typename?: 'insurance_policy_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+  insurance_quote_selection_id?: Maybe<Scalars['Int']>;
+  policy_seq?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "insurance_policy" */
+export enum Insurance_Policy_Update_Column {
+  /** column name */
+  AgentSigned = 'agent_signed',
+  /** column name */
+  CanaryToken = 'canary_token',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedByUserId = 'created_by_user_id',
+  /** column name */
+  EffectiveDate = 'effective_date',
+  /** column name */
+  ElectronicSignatureUrl = 'electronic_signature_url',
+  /** column name */
+  ExpirationDate = 'expiration_date',
+  /** column name */
+  Exported = 'exported',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  InsuranceQuoteSelectionId = 'insurance_quote_selection_id',
+  /** column name */
+  InsuredSigned = 'insured_signed',
+  /** column name */
+  IpfsQuoteData = 'ipfs_quote_data',
+  /** column name */
+  IpfsQuoteNumber = 'ipfs_quote_number',
+  /** column name */
+  IpfsReport = 'ipfs_report',
+  /** column name */
+  LongPolicyNumber = 'long_policy_number',
+  /** column name */
+  PaymentCollected = 'payment_collected',
+  /** column name */
+  PaymentState = 'payment_state',
+  /** column name */
+  PolicyNumber = 'policy_number',
+  /** column name */
+  PolicySeq = 'policy_seq',
+  /** column name */
+  Stage = 'stage',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  WaratahReport = 'waratah_report'
+}
+
+export type Insurance_Policy_Updates = {
+  /** append existing jsonb value of filtered columns with new jsonb value */
+  _append?: Maybe<Insurance_Policy_Append_Input>;
+  /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+  _delete_at_path?: Maybe<Insurance_Policy_Delete_At_Path_Input>;
+  /** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+  _delete_elem?: Maybe<Insurance_Policy_Delete_Elem_Input>;
+  /** delete key/value pair or string element. key/value pairs are matched based on their key value */
+  _delete_key?: Maybe<Insurance_Policy_Delete_Key_Input>;
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: Maybe<Insurance_Policy_Inc_Input>;
+  /** prepend existing jsonb value of filtered columns with new jsonb value */
+  _prepend?: Maybe<Insurance_Policy_Prepend_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<Insurance_Policy_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Insurance_Policy_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Insurance_Policy_Var_Pop_Fields = {
+  __typename?: 'insurance_policy_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  insurance_quote_selection_id?: Maybe<Scalars['Float']>;
+  policy_seq?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Insurance_Policy_Var_Samp_Fields = {
+  __typename?: 'insurance_policy_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  insurance_quote_selection_id?: Maybe<Scalars['Float']>;
+  policy_seq?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Insurance_Policy_Variance_Fields = {
+  __typename?: 'insurance_policy_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+  insurance_quote_selection_id?: Maybe<Scalars['Float']>;
+  policy_seq?: Maybe<Scalars['Float']>;
+};
+
+/** columns and relationships of "insurance_quote" */
+export type Insurance_Quote = {
+  __typename?: 'insurance_quote';
+  base_premium: Scalars['money'];
+  commission_percentage?: Maybe<Scalars['Int']>;
+  created_at: Scalars['timestamptz'];
+  created_by_user_id?: Maybe<Scalars['String']>;
+  deductible: Scalars['money'];
+  fees?: Maybe<Scalars['jsonb']>;
+  id: Scalars['bigint'];
+  /** An object relationship */
+  insurance_application?: Maybe<Insurance_Application>;
+  insurance_application_id?: Maybe<Scalars['uuid']>;
+  /** An object relationship */
+  insurance_quote_selection?: Maybe<Insurance_Quote_Selection>;
+  other_deductibles?: Maybe<Scalars['money']>;
+  policy_limit: Scalars['money'];
+  premium?: Maybe<Scalars['money']>;
+  sub_limits?: Maybe<Scalars['jsonb']>;
+  tax_percentage?: Maybe<Scalars['numeric']>;
+  taxes?: Maybe<Scalars['jsonb']>;
+  total_premium?: Maybe<Scalars['money']>;
+  /** An object relationship */
+  underwriter_organization?: Maybe<Underwriter_Organization>;
+  underwriter_organization_id?: Maybe<Scalars['Int']>;
+  updated_at: Scalars['timestamptz'];
+};
+
+
+/** columns and relationships of "insurance_quote" */
+export type Insurance_QuoteFeesArgs = {
+  path?: Maybe<Scalars['String']>;
+};
+
+
+/** columns and relationships of "insurance_quote" */
+export type Insurance_QuoteSub_LimitsArgs = {
+  path?: Maybe<Scalars['String']>;
+};
+
+
+/** columns and relationships of "insurance_quote" */
+export type Insurance_QuoteTaxesArgs = {
+  path?: Maybe<Scalars['String']>;
+};
+
+/** aggregated selection of "insurance_quote" */
+export type Insurance_Quote_Aggregate = {
+  __typename?: 'insurance_quote_aggregate';
+  aggregate?: Maybe<Insurance_Quote_Aggregate_Fields>;
+  nodes: Array<Insurance_Quote>;
+};
+
+export type Insurance_Quote_Aggregate_Bool_Exp = {
+  count?: Maybe<Insurance_Quote_Aggregate_Bool_Exp_Count>;
+};
+
+export type Insurance_Quote_Aggregate_Bool_Exp_Count = {
+  arguments?: Maybe<Array<Insurance_Quote_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+  filter?: Maybe<Insurance_Quote_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "insurance_quote" */
+export type Insurance_Quote_Aggregate_Fields = {
+  __typename?: 'insurance_quote_aggregate_fields';
+  avg?: Maybe<Insurance_Quote_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Insurance_Quote_Max_Fields>;
+  min?: Maybe<Insurance_Quote_Min_Fields>;
+  stddev?: Maybe<Insurance_Quote_Stddev_Fields>;
+  stddev_pop?: Maybe<Insurance_Quote_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Insurance_Quote_Stddev_Samp_Fields>;
+  sum?: Maybe<Insurance_Quote_Sum_Fields>;
+  var_pop?: Maybe<Insurance_Quote_Var_Pop_Fields>;
+  var_samp?: Maybe<Insurance_Quote_Var_Samp_Fields>;
+  variance?: Maybe<Insurance_Quote_Variance_Fields>;
+};
+
+
+/** aggregate fields of "insurance_quote" */
+export type Insurance_Quote_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Insurance_Quote_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "insurance_quote" */
+export type Insurance_Quote_Aggregate_Order_By = {
+  avg?: Maybe<Insurance_Quote_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Insurance_Quote_Max_Order_By>;
+  min?: Maybe<Insurance_Quote_Min_Order_By>;
+  stddev?: Maybe<Insurance_Quote_Stddev_Order_By>;
+  stddev_pop?: Maybe<Insurance_Quote_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Insurance_Quote_Stddev_Samp_Order_By>;
+  sum?: Maybe<Insurance_Quote_Sum_Order_By>;
+  var_pop?: Maybe<Insurance_Quote_Var_Pop_Order_By>;
+  var_samp?: Maybe<Insurance_Quote_Var_Samp_Order_By>;
+  variance?: Maybe<Insurance_Quote_Variance_Order_By>;
+};
+
+/** append existing jsonb value of filtered columns with new jsonb value */
+export type Insurance_Quote_Append_Input = {
+  fees?: Maybe<Scalars['jsonb']>;
+  sub_limits?: Maybe<Scalars['jsonb']>;
+  taxes?: Maybe<Scalars['jsonb']>;
+};
+
+/** input type for inserting array relation for remote table "insurance_quote" */
+export type Insurance_Quote_Arr_Rel_Insert_Input = {
+  data: Array<Insurance_Quote_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: Maybe<Insurance_Quote_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Insurance_Quote_Avg_Fields = {
+  __typename?: 'insurance_quote_avg_fields';
+  base_premium?: Maybe<Scalars['Float']>;
+  commission_percentage?: Maybe<Scalars['Float']>;
+  deductible?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  other_deductibles?: Maybe<Scalars['Float']>;
+  policy_limit?: Maybe<Scalars['Float']>;
+  premium?: Maybe<Scalars['Float']>;
+  tax_percentage?: Maybe<Scalars['Float']>;
+  total_premium?: Maybe<Scalars['Float']>;
+  underwriter_organization_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "insurance_quote" */
+export type Insurance_Quote_Avg_Order_By = {
+  base_premium?: Maybe<Order_By>;
+  commission_percentage?: Maybe<Order_By>;
+  deductible?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  other_deductibles?: Maybe<Order_By>;
+  policy_limit?: Maybe<Order_By>;
+  premium?: Maybe<Order_By>;
+  tax_percentage?: Maybe<Order_By>;
+  total_premium?: Maybe<Order_By>;
+  underwriter_organization_id?: Maybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "insurance_quote". All fields are combined with a logical 'AND'. */
+export type Insurance_Quote_Bool_Exp = {
+  _and?: Maybe<Array<Insurance_Quote_Bool_Exp>>;
+  _not?: Maybe<Insurance_Quote_Bool_Exp>;
+  _or?: Maybe<Array<Insurance_Quote_Bool_Exp>>;
+  base_premium?: Maybe<Money_Comparison_Exp>;
+  commission_percentage?: Maybe<Int_Comparison_Exp>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  created_by_user_id?: Maybe<String_Comparison_Exp>;
+  deductible?: Maybe<Money_Comparison_Exp>;
+  fees?: Maybe<Jsonb_Comparison_Exp>;
+  id?: Maybe<Bigint_Comparison_Exp>;
+  insurance_application?: Maybe<Insurance_Application_Bool_Exp>;
+  insurance_application_id?: Maybe<Uuid_Comparison_Exp>;
+  insurance_quote_selection?: Maybe<Insurance_Quote_Selection_Bool_Exp>;
+  other_deductibles?: Maybe<Money_Comparison_Exp>;
+  policy_limit?: Maybe<Money_Comparison_Exp>;
+  premium?: Maybe<Money_Comparison_Exp>;
+  sub_limits?: Maybe<Jsonb_Comparison_Exp>;
+  tax_percentage?: Maybe<Numeric_Comparison_Exp>;
+  taxes?: Maybe<Jsonb_Comparison_Exp>;
+  total_premium?: Maybe<Money_Comparison_Exp>;
+  underwriter_organization?: Maybe<Underwriter_Organization_Bool_Exp>;
+  underwriter_organization_id?: Maybe<Int_Comparison_Exp>;
+  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "insurance_quote" */
+export enum Insurance_Quote_Constraint {
+  /** unique or primary key constraint on columns "deductible", "insurance_application_id", "policy_limit" */
+  InsuranceQuoteInsuranceApplicationIdPolicyLimitDeductibl = 'insurance_quote_insurance_application_id_policy_limit_deductibl',
+  /** unique or primary key constraint on columns "id" */
+  InsuranceQuotePkey = 'insurance_quote_pkey'
+}
+
+/** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+export type Insurance_Quote_Delete_At_Path_Input = {
+  fees?: Maybe<Array<Scalars['String']>>;
+  sub_limits?: Maybe<Array<Scalars['String']>>;
+  taxes?: Maybe<Array<Scalars['String']>>;
+};
+
+/** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+export type Insurance_Quote_Delete_Elem_Input = {
+  fees?: Maybe<Scalars['Int']>;
+  sub_limits?: Maybe<Scalars['Int']>;
+  taxes?: Maybe<Scalars['Int']>;
+};
+
+/** delete key/value pair or string element. key/value pairs are matched based on their key value */
+export type Insurance_Quote_Delete_Key_Input = {
+  fees?: Maybe<Scalars['String']>;
+  sub_limits?: Maybe<Scalars['String']>;
+  taxes?: Maybe<Scalars['String']>;
+};
+
+/** columns and relationships of "insurance_quote_email" */
+export type Insurance_Quote_Email = {
+  __typename?: 'insurance_quote_email';
+  application_id: Scalars['uuid'];
+  created_at: Scalars['timestamptz'];
+  /** An object relationship */
+  created_by?: Maybe<User>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  email: Scalars['String'];
+  email_sent_at?: Maybe<Scalars['timestamptz']>;
+  id: Scalars['Int'];
+  /** An object relationship */
+  insurance_application: Insurance_Application;
+  name: Scalars['String'];
+  org_name?: Maybe<Scalars['String']>;
+  quote_number?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+  updated_at: Scalars['timestamptz'];
+};
+
+/** aggregated selection of "insurance_quote_email" */
+export type Insurance_Quote_Email_Aggregate = {
+  __typename?: 'insurance_quote_email_aggregate';
+  aggregate?: Maybe<Insurance_Quote_Email_Aggregate_Fields>;
+  nodes: Array<Insurance_Quote_Email>;
+};
+
+/** aggregate fields of "insurance_quote_email" */
+export type Insurance_Quote_Email_Aggregate_Fields = {
+  __typename?: 'insurance_quote_email_aggregate_fields';
+  avg?: Maybe<Insurance_Quote_Email_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Insurance_Quote_Email_Max_Fields>;
+  min?: Maybe<Insurance_Quote_Email_Min_Fields>;
+  stddev?: Maybe<Insurance_Quote_Email_Stddev_Fields>;
+  stddev_pop?: Maybe<Insurance_Quote_Email_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Insurance_Quote_Email_Stddev_Samp_Fields>;
+  sum?: Maybe<Insurance_Quote_Email_Sum_Fields>;
+  var_pop?: Maybe<Insurance_Quote_Email_Var_Pop_Fields>;
+  var_samp?: Maybe<Insurance_Quote_Email_Var_Samp_Fields>;
+  variance?: Maybe<Insurance_Quote_Email_Variance_Fields>;
+};
+
+
+/** aggregate fields of "insurance_quote_email" */
+export type Insurance_Quote_Email_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Insurance_Quote_Email_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Insurance_Quote_Email_Avg_Fields = {
+  __typename?: 'insurance_quote_email_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "insurance_quote_email". All fields are combined with a logical 'AND'. */
+export type Insurance_Quote_Email_Bool_Exp = {
+  _and?: Maybe<Array<Insurance_Quote_Email_Bool_Exp>>;
+  _not?: Maybe<Insurance_Quote_Email_Bool_Exp>;
+  _or?: Maybe<Array<Insurance_Quote_Email_Bool_Exp>>;
+  application_id?: Maybe<Uuid_Comparison_Exp>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  created_by?: Maybe<User_Bool_Exp>;
+  created_by_user_id?: Maybe<String_Comparison_Exp>;
+  email?: Maybe<String_Comparison_Exp>;
+  email_sent_at?: Maybe<Timestamptz_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  insurance_application?: Maybe<Insurance_Application_Bool_Exp>;
+  name?: Maybe<String_Comparison_Exp>;
+  org_name?: Maybe<String_Comparison_Exp>;
+  quote_number?: Maybe<String_Comparison_Exp>;
+  status?: Maybe<String_Comparison_Exp>;
+  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "insurance_quote_email" */
+export enum Insurance_Quote_Email_Constraint {
+  /** unique or primary key constraint on columns "email", "status", "quote_number", "application_id" */
+  InsuranceQuoteEmailEmailQuoteNumberApplicationIdStatus = 'insurance_quote_email_email_quote_number_application_id_status_',
+  /** unique or primary key constraint on columns "id" */
+  InsuranceQuoteEmailPkey = 'insurance_quote_email_pkey'
+}
+
+/** input type for incrementing numeric columns in table "insurance_quote_email" */
+export type Insurance_Quote_Email_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "insurance_quote_email" */
+export type Insurance_Quote_Email_Insert_Input = {
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by?: Maybe<User_Obj_Rel_Insert_Input>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  email_sent_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  insurance_application?: Maybe<Insurance_Application_Obj_Rel_Insert_Input>;
+  name?: Maybe<Scalars['String']>;
+  org_name?: Maybe<Scalars['String']>;
+  quote_number?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type Insurance_Quote_Email_Max_Fields = {
+  __typename?: 'insurance_quote_email_max_fields';
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  email_sent_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  org_name?: Maybe<Scalars['String']>;
+  quote_number?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate min on columns */
+export type Insurance_Quote_Email_Min_Fields = {
+  __typename?: 'insurance_quote_email_min_fields';
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  email_sent_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  org_name?: Maybe<Scalars['String']>;
+  quote_number?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** response of any mutation on the table "insurance_quote_email" */
+export type Insurance_Quote_Email_Mutation_Response = {
+  __typename?: 'insurance_quote_email_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Insurance_Quote_Email>;
+};
+
+/** on_conflict condition type for table "insurance_quote_email" */
+export type Insurance_Quote_Email_On_Conflict = {
+  constraint: Insurance_Quote_Email_Constraint;
+  update_columns?: Array<Insurance_Quote_Email_Update_Column>;
+  where?: Maybe<Insurance_Quote_Email_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "insurance_quote_email". */
+export type Insurance_Quote_Email_Order_By = {
+  application_id?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  created_by?: Maybe<User_Order_By>;
+  created_by_user_id?: Maybe<Order_By>;
+  email?: Maybe<Order_By>;
+  email_sent_at?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  insurance_application?: Maybe<Insurance_Application_Order_By>;
+  name?: Maybe<Order_By>;
+  org_name?: Maybe<Order_By>;
+  quote_number?: Maybe<Order_By>;
+  status?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: insurance_quote_email */
+export type Insurance_Quote_Email_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "insurance_quote_email" */
+export enum Insurance_Quote_Email_Select_Column {
+  /** column name */
+  ApplicationId = 'application_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedByUserId = 'created_by_user_id',
+  /** column name */
+  Email = 'email',
+  /** column name */
+  EmailSentAt = 'email_sent_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  OrgName = 'org_name',
+  /** column name */
+  QuoteNumber = 'quote_number',
+  /** column name */
+  Status = 'status',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "insurance_quote_email" */
+export type Insurance_Quote_Email_Set_Input = {
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  email_sent_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  org_name?: Maybe<Scalars['String']>;
+  quote_number?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate stddev on columns */
+export type Insurance_Quote_Email_Stddev_Fields = {
+  __typename?: 'insurance_quote_email_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Insurance_Quote_Email_Stddev_Pop_Fields = {
+  __typename?: 'insurance_quote_email_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Insurance_Quote_Email_Stddev_Samp_Fields = {
+  __typename?: 'insurance_quote_email_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Streaming cursor of the table "insurance_quote_email" */
+export type Insurance_Quote_Email_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Insurance_Quote_Email_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Insurance_Quote_Email_Stream_Cursor_Value_Input = {
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  email_sent_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  org_name?: Maybe<Scalars['String']>;
+  quote_number?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate sum on columns */
+export type Insurance_Quote_Email_Sum_Fields = {
+  __typename?: 'insurance_quote_email_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "insurance_quote_email" */
+export enum Insurance_Quote_Email_Update_Column {
+  /** column name */
+  ApplicationId = 'application_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedByUserId = 'created_by_user_id',
+  /** column name */
+  Email = 'email',
+  /** column name */
+  EmailSentAt = 'email_sent_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  OrgName = 'org_name',
+  /** column name */
+  QuoteNumber = 'quote_number',
+  /** column name */
+  Status = 'status',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+export type Insurance_Quote_Email_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: Maybe<Insurance_Quote_Email_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<Insurance_Quote_Email_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Insurance_Quote_Email_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Insurance_Quote_Email_Var_Pop_Fields = {
+  __typename?: 'insurance_quote_email_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Insurance_Quote_Email_Var_Samp_Fields = {
+  __typename?: 'insurance_quote_email_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Insurance_Quote_Email_Variance_Fields = {
+  __typename?: 'insurance_quote_email_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** input type for incrementing numeric columns in table "insurance_quote" */
+export type Insurance_Quote_Inc_Input = {
+  base_premium?: Maybe<Scalars['money']>;
+  commission_percentage?: Maybe<Scalars['Int']>;
+  deductible?: Maybe<Scalars['money']>;
+  id?: Maybe<Scalars['bigint']>;
+  other_deductibles?: Maybe<Scalars['money']>;
+  policy_limit?: Maybe<Scalars['money']>;
+  premium?: Maybe<Scalars['money']>;
+  tax_percentage?: Maybe<Scalars['numeric']>;
+  total_premium?: Maybe<Scalars['money']>;
+  underwriter_organization_id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "insurance_quote" */
+export type Insurance_Quote_Insert_Input = {
+  base_premium?: Maybe<Scalars['money']>;
+  commission_percentage?: Maybe<Scalars['Int']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  deductible?: Maybe<Scalars['money']>;
+  fees?: Maybe<Scalars['jsonb']>;
+  id?: Maybe<Scalars['bigint']>;
+  insurance_application?: Maybe<Insurance_Application_Obj_Rel_Insert_Input>;
+  insurance_application_id?: Maybe<Scalars['uuid']>;
+  insurance_quote_selection?: Maybe<Insurance_Quote_Selection_Obj_Rel_Insert_Input>;
+  other_deductibles?: Maybe<Scalars['money']>;
+  policy_limit?: Maybe<Scalars['money']>;
+  premium?: Maybe<Scalars['money']>;
+  sub_limits?: Maybe<Scalars['jsonb']>;
+  tax_percentage?: Maybe<Scalars['numeric']>;
+  taxes?: Maybe<Scalars['jsonb']>;
+  total_premium?: Maybe<Scalars['money']>;
+  underwriter_organization?: Maybe<Underwriter_Organization_Obj_Rel_Insert_Input>;
+  underwriter_organization_id?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type Insurance_Quote_Max_Fields = {
+  __typename?: 'insurance_quote_max_fields';
+  base_premium?: Maybe<Scalars['money']>;
+  commission_percentage?: Maybe<Scalars['Int']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  deductible?: Maybe<Scalars['money']>;
+  id?: Maybe<Scalars['bigint']>;
+  insurance_application_id?: Maybe<Scalars['uuid']>;
+  other_deductibles?: Maybe<Scalars['money']>;
+  policy_limit?: Maybe<Scalars['money']>;
+  premium?: Maybe<Scalars['money']>;
+  tax_percentage?: Maybe<Scalars['numeric']>;
+  total_premium?: Maybe<Scalars['money']>;
+  underwriter_organization_id?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** order by max() on columns of table "insurance_quote" */
+export type Insurance_Quote_Max_Order_By = {
+  base_premium?: Maybe<Order_By>;
+  commission_percentage?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  created_by_user_id?: Maybe<Order_By>;
+  deductible?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  insurance_application_id?: Maybe<Order_By>;
+  other_deductibles?: Maybe<Order_By>;
+  policy_limit?: Maybe<Order_By>;
+  premium?: Maybe<Order_By>;
+  tax_percentage?: Maybe<Order_By>;
+  total_premium?: Maybe<Order_By>;
+  underwriter_organization_id?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Insurance_Quote_Min_Fields = {
+  __typename?: 'insurance_quote_min_fields';
+  base_premium?: Maybe<Scalars['money']>;
+  commission_percentage?: Maybe<Scalars['Int']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  deductible?: Maybe<Scalars['money']>;
+  id?: Maybe<Scalars['bigint']>;
+  insurance_application_id?: Maybe<Scalars['uuid']>;
+  other_deductibles?: Maybe<Scalars['money']>;
+  policy_limit?: Maybe<Scalars['money']>;
+  premium?: Maybe<Scalars['money']>;
+  tax_percentage?: Maybe<Scalars['numeric']>;
+  total_premium?: Maybe<Scalars['money']>;
+  underwriter_organization_id?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** order by min() on columns of table "insurance_quote" */
+export type Insurance_Quote_Min_Order_By = {
+  base_premium?: Maybe<Order_By>;
+  commission_percentage?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  created_by_user_id?: Maybe<Order_By>;
+  deductible?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  insurance_application_id?: Maybe<Order_By>;
+  other_deductibles?: Maybe<Order_By>;
+  policy_limit?: Maybe<Order_By>;
+  premium?: Maybe<Order_By>;
+  tax_percentage?: Maybe<Order_By>;
+  total_premium?: Maybe<Order_By>;
+  underwriter_organization_id?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "insurance_quote" */
+export type Insurance_Quote_Mutation_Response = {
+  __typename?: 'insurance_quote_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Insurance_Quote>;
+};
+
+/** input type for inserting object relation for remote table "insurance_quote" */
+export type Insurance_Quote_Obj_Rel_Insert_Input = {
+  data: Insurance_Quote_Insert_Input;
+  /** upsert condition */
+  on_conflict?: Maybe<Insurance_Quote_On_Conflict>;
+};
+
+/** on_conflict condition type for table "insurance_quote" */
+export type Insurance_Quote_On_Conflict = {
+  constraint: Insurance_Quote_Constraint;
+  update_columns?: Array<Insurance_Quote_Update_Column>;
+  where?: Maybe<Insurance_Quote_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "insurance_quote". */
+export type Insurance_Quote_Order_By = {
+  base_premium?: Maybe<Order_By>;
+  commission_percentage?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  created_by_user_id?: Maybe<Order_By>;
+  deductible?: Maybe<Order_By>;
+  fees?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  insurance_application?: Maybe<Insurance_Application_Order_By>;
+  insurance_application_id?: Maybe<Order_By>;
+  insurance_quote_selection?: Maybe<Insurance_Quote_Selection_Order_By>;
+  other_deductibles?: Maybe<Order_By>;
+  policy_limit?: Maybe<Order_By>;
+  premium?: Maybe<Order_By>;
+  sub_limits?: Maybe<Order_By>;
+  tax_percentage?: Maybe<Order_By>;
+  taxes?: Maybe<Order_By>;
+  total_premium?: Maybe<Order_By>;
+  underwriter_organization?: Maybe<Underwriter_Organization_Order_By>;
+  underwriter_organization_id?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** columns and relationships of "insurance_quote_pdf_selection" */
+export type Insurance_Quote_Pdf_Selection = {
+  __typename?: 'insurance_quote_pdf_selection';
+  application_id: Scalars['uuid'];
+  created_at: Scalars['timestamptz'];
+  created_by?: Maybe<Scalars['String']>;
+  /** An object relationship */
+  insurance_application: Insurance_Application;
+  /** An object relationship */
+  insurance_quote: Insurance_Quote;
+  /** An object relationship */
+  insurance_quote_pdf_selection_artifact: Insurance_Quote_Pdf_Selection_Artifact;
+  pdf_selection_artifact_id: Scalars['Int'];
+  quote_id: Scalars['Int'];
+};
+
+/** aggregated selection of "insurance_quote_pdf_selection" */
+export type Insurance_Quote_Pdf_Selection_Aggregate = {
+  __typename?: 'insurance_quote_pdf_selection_aggregate';
+  aggregate?: Maybe<Insurance_Quote_Pdf_Selection_Aggregate_Fields>;
+  nodes: Array<Insurance_Quote_Pdf_Selection>;
+};
+
+export type Insurance_Quote_Pdf_Selection_Aggregate_Bool_Exp = {
+  count?: Maybe<Insurance_Quote_Pdf_Selection_Aggregate_Bool_Exp_Count>;
+};
+
+export type Insurance_Quote_Pdf_Selection_Aggregate_Bool_Exp_Count = {
+  arguments?: Maybe<Array<Insurance_Quote_Pdf_Selection_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+  filter?: Maybe<Insurance_Quote_Pdf_Selection_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "insurance_quote_pdf_selection" */
+export type Insurance_Quote_Pdf_Selection_Aggregate_Fields = {
+  __typename?: 'insurance_quote_pdf_selection_aggregate_fields';
+  avg?: Maybe<Insurance_Quote_Pdf_Selection_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Insurance_Quote_Pdf_Selection_Max_Fields>;
+  min?: Maybe<Insurance_Quote_Pdf_Selection_Min_Fields>;
+  stddev?: Maybe<Insurance_Quote_Pdf_Selection_Stddev_Fields>;
+  stddev_pop?: Maybe<Insurance_Quote_Pdf_Selection_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Insurance_Quote_Pdf_Selection_Stddev_Samp_Fields>;
+  sum?: Maybe<Insurance_Quote_Pdf_Selection_Sum_Fields>;
+  var_pop?: Maybe<Insurance_Quote_Pdf_Selection_Var_Pop_Fields>;
+  var_samp?: Maybe<Insurance_Quote_Pdf_Selection_Var_Samp_Fields>;
+  variance?: Maybe<Insurance_Quote_Pdf_Selection_Variance_Fields>;
+};
+
+
+/** aggregate fields of "insurance_quote_pdf_selection" */
+export type Insurance_Quote_Pdf_Selection_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Insurance_Quote_Pdf_Selection_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "insurance_quote_pdf_selection" */
+export type Insurance_Quote_Pdf_Selection_Aggregate_Order_By = {
+  avg?: Maybe<Insurance_Quote_Pdf_Selection_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Insurance_Quote_Pdf_Selection_Max_Order_By>;
+  min?: Maybe<Insurance_Quote_Pdf_Selection_Min_Order_By>;
+  stddev?: Maybe<Insurance_Quote_Pdf_Selection_Stddev_Order_By>;
+  stddev_pop?: Maybe<Insurance_Quote_Pdf_Selection_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Insurance_Quote_Pdf_Selection_Stddev_Samp_Order_By>;
+  sum?: Maybe<Insurance_Quote_Pdf_Selection_Sum_Order_By>;
+  var_pop?: Maybe<Insurance_Quote_Pdf_Selection_Var_Pop_Order_By>;
+  var_samp?: Maybe<Insurance_Quote_Pdf_Selection_Var_Samp_Order_By>;
+  variance?: Maybe<Insurance_Quote_Pdf_Selection_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "insurance_quote_pdf_selection" */
+export type Insurance_Quote_Pdf_Selection_Arr_Rel_Insert_Input = {
+  data: Array<Insurance_Quote_Pdf_Selection_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: Maybe<Insurance_Quote_Pdf_Selection_On_Conflict>;
+};
+
+/** columns and relationships of "insurance_quote_pdf_selection_artifact" */
+export type Insurance_Quote_Pdf_Selection_Artifact = {
+  __typename?: 'insurance_quote_pdf_selection_artifact';
+  artifact_id: Scalars['Int'];
+  created_at: Scalars['timestamptz'];
+  created_by?: Maybe<Scalars['String']>;
+  id: Scalars['Int'];
+  /** An object relationship */
+  insurance_application_artifact: Insurance_Application_Artifact;
+  /** An array relationship */
+  insurance_quote_pdf_selections: Array<Insurance_Quote_Pdf_Selection>;
+  /** An aggregate relationship */
+  insurance_quote_pdf_selections_aggregate: Insurance_Quote_Pdf_Selection_Aggregate;
+};
+
+
+/** columns and relationships of "insurance_quote_pdf_selection_artifact" */
+export type Insurance_Quote_Pdf_Selection_ArtifactInsurance_Quote_Pdf_SelectionsArgs = {
+  distinct_on?: Maybe<Array<Insurance_Quote_Pdf_Selection_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Quote_Pdf_Selection_Order_By>>;
+  where?: Maybe<Insurance_Quote_Pdf_Selection_Bool_Exp>;
+};
+
+
+/** columns and relationships of "insurance_quote_pdf_selection_artifact" */
+export type Insurance_Quote_Pdf_Selection_ArtifactInsurance_Quote_Pdf_Selections_AggregateArgs = {
+  distinct_on?: Maybe<Array<Insurance_Quote_Pdf_Selection_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Quote_Pdf_Selection_Order_By>>;
+  where?: Maybe<Insurance_Quote_Pdf_Selection_Bool_Exp>;
+};
+
+/** aggregated selection of "insurance_quote_pdf_selection_artifact" */
+export type Insurance_Quote_Pdf_Selection_Artifact_Aggregate = {
+  __typename?: 'insurance_quote_pdf_selection_artifact_aggregate';
+  aggregate?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Aggregate_Fields>;
+  nodes: Array<Insurance_Quote_Pdf_Selection_Artifact>;
+};
+
+export type Insurance_Quote_Pdf_Selection_Artifact_Aggregate_Bool_Exp = {
+  count?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Aggregate_Bool_Exp_Count>;
+};
+
+export type Insurance_Quote_Pdf_Selection_Artifact_Aggregate_Bool_Exp_Count = {
+  arguments?: Maybe<Array<Insurance_Quote_Pdf_Selection_Artifact_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+  filter?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "insurance_quote_pdf_selection_artifact" */
+export type Insurance_Quote_Pdf_Selection_Artifact_Aggregate_Fields = {
+  __typename?: 'insurance_quote_pdf_selection_artifact_aggregate_fields';
+  avg?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Max_Fields>;
+  min?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Min_Fields>;
+  stddev?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Stddev_Fields>;
+  stddev_pop?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Stddev_Samp_Fields>;
+  sum?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Sum_Fields>;
+  var_pop?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Var_Pop_Fields>;
+  var_samp?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Var_Samp_Fields>;
+  variance?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Variance_Fields>;
+};
+
+
+/** aggregate fields of "insurance_quote_pdf_selection_artifact" */
+export type Insurance_Quote_Pdf_Selection_Artifact_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Insurance_Quote_Pdf_Selection_Artifact_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "insurance_quote_pdf_selection_artifact" */
+export type Insurance_Quote_Pdf_Selection_Artifact_Aggregate_Order_By = {
+  avg?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Max_Order_By>;
+  min?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Min_Order_By>;
+  stddev?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Stddev_Order_By>;
+  stddev_pop?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Stddev_Samp_Order_By>;
+  sum?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Sum_Order_By>;
+  var_pop?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Var_Pop_Order_By>;
+  var_samp?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Var_Samp_Order_By>;
+  variance?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "insurance_quote_pdf_selection_artifact" */
+export type Insurance_Quote_Pdf_Selection_Artifact_Arr_Rel_Insert_Input = {
+  data: Array<Insurance_Quote_Pdf_Selection_Artifact_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Insurance_Quote_Pdf_Selection_Artifact_Avg_Fields = {
+  __typename?: 'insurance_quote_pdf_selection_artifact_avg_fields';
+  artifact_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "insurance_quote_pdf_selection_artifact" */
+export type Insurance_Quote_Pdf_Selection_Artifact_Avg_Order_By = {
+  artifact_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "insurance_quote_pdf_selection_artifact". All fields are combined with a logical 'AND'. */
+export type Insurance_Quote_Pdf_Selection_Artifact_Bool_Exp = {
+  _and?: Maybe<Array<Insurance_Quote_Pdf_Selection_Artifact_Bool_Exp>>;
+  _not?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Bool_Exp>;
+  _or?: Maybe<Array<Insurance_Quote_Pdf_Selection_Artifact_Bool_Exp>>;
+  artifact_id?: Maybe<Int_Comparison_Exp>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  created_by?: Maybe<String_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  insurance_application_artifact?: Maybe<Insurance_Application_Artifact_Bool_Exp>;
+  insurance_quote_pdf_selections?: Maybe<Insurance_Quote_Pdf_Selection_Bool_Exp>;
+  insurance_quote_pdf_selections_aggregate?: Maybe<Insurance_Quote_Pdf_Selection_Aggregate_Bool_Exp>;
+};
+
+/** unique or primary key constraints on table "insurance_quote_pdf_selection_artifact" */
+export enum Insurance_Quote_Pdf_Selection_Artifact_Constraint {
+  /** unique or primary key constraint on columns "id", "artifact_id" */
+  InsuranceQuotePdfSelectionArtifactIdArtifactIdKey = 'insurance_quote_pdf_selection_artifact_id_artifact_id_key',
+  /** unique or primary key constraint on columns "id" */
+  InsuranceQuotePdfSelectionArtifactPkey = 'insurance_quote_pdf_selection_artifact_pkey'
+}
+
+/** input type for incrementing numeric columns in table "insurance_quote_pdf_selection_artifact" */
+export type Insurance_Quote_Pdf_Selection_Artifact_Inc_Input = {
+  artifact_id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "insurance_quote_pdf_selection_artifact" */
+export type Insurance_Quote_Pdf_Selection_Artifact_Insert_Input = {
+  artifact_id?: Maybe<Scalars['Int']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  insurance_application_artifact?: Maybe<Insurance_Application_Artifact_Obj_Rel_Insert_Input>;
+  insurance_quote_pdf_selections?: Maybe<Insurance_Quote_Pdf_Selection_Arr_Rel_Insert_Input>;
+};
+
+/** aggregate max on columns */
+export type Insurance_Quote_Pdf_Selection_Artifact_Max_Fields = {
+  __typename?: 'insurance_quote_pdf_selection_artifact_max_fields';
+  artifact_id?: Maybe<Scalars['Int']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** order by max() on columns of table "insurance_quote_pdf_selection_artifact" */
+export type Insurance_Quote_Pdf_Selection_Artifact_Max_Order_By = {
+  artifact_id?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  created_by?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Insurance_Quote_Pdf_Selection_Artifact_Min_Fields = {
+  __typename?: 'insurance_quote_pdf_selection_artifact_min_fields';
+  artifact_id?: Maybe<Scalars['Int']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** order by min() on columns of table "insurance_quote_pdf_selection_artifact" */
+export type Insurance_Quote_Pdf_Selection_Artifact_Min_Order_By = {
+  artifact_id?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  created_by?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "insurance_quote_pdf_selection_artifact" */
+export type Insurance_Quote_Pdf_Selection_Artifact_Mutation_Response = {
+  __typename?: 'insurance_quote_pdf_selection_artifact_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Insurance_Quote_Pdf_Selection_Artifact>;
+};
+
+/** input type for inserting object relation for remote table "insurance_quote_pdf_selection_artifact" */
+export type Insurance_Quote_Pdf_Selection_Artifact_Obj_Rel_Insert_Input = {
+  data: Insurance_Quote_Pdf_Selection_Artifact_Insert_Input;
+  /** upsert condition */
+  on_conflict?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_On_Conflict>;
+};
+
+/** on_conflict condition type for table "insurance_quote_pdf_selection_artifact" */
+export type Insurance_Quote_Pdf_Selection_Artifact_On_Conflict = {
+  constraint: Insurance_Quote_Pdf_Selection_Artifact_Constraint;
+  update_columns?: Array<Insurance_Quote_Pdf_Selection_Artifact_Update_Column>;
+  where?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "insurance_quote_pdf_selection_artifact". */
+export type Insurance_Quote_Pdf_Selection_Artifact_Order_By = {
+  artifact_id?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  created_by?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  insurance_application_artifact?: Maybe<Insurance_Application_Artifact_Order_By>;
+  insurance_quote_pdf_selections_aggregate?: Maybe<Insurance_Quote_Pdf_Selection_Aggregate_Order_By>;
+};
+
+/** primary key columns input for table: insurance_quote_pdf_selection_artifact */
+export type Insurance_Quote_Pdf_Selection_Artifact_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "insurance_quote_pdf_selection_artifact" */
+export enum Insurance_Quote_Pdf_Selection_Artifact_Select_Column {
+  /** column name */
+  ArtifactId = 'artifact_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedBy = 'created_by',
+  /** column name */
+  Id = 'id'
+}
+
+/** input type for updating data in table "insurance_quote_pdf_selection_artifact" */
+export type Insurance_Quote_Pdf_Selection_Artifact_Set_Input = {
+  artifact_id?: Maybe<Scalars['Int']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate stddev on columns */
+export type Insurance_Quote_Pdf_Selection_Artifact_Stddev_Fields = {
+  __typename?: 'insurance_quote_pdf_selection_artifact_stddev_fields';
+  artifact_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "insurance_quote_pdf_selection_artifact" */
+export type Insurance_Quote_Pdf_Selection_Artifact_Stddev_Order_By = {
+  artifact_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Insurance_Quote_Pdf_Selection_Artifact_Stddev_Pop_Fields = {
+  __typename?: 'insurance_quote_pdf_selection_artifact_stddev_pop_fields';
+  artifact_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "insurance_quote_pdf_selection_artifact" */
+export type Insurance_Quote_Pdf_Selection_Artifact_Stddev_Pop_Order_By = {
+  artifact_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Insurance_Quote_Pdf_Selection_Artifact_Stddev_Samp_Fields = {
+  __typename?: 'insurance_quote_pdf_selection_artifact_stddev_samp_fields';
+  artifact_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "insurance_quote_pdf_selection_artifact" */
+export type Insurance_Quote_Pdf_Selection_Artifact_Stddev_Samp_Order_By = {
+  artifact_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+};
+
+/** Streaming cursor of the table "insurance_quote_pdf_selection_artifact" */
+export type Insurance_Quote_Pdf_Selection_Artifact_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Insurance_Quote_Pdf_Selection_Artifact_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Insurance_Quote_Pdf_Selection_Artifact_Stream_Cursor_Value_Input = {
+  artifact_id?: Maybe<Scalars['Int']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate sum on columns */
+export type Insurance_Quote_Pdf_Selection_Artifact_Sum_Fields = {
+  __typename?: 'insurance_quote_pdf_selection_artifact_sum_fields';
+  artifact_id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "insurance_quote_pdf_selection_artifact" */
+export type Insurance_Quote_Pdf_Selection_Artifact_Sum_Order_By = {
+  artifact_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+};
+
+/** update columns of table "insurance_quote_pdf_selection_artifact" */
+export enum Insurance_Quote_Pdf_Selection_Artifact_Update_Column {
+  /** column name */
+  ArtifactId = 'artifact_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedBy = 'created_by',
+  /** column name */
+  Id = 'id'
+}
+
+export type Insurance_Quote_Pdf_Selection_Artifact_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Insurance_Quote_Pdf_Selection_Artifact_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Insurance_Quote_Pdf_Selection_Artifact_Var_Pop_Fields = {
+  __typename?: 'insurance_quote_pdf_selection_artifact_var_pop_fields';
+  artifact_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "insurance_quote_pdf_selection_artifact" */
+export type Insurance_Quote_Pdf_Selection_Artifact_Var_Pop_Order_By = {
+  artifact_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Insurance_Quote_Pdf_Selection_Artifact_Var_Samp_Fields = {
+  __typename?: 'insurance_quote_pdf_selection_artifact_var_samp_fields';
+  artifact_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "insurance_quote_pdf_selection_artifact" */
+export type Insurance_Quote_Pdf_Selection_Artifact_Var_Samp_Order_By = {
+  artifact_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Insurance_Quote_Pdf_Selection_Artifact_Variance_Fields = {
+  __typename?: 'insurance_quote_pdf_selection_artifact_variance_fields';
+  artifact_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "insurance_quote_pdf_selection_artifact" */
+export type Insurance_Quote_Pdf_Selection_Artifact_Variance_Order_By = {
+  artifact_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate avg on columns */
+export type Insurance_Quote_Pdf_Selection_Avg_Fields = {
+  __typename?: 'insurance_quote_pdf_selection_avg_fields';
+  pdf_selection_artifact_id?: Maybe<Scalars['Float']>;
+  quote_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "insurance_quote_pdf_selection" */
+export type Insurance_Quote_Pdf_Selection_Avg_Order_By = {
+  pdf_selection_artifact_id?: Maybe<Order_By>;
+  quote_id?: Maybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "insurance_quote_pdf_selection". All fields are combined with a logical 'AND'. */
+export type Insurance_Quote_Pdf_Selection_Bool_Exp = {
+  _and?: Maybe<Array<Insurance_Quote_Pdf_Selection_Bool_Exp>>;
+  _not?: Maybe<Insurance_Quote_Pdf_Selection_Bool_Exp>;
+  _or?: Maybe<Array<Insurance_Quote_Pdf_Selection_Bool_Exp>>;
+  application_id?: Maybe<Uuid_Comparison_Exp>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  created_by?: Maybe<String_Comparison_Exp>;
+  insurance_application?: Maybe<Insurance_Application_Bool_Exp>;
+  insurance_quote?: Maybe<Insurance_Quote_Bool_Exp>;
+  insurance_quote_pdf_selection_artifact?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Bool_Exp>;
+  pdf_selection_artifact_id?: Maybe<Int_Comparison_Exp>;
+  quote_id?: Maybe<Int_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "insurance_quote_pdf_selection" */
+export enum Insurance_Quote_Pdf_Selection_Constraint {
+  /** unique or primary key constraint on columns "pdf_selection_artifact_id", "quote_id", "application_id" */
+  InsuranceQuotePdfSelectionApplicationIdPdfSelectionArti = 'insurance_quote_pdf_selection_application_id_pdf_selection_arti',
+  /** unique or primary key constraint on columns "pdf_selection_artifact_id", "quote_id", "application_id" */
+  InsuranceQuotePdfSelectionPkey = 'insurance_quote_pdf_selection_pkey'
+}
+
+/** input type for incrementing numeric columns in table "insurance_quote_pdf_selection" */
+export type Insurance_Quote_Pdf_Selection_Inc_Input = {
+  pdf_selection_artifact_id?: Maybe<Scalars['Int']>;
+  quote_id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "insurance_quote_pdf_selection" */
+export type Insurance_Quote_Pdf_Selection_Insert_Input = {
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by?: Maybe<Scalars['String']>;
+  insurance_application?: Maybe<Insurance_Application_Obj_Rel_Insert_Input>;
+  insurance_quote?: Maybe<Insurance_Quote_Obj_Rel_Insert_Input>;
+  insurance_quote_pdf_selection_artifact?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Obj_Rel_Insert_Input>;
+  pdf_selection_artifact_id?: Maybe<Scalars['Int']>;
+  quote_id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate max on columns */
+export type Insurance_Quote_Pdf_Selection_Max_Fields = {
+  __typename?: 'insurance_quote_pdf_selection_max_fields';
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by?: Maybe<Scalars['String']>;
+  pdf_selection_artifact_id?: Maybe<Scalars['Int']>;
+  quote_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by max() on columns of table "insurance_quote_pdf_selection" */
+export type Insurance_Quote_Pdf_Selection_Max_Order_By = {
+  application_id?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  created_by?: Maybe<Order_By>;
+  pdf_selection_artifact_id?: Maybe<Order_By>;
+  quote_id?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Insurance_Quote_Pdf_Selection_Min_Fields = {
+  __typename?: 'insurance_quote_pdf_selection_min_fields';
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by?: Maybe<Scalars['String']>;
+  pdf_selection_artifact_id?: Maybe<Scalars['Int']>;
+  quote_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by min() on columns of table "insurance_quote_pdf_selection" */
+export type Insurance_Quote_Pdf_Selection_Min_Order_By = {
+  application_id?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  created_by?: Maybe<Order_By>;
+  pdf_selection_artifact_id?: Maybe<Order_By>;
+  quote_id?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "insurance_quote_pdf_selection" */
+export type Insurance_Quote_Pdf_Selection_Mutation_Response = {
+  __typename?: 'insurance_quote_pdf_selection_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Insurance_Quote_Pdf_Selection>;
+};
+
+/** on_conflict condition type for table "insurance_quote_pdf_selection" */
+export type Insurance_Quote_Pdf_Selection_On_Conflict = {
+  constraint: Insurance_Quote_Pdf_Selection_Constraint;
+  update_columns?: Array<Insurance_Quote_Pdf_Selection_Update_Column>;
+  where?: Maybe<Insurance_Quote_Pdf_Selection_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "insurance_quote_pdf_selection". */
+export type Insurance_Quote_Pdf_Selection_Order_By = {
+  application_id?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  created_by?: Maybe<Order_By>;
+  insurance_application?: Maybe<Insurance_Application_Order_By>;
+  insurance_quote?: Maybe<Insurance_Quote_Order_By>;
+  insurance_quote_pdf_selection_artifact?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Order_By>;
+  pdf_selection_artifact_id?: Maybe<Order_By>;
+  quote_id?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: insurance_quote_pdf_selection */
+export type Insurance_Quote_Pdf_Selection_Pk_Columns_Input = {
+  application_id: Scalars['uuid'];
+  pdf_selection_artifact_id: Scalars['Int'];
+  quote_id: Scalars['Int'];
+};
+
+/** select columns of table "insurance_quote_pdf_selection" */
+export enum Insurance_Quote_Pdf_Selection_Select_Column {
+  /** column name */
+  ApplicationId = 'application_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedBy = 'created_by',
+  /** column name */
+  PdfSelectionArtifactId = 'pdf_selection_artifact_id',
+  /** column name */
+  QuoteId = 'quote_id'
+}
+
+/** input type for updating data in table "insurance_quote_pdf_selection" */
+export type Insurance_Quote_Pdf_Selection_Set_Input = {
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by?: Maybe<Scalars['String']>;
+  pdf_selection_artifact_id?: Maybe<Scalars['Int']>;
+  quote_id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate stddev on columns */
+export type Insurance_Quote_Pdf_Selection_Stddev_Fields = {
+  __typename?: 'insurance_quote_pdf_selection_stddev_fields';
+  pdf_selection_artifact_id?: Maybe<Scalars['Float']>;
+  quote_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "insurance_quote_pdf_selection" */
+export type Insurance_Quote_Pdf_Selection_Stddev_Order_By = {
+  pdf_selection_artifact_id?: Maybe<Order_By>;
+  quote_id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Insurance_Quote_Pdf_Selection_Stddev_Pop_Fields = {
+  __typename?: 'insurance_quote_pdf_selection_stddev_pop_fields';
+  pdf_selection_artifact_id?: Maybe<Scalars['Float']>;
+  quote_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "insurance_quote_pdf_selection" */
+export type Insurance_Quote_Pdf_Selection_Stddev_Pop_Order_By = {
+  pdf_selection_artifact_id?: Maybe<Order_By>;
+  quote_id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Insurance_Quote_Pdf_Selection_Stddev_Samp_Fields = {
+  __typename?: 'insurance_quote_pdf_selection_stddev_samp_fields';
+  pdf_selection_artifact_id?: Maybe<Scalars['Float']>;
+  quote_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "insurance_quote_pdf_selection" */
+export type Insurance_Quote_Pdf_Selection_Stddev_Samp_Order_By = {
+  pdf_selection_artifact_id?: Maybe<Order_By>;
+  quote_id?: Maybe<Order_By>;
+};
+
+/** Streaming cursor of the table "insurance_quote_pdf_selection" */
+export type Insurance_Quote_Pdf_Selection_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Insurance_Quote_Pdf_Selection_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Insurance_Quote_Pdf_Selection_Stream_Cursor_Value_Input = {
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by?: Maybe<Scalars['String']>;
+  pdf_selection_artifact_id?: Maybe<Scalars['Int']>;
+  quote_id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate sum on columns */
+export type Insurance_Quote_Pdf_Selection_Sum_Fields = {
+  __typename?: 'insurance_quote_pdf_selection_sum_fields';
+  pdf_selection_artifact_id?: Maybe<Scalars['Int']>;
+  quote_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "insurance_quote_pdf_selection" */
+export type Insurance_Quote_Pdf_Selection_Sum_Order_By = {
+  pdf_selection_artifact_id?: Maybe<Order_By>;
+  quote_id?: Maybe<Order_By>;
+};
+
+/** update columns of table "insurance_quote_pdf_selection" */
+export enum Insurance_Quote_Pdf_Selection_Update_Column {
+  /** column name */
+  ApplicationId = 'application_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedBy = 'created_by',
+  /** column name */
+  PdfSelectionArtifactId = 'pdf_selection_artifact_id',
+  /** column name */
+  QuoteId = 'quote_id'
+}
+
+export type Insurance_Quote_Pdf_Selection_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: Maybe<Insurance_Quote_Pdf_Selection_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<Insurance_Quote_Pdf_Selection_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Insurance_Quote_Pdf_Selection_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Insurance_Quote_Pdf_Selection_Var_Pop_Fields = {
+  __typename?: 'insurance_quote_pdf_selection_var_pop_fields';
+  pdf_selection_artifact_id?: Maybe<Scalars['Float']>;
+  quote_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "insurance_quote_pdf_selection" */
+export type Insurance_Quote_Pdf_Selection_Var_Pop_Order_By = {
+  pdf_selection_artifact_id?: Maybe<Order_By>;
+  quote_id?: Maybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Insurance_Quote_Pdf_Selection_Var_Samp_Fields = {
+  __typename?: 'insurance_quote_pdf_selection_var_samp_fields';
+  pdf_selection_artifact_id?: Maybe<Scalars['Float']>;
+  quote_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "insurance_quote_pdf_selection" */
+export type Insurance_Quote_Pdf_Selection_Var_Samp_Order_By = {
+  pdf_selection_artifact_id?: Maybe<Order_By>;
+  quote_id?: Maybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Insurance_Quote_Pdf_Selection_Variance_Fields = {
+  __typename?: 'insurance_quote_pdf_selection_variance_fields';
+  pdf_selection_artifact_id?: Maybe<Scalars['Float']>;
+  quote_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "insurance_quote_pdf_selection" */
+export type Insurance_Quote_Pdf_Selection_Variance_Order_By = {
+  pdf_selection_artifact_id?: Maybe<Order_By>;
+  quote_id?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: insurance_quote */
+export type Insurance_Quote_Pk_Columns_Input = {
+  id: Scalars['bigint'];
+};
+
+/** prepend existing jsonb value of filtered columns with new jsonb value */
+export type Insurance_Quote_Prepend_Input = {
+  fees?: Maybe<Scalars['jsonb']>;
+  sub_limits?: Maybe<Scalars['jsonb']>;
+  taxes?: Maybe<Scalars['jsonb']>;
+};
+
+/** select columns of table "insurance_quote" */
+export enum Insurance_Quote_Select_Column {
+  /** column name */
+  BasePremium = 'base_premium',
+  /** column name */
+  CommissionPercentage = 'commission_percentage',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedByUserId = 'created_by_user_id',
+  /** column name */
+  Deductible = 'deductible',
+  /** column name */
+  Fees = 'fees',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  InsuranceApplicationId = 'insurance_application_id',
+  /** column name */
+  OtherDeductibles = 'other_deductibles',
+  /** column name */
+  PolicyLimit = 'policy_limit',
+  /** column name */
+  Premium = 'premium',
+  /** column name */
+  SubLimits = 'sub_limits',
+  /** column name */
+  TaxPercentage = 'tax_percentage',
+  /** column name */
+  Taxes = 'taxes',
+  /** column name */
+  TotalPremium = 'total_premium',
+  /** column name */
+  UnderwriterOrganizationId = 'underwriter_organization_id',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** columns and relationships of "insurance_quote_selection" */
+export type Insurance_Quote_Selection = {
+  __typename?: 'insurance_quote_selection';
+  application_id: Scalars['uuid'];
+  id: Scalars['Int'];
+  /** An object relationship */
+  insurance_application: Insurance_Application;
+  /** An object relationship */
+  insurance_policy?: Maybe<Insurance_Policy>;
+  /** An object relationship */
+  insurance_quote: Insurance_Quote;
+  quote_id: Scalars['Int'];
+};
+
+/** aggregated selection of "insurance_quote_selection" */
+export type Insurance_Quote_Selection_Aggregate = {
+  __typename?: 'insurance_quote_selection_aggregate';
+  aggregate?: Maybe<Insurance_Quote_Selection_Aggregate_Fields>;
+  nodes: Array<Insurance_Quote_Selection>;
+};
+
+/** aggregate fields of "insurance_quote_selection" */
+export type Insurance_Quote_Selection_Aggregate_Fields = {
+  __typename?: 'insurance_quote_selection_aggregate_fields';
+  avg?: Maybe<Insurance_Quote_Selection_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Insurance_Quote_Selection_Max_Fields>;
+  min?: Maybe<Insurance_Quote_Selection_Min_Fields>;
+  stddev?: Maybe<Insurance_Quote_Selection_Stddev_Fields>;
+  stddev_pop?: Maybe<Insurance_Quote_Selection_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Insurance_Quote_Selection_Stddev_Samp_Fields>;
+  sum?: Maybe<Insurance_Quote_Selection_Sum_Fields>;
+  var_pop?: Maybe<Insurance_Quote_Selection_Var_Pop_Fields>;
+  var_samp?: Maybe<Insurance_Quote_Selection_Var_Samp_Fields>;
+  variance?: Maybe<Insurance_Quote_Selection_Variance_Fields>;
+};
+
+
+/** aggregate fields of "insurance_quote_selection" */
+export type Insurance_Quote_Selection_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Insurance_Quote_Selection_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Insurance_Quote_Selection_Avg_Fields = {
+  __typename?: 'insurance_quote_selection_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+  quote_id?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "insurance_quote_selection". All fields are combined with a logical 'AND'. */
+export type Insurance_Quote_Selection_Bool_Exp = {
+  _and?: Maybe<Array<Insurance_Quote_Selection_Bool_Exp>>;
+  _not?: Maybe<Insurance_Quote_Selection_Bool_Exp>;
+  _or?: Maybe<Array<Insurance_Quote_Selection_Bool_Exp>>;
+  application_id?: Maybe<Uuid_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  insurance_application?: Maybe<Insurance_Application_Bool_Exp>;
+  insurance_policy?: Maybe<Insurance_Policy_Bool_Exp>;
+  insurance_quote?: Maybe<Insurance_Quote_Bool_Exp>;
+  quote_id?: Maybe<Int_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "insurance_quote_selection" */
+export enum Insurance_Quote_Selection_Constraint {
+  /** unique or primary key constraint on columns "application_id" */
+  InsuranceQuoteSelectionApplicationIdKey = 'insurance_quote_selection_application_id_key',
+  /** unique or primary key constraint on columns "id" */
+  InsuranceQuoteSelectionPkey = 'insurance_quote_selection_pkey',
+  /** unique or primary key constraint on columns "quote_id" */
+  InsuranceQuoteSelectionQuoteIdKey = 'insurance_quote_selection_quote_id_key'
+}
+
+/** input type for incrementing numeric columns in table "insurance_quote_selection" */
+export type Insurance_Quote_Selection_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+  quote_id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "insurance_quote_selection" */
+export type Insurance_Quote_Selection_Insert_Input = {
+  application_id?: Maybe<Scalars['uuid']>;
+  id?: Maybe<Scalars['Int']>;
+  insurance_application?: Maybe<Insurance_Application_Obj_Rel_Insert_Input>;
+  insurance_policy?: Maybe<Insurance_Policy_Obj_Rel_Insert_Input>;
+  insurance_quote?: Maybe<Insurance_Quote_Obj_Rel_Insert_Input>;
+  quote_id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate max on columns */
+export type Insurance_Quote_Selection_Max_Fields = {
+  __typename?: 'insurance_quote_selection_max_fields';
+  application_id?: Maybe<Scalars['uuid']>;
+  id?: Maybe<Scalars['Int']>;
+  quote_id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate min on columns */
+export type Insurance_Quote_Selection_Min_Fields = {
+  __typename?: 'insurance_quote_selection_min_fields';
+  application_id?: Maybe<Scalars['uuid']>;
+  id?: Maybe<Scalars['Int']>;
+  quote_id?: Maybe<Scalars['Int']>;
+};
+
+/** response of any mutation on the table "insurance_quote_selection" */
+export type Insurance_Quote_Selection_Mutation_Response = {
+  __typename?: 'insurance_quote_selection_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Insurance_Quote_Selection>;
+};
+
+/** input type for inserting object relation for remote table "insurance_quote_selection" */
+export type Insurance_Quote_Selection_Obj_Rel_Insert_Input = {
+  data: Insurance_Quote_Selection_Insert_Input;
+  /** upsert condition */
+  on_conflict?: Maybe<Insurance_Quote_Selection_On_Conflict>;
+};
+
+/** on_conflict condition type for table "insurance_quote_selection" */
+export type Insurance_Quote_Selection_On_Conflict = {
+  constraint: Insurance_Quote_Selection_Constraint;
+  update_columns?: Array<Insurance_Quote_Selection_Update_Column>;
+  where?: Maybe<Insurance_Quote_Selection_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "insurance_quote_selection". */
+export type Insurance_Quote_Selection_Order_By = {
+  application_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  insurance_application?: Maybe<Insurance_Application_Order_By>;
+  insurance_policy?: Maybe<Insurance_Policy_Order_By>;
+  insurance_quote?: Maybe<Insurance_Quote_Order_By>;
+  quote_id?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: insurance_quote_selection */
+export type Insurance_Quote_Selection_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "insurance_quote_selection" */
+export enum Insurance_Quote_Selection_Select_Column {
+  /** column name */
+  ApplicationId = 'application_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  QuoteId = 'quote_id'
+}
+
+/** input type for updating data in table "insurance_quote_selection" */
+export type Insurance_Quote_Selection_Set_Input = {
+  application_id?: Maybe<Scalars['uuid']>;
+  id?: Maybe<Scalars['Int']>;
+  quote_id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate stddev on columns */
+export type Insurance_Quote_Selection_Stddev_Fields = {
+  __typename?: 'insurance_quote_selection_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+  quote_id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Insurance_Quote_Selection_Stddev_Pop_Fields = {
+  __typename?: 'insurance_quote_selection_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  quote_id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Insurance_Quote_Selection_Stddev_Samp_Fields = {
+  __typename?: 'insurance_quote_selection_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  quote_id?: Maybe<Scalars['Float']>;
+};
+
+/** Streaming cursor of the table "insurance_quote_selection" */
+export type Insurance_Quote_Selection_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Insurance_Quote_Selection_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Insurance_Quote_Selection_Stream_Cursor_Value_Input = {
+  application_id?: Maybe<Scalars['uuid']>;
+  id?: Maybe<Scalars['Int']>;
+  quote_id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate sum on columns */
+export type Insurance_Quote_Selection_Sum_Fields = {
+  __typename?: 'insurance_quote_selection_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+  quote_id?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "insurance_quote_selection" */
+export enum Insurance_Quote_Selection_Update_Column {
+  /** column name */
+  ApplicationId = 'application_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  QuoteId = 'quote_id'
+}
+
+export type Insurance_Quote_Selection_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: Maybe<Insurance_Quote_Selection_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<Insurance_Quote_Selection_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Insurance_Quote_Selection_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Insurance_Quote_Selection_Var_Pop_Fields = {
+  __typename?: 'insurance_quote_selection_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  quote_id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Insurance_Quote_Selection_Var_Samp_Fields = {
+  __typename?: 'insurance_quote_selection_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  quote_id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Insurance_Quote_Selection_Variance_Fields = {
+  __typename?: 'insurance_quote_selection_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+  quote_id?: Maybe<Scalars['Float']>;
+};
+
+/** input type for updating data in table "insurance_quote" */
+export type Insurance_Quote_Set_Input = {
+  base_premium?: Maybe<Scalars['money']>;
+  commission_percentage?: Maybe<Scalars['Int']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  deductible?: Maybe<Scalars['money']>;
+  fees?: Maybe<Scalars['jsonb']>;
+  id?: Maybe<Scalars['bigint']>;
+  insurance_application_id?: Maybe<Scalars['uuid']>;
+  other_deductibles?: Maybe<Scalars['money']>;
+  policy_limit?: Maybe<Scalars['money']>;
+  premium?: Maybe<Scalars['money']>;
+  sub_limits?: Maybe<Scalars['jsonb']>;
+  tax_percentage?: Maybe<Scalars['numeric']>;
+  taxes?: Maybe<Scalars['jsonb']>;
+  total_premium?: Maybe<Scalars['money']>;
+  underwriter_organization_id?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate stddev on columns */
+export type Insurance_Quote_Stddev_Fields = {
+  __typename?: 'insurance_quote_stddev_fields';
+  base_premium?: Maybe<Scalars['Float']>;
+  commission_percentage?: Maybe<Scalars['Float']>;
+  deductible?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  other_deductibles?: Maybe<Scalars['Float']>;
+  policy_limit?: Maybe<Scalars['Float']>;
+  premium?: Maybe<Scalars['Float']>;
+  tax_percentage?: Maybe<Scalars['Float']>;
+  total_premium?: Maybe<Scalars['Float']>;
+  underwriter_organization_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "insurance_quote" */
+export type Insurance_Quote_Stddev_Order_By = {
+  base_premium?: Maybe<Order_By>;
+  commission_percentage?: Maybe<Order_By>;
+  deductible?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  other_deductibles?: Maybe<Order_By>;
+  policy_limit?: Maybe<Order_By>;
+  premium?: Maybe<Order_By>;
+  tax_percentage?: Maybe<Order_By>;
+  total_premium?: Maybe<Order_By>;
+  underwriter_organization_id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Insurance_Quote_Stddev_Pop_Fields = {
+  __typename?: 'insurance_quote_stddev_pop_fields';
+  base_premium?: Maybe<Scalars['Float']>;
+  commission_percentage?: Maybe<Scalars['Float']>;
+  deductible?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  other_deductibles?: Maybe<Scalars['Float']>;
+  policy_limit?: Maybe<Scalars['Float']>;
+  premium?: Maybe<Scalars['Float']>;
+  tax_percentage?: Maybe<Scalars['Float']>;
+  total_premium?: Maybe<Scalars['Float']>;
+  underwriter_organization_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "insurance_quote" */
+export type Insurance_Quote_Stddev_Pop_Order_By = {
+  base_premium?: Maybe<Order_By>;
+  commission_percentage?: Maybe<Order_By>;
+  deductible?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  other_deductibles?: Maybe<Order_By>;
+  policy_limit?: Maybe<Order_By>;
+  premium?: Maybe<Order_By>;
+  tax_percentage?: Maybe<Order_By>;
+  total_premium?: Maybe<Order_By>;
+  underwriter_organization_id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Insurance_Quote_Stddev_Samp_Fields = {
+  __typename?: 'insurance_quote_stddev_samp_fields';
+  base_premium?: Maybe<Scalars['Float']>;
+  commission_percentage?: Maybe<Scalars['Float']>;
+  deductible?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  other_deductibles?: Maybe<Scalars['Float']>;
+  policy_limit?: Maybe<Scalars['Float']>;
+  premium?: Maybe<Scalars['Float']>;
+  tax_percentage?: Maybe<Scalars['Float']>;
+  total_premium?: Maybe<Scalars['Float']>;
+  underwriter_organization_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "insurance_quote" */
+export type Insurance_Quote_Stddev_Samp_Order_By = {
+  base_premium?: Maybe<Order_By>;
+  commission_percentage?: Maybe<Order_By>;
+  deductible?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  other_deductibles?: Maybe<Order_By>;
+  policy_limit?: Maybe<Order_By>;
+  premium?: Maybe<Order_By>;
+  tax_percentage?: Maybe<Order_By>;
+  total_premium?: Maybe<Order_By>;
+  underwriter_organization_id?: Maybe<Order_By>;
+};
+
+/** Streaming cursor of the table "insurance_quote" */
+export type Insurance_Quote_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Insurance_Quote_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Insurance_Quote_Stream_Cursor_Value_Input = {
+  base_premium?: Maybe<Scalars['money']>;
+  commission_percentage?: Maybe<Scalars['Int']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  deductible?: Maybe<Scalars['money']>;
+  fees?: Maybe<Scalars['jsonb']>;
+  id?: Maybe<Scalars['bigint']>;
+  insurance_application_id?: Maybe<Scalars['uuid']>;
+  other_deductibles?: Maybe<Scalars['money']>;
+  policy_limit?: Maybe<Scalars['money']>;
+  premium?: Maybe<Scalars['money']>;
+  sub_limits?: Maybe<Scalars['jsonb']>;
+  tax_percentage?: Maybe<Scalars['numeric']>;
+  taxes?: Maybe<Scalars['jsonb']>;
+  total_premium?: Maybe<Scalars['money']>;
+  underwriter_organization_id?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate sum on columns */
+export type Insurance_Quote_Sum_Fields = {
+  __typename?: 'insurance_quote_sum_fields';
+  base_premium?: Maybe<Scalars['money']>;
+  commission_percentage?: Maybe<Scalars['Int']>;
+  deductible?: Maybe<Scalars['money']>;
+  id?: Maybe<Scalars['bigint']>;
+  other_deductibles?: Maybe<Scalars['money']>;
+  policy_limit?: Maybe<Scalars['money']>;
+  premium?: Maybe<Scalars['money']>;
+  tax_percentage?: Maybe<Scalars['numeric']>;
+  total_premium?: Maybe<Scalars['money']>;
+  underwriter_organization_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "insurance_quote" */
+export type Insurance_Quote_Sum_Order_By = {
+  base_premium?: Maybe<Order_By>;
+  commission_percentage?: Maybe<Order_By>;
+  deductible?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  other_deductibles?: Maybe<Order_By>;
+  policy_limit?: Maybe<Order_By>;
+  premium?: Maybe<Order_By>;
+  tax_percentage?: Maybe<Order_By>;
+  total_premium?: Maybe<Order_By>;
+  underwriter_organization_id?: Maybe<Order_By>;
+};
+
+/** update columns of table "insurance_quote" */
+export enum Insurance_Quote_Update_Column {
+  /** column name */
+  BasePremium = 'base_premium',
+  /** column name */
+  CommissionPercentage = 'commission_percentage',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedByUserId = 'created_by_user_id',
+  /** column name */
+  Deductible = 'deductible',
+  /** column name */
+  Fees = 'fees',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  InsuranceApplicationId = 'insurance_application_id',
+  /** column name */
+  OtherDeductibles = 'other_deductibles',
+  /** column name */
+  PolicyLimit = 'policy_limit',
+  /** column name */
+  Premium = 'premium',
+  /** column name */
+  SubLimits = 'sub_limits',
+  /** column name */
+  TaxPercentage = 'tax_percentage',
+  /** column name */
+  Taxes = 'taxes',
+  /** column name */
+  TotalPremium = 'total_premium',
+  /** column name */
+  UnderwriterOrganizationId = 'underwriter_organization_id',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+export type Insurance_Quote_Updates = {
+  /** append existing jsonb value of filtered columns with new jsonb value */
+  _append?: Maybe<Insurance_Quote_Append_Input>;
+  /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+  _delete_at_path?: Maybe<Insurance_Quote_Delete_At_Path_Input>;
+  /** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+  _delete_elem?: Maybe<Insurance_Quote_Delete_Elem_Input>;
+  /** delete key/value pair or string element. key/value pairs are matched based on their key value */
+  _delete_key?: Maybe<Insurance_Quote_Delete_Key_Input>;
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: Maybe<Insurance_Quote_Inc_Input>;
+  /** prepend existing jsonb value of filtered columns with new jsonb value */
+  _prepend?: Maybe<Insurance_Quote_Prepend_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<Insurance_Quote_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Insurance_Quote_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Insurance_Quote_Var_Pop_Fields = {
+  __typename?: 'insurance_quote_var_pop_fields';
+  base_premium?: Maybe<Scalars['Float']>;
+  commission_percentage?: Maybe<Scalars['Float']>;
+  deductible?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  other_deductibles?: Maybe<Scalars['Float']>;
+  policy_limit?: Maybe<Scalars['Float']>;
+  premium?: Maybe<Scalars['Float']>;
+  tax_percentage?: Maybe<Scalars['Float']>;
+  total_premium?: Maybe<Scalars['Float']>;
+  underwriter_organization_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "insurance_quote" */
+export type Insurance_Quote_Var_Pop_Order_By = {
+  base_premium?: Maybe<Order_By>;
+  commission_percentage?: Maybe<Order_By>;
+  deductible?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  other_deductibles?: Maybe<Order_By>;
+  policy_limit?: Maybe<Order_By>;
+  premium?: Maybe<Order_By>;
+  tax_percentage?: Maybe<Order_By>;
+  total_premium?: Maybe<Order_By>;
+  underwriter_organization_id?: Maybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Insurance_Quote_Var_Samp_Fields = {
+  __typename?: 'insurance_quote_var_samp_fields';
+  base_premium?: Maybe<Scalars['Float']>;
+  commission_percentage?: Maybe<Scalars['Float']>;
+  deductible?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  other_deductibles?: Maybe<Scalars['Float']>;
+  policy_limit?: Maybe<Scalars['Float']>;
+  premium?: Maybe<Scalars['Float']>;
+  tax_percentage?: Maybe<Scalars['Float']>;
+  total_premium?: Maybe<Scalars['Float']>;
+  underwriter_organization_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "insurance_quote" */
+export type Insurance_Quote_Var_Samp_Order_By = {
+  base_premium?: Maybe<Order_By>;
+  commission_percentage?: Maybe<Order_By>;
+  deductible?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  other_deductibles?: Maybe<Order_By>;
+  policy_limit?: Maybe<Order_By>;
+  premium?: Maybe<Order_By>;
+  tax_percentage?: Maybe<Order_By>;
+  total_premium?: Maybe<Order_By>;
+  underwriter_organization_id?: Maybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Insurance_Quote_Variance_Fields = {
+  __typename?: 'insurance_quote_variance_fields';
+  base_premium?: Maybe<Scalars['Float']>;
+  commission_percentage?: Maybe<Scalars['Float']>;
+  deductible?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  other_deductibles?: Maybe<Scalars['Float']>;
+  policy_limit?: Maybe<Scalars['Float']>;
+  premium?: Maybe<Scalars['Float']>;
+  tax_percentage?: Maybe<Scalars['Float']>;
+  total_premium?: Maybe<Scalars['Float']>;
+  underwriter_organization_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "insurance_quote" */
+export type Insurance_Quote_Variance_Order_By = {
+  base_premium?: Maybe<Order_By>;
+  commission_percentage?: Maybe<Order_By>;
+  deductible?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  other_deductibles?: Maybe<Order_By>;
+  policy_limit?: Maybe<Order_By>;
+  premium?: Maybe<Order_By>;
+  tax_percentage?: Maybe<Order_By>;
+  total_premium?: Maybe<Order_By>;
+  underwriter_organization_id?: Maybe<Order_By>;
+};
+
+/** columns and relationships of "insured_organization" */
+export type Insured_Organization = {
+  __typename?: 'insured_organization';
+  address?: Maybe<Scalars['String']>;
+  /** An object relationship */
+  broker_agency?: Maybe<Broker_Agency>;
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  city?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  id: Scalars['Int'];
+  /** An array relationship */
+  insurance_applications: Array<Insurance_Application>;
+  /** An aggregate relationship */
+  insurance_applications_aggregate: Insurance_Application_Aggregate;
+  /** An array relationship */
+  insured_organization_contacts: Array<Insured_Organization_Contact>;
+  /** An aggregate relationship */
+  insured_organization_contacts_aggregate: Insured_Organization_Contact_Aggregate;
+  name?: Maybe<Scalars['String']>;
+  /** An array relationship */
+  organization_domains: Array<Organization_Domains>;
+  /** An aggregate relationship */
+  organization_domains_aggregate: Organization_Domains_Aggregate;
+  state?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  zip?: Maybe<Scalars['String']>;
+};
+
+
+/** columns and relationships of "insured_organization" */
+export type Insured_OrganizationInsurance_ApplicationsArgs = {
+  distinct_on?: Maybe<Array<Insurance_Application_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Application_Order_By>>;
+  where?: Maybe<Insurance_Application_Bool_Exp>;
+};
+
+
+/** columns and relationships of "insured_organization" */
+export type Insured_OrganizationInsurance_Applications_AggregateArgs = {
+  distinct_on?: Maybe<Array<Insurance_Application_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Application_Order_By>>;
+  where?: Maybe<Insurance_Application_Bool_Exp>;
+};
+
+
+/** columns and relationships of "insured_organization" */
+export type Insured_OrganizationInsured_Organization_ContactsArgs = {
+  distinct_on?: Maybe<Array<Insured_Organization_Contact_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insured_Organization_Contact_Order_By>>;
+  where?: Maybe<Insured_Organization_Contact_Bool_Exp>;
+};
+
+
+/** columns and relationships of "insured_organization" */
+export type Insured_OrganizationInsured_Organization_Contacts_AggregateArgs = {
+  distinct_on?: Maybe<Array<Insured_Organization_Contact_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insured_Organization_Contact_Order_By>>;
+  where?: Maybe<Insured_Organization_Contact_Bool_Exp>;
+};
+
+
+/** columns and relationships of "insured_organization" */
+export type Insured_OrganizationOrganization_DomainsArgs = {
+  distinct_on?: Maybe<Array<Organization_Domains_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Organization_Domains_Order_By>>;
+  where?: Maybe<Organization_Domains_Bool_Exp>;
+};
+
+
+/** columns and relationships of "insured_organization" */
+export type Insured_OrganizationOrganization_Domains_AggregateArgs = {
+  distinct_on?: Maybe<Array<Organization_Domains_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Organization_Domains_Order_By>>;
+  where?: Maybe<Organization_Domains_Bool_Exp>;
+};
+
+/** aggregated selection of "insured_organization" */
+export type Insured_Organization_Aggregate = {
+  __typename?: 'insured_organization_aggregate';
+  aggregate?: Maybe<Insured_Organization_Aggregate_Fields>;
+  nodes: Array<Insured_Organization>;
+};
+
+export type Insured_Organization_Aggregate_Bool_Exp = {
+  count?: Maybe<Insured_Organization_Aggregate_Bool_Exp_Count>;
+};
+
+export type Insured_Organization_Aggregate_Bool_Exp_Count = {
+  arguments?: Maybe<Array<Insured_Organization_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+  filter?: Maybe<Insured_Organization_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "insured_organization" */
+export type Insured_Organization_Aggregate_Fields = {
+  __typename?: 'insured_organization_aggregate_fields';
+  avg?: Maybe<Insured_Organization_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Insured_Organization_Max_Fields>;
+  min?: Maybe<Insured_Organization_Min_Fields>;
+  stddev?: Maybe<Insured_Organization_Stddev_Fields>;
+  stddev_pop?: Maybe<Insured_Organization_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Insured_Organization_Stddev_Samp_Fields>;
+  sum?: Maybe<Insured_Organization_Sum_Fields>;
+  var_pop?: Maybe<Insured_Organization_Var_Pop_Fields>;
+  var_samp?: Maybe<Insured_Organization_Var_Samp_Fields>;
+  variance?: Maybe<Insured_Organization_Variance_Fields>;
+};
+
+
+/** aggregate fields of "insured_organization" */
+export type Insured_Organization_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Insured_Organization_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "insured_organization" */
+export type Insured_Organization_Aggregate_Order_By = {
+  avg?: Maybe<Insured_Organization_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Insured_Organization_Max_Order_By>;
+  min?: Maybe<Insured_Organization_Min_Order_By>;
+  stddev?: Maybe<Insured_Organization_Stddev_Order_By>;
+  stddev_pop?: Maybe<Insured_Organization_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Insured_Organization_Stddev_Samp_Order_By>;
+  sum?: Maybe<Insured_Organization_Sum_Order_By>;
+  var_pop?: Maybe<Insured_Organization_Var_Pop_Order_By>;
+  var_samp?: Maybe<Insured_Organization_Var_Samp_Order_By>;
+  variance?: Maybe<Insured_Organization_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "insured_organization" */
+export type Insured_Organization_Arr_Rel_Insert_Input = {
+  data: Array<Insured_Organization_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: Maybe<Insured_Organization_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Insured_Organization_Avg_Fields = {
+  __typename?: 'insured_organization_avg_fields';
+  broker_agency_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "insured_organization" */
+export type Insured_Organization_Avg_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "insured_organization". All fields are combined with a logical 'AND'. */
+export type Insured_Organization_Bool_Exp = {
+  _and?: Maybe<Array<Insured_Organization_Bool_Exp>>;
+  _not?: Maybe<Insured_Organization_Bool_Exp>;
+  _or?: Maybe<Array<Insured_Organization_Bool_Exp>>;
+  address?: Maybe<String_Comparison_Exp>;
+  broker_agency?: Maybe<Broker_Agency_Bool_Exp>;
+  broker_agency_id?: Maybe<Int_Comparison_Exp>;
+  city?: Maybe<String_Comparison_Exp>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  created_by_user_id?: Maybe<String_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  insurance_applications?: Maybe<Insurance_Application_Bool_Exp>;
+  insurance_applications_aggregate?: Maybe<Insurance_Application_Aggregate_Bool_Exp>;
+  insured_organization_contacts?: Maybe<Insured_Organization_Contact_Bool_Exp>;
+  insured_organization_contacts_aggregate?: Maybe<Insured_Organization_Contact_Aggregate_Bool_Exp>;
+  name?: Maybe<String_Comparison_Exp>;
+  organization_domains?: Maybe<Organization_Domains_Bool_Exp>;
+  organization_domains_aggregate?: Maybe<Organization_Domains_Aggregate_Bool_Exp>;
+  state?: Maybe<String_Comparison_Exp>;
+  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+  zip?: Maybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "insured_organization" */
+export enum Insured_Organization_Constraint {
+  /** unique or primary key constraint on columns "broker_agency_id", "name" */
+  InsuredOrganizationNameBrokerAgencyIdKey = 'insured_organization_name_broker_agency_id_key',
+  /** unique or primary key constraint on columns "id" */
+  InsuredOrganizationPkey = 'insured_organization_pkey'
+}
+
+/** columns and relationships of "insured_organization_contact" */
+export type Insured_Organization_Contact = {
+  __typename?: 'insured_organization_contact';
+  designation?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  id: Scalars['Int'];
+  /** An object relationship */
+  insured_organization: Insured_Organization;
+  insured_organization_id: Scalars['Int'];
+  name: Scalars['String'];
+  phone?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+/** aggregated selection of "insured_organization_contact" */
+export type Insured_Organization_Contact_Aggregate = {
+  __typename?: 'insured_organization_contact_aggregate';
+  aggregate?: Maybe<Insured_Organization_Contact_Aggregate_Fields>;
+  nodes: Array<Insured_Organization_Contact>;
+};
+
+export type Insured_Organization_Contact_Aggregate_Bool_Exp = {
+  count?: Maybe<Insured_Organization_Contact_Aggregate_Bool_Exp_Count>;
+};
+
+export type Insured_Organization_Contact_Aggregate_Bool_Exp_Count = {
+  arguments?: Maybe<Array<Insured_Organization_Contact_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+  filter?: Maybe<Insured_Organization_Contact_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "insured_organization_contact" */
+export type Insured_Organization_Contact_Aggregate_Fields = {
+  __typename?: 'insured_organization_contact_aggregate_fields';
+  avg?: Maybe<Insured_Organization_Contact_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Insured_Organization_Contact_Max_Fields>;
+  min?: Maybe<Insured_Organization_Contact_Min_Fields>;
+  stddev?: Maybe<Insured_Organization_Contact_Stddev_Fields>;
+  stddev_pop?: Maybe<Insured_Organization_Contact_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Insured_Organization_Contact_Stddev_Samp_Fields>;
+  sum?: Maybe<Insured_Organization_Contact_Sum_Fields>;
+  var_pop?: Maybe<Insured_Organization_Contact_Var_Pop_Fields>;
+  var_samp?: Maybe<Insured_Organization_Contact_Var_Samp_Fields>;
+  variance?: Maybe<Insured_Organization_Contact_Variance_Fields>;
+};
+
+
+/** aggregate fields of "insured_organization_contact" */
+export type Insured_Organization_Contact_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Insured_Organization_Contact_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "insured_organization_contact" */
+export type Insured_Organization_Contact_Aggregate_Order_By = {
+  avg?: Maybe<Insured_Organization_Contact_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Insured_Organization_Contact_Max_Order_By>;
+  min?: Maybe<Insured_Organization_Contact_Min_Order_By>;
+  stddev?: Maybe<Insured_Organization_Contact_Stddev_Order_By>;
+  stddev_pop?: Maybe<Insured_Organization_Contact_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Insured_Organization_Contact_Stddev_Samp_Order_By>;
+  sum?: Maybe<Insured_Organization_Contact_Sum_Order_By>;
+  var_pop?: Maybe<Insured_Organization_Contact_Var_Pop_Order_By>;
+  var_samp?: Maybe<Insured_Organization_Contact_Var_Samp_Order_By>;
+  variance?: Maybe<Insured_Organization_Contact_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "insured_organization_contact" */
+export type Insured_Organization_Contact_Arr_Rel_Insert_Input = {
+  data: Array<Insured_Organization_Contact_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: Maybe<Insured_Organization_Contact_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Insured_Organization_Contact_Avg_Fields = {
+  __typename?: 'insured_organization_contact_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+  insured_organization_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "insured_organization_contact" */
+export type Insured_Organization_Contact_Avg_Order_By = {
+  id?: Maybe<Order_By>;
+  insured_organization_id?: Maybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "insured_organization_contact". All fields are combined with a logical 'AND'. */
+export type Insured_Organization_Contact_Bool_Exp = {
+  _and?: Maybe<Array<Insured_Organization_Contact_Bool_Exp>>;
+  _not?: Maybe<Insured_Organization_Contact_Bool_Exp>;
+  _or?: Maybe<Array<Insured_Organization_Contact_Bool_Exp>>;
+  designation?: Maybe<String_Comparison_Exp>;
+  email?: Maybe<String_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  insured_organization?: Maybe<Insured_Organization_Bool_Exp>;
+  insured_organization_id?: Maybe<Int_Comparison_Exp>;
+  name?: Maybe<String_Comparison_Exp>;
+  phone?: Maybe<String_Comparison_Exp>;
+  type?: Maybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "insured_organization_contact" */
+export enum Insured_Organization_Contact_Constraint {
+  /** unique or primary key constraint on columns "email", "type", "insured_organization_id" */
+  InsuredOrganizationContactInsuredOrganizationIdEmailType = 'insured_organization_contact_insured_organization_id_email_type',
+  /** unique or primary key constraint on columns "id" */
+  InsuredOrganizationContactPkey = 'insured_organization_contact_pkey'
+}
+
+/** input type for incrementing numeric columns in table "insured_organization_contact" */
+export type Insured_Organization_Contact_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+  insured_organization_id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "insured_organization_contact" */
+export type Insured_Organization_Contact_Insert_Input = {
+  designation?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  insured_organization?: Maybe<Insured_Organization_Obj_Rel_Insert_Input>;
+  insured_organization_id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Insured_Organization_Contact_Max_Fields = {
+  __typename?: 'insured_organization_contact_max_fields';
+  designation?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  insured_organization_id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+/** order by max() on columns of table "insured_organization_contact" */
+export type Insured_Organization_Contact_Max_Order_By = {
+  designation?: Maybe<Order_By>;
+  email?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  insured_organization_id?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
+  phone?: Maybe<Order_By>;
+  type?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Insured_Organization_Contact_Min_Fields = {
+  __typename?: 'insured_organization_contact_min_fields';
+  designation?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  insured_organization_id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+/** order by min() on columns of table "insured_organization_contact" */
+export type Insured_Organization_Contact_Min_Order_By = {
+  designation?: Maybe<Order_By>;
+  email?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  insured_organization_id?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
+  phone?: Maybe<Order_By>;
+  type?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "insured_organization_contact" */
+export type Insured_Organization_Contact_Mutation_Response = {
+  __typename?: 'insured_organization_contact_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Insured_Organization_Contact>;
+};
+
+/** on_conflict condition type for table "insured_organization_contact" */
+export type Insured_Organization_Contact_On_Conflict = {
+  constraint: Insured_Organization_Contact_Constraint;
+  update_columns?: Array<Insured_Organization_Contact_Update_Column>;
+  where?: Maybe<Insured_Organization_Contact_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "insured_organization_contact". */
+export type Insured_Organization_Contact_Order_By = {
+  designation?: Maybe<Order_By>;
+  email?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  insured_organization?: Maybe<Insured_Organization_Order_By>;
+  insured_organization_id?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
+  phone?: Maybe<Order_By>;
+  type?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: insured_organization_contact */
+export type Insured_Organization_Contact_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "insured_organization_contact" */
+export enum Insured_Organization_Contact_Select_Column {
+  /** column name */
+  Designation = 'designation',
+  /** column name */
+  Email = 'email',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  InsuredOrganizationId = 'insured_organization_id',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  Phone = 'phone',
+  /** column name */
+  Type = 'type'
+}
+
+/** input type for updating data in table "insured_organization_contact" */
+export type Insured_Organization_Contact_Set_Input = {
+  designation?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  insured_organization_id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+/** aggregate stddev on columns */
+export type Insured_Organization_Contact_Stddev_Fields = {
+  __typename?: 'insured_organization_contact_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+  insured_organization_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "insured_organization_contact" */
+export type Insured_Organization_Contact_Stddev_Order_By = {
+  id?: Maybe<Order_By>;
+  insured_organization_id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Insured_Organization_Contact_Stddev_Pop_Fields = {
+  __typename?: 'insured_organization_contact_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  insured_organization_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "insured_organization_contact" */
+export type Insured_Organization_Contact_Stddev_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+  insured_organization_id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Insured_Organization_Contact_Stddev_Samp_Fields = {
+  __typename?: 'insured_organization_contact_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  insured_organization_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "insured_organization_contact" */
+export type Insured_Organization_Contact_Stddev_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+  insured_organization_id?: Maybe<Order_By>;
+};
+
+/** Streaming cursor of the table "insured_organization_contact" */
+export type Insured_Organization_Contact_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Insured_Organization_Contact_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Insured_Organization_Contact_Stream_Cursor_Value_Input = {
+  designation?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  insured_organization_id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+/** aggregate sum on columns */
+export type Insured_Organization_Contact_Sum_Fields = {
+  __typename?: 'insured_organization_contact_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+  insured_organization_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "insured_organization_contact" */
+export type Insured_Organization_Contact_Sum_Order_By = {
+  id?: Maybe<Order_By>;
+  insured_organization_id?: Maybe<Order_By>;
+};
+
+/** update columns of table "insured_organization_contact" */
+export enum Insured_Organization_Contact_Update_Column {
+  /** column name */
+  Designation = 'designation',
+  /** column name */
+  Email = 'email',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  InsuredOrganizationId = 'insured_organization_id',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  Phone = 'phone',
+  /** column name */
+  Type = 'type'
+}
+
+export type Insured_Organization_Contact_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: Maybe<Insured_Organization_Contact_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<Insured_Organization_Contact_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Insured_Organization_Contact_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Insured_Organization_Contact_Var_Pop_Fields = {
+  __typename?: 'insured_organization_contact_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  insured_organization_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "insured_organization_contact" */
+export type Insured_Organization_Contact_Var_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+  insured_organization_id?: Maybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Insured_Organization_Contact_Var_Samp_Fields = {
+  __typename?: 'insured_organization_contact_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  insured_organization_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "insured_organization_contact" */
+export type Insured_Organization_Contact_Var_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+  insured_organization_id?: Maybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Insured_Organization_Contact_Variance_Fields = {
+  __typename?: 'insured_organization_contact_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+  insured_organization_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "insured_organization_contact" */
+export type Insured_Organization_Contact_Variance_Order_By = {
+  id?: Maybe<Order_By>;
+  insured_organization_id?: Maybe<Order_By>;
+};
+
+/** input type for incrementing numeric columns in table "insured_organization" */
+export type Insured_Organization_Inc_Input = {
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "insured_organization" */
+export type Insured_Organization_Insert_Input = {
+  address?: Maybe<Scalars['String']>;
+  broker_agency?: Maybe<Broker_Agency_Obj_Rel_Insert_Input>;
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  city?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  insurance_applications?: Maybe<Insurance_Application_Arr_Rel_Insert_Input>;
+  insured_organization_contacts?: Maybe<Insured_Organization_Contact_Arr_Rel_Insert_Input>;
+  name?: Maybe<Scalars['String']>;
+  organization_domains?: Maybe<Organization_Domains_Arr_Rel_Insert_Input>;
+  state?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  zip?: Maybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Insured_Organization_Max_Fields = {
+  __typename?: 'insured_organization_max_fields';
+  address?: Maybe<Scalars['String']>;
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  city?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  state?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  zip?: Maybe<Scalars['String']>;
+};
+
+/** order by max() on columns of table "insured_organization" */
+export type Insured_Organization_Max_Order_By = {
+  address?: Maybe<Order_By>;
+  broker_agency_id?: Maybe<Order_By>;
+  city?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  created_by_user_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
+  state?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+  zip?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Insured_Organization_Min_Fields = {
+  __typename?: 'insured_organization_min_fields';
+  address?: Maybe<Scalars['String']>;
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  city?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  state?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  zip?: Maybe<Scalars['String']>;
+};
+
+/** order by min() on columns of table "insured_organization" */
+export type Insured_Organization_Min_Order_By = {
+  address?: Maybe<Order_By>;
+  broker_agency_id?: Maybe<Order_By>;
+  city?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  created_by_user_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
+  state?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+  zip?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "insured_organization" */
+export type Insured_Organization_Mutation_Response = {
+  __typename?: 'insured_organization_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Insured_Organization>;
+};
+
+/** input type for inserting object relation for remote table "insured_organization" */
+export type Insured_Organization_Obj_Rel_Insert_Input = {
+  data: Insured_Organization_Insert_Input;
+  /** upsert condition */
+  on_conflict?: Maybe<Insured_Organization_On_Conflict>;
+};
+
+/** on_conflict condition type for table "insured_organization" */
+export type Insured_Organization_On_Conflict = {
+  constraint: Insured_Organization_Constraint;
+  update_columns?: Array<Insured_Organization_Update_Column>;
+  where?: Maybe<Insured_Organization_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "insured_organization". */
+export type Insured_Organization_Order_By = {
+  address?: Maybe<Order_By>;
+  broker_agency?: Maybe<Broker_Agency_Order_By>;
+  broker_agency_id?: Maybe<Order_By>;
+  city?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  created_by_user_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  insurance_applications_aggregate?: Maybe<Insurance_Application_Aggregate_Order_By>;
+  insured_organization_contacts_aggregate?: Maybe<Insured_Organization_Contact_Aggregate_Order_By>;
+  name?: Maybe<Order_By>;
+  organization_domains_aggregate?: Maybe<Organization_Domains_Aggregate_Order_By>;
+  state?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+  zip?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: insured_organization */
+export type Insured_Organization_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "insured_organization" */
+export enum Insured_Organization_Select_Column {
+  /** column name */
+  Address = 'address',
+  /** column name */
+  BrokerAgencyId = 'broker_agency_id',
+  /** column name */
+  City = 'city',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedByUserId = 'created_by_user_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  State = 'state',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  Zip = 'zip'
+}
+
+/** input type for updating data in table "insured_organization" */
+export type Insured_Organization_Set_Input = {
+  address?: Maybe<Scalars['String']>;
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  city?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  state?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  zip?: Maybe<Scalars['String']>;
+};
+
+/** aggregate stddev on columns */
+export type Insured_Organization_Stddev_Fields = {
+  __typename?: 'insured_organization_stddev_fields';
+  broker_agency_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "insured_organization" */
+export type Insured_Organization_Stddev_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Insured_Organization_Stddev_Pop_Fields = {
+  __typename?: 'insured_organization_stddev_pop_fields';
+  broker_agency_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "insured_organization" */
+export type Insured_Organization_Stddev_Pop_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Insured_Organization_Stddev_Samp_Fields = {
+  __typename?: 'insured_organization_stddev_samp_fields';
+  broker_agency_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "insured_organization" */
+export type Insured_Organization_Stddev_Samp_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+};
+
+/** Streaming cursor of the table "insured_organization" */
+export type Insured_Organization_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Insured_Organization_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Insured_Organization_Stream_Cursor_Value_Input = {
+  address?: Maybe<Scalars['String']>;
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  city?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  state?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  zip?: Maybe<Scalars['String']>;
+};
+
+/** aggregate sum on columns */
+export type Insured_Organization_Sum_Fields = {
+  __typename?: 'insured_organization_sum_fields';
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "insured_organization" */
+export type Insured_Organization_Sum_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+};
+
+/** update columns of table "insured_organization" */
+export enum Insured_Organization_Update_Column {
+  /** column name */
+  Address = 'address',
+  /** column name */
+  BrokerAgencyId = 'broker_agency_id',
+  /** column name */
+  City = 'city',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedByUserId = 'created_by_user_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  State = 'state',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  Zip = 'zip'
+}
+
+export type Insured_Organization_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: Maybe<Insured_Organization_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<Insured_Organization_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Insured_Organization_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Insured_Organization_Var_Pop_Fields = {
+  __typename?: 'insured_organization_var_pop_fields';
+  broker_agency_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "insured_organization" */
+export type Insured_Organization_Var_Pop_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Insured_Organization_Var_Samp_Fields = {
+  __typename?: 'insured_organization_var_samp_fields';
+  broker_agency_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "insured_organization" */
+export type Insured_Organization_Var_Samp_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Insured_Organization_Variance_Fields = {
+  __typename?: 'insured_organization_variance_fields';
+  broker_agency_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "insured_organization" */
+export type Insured_Organization_Variance_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+};
+
+export type Jsonb_Cast_Exp = {
+  String?: Maybe<String_Comparison_Exp>;
+};
+
+/** Boolean expression to compare columns of type "jsonb". All fields are combined with logical 'AND'. */
+export type Jsonb_Comparison_Exp = {
+  _cast?: Maybe<Jsonb_Cast_Exp>;
+  /** is the column contained in the given json value */
+  _contained_in?: Maybe<Scalars['jsonb']>;
+  /** does the column contain the given json value at the top level */
+  _contains?: Maybe<Scalars['jsonb']>;
+  _eq?: Maybe<Scalars['jsonb']>;
+  _gt?: Maybe<Scalars['jsonb']>;
+  _gte?: Maybe<Scalars['jsonb']>;
+  /** does the string exist as a top-level key in the column */
+  _has_key?: Maybe<Scalars['String']>;
+  /** do all of these strings exist as top-level keys in the column */
+  _has_keys_all?: Maybe<Array<Scalars['String']>>;
+  /** do any of these strings exist as top-level keys in the column */
+  _has_keys_any?: Maybe<Array<Scalars['String']>>;
+  _in?: Maybe<Array<Scalars['jsonb']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['jsonb']>;
+  _lte?: Maybe<Scalars['jsonb']>;
+  _neq?: Maybe<Scalars['jsonb']>;
+  _nin?: Maybe<Array<Scalars['jsonb']>>;
+};
+
+/** columns and relationships of "latest_app_artifacts_quote_policy" */
+export type Latest_App_Artifacts_Quote_Policy = {
+  __typename?: 'latest_app_artifacts_quote_policy';
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  file_type?: Maybe<Scalars['String']>;
+  file_uri?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  /** An object relationship */
+  insurance_application?: Maybe<Insurance_Application>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregated selection of "latest_app_artifacts_quote_policy" */
+export type Latest_App_Artifacts_Quote_Policy_Aggregate = {
+  __typename?: 'latest_app_artifacts_quote_policy_aggregate';
+  aggregate?: Maybe<Latest_App_Artifacts_Quote_Policy_Aggregate_Fields>;
+  nodes: Array<Latest_App_Artifacts_Quote_Policy>;
+};
+
+/** aggregate fields of "latest_app_artifacts_quote_policy" */
+export type Latest_App_Artifacts_Quote_Policy_Aggregate_Fields = {
+  __typename?: 'latest_app_artifacts_quote_policy_aggregate_fields';
+  avg?: Maybe<Latest_App_Artifacts_Quote_Policy_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Latest_App_Artifacts_Quote_Policy_Max_Fields>;
+  min?: Maybe<Latest_App_Artifacts_Quote_Policy_Min_Fields>;
+  stddev?: Maybe<Latest_App_Artifacts_Quote_Policy_Stddev_Fields>;
+  stddev_pop?: Maybe<Latest_App_Artifacts_Quote_Policy_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Latest_App_Artifacts_Quote_Policy_Stddev_Samp_Fields>;
+  sum?: Maybe<Latest_App_Artifacts_Quote_Policy_Sum_Fields>;
+  var_pop?: Maybe<Latest_App_Artifacts_Quote_Policy_Var_Pop_Fields>;
+  var_samp?: Maybe<Latest_App_Artifacts_Quote_Policy_Var_Samp_Fields>;
+  variance?: Maybe<Latest_App_Artifacts_Quote_Policy_Variance_Fields>;
+};
+
+
+/** aggregate fields of "latest_app_artifacts_quote_policy" */
+export type Latest_App_Artifacts_Quote_Policy_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Latest_App_Artifacts_Quote_Policy_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Latest_App_Artifacts_Quote_Policy_Avg_Fields = {
+  __typename?: 'latest_app_artifacts_quote_policy_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "latest_app_artifacts_quote_policy". All fields are combined with a logical 'AND'. */
+export type Latest_App_Artifacts_Quote_Policy_Bool_Exp = {
+  _and?: Maybe<Array<Latest_App_Artifacts_Quote_Policy_Bool_Exp>>;
+  _not?: Maybe<Latest_App_Artifacts_Quote_Policy_Bool_Exp>;
+  _or?: Maybe<Array<Latest_App_Artifacts_Quote_Policy_Bool_Exp>>;
+  application_id?: Maybe<Uuid_Comparison_Exp>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  file_type?: Maybe<String_Comparison_Exp>;
+  file_uri?: Maybe<String_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  insurance_application?: Maybe<Insurance_Application_Bool_Exp>;
+  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+};
+
+/** aggregate max on columns */
+export type Latest_App_Artifacts_Quote_Policy_Max_Fields = {
+  __typename?: 'latest_app_artifacts_quote_policy_max_fields';
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  file_type?: Maybe<Scalars['String']>;
+  file_uri?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate min on columns */
+export type Latest_App_Artifacts_Quote_Policy_Min_Fields = {
+  __typename?: 'latest_app_artifacts_quote_policy_min_fields';
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  file_type?: Maybe<Scalars['String']>;
+  file_uri?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** Ordering options when selecting data from "latest_app_artifacts_quote_policy". */
+export type Latest_App_Artifacts_Quote_Policy_Order_By = {
+  application_id?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  file_type?: Maybe<Order_By>;
+  file_uri?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  insurance_application?: Maybe<Insurance_Application_Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** select columns of table "latest_app_artifacts_quote_policy" */
+export enum Latest_App_Artifacts_Quote_Policy_Select_Column {
+  /** column name */
+  ApplicationId = 'application_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  FileType = 'file_type',
+  /** column name */
+  FileUri = 'file_uri',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** aggregate stddev on columns */
+export type Latest_App_Artifacts_Quote_Policy_Stddev_Fields = {
+  __typename?: 'latest_app_artifacts_quote_policy_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Latest_App_Artifacts_Quote_Policy_Stddev_Pop_Fields = {
+  __typename?: 'latest_app_artifacts_quote_policy_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Latest_App_Artifacts_Quote_Policy_Stddev_Samp_Fields = {
+  __typename?: 'latest_app_artifacts_quote_policy_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Streaming cursor of the table "latest_app_artifacts_quote_policy" */
+export type Latest_App_Artifacts_Quote_Policy_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Latest_App_Artifacts_Quote_Policy_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Latest_App_Artifacts_Quote_Policy_Stream_Cursor_Value_Input = {
+  application_id?: Maybe<Scalars['uuid']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  file_type?: Maybe<Scalars['String']>;
+  file_uri?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate sum on columns */
+export type Latest_App_Artifacts_Quote_Policy_Sum_Fields = {
+  __typename?: 'latest_app_artifacts_quote_policy_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate var_pop on columns */
+export type Latest_App_Artifacts_Quote_Policy_Var_Pop_Fields = {
+  __typename?: 'latest_app_artifacts_quote_policy_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Latest_App_Artifacts_Quote_Policy_Var_Samp_Fields = {
+  __typename?: 'latest_app_artifacts_quote_policy_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Latest_App_Artifacts_Quote_Policy_Variance_Fields = {
+  __typename?: 'latest_app_artifacts_quote_policy_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** columns and relationships of "latest_insurance_applications" */
+export type Latest_Insurance_Applications = {
+  __typename?: 'latest_insurance_applications';
+  /** An object relationship */
+  broker_agency?: Maybe<Broker_Agency>;
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  domain?: Maybe<Scalars['String']>;
+  effective_date?: Maybe<Scalars['date']>;
+  employees?: Maybe<Scalars['Int']>;
+  expiration_date?: Maybe<Scalars['date']>;
+  /** An array relationship */
+  external_scans: Array<External_Scan>;
+  /** An aggregate relationship */
+  external_scans_aggregate: External_Scan_Aggregate;
+  id?: Maybe<Scalars['uuid']>;
+  idx?: Maybe<Scalars['Int']>;
+  industry?: Maybe<Scalars['String']>;
+  /** An object relationship */
+  insurance_quote_selection?: Maybe<Insurance_Quote_Selection>;
+  /** An array relationship */
+  insurance_quotes: Array<Insurance_Quote>;
+  /** An aggregate relationship */
+  insurance_quotes_aggregate: Insurance_Quote_Aggregate;
+  /** An object relationship */
+  insured_organization?: Maybe<Insured_Organization>;
+  insured_organization_id?: Maybe<Scalars['Int']>;
+  naics_code?: Maybe<Scalars['String']>;
+  revenue?: Maybe<Scalars['money']>;
+  stage?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+
+/** columns and relationships of "latest_insurance_applications" */
+export type Latest_Insurance_ApplicationsExternal_ScansArgs = {
+  distinct_on?: Maybe<Array<External_Scan_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<External_Scan_Order_By>>;
+  where?: Maybe<External_Scan_Bool_Exp>;
+};
+
+
+/** columns and relationships of "latest_insurance_applications" */
+export type Latest_Insurance_ApplicationsExternal_Scans_AggregateArgs = {
+  distinct_on?: Maybe<Array<External_Scan_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<External_Scan_Order_By>>;
+  where?: Maybe<External_Scan_Bool_Exp>;
+};
+
+
+/** columns and relationships of "latest_insurance_applications" */
+export type Latest_Insurance_ApplicationsInsurance_QuotesArgs = {
+  distinct_on?: Maybe<Array<Insurance_Quote_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Quote_Order_By>>;
+  where?: Maybe<Insurance_Quote_Bool_Exp>;
+};
+
+
+/** columns and relationships of "latest_insurance_applications" */
+export type Latest_Insurance_ApplicationsInsurance_Quotes_AggregateArgs = {
+  distinct_on?: Maybe<Array<Insurance_Quote_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Quote_Order_By>>;
+  where?: Maybe<Insurance_Quote_Bool_Exp>;
+};
+
+/** aggregated selection of "latest_insurance_applications" */
+export type Latest_Insurance_Applications_Aggregate = {
+  __typename?: 'latest_insurance_applications_aggregate';
+  aggregate?: Maybe<Latest_Insurance_Applications_Aggregate_Fields>;
+  nodes: Array<Latest_Insurance_Applications>;
+};
+
+/** aggregate fields of "latest_insurance_applications" */
+export type Latest_Insurance_Applications_Aggregate_Fields = {
+  __typename?: 'latest_insurance_applications_aggregate_fields';
+  avg?: Maybe<Latest_Insurance_Applications_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Latest_Insurance_Applications_Max_Fields>;
+  min?: Maybe<Latest_Insurance_Applications_Min_Fields>;
+  stddev?: Maybe<Latest_Insurance_Applications_Stddev_Fields>;
+  stddev_pop?: Maybe<Latest_Insurance_Applications_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Latest_Insurance_Applications_Stddev_Samp_Fields>;
+  sum?: Maybe<Latest_Insurance_Applications_Sum_Fields>;
+  var_pop?: Maybe<Latest_Insurance_Applications_Var_Pop_Fields>;
+  var_samp?: Maybe<Latest_Insurance_Applications_Var_Samp_Fields>;
+  variance?: Maybe<Latest_Insurance_Applications_Variance_Fields>;
+};
+
+
+/** aggregate fields of "latest_insurance_applications" */
+export type Latest_Insurance_Applications_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Latest_Insurance_Applications_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Latest_Insurance_Applications_Avg_Fields = {
+  __typename?: 'latest_insurance_applications_avg_fields';
+  broker_agency_id?: Maybe<Scalars['Float']>;
+  employees?: Maybe<Scalars['Float']>;
+  idx?: Maybe<Scalars['Float']>;
+  insured_organization_id?: Maybe<Scalars['Float']>;
+  revenue?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "latest_insurance_applications". All fields are combined with a logical 'AND'. */
+export type Latest_Insurance_Applications_Bool_Exp = {
+  _and?: Maybe<Array<Latest_Insurance_Applications_Bool_Exp>>;
+  _not?: Maybe<Latest_Insurance_Applications_Bool_Exp>;
+  _or?: Maybe<Array<Latest_Insurance_Applications_Bool_Exp>>;
+  broker_agency?: Maybe<Broker_Agency_Bool_Exp>;
+  broker_agency_id?: Maybe<Int_Comparison_Exp>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  created_by_user_id?: Maybe<String_Comparison_Exp>;
+  domain?: Maybe<String_Comparison_Exp>;
+  effective_date?: Maybe<Date_Comparison_Exp>;
+  employees?: Maybe<Int_Comparison_Exp>;
+  expiration_date?: Maybe<Date_Comparison_Exp>;
+  external_scans?: Maybe<External_Scan_Bool_Exp>;
+  external_scans_aggregate?: Maybe<External_Scan_Aggregate_Bool_Exp>;
+  id?: Maybe<Uuid_Comparison_Exp>;
+  idx?: Maybe<Int_Comparison_Exp>;
+  industry?: Maybe<String_Comparison_Exp>;
+  insurance_quote_selection?: Maybe<Insurance_Quote_Selection_Bool_Exp>;
+  insurance_quotes?: Maybe<Insurance_Quote_Bool_Exp>;
+  insurance_quotes_aggregate?: Maybe<Insurance_Quote_Aggregate_Bool_Exp>;
+  insured_organization?: Maybe<Insured_Organization_Bool_Exp>;
+  insured_organization_id?: Maybe<Int_Comparison_Exp>;
+  naics_code?: Maybe<String_Comparison_Exp>;
+  revenue?: Maybe<Money_Comparison_Exp>;
+  stage?: Maybe<String_Comparison_Exp>;
+  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+};
+
+/** aggregate max on columns */
+export type Latest_Insurance_Applications_Max_Fields = {
+  __typename?: 'latest_insurance_applications_max_fields';
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  domain?: Maybe<Scalars['String']>;
+  effective_date?: Maybe<Scalars['date']>;
+  employees?: Maybe<Scalars['Int']>;
+  expiration_date?: Maybe<Scalars['date']>;
+  id?: Maybe<Scalars['uuid']>;
+  idx?: Maybe<Scalars['Int']>;
+  industry?: Maybe<Scalars['String']>;
+  insured_organization_id?: Maybe<Scalars['Int']>;
+  naics_code?: Maybe<Scalars['String']>;
+  revenue?: Maybe<Scalars['money']>;
+  stage?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate min on columns */
+export type Latest_Insurance_Applications_Min_Fields = {
+  __typename?: 'latest_insurance_applications_min_fields';
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  domain?: Maybe<Scalars['String']>;
+  effective_date?: Maybe<Scalars['date']>;
+  employees?: Maybe<Scalars['Int']>;
+  expiration_date?: Maybe<Scalars['date']>;
+  id?: Maybe<Scalars['uuid']>;
+  idx?: Maybe<Scalars['Int']>;
+  industry?: Maybe<Scalars['String']>;
+  insured_organization_id?: Maybe<Scalars['Int']>;
+  naics_code?: Maybe<Scalars['String']>;
+  revenue?: Maybe<Scalars['money']>;
+  stage?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** Ordering options when selecting data from "latest_insurance_applications". */
+export type Latest_Insurance_Applications_Order_By = {
+  broker_agency?: Maybe<Broker_Agency_Order_By>;
+  broker_agency_id?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  created_by_user_id?: Maybe<Order_By>;
+  domain?: Maybe<Order_By>;
+  effective_date?: Maybe<Order_By>;
+  employees?: Maybe<Order_By>;
+  expiration_date?: Maybe<Order_By>;
+  external_scans_aggregate?: Maybe<External_Scan_Aggregate_Order_By>;
+  id?: Maybe<Order_By>;
+  idx?: Maybe<Order_By>;
+  industry?: Maybe<Order_By>;
+  insurance_quote_selection?: Maybe<Insurance_Quote_Selection_Order_By>;
+  insurance_quotes_aggregate?: Maybe<Insurance_Quote_Aggregate_Order_By>;
+  insured_organization?: Maybe<Insured_Organization_Order_By>;
+  insured_organization_id?: Maybe<Order_By>;
+  naics_code?: Maybe<Order_By>;
+  revenue?: Maybe<Order_By>;
+  stage?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** select columns of table "latest_insurance_applications" */
+export enum Latest_Insurance_Applications_Select_Column {
+  /** column name */
+  BrokerAgencyId = 'broker_agency_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedByUserId = 'created_by_user_id',
+  /** column name */
+  Domain = 'domain',
+  /** column name */
+  EffectiveDate = 'effective_date',
+  /** column name */
+  Employees = 'employees',
+  /** column name */
+  ExpirationDate = 'expiration_date',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Idx = 'idx',
+  /** column name */
+  Industry = 'industry',
+  /** column name */
+  InsuredOrganizationId = 'insured_organization_id',
+  /** column name */
+  NaicsCode = 'naics_code',
+  /** column name */
+  Revenue = 'revenue',
+  /** column name */
+  Stage = 'stage',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** aggregate stddev on columns */
+export type Latest_Insurance_Applications_Stddev_Fields = {
+  __typename?: 'latest_insurance_applications_stddev_fields';
+  broker_agency_id?: Maybe<Scalars['Float']>;
+  employees?: Maybe<Scalars['Float']>;
+  idx?: Maybe<Scalars['Float']>;
+  insured_organization_id?: Maybe<Scalars['Float']>;
+  revenue?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Latest_Insurance_Applications_Stddev_Pop_Fields = {
+  __typename?: 'latest_insurance_applications_stddev_pop_fields';
+  broker_agency_id?: Maybe<Scalars['Float']>;
+  employees?: Maybe<Scalars['Float']>;
+  idx?: Maybe<Scalars['Float']>;
+  insured_organization_id?: Maybe<Scalars['Float']>;
+  revenue?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Latest_Insurance_Applications_Stddev_Samp_Fields = {
+  __typename?: 'latest_insurance_applications_stddev_samp_fields';
+  broker_agency_id?: Maybe<Scalars['Float']>;
+  employees?: Maybe<Scalars['Float']>;
+  idx?: Maybe<Scalars['Float']>;
+  insured_organization_id?: Maybe<Scalars['Float']>;
+  revenue?: Maybe<Scalars['Float']>;
+};
+
+/** Streaming cursor of the table "latest_insurance_applications" */
+export type Latest_Insurance_Applications_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Latest_Insurance_Applications_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Latest_Insurance_Applications_Stream_Cursor_Value_Input = {
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by_user_id?: Maybe<Scalars['String']>;
+  domain?: Maybe<Scalars['String']>;
+  effective_date?: Maybe<Scalars['date']>;
+  employees?: Maybe<Scalars['Int']>;
+  expiration_date?: Maybe<Scalars['date']>;
+  id?: Maybe<Scalars['uuid']>;
+  idx?: Maybe<Scalars['Int']>;
+  industry?: Maybe<Scalars['String']>;
+  insured_organization_id?: Maybe<Scalars['Int']>;
+  naics_code?: Maybe<Scalars['String']>;
+  revenue?: Maybe<Scalars['money']>;
+  stage?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate sum on columns */
+export type Latest_Insurance_Applications_Sum_Fields = {
+  __typename?: 'latest_insurance_applications_sum_fields';
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  employees?: Maybe<Scalars['Int']>;
+  idx?: Maybe<Scalars['Int']>;
+  insured_organization_id?: Maybe<Scalars['Int']>;
+  revenue?: Maybe<Scalars['money']>;
+};
+
+/** aggregate var_pop on columns */
+export type Latest_Insurance_Applications_Var_Pop_Fields = {
+  __typename?: 'latest_insurance_applications_var_pop_fields';
+  broker_agency_id?: Maybe<Scalars['Float']>;
+  employees?: Maybe<Scalars['Float']>;
+  idx?: Maybe<Scalars['Float']>;
+  insured_organization_id?: Maybe<Scalars['Float']>;
+  revenue?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Latest_Insurance_Applications_Var_Samp_Fields = {
+  __typename?: 'latest_insurance_applications_var_samp_fields';
+  broker_agency_id?: Maybe<Scalars['Float']>;
+  employees?: Maybe<Scalars['Float']>;
+  idx?: Maybe<Scalars['Float']>;
+  insured_organization_id?: Maybe<Scalars['Float']>;
+  revenue?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Latest_Insurance_Applications_Variance_Fields = {
+  __typename?: 'latest_insurance_applications_variance_fields';
+  broker_agency_id?: Maybe<Scalars['Float']>;
+  employees?: Maybe<Scalars['Float']>;
+  idx?: Maybe<Scalars['Float']>;
+  insured_organization_id?: Maybe<Scalars['Float']>;
+  revenue?: Maybe<Scalars['Float']>;
+};
+
+/** columns and relationships of "me" */
+export type Me = {
+  __typename?: 'me';
+  auth0_id?: Maybe<Scalars['String']>;
+  /** An object relationship */
+  broker_producer?: Maybe<Broker_Producer>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  /** An object relationship */
+  tenant_admin?: Maybe<Tenant_Admin>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregated selection of "me" */
+export type Me_Aggregate = {
+  __typename?: 'me_aggregate';
+  aggregate?: Maybe<Me_Aggregate_Fields>;
+  nodes: Array<Me>;
+};
+
+/** aggregate fields of "me" */
+export type Me_Aggregate_Fields = {
+  __typename?: 'me_aggregate_fields';
+  avg?: Maybe<Me_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Me_Max_Fields>;
+  min?: Maybe<Me_Min_Fields>;
+  stddev?: Maybe<Me_Stddev_Fields>;
+  stddev_pop?: Maybe<Me_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Me_Stddev_Samp_Fields>;
+  sum?: Maybe<Me_Sum_Fields>;
+  var_pop?: Maybe<Me_Var_Pop_Fields>;
+  var_samp?: Maybe<Me_Var_Samp_Fields>;
+  variance?: Maybe<Me_Variance_Fields>;
+};
+
+
+/** aggregate fields of "me" */
+export type Me_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Me_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Me_Avg_Fields = {
+  __typename?: 'me_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "me". All fields are combined with a logical 'AND'. */
+export type Me_Bool_Exp = {
+  _and?: Maybe<Array<Me_Bool_Exp>>;
+  _not?: Maybe<Me_Bool_Exp>;
+  _or?: Maybe<Array<Me_Bool_Exp>>;
+  auth0_id?: Maybe<String_Comparison_Exp>;
+  broker_producer?: Maybe<Broker_Producer_Bool_Exp>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  email?: Maybe<String_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  name?: Maybe<String_Comparison_Exp>;
+  tenant_admin?: Maybe<Tenant_Admin_Bool_Exp>;
+  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+};
+
+/** input type for incrementing numeric columns in table "me" */
+export type Me_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "me" */
+export type Me_Insert_Input = {
+  auth0_id?: Maybe<Scalars['String']>;
+  broker_producer?: Maybe<Broker_Producer_Obj_Rel_Insert_Input>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  tenant_admin?: Maybe<Tenant_Admin_Obj_Rel_Insert_Input>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type Me_Max_Fields = {
+  __typename?: 'me_max_fields';
+  auth0_id?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate min on columns */
+export type Me_Min_Fields = {
+  __typename?: 'me_min_fields';
+  auth0_id?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** response of any mutation on the table "me" */
+export type Me_Mutation_Response = {
+  __typename?: 'me_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Me>;
+};
+
+/** Ordering options when selecting data from "me". */
+export type Me_Order_By = {
+  auth0_id?: Maybe<Order_By>;
+  broker_producer?: Maybe<Broker_Producer_Order_By>;
+  created_at?: Maybe<Order_By>;
+  email?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
+  tenant_admin?: Maybe<Tenant_Admin_Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** select columns of table "me" */
+export enum Me_Select_Column {
+  /** column name */
+  Auth0Id = 'auth0_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Email = 'email',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "me" */
+export type Me_Set_Input = {
+  auth0_id?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate stddev on columns */
+export type Me_Stddev_Fields = {
+  __typename?: 'me_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Me_Stddev_Pop_Fields = {
+  __typename?: 'me_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Me_Stddev_Samp_Fields = {
+  __typename?: 'me_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Streaming cursor of the table "me" */
+export type Me_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Me_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Me_Stream_Cursor_Value_Input = {
+  auth0_id?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate sum on columns */
+export type Me_Sum_Fields = {
+  __typename?: 'me_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+};
+
+export type Me_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: Maybe<Me_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<Me_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Me_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Me_Var_Pop_Fields = {
+  __typename?: 'me_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Me_Var_Samp_Fields = {
+  __typename?: 'me_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Me_Variance_Fields = {
+  __typename?: 'me_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to compare columns of type "money". All fields are combined with logical 'AND'. */
+export type Money_Comparison_Exp = {
+  _eq?: Maybe<Scalars['money']>;
+  _gt?: Maybe<Scalars['money']>;
+  _gte?: Maybe<Scalars['money']>;
+  _in?: Maybe<Array<Scalars['money']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['money']>;
+  _lte?: Maybe<Scalars['money']>;
+  _neq?: Maybe<Scalars['money']>;
+  _nin?: Maybe<Array<Scalars['money']>>;
+};
+
+/** mutation root */
+export type Mutation_Root = {
+  __typename?: 'mutation_root';
+  adminResetPassword?: Maybe<ResetPasswordOutput>;
+  createBrokerUsers?: Maybe<Array<Maybe<CreateBrokerUserOutput>>>;
+  createCustomQuote?: Maybe<CustomQuoteOutput>;
+  createInsuredApplication?: Maybe<InsuredOutput>;
+  createInsuredApplicationFromUI?: Maybe<UiInsuredOutput>;
+  createPDFQuoteSelection?: Maybe<CreateQuotePdfSelectionOutput>;
+  createTenantAdmins?: Maybe<Array<Maybe<CreateTenantAdminOutput>>>;
+  /** delete data from the table: "broker_agency" */
+  delete_broker_agency?: Maybe<Broker_Agency_Mutation_Response>;
+  /** delete single row from the table: "broker_agency" */
+  delete_broker_agency_by_pk?: Maybe<Broker_Agency>;
+  /** delete data from the table: "broker_producer" */
+  delete_broker_producer?: Maybe<Broker_Producer_Mutation_Response>;
+  /** delete single row from the table: "broker_producer" */
+  delete_broker_producer_by_pk?: Maybe<Broker_Producer>;
+  /** delete data from the table: "document_forms" */
+  delete_document_forms?: Maybe<Document_Forms_Mutation_Response>;
+  /** delete single row from the table: "document_forms" */
+  delete_document_forms_by_pk?: Maybe<Document_Forms>;
+  /** delete data from the table: "domain_scan" */
+  delete_domain_scan?: Maybe<Domain_Scan_Mutation_Response>;
+  /** delete single row from the table: "domain_scan" */
+  delete_domain_scan_by_pk?: Maybe<Domain_Scan>;
+  /** delete data from the table: "domains" */
+  delete_domains?: Maybe<Domains_Mutation_Response>;
+  /** delete single row from the table: "domains" */
+  delete_domains_by_pk?: Maybe<Domains>;
+  /** delete data from the table: "external_scan" */
+  delete_external_scan?: Maybe<External_Scan_Mutation_Response>;
+  /** delete single row from the table: "external_scan" */
+  delete_external_scan_by_pk?: Maybe<External_Scan>;
+  /** delete data from the table: "ims_applications_not_taken_up" */
+  delete_ims_applications_not_taken_up?: Maybe<Ims_Applications_Not_Taken_Up_Mutation_Response>;
+  /** delete single row from the table: "ims_applications_not_taken_up" */
+  delete_ims_applications_not_taken_up_by_pk?: Maybe<Ims_Applications_Not_Taken_Up>;
+  /** delete data from the table: "ims_charge" */
+  delete_ims_charge?: Maybe<Ims_Charge_Mutation_Response>;
+  /** delete single row from the table: "ims_charge" */
+  delete_ims_charge_by_pk?: Maybe<Ims_Charge>;
+  /** delete data from the table: "ims_company_business_type" */
+  delete_ims_company_business_type?: Maybe<Ims_Company_Business_Type_Mutation_Response>;
+  /** delete single row from the table: "ims_company_business_type" */
+  delete_ims_company_business_type_by_pk?: Maybe<Ims_Company_Business_Type>;
+  /** delete data from the table: "ims_responses" */
+  delete_ims_responses?: Maybe<Ims_Responses_Mutation_Response>;
+  /** delete single row from the table: "ims_responses" */
+  delete_ims_responses_by_pk?: Maybe<Ims_Responses>;
+  /** delete data from the table: "ims_state" */
+  delete_ims_state?: Maybe<Ims_State_Mutation_Response>;
+  /** delete single row from the table: "ims_state" */
+  delete_ims_state_by_pk?: Maybe<Ims_State>;
+  /** delete data from the table: "insurance_application" */
+  delete_insurance_application?: Maybe<Insurance_Application_Mutation_Response>;
+  /** delete data from the table: "insurance_application_artifact" */
+  delete_insurance_application_artifact?: Maybe<Insurance_Application_Artifact_Mutation_Response>;
+  /** delete single row from the table: "insurance_application_artifact" */
+  delete_insurance_application_artifact_by_pk?: Maybe<Insurance_Application_Artifact>;
+  /** delete single row from the table: "insurance_application" */
+  delete_insurance_application_by_pk?: Maybe<Insurance_Application>;
+  /** delete data from the table: "insurance_policy" */
+  delete_insurance_policy?: Maybe<Insurance_Policy_Mutation_Response>;
+  /** delete single row from the table: "insurance_policy" */
+  delete_insurance_policy_by_pk?: Maybe<Insurance_Policy>;
+  /** delete data from the table: "insurance_quote" */
+  delete_insurance_quote?: Maybe<Insurance_Quote_Mutation_Response>;
+  /** delete single row from the table: "insurance_quote" */
+  delete_insurance_quote_by_pk?: Maybe<Insurance_Quote>;
+  /** delete data from the table: "insurance_quote_email" */
+  delete_insurance_quote_email?: Maybe<Insurance_Quote_Email_Mutation_Response>;
+  /** delete single row from the table: "insurance_quote_email" */
+  delete_insurance_quote_email_by_pk?: Maybe<Insurance_Quote_Email>;
+  /** delete data from the table: "insurance_quote_pdf_selection" */
+  delete_insurance_quote_pdf_selection?: Maybe<Insurance_Quote_Pdf_Selection_Mutation_Response>;
+  /** delete data from the table: "insurance_quote_pdf_selection_artifact" */
+  delete_insurance_quote_pdf_selection_artifact?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Mutation_Response>;
+  /** delete single row from the table: "insurance_quote_pdf_selection_artifact" */
+  delete_insurance_quote_pdf_selection_artifact_by_pk?: Maybe<Insurance_Quote_Pdf_Selection_Artifact>;
+  /** delete single row from the table: "insurance_quote_pdf_selection" */
+  delete_insurance_quote_pdf_selection_by_pk?: Maybe<Insurance_Quote_Pdf_Selection>;
+  /** delete data from the table: "insurance_quote_selection" */
+  delete_insurance_quote_selection?: Maybe<Insurance_Quote_Selection_Mutation_Response>;
+  /** delete single row from the table: "insurance_quote_selection" */
+  delete_insurance_quote_selection_by_pk?: Maybe<Insurance_Quote_Selection>;
+  /** delete data from the table: "insured_organization" */
+  delete_insured_organization?: Maybe<Insured_Organization_Mutation_Response>;
+  /** delete single row from the table: "insured_organization" */
+  delete_insured_organization_by_pk?: Maybe<Insured_Organization>;
+  /** delete data from the table: "insured_organization_contact" */
+  delete_insured_organization_contact?: Maybe<Insured_Organization_Contact_Mutation_Response>;
+  /** delete single row from the table: "insured_organization_contact" */
+  delete_insured_organization_contact_by_pk?: Maybe<Insured_Organization_Contact>;
+  /** delete data from the table: "me" */
+  delete_me?: Maybe<Me_Mutation_Response>;
+  /** delete data from the table: "naics_code" */
+  delete_naics_code?: Maybe<Naics_Code_Mutation_Response>;
+  /** delete single row from the table: "naics_code" */
+  delete_naics_code_by_pk?: Maybe<Naics_Code>;
+  /** delete data from the table: "naics_mapping" */
+  delete_naics_mapping?: Maybe<Naics_Mapping_Mutation_Response>;
+  /** delete data from the table: "organization_domains" */
+  delete_organization_domains?: Maybe<Organization_Domains_Mutation_Response>;
+  /** delete single row from the table: "organization_domains" */
+  delete_organization_domains_by_pk?: Maybe<Organization_Domains>;
+  /** delete data from the table: "organization_industry" */
+  delete_organization_industry?: Maybe<Organization_Industry_Mutation_Response>;
+  /** delete single row from the table: "organization_industry" */
+  delete_organization_industry_by_pk?: Maybe<Organization_Industry>;
+  /** delete data from the table: "policy_payment" */
+  delete_policy_payment?: Maybe<Policy_Payment_Mutation_Response>;
+  /** delete single row from the table: "policy_payment" */
+  delete_policy_payment_by_pk?: Maybe<Policy_Payment>;
+  /** delete data from the table: "policy_seq_counter" */
+  delete_policy_seq_counter?: Maybe<Policy_Seq_Counter_Mutation_Response>;
+  /** delete data from the table: "rqb_system" */
+  delete_rqb_system?: Maybe<Rqb_System_Mutation_Response>;
+  /** delete single row from the table: "rqb_system" */
+  delete_rqb_system_by_pk?: Maybe<Rqb_System>;
+  /** delete data from the table: "tenant" */
+  delete_tenant?: Maybe<Tenant_Mutation_Response>;
+  /** delete data from the table: "tenant_admin" */
+  delete_tenant_admin?: Maybe<Tenant_Admin_Mutation_Response>;
+  /** delete single row from the table: "tenant_admin" */
+  delete_tenant_admin_by_pk?: Maybe<Tenant_Admin>;
+  /** delete single row from the table: "tenant" */
+  delete_tenant_by_pk?: Maybe<Tenant>;
+  /** delete data from the table: "tld_exclusions" */
+  delete_tld_exclusions?: Maybe<Tld_Exclusions_Mutation_Response>;
+  /** delete single row from the table: "tld_exclusions" */
+  delete_tld_exclusions_by_pk?: Maybe<Tld_Exclusions>;
+  /** delete data from the table: "underwriter_broker_agencies" */
+  delete_underwriter_broker_agencies?: Maybe<Underwriter_Broker_Agencies_Mutation_Response>;
+  /** delete single row from the table: "underwriter_broker_agencies" */
+  delete_underwriter_broker_agencies_by_pk?: Maybe<Underwriter_Broker_Agencies>;
+  /** delete data from the table: "underwriter_organization" */
+  delete_underwriter_organization?: Maybe<Underwriter_Organization_Mutation_Response>;
+  /** delete single row from the table: "underwriter_organization" */
+  delete_underwriter_organization_by_pk?: Maybe<Underwriter_Organization>;
+  /** delete data from the table: "underwriter_user" */
+  delete_underwriter_user?: Maybe<Underwriter_User_Mutation_Response>;
+  /** delete single row from the table: "underwriter_user" */
+  delete_underwriter_user_by_pk?: Maybe<Underwriter_User>;
+  /** delete data from the table: "user" */
+  delete_user?: Maybe<User_Mutation_Response>;
+  /** delete single row from the table: "user" */
+  delete_user_by_pk?: Maybe<User>;
+  /** delete data from the table: "user_password_reset" */
+  delete_user_password_reset?: Maybe<User_Password_Reset_Mutation_Response>;
+  /** delete single row from the table: "user_password_reset" */
+  delete_user_password_reset_by_pk?: Maybe<User_Password_Reset>;
+  /** delete data from the table: "view_insurance_application_for_not_taken_up_45_days" */
+  delete_view_insurance_application_for_not_taken_up_45_days?: Maybe<View_Insurance_Application_For_Not_Taken_Up_45_Days_Mutation_Response>;
+  forgotPassword?: Maybe<ResetPasswordOutput>;
+  /** Generates quotes */
+  generateQuotes?: Maybe<QuotesOutput>;
+  getUnusedRetentions?: Maybe<UnusedRetentionsOutput>;
+  handleAgentBind?: Maybe<AgentBindPolicyOutput>;
+  handleIpfsIntegration?: Maybe<PolicyOutput>;
+  /** insert data into the table: "broker_agency" */
+  insert_broker_agency?: Maybe<Broker_Agency_Mutation_Response>;
+  /** insert a single row into the table: "broker_agency" */
+  insert_broker_agency_one?: Maybe<Broker_Agency>;
+  /** insert data into the table: "broker_producer" */
+  insert_broker_producer?: Maybe<Broker_Producer_Mutation_Response>;
+  /** insert a single row into the table: "broker_producer" */
+  insert_broker_producer_one?: Maybe<Broker_Producer>;
+  /** insert data into the table: "document_forms" */
+  insert_document_forms?: Maybe<Document_Forms_Mutation_Response>;
+  /** insert a single row into the table: "document_forms" */
+  insert_document_forms_one?: Maybe<Document_Forms>;
+  /** insert data into the table: "domain_scan" */
+  insert_domain_scan?: Maybe<Domain_Scan_Mutation_Response>;
+  /** insert a single row into the table: "domain_scan" */
+  insert_domain_scan_one?: Maybe<Domain_Scan>;
+  /** insert data into the table: "domains" */
+  insert_domains?: Maybe<Domains_Mutation_Response>;
+  /** insert a single row into the table: "domains" */
+  insert_domains_one?: Maybe<Domains>;
+  /** insert data into the table: "external_scan" */
+  insert_external_scan?: Maybe<External_Scan_Mutation_Response>;
+  /** insert a single row into the table: "external_scan" */
+  insert_external_scan_one?: Maybe<External_Scan>;
+  /** insert data into the table: "ims_applications_not_taken_up" */
+  insert_ims_applications_not_taken_up?: Maybe<Ims_Applications_Not_Taken_Up_Mutation_Response>;
+  /** insert a single row into the table: "ims_applications_not_taken_up" */
+  insert_ims_applications_not_taken_up_one?: Maybe<Ims_Applications_Not_Taken_Up>;
+  /** insert data into the table: "ims_charge" */
+  insert_ims_charge?: Maybe<Ims_Charge_Mutation_Response>;
+  /** insert a single row into the table: "ims_charge" */
+  insert_ims_charge_one?: Maybe<Ims_Charge>;
+  /** insert data into the table: "ims_company_business_type" */
+  insert_ims_company_business_type?: Maybe<Ims_Company_Business_Type_Mutation_Response>;
+  /** insert a single row into the table: "ims_company_business_type" */
+  insert_ims_company_business_type_one?: Maybe<Ims_Company_Business_Type>;
+  /** insert data into the table: "ims_responses" */
+  insert_ims_responses?: Maybe<Ims_Responses_Mutation_Response>;
+  /** insert a single row into the table: "ims_responses" */
+  insert_ims_responses_one?: Maybe<Ims_Responses>;
+  /** insert data into the table: "ims_state" */
+  insert_ims_state?: Maybe<Ims_State_Mutation_Response>;
+  /** insert a single row into the table: "ims_state" */
+  insert_ims_state_one?: Maybe<Ims_State>;
+  /** insert data into the table: "insurance_application" */
+  insert_insurance_application?: Maybe<Insurance_Application_Mutation_Response>;
+  /** insert data into the table: "insurance_application_artifact" */
+  insert_insurance_application_artifact?: Maybe<Insurance_Application_Artifact_Mutation_Response>;
+  /** insert a single row into the table: "insurance_application_artifact" */
+  insert_insurance_application_artifact_one?: Maybe<Insurance_Application_Artifact>;
+  /** insert a single row into the table: "insurance_application" */
+  insert_insurance_application_one?: Maybe<Insurance_Application>;
+  /** insert data into the table: "insurance_policy" */
+  insert_insurance_policy?: Maybe<Insurance_Policy_Mutation_Response>;
+  /** insert a single row into the table: "insurance_policy" */
+  insert_insurance_policy_one?: Maybe<Insurance_Policy>;
+  /** insert data into the table: "insurance_quote" */
+  insert_insurance_quote?: Maybe<Insurance_Quote_Mutation_Response>;
+  /** insert data into the table: "insurance_quote_email" */
+  insert_insurance_quote_email?: Maybe<Insurance_Quote_Email_Mutation_Response>;
+  /** insert a single row into the table: "insurance_quote_email" */
+  insert_insurance_quote_email_one?: Maybe<Insurance_Quote_Email>;
+  /** insert a single row into the table: "insurance_quote" */
+  insert_insurance_quote_one?: Maybe<Insurance_Quote>;
+  /** insert data into the table: "insurance_quote_pdf_selection" */
+  insert_insurance_quote_pdf_selection?: Maybe<Insurance_Quote_Pdf_Selection_Mutation_Response>;
+  /** insert data into the table: "insurance_quote_pdf_selection_artifact" */
+  insert_insurance_quote_pdf_selection_artifact?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Mutation_Response>;
+  /** insert a single row into the table: "insurance_quote_pdf_selection_artifact" */
+  insert_insurance_quote_pdf_selection_artifact_one?: Maybe<Insurance_Quote_Pdf_Selection_Artifact>;
+  /** insert a single row into the table: "insurance_quote_pdf_selection" */
+  insert_insurance_quote_pdf_selection_one?: Maybe<Insurance_Quote_Pdf_Selection>;
+  /** insert data into the table: "insurance_quote_selection" */
+  insert_insurance_quote_selection?: Maybe<Insurance_Quote_Selection_Mutation_Response>;
+  /** insert a single row into the table: "insurance_quote_selection" */
+  insert_insurance_quote_selection_one?: Maybe<Insurance_Quote_Selection>;
+  /** insert data into the table: "insured_organization" */
+  insert_insured_organization?: Maybe<Insured_Organization_Mutation_Response>;
+  /** insert data into the table: "insured_organization_contact" */
+  insert_insured_organization_contact?: Maybe<Insured_Organization_Contact_Mutation_Response>;
+  /** insert a single row into the table: "insured_organization_contact" */
+  insert_insured_organization_contact_one?: Maybe<Insured_Organization_Contact>;
+  /** insert a single row into the table: "insured_organization" */
+  insert_insured_organization_one?: Maybe<Insured_Organization>;
+  /** insert data into the table: "me" */
+  insert_me?: Maybe<Me_Mutation_Response>;
+  /** insert a single row into the table: "me" */
+  insert_me_one?: Maybe<Me>;
+  /** insert data into the table: "naics_code" */
+  insert_naics_code?: Maybe<Naics_Code_Mutation_Response>;
+  /** insert a single row into the table: "naics_code" */
+  insert_naics_code_one?: Maybe<Naics_Code>;
+  /** insert data into the table: "naics_mapping" */
+  insert_naics_mapping?: Maybe<Naics_Mapping_Mutation_Response>;
+  /** insert a single row into the table: "naics_mapping" */
+  insert_naics_mapping_one?: Maybe<Naics_Mapping>;
+  /** insert data into the table: "organization_domains" */
+  insert_organization_domains?: Maybe<Organization_Domains_Mutation_Response>;
+  /** insert a single row into the table: "organization_domains" */
+  insert_organization_domains_one?: Maybe<Organization_Domains>;
+  /** insert data into the table: "organization_industry" */
+  insert_organization_industry?: Maybe<Organization_Industry_Mutation_Response>;
+  /** insert a single row into the table: "organization_industry" */
+  insert_organization_industry_one?: Maybe<Organization_Industry>;
+  /** insert data into the table: "policy_payment" */
+  insert_policy_payment?: Maybe<Policy_Payment_Mutation_Response>;
+  /** insert a single row into the table: "policy_payment" */
+  insert_policy_payment_one?: Maybe<Policy_Payment>;
+  /** insert data into the table: "policy_seq_counter" */
+  insert_policy_seq_counter?: Maybe<Policy_Seq_Counter_Mutation_Response>;
+  /** insert a single row into the table: "policy_seq_counter" */
+  insert_policy_seq_counter_one?: Maybe<Policy_Seq_Counter>;
+  /** insert data into the table: "rqb_system" */
+  insert_rqb_system?: Maybe<Rqb_System_Mutation_Response>;
+  /** insert a single row into the table: "rqb_system" */
+  insert_rqb_system_one?: Maybe<Rqb_System>;
+  /** insert data into the table: "tenant" */
+  insert_tenant?: Maybe<Tenant_Mutation_Response>;
+  /** insert data into the table: "tenant_admin" */
+  insert_tenant_admin?: Maybe<Tenant_Admin_Mutation_Response>;
+  /** insert a single row into the table: "tenant_admin" */
+  insert_tenant_admin_one?: Maybe<Tenant_Admin>;
+  /** insert a single row into the table: "tenant" */
+  insert_tenant_one?: Maybe<Tenant>;
+  /** insert data into the table: "tld_exclusions" */
+  insert_tld_exclusions?: Maybe<Tld_Exclusions_Mutation_Response>;
+  /** insert a single row into the table: "tld_exclusions" */
+  insert_tld_exclusions_one?: Maybe<Tld_Exclusions>;
+  /** insert data into the table: "underwriter_broker_agencies" */
+  insert_underwriter_broker_agencies?: Maybe<Underwriter_Broker_Agencies_Mutation_Response>;
+  /** insert a single row into the table: "underwriter_broker_agencies" */
+  insert_underwriter_broker_agencies_one?: Maybe<Underwriter_Broker_Agencies>;
+  /** insert data into the table: "underwriter_organization" */
+  insert_underwriter_organization?: Maybe<Underwriter_Organization_Mutation_Response>;
+  /** insert a single row into the table: "underwriter_organization" */
+  insert_underwriter_organization_one?: Maybe<Underwriter_Organization>;
+  /** insert data into the table: "underwriter_user" */
+  insert_underwriter_user?: Maybe<Underwriter_User_Mutation_Response>;
+  /** insert a single row into the table: "underwriter_user" */
+  insert_underwriter_user_one?: Maybe<Underwriter_User>;
+  /** insert data into the table: "user" */
+  insert_user?: Maybe<User_Mutation_Response>;
+  /** insert a single row into the table: "user" */
+  insert_user_one?: Maybe<User>;
+  /** insert data into the table: "user_password_reset" */
+  insert_user_password_reset?: Maybe<User_Password_Reset_Mutation_Response>;
+  /** insert a single row into the table: "user_password_reset" */
+  insert_user_password_reset_one?: Maybe<User_Password_Reset>;
+  /** insert data into the table: "view_insurance_application_for_not_taken_up_45_days" */
+  insert_view_insurance_application_for_not_taken_up_45_days?: Maybe<View_Insurance_Application_For_Not_Taken_Up_45_Days_Mutation_Response>;
+  /** insert a single row into the table: "view_insurance_application_for_not_taken_up_45_days" */
+  insert_view_insurance_application_for_not_taken_up_45_days_one?: Maybe<View_Insurance_Application_For_Not_Taken_Up_45_Days>;
+  logoUpload?: Maybe<FileOutput>;
+  manualTriggerQuotePDF?: Maybe<ManualTriggerQuotePdfOutput>;
+  /** manualTriggerScan */
+  manualTriggerScan?: Maybe<ManualTriggerScanOutput>;
+  /** resendQuotePDFEmailFromUI */
+  resendQuotePDFEmailFromUI?: Maybe<ResendOutput>;
+  searchDnB?: Maybe<DnBOutput>;
+  /** This action sends emails with quote pdf to added recipients */
+  sendQuotePDFEmailsFromUI?: Maybe<EmailRecipientOutput>;
+  sendToIPFS: Scalars['uuid'];
+  /** updatePremium */
+  updatePremium?: Maybe<SendPremiumOutput>;
+  updateUserStatus?: Maybe<UserStatusOutput>;
+  /** update data of the table: "broker_agency" */
+  update_broker_agency?: Maybe<Broker_Agency_Mutation_Response>;
+  /** update single row of the table: "broker_agency" */
+  update_broker_agency_by_pk?: Maybe<Broker_Agency>;
+  /** update multiples rows of table: "broker_agency" */
+  update_broker_agency_many?: Maybe<Array<Maybe<Broker_Agency_Mutation_Response>>>;
+  /** update data of the table: "broker_producer" */
+  update_broker_producer?: Maybe<Broker_Producer_Mutation_Response>;
+  /** update single row of the table: "broker_producer" */
+  update_broker_producer_by_pk?: Maybe<Broker_Producer>;
+  /** update multiples rows of table: "broker_producer" */
+  update_broker_producer_many?: Maybe<Array<Maybe<Broker_Producer_Mutation_Response>>>;
+  /** update data of the table: "document_forms" */
+  update_document_forms?: Maybe<Document_Forms_Mutation_Response>;
+  /** update single row of the table: "document_forms" */
+  update_document_forms_by_pk?: Maybe<Document_Forms>;
+  /** update multiples rows of table: "document_forms" */
+  update_document_forms_many?: Maybe<Array<Maybe<Document_Forms_Mutation_Response>>>;
+  /** update data of the table: "domain_scan" */
+  update_domain_scan?: Maybe<Domain_Scan_Mutation_Response>;
+  /** update single row of the table: "domain_scan" */
+  update_domain_scan_by_pk?: Maybe<Domain_Scan>;
+  /** update multiples rows of table: "domain_scan" */
+  update_domain_scan_many?: Maybe<Array<Maybe<Domain_Scan_Mutation_Response>>>;
+  /** update data of the table: "domains" */
+  update_domains?: Maybe<Domains_Mutation_Response>;
+  /** update single row of the table: "domains" */
+  update_domains_by_pk?: Maybe<Domains>;
+  /** update multiples rows of table: "domains" */
+  update_domains_many?: Maybe<Array<Maybe<Domains_Mutation_Response>>>;
+  /** update data of the table: "external_scan" */
+  update_external_scan?: Maybe<External_Scan_Mutation_Response>;
+  /** update single row of the table: "external_scan" */
+  update_external_scan_by_pk?: Maybe<External_Scan>;
+  /** update multiples rows of table: "external_scan" */
+  update_external_scan_many?: Maybe<Array<Maybe<External_Scan_Mutation_Response>>>;
+  /** update data of the table: "ims_applications_not_taken_up" */
+  update_ims_applications_not_taken_up?: Maybe<Ims_Applications_Not_Taken_Up_Mutation_Response>;
+  /** update single row of the table: "ims_applications_not_taken_up" */
+  update_ims_applications_not_taken_up_by_pk?: Maybe<Ims_Applications_Not_Taken_Up>;
+  /** update multiples rows of table: "ims_applications_not_taken_up" */
+  update_ims_applications_not_taken_up_many?: Maybe<Array<Maybe<Ims_Applications_Not_Taken_Up_Mutation_Response>>>;
+  /** update data of the table: "ims_charge" */
+  update_ims_charge?: Maybe<Ims_Charge_Mutation_Response>;
+  /** update single row of the table: "ims_charge" */
+  update_ims_charge_by_pk?: Maybe<Ims_Charge>;
+  /** update multiples rows of table: "ims_charge" */
+  update_ims_charge_many?: Maybe<Array<Maybe<Ims_Charge_Mutation_Response>>>;
+  /** update data of the table: "ims_company_business_type" */
+  update_ims_company_business_type?: Maybe<Ims_Company_Business_Type_Mutation_Response>;
+  /** update single row of the table: "ims_company_business_type" */
+  update_ims_company_business_type_by_pk?: Maybe<Ims_Company_Business_Type>;
+  /** update multiples rows of table: "ims_company_business_type" */
+  update_ims_company_business_type_many?: Maybe<Array<Maybe<Ims_Company_Business_Type_Mutation_Response>>>;
+  /** update data of the table: "ims_responses" */
+  update_ims_responses?: Maybe<Ims_Responses_Mutation_Response>;
+  /** update single row of the table: "ims_responses" */
+  update_ims_responses_by_pk?: Maybe<Ims_Responses>;
+  /** update multiples rows of table: "ims_responses" */
+  update_ims_responses_many?: Maybe<Array<Maybe<Ims_Responses_Mutation_Response>>>;
+  /** update data of the table: "ims_state" */
+  update_ims_state?: Maybe<Ims_State_Mutation_Response>;
+  /** update single row of the table: "ims_state" */
+  update_ims_state_by_pk?: Maybe<Ims_State>;
+  /** update multiples rows of table: "ims_state" */
+  update_ims_state_many?: Maybe<Array<Maybe<Ims_State_Mutation_Response>>>;
+  /** update data of the table: "insurance_application" */
+  update_insurance_application?: Maybe<Insurance_Application_Mutation_Response>;
+  /** update data of the table: "insurance_application_artifact" */
+  update_insurance_application_artifact?: Maybe<Insurance_Application_Artifact_Mutation_Response>;
+  /** update single row of the table: "insurance_application_artifact" */
+  update_insurance_application_artifact_by_pk?: Maybe<Insurance_Application_Artifact>;
+  /** update multiples rows of table: "insurance_application_artifact" */
+  update_insurance_application_artifact_many?: Maybe<Array<Maybe<Insurance_Application_Artifact_Mutation_Response>>>;
+  /** update single row of the table: "insurance_application" */
+  update_insurance_application_by_pk?: Maybe<Insurance_Application>;
+  /** update multiples rows of table: "insurance_application" */
+  update_insurance_application_many?: Maybe<Array<Maybe<Insurance_Application_Mutation_Response>>>;
+  /** update data of the table: "insurance_policy" */
+  update_insurance_policy?: Maybe<Insurance_Policy_Mutation_Response>;
+  /** update single row of the table: "insurance_policy" */
+  update_insurance_policy_by_pk?: Maybe<Insurance_Policy>;
+  /** update multiples rows of table: "insurance_policy" */
+  update_insurance_policy_many?: Maybe<Array<Maybe<Insurance_Policy_Mutation_Response>>>;
+  /** update data of the table: "insurance_quote" */
+  update_insurance_quote?: Maybe<Insurance_Quote_Mutation_Response>;
+  /** update single row of the table: "insurance_quote" */
+  update_insurance_quote_by_pk?: Maybe<Insurance_Quote>;
+  /** update data of the table: "insurance_quote_email" */
+  update_insurance_quote_email?: Maybe<Insurance_Quote_Email_Mutation_Response>;
+  /** update single row of the table: "insurance_quote_email" */
+  update_insurance_quote_email_by_pk?: Maybe<Insurance_Quote_Email>;
+  /** update multiples rows of table: "insurance_quote_email" */
+  update_insurance_quote_email_many?: Maybe<Array<Maybe<Insurance_Quote_Email_Mutation_Response>>>;
+  /** update multiples rows of table: "insurance_quote" */
+  update_insurance_quote_many?: Maybe<Array<Maybe<Insurance_Quote_Mutation_Response>>>;
+  /** update data of the table: "insurance_quote_pdf_selection" */
+  update_insurance_quote_pdf_selection?: Maybe<Insurance_Quote_Pdf_Selection_Mutation_Response>;
+  /** update data of the table: "insurance_quote_pdf_selection_artifact" */
+  update_insurance_quote_pdf_selection_artifact?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Mutation_Response>;
+  /** update single row of the table: "insurance_quote_pdf_selection_artifact" */
+  update_insurance_quote_pdf_selection_artifact_by_pk?: Maybe<Insurance_Quote_Pdf_Selection_Artifact>;
+  /** update multiples rows of table: "insurance_quote_pdf_selection_artifact" */
+  update_insurance_quote_pdf_selection_artifact_many?: Maybe<Array<Maybe<Insurance_Quote_Pdf_Selection_Artifact_Mutation_Response>>>;
+  /** update single row of the table: "insurance_quote_pdf_selection" */
+  update_insurance_quote_pdf_selection_by_pk?: Maybe<Insurance_Quote_Pdf_Selection>;
+  /** update multiples rows of table: "insurance_quote_pdf_selection" */
+  update_insurance_quote_pdf_selection_many?: Maybe<Array<Maybe<Insurance_Quote_Pdf_Selection_Mutation_Response>>>;
+  /** update data of the table: "insurance_quote_selection" */
+  update_insurance_quote_selection?: Maybe<Insurance_Quote_Selection_Mutation_Response>;
+  /** update single row of the table: "insurance_quote_selection" */
+  update_insurance_quote_selection_by_pk?: Maybe<Insurance_Quote_Selection>;
+  /** update multiples rows of table: "insurance_quote_selection" */
+  update_insurance_quote_selection_many?: Maybe<Array<Maybe<Insurance_Quote_Selection_Mutation_Response>>>;
+  /** update data of the table: "insured_organization" */
+  update_insured_organization?: Maybe<Insured_Organization_Mutation_Response>;
+  /** update single row of the table: "insured_organization" */
+  update_insured_organization_by_pk?: Maybe<Insured_Organization>;
+  /** update data of the table: "insured_organization_contact" */
+  update_insured_organization_contact?: Maybe<Insured_Organization_Contact_Mutation_Response>;
+  /** update single row of the table: "insured_organization_contact" */
+  update_insured_organization_contact_by_pk?: Maybe<Insured_Organization_Contact>;
+  /** update multiples rows of table: "insured_organization_contact" */
+  update_insured_organization_contact_many?: Maybe<Array<Maybe<Insured_Organization_Contact_Mutation_Response>>>;
+  /** update multiples rows of table: "insured_organization" */
+  update_insured_organization_many?: Maybe<Array<Maybe<Insured_Organization_Mutation_Response>>>;
+  /** update data of the table: "me" */
+  update_me?: Maybe<Me_Mutation_Response>;
+  /** update multiples rows of table: "me" */
+  update_me_many?: Maybe<Array<Maybe<Me_Mutation_Response>>>;
+  /** update data of the table: "naics_code" */
+  update_naics_code?: Maybe<Naics_Code_Mutation_Response>;
+  /** update single row of the table: "naics_code" */
+  update_naics_code_by_pk?: Maybe<Naics_Code>;
+  /** update multiples rows of table: "naics_code" */
+  update_naics_code_many?: Maybe<Array<Maybe<Naics_Code_Mutation_Response>>>;
+  /** update data of the table: "naics_mapping" */
+  update_naics_mapping?: Maybe<Naics_Mapping_Mutation_Response>;
+  /** update multiples rows of table: "naics_mapping" */
+  update_naics_mapping_many?: Maybe<Array<Maybe<Naics_Mapping_Mutation_Response>>>;
+  /** update data of the table: "organization_domains" */
+  update_organization_domains?: Maybe<Organization_Domains_Mutation_Response>;
+  /** update single row of the table: "organization_domains" */
+  update_organization_domains_by_pk?: Maybe<Organization_Domains>;
+  /** update multiples rows of table: "organization_domains" */
+  update_organization_domains_many?: Maybe<Array<Maybe<Organization_Domains_Mutation_Response>>>;
+  /** update data of the table: "organization_industry" */
+  update_organization_industry?: Maybe<Organization_Industry_Mutation_Response>;
+  /** update single row of the table: "organization_industry" */
+  update_organization_industry_by_pk?: Maybe<Organization_Industry>;
+  /** update multiples rows of table: "organization_industry" */
+  update_organization_industry_many?: Maybe<Array<Maybe<Organization_Industry_Mutation_Response>>>;
+  /** update data of the table: "policy_payment" */
+  update_policy_payment?: Maybe<Policy_Payment_Mutation_Response>;
+  /** update single row of the table: "policy_payment" */
+  update_policy_payment_by_pk?: Maybe<Policy_Payment>;
+  /** update multiples rows of table: "policy_payment" */
+  update_policy_payment_many?: Maybe<Array<Maybe<Policy_Payment_Mutation_Response>>>;
+  /** update data of the table: "policy_seq_counter" */
+  update_policy_seq_counter?: Maybe<Policy_Seq_Counter_Mutation_Response>;
+  /** update multiples rows of table: "policy_seq_counter" */
+  update_policy_seq_counter_many?: Maybe<Array<Maybe<Policy_Seq_Counter_Mutation_Response>>>;
+  /** update data of the table: "rqb_system" */
+  update_rqb_system?: Maybe<Rqb_System_Mutation_Response>;
+  /** update single row of the table: "rqb_system" */
+  update_rqb_system_by_pk?: Maybe<Rqb_System>;
+  /** update multiples rows of table: "rqb_system" */
+  update_rqb_system_many?: Maybe<Array<Maybe<Rqb_System_Mutation_Response>>>;
+  /** update data of the table: "tenant" */
+  update_tenant?: Maybe<Tenant_Mutation_Response>;
+  /** update data of the table: "tenant_admin" */
+  update_tenant_admin?: Maybe<Tenant_Admin_Mutation_Response>;
+  /** update single row of the table: "tenant_admin" */
+  update_tenant_admin_by_pk?: Maybe<Tenant_Admin>;
+  /** update multiples rows of table: "tenant_admin" */
+  update_tenant_admin_many?: Maybe<Array<Maybe<Tenant_Admin_Mutation_Response>>>;
+  /** update single row of the table: "tenant" */
+  update_tenant_by_pk?: Maybe<Tenant>;
+  /** update multiples rows of table: "tenant" */
+  update_tenant_many?: Maybe<Array<Maybe<Tenant_Mutation_Response>>>;
+  /** update data of the table: "tld_exclusions" */
+  update_tld_exclusions?: Maybe<Tld_Exclusions_Mutation_Response>;
+  /** update single row of the table: "tld_exclusions" */
+  update_tld_exclusions_by_pk?: Maybe<Tld_Exclusions>;
+  /** update multiples rows of table: "tld_exclusions" */
+  update_tld_exclusions_many?: Maybe<Array<Maybe<Tld_Exclusions_Mutation_Response>>>;
+  /** update data of the table: "underwriter_broker_agencies" */
+  update_underwriter_broker_agencies?: Maybe<Underwriter_Broker_Agencies_Mutation_Response>;
+  /** update single row of the table: "underwriter_broker_agencies" */
+  update_underwriter_broker_agencies_by_pk?: Maybe<Underwriter_Broker_Agencies>;
+  /** update multiples rows of table: "underwriter_broker_agencies" */
+  update_underwriter_broker_agencies_many?: Maybe<Array<Maybe<Underwriter_Broker_Agencies_Mutation_Response>>>;
+  /** update data of the table: "underwriter_organization" */
+  update_underwriter_organization?: Maybe<Underwriter_Organization_Mutation_Response>;
+  /** update single row of the table: "underwriter_organization" */
+  update_underwriter_organization_by_pk?: Maybe<Underwriter_Organization>;
+  /** update multiples rows of table: "underwriter_organization" */
+  update_underwriter_organization_many?: Maybe<Array<Maybe<Underwriter_Organization_Mutation_Response>>>;
+  /** update data of the table: "underwriter_user" */
+  update_underwriter_user?: Maybe<Underwriter_User_Mutation_Response>;
+  /** update single row of the table: "underwriter_user" */
+  update_underwriter_user_by_pk?: Maybe<Underwriter_User>;
+  /** update multiples rows of table: "underwriter_user" */
+  update_underwriter_user_many?: Maybe<Array<Maybe<Underwriter_User_Mutation_Response>>>;
+  /** update data of the table: "user" */
+  update_user?: Maybe<User_Mutation_Response>;
+  /** update single row of the table: "user" */
+  update_user_by_pk?: Maybe<User>;
+  /** update multiples rows of table: "user" */
+  update_user_many?: Maybe<Array<Maybe<User_Mutation_Response>>>;
+  /** update data of the table: "user_password_reset" */
+  update_user_password_reset?: Maybe<User_Password_Reset_Mutation_Response>;
+  /** update single row of the table: "user_password_reset" */
+  update_user_password_reset_by_pk?: Maybe<User_Password_Reset>;
+  /** update multiples rows of table: "user_password_reset" */
+  update_user_password_reset_many?: Maybe<Array<Maybe<User_Password_Reset_Mutation_Response>>>;
+  /** update data of the table: "view_insurance_application_for_not_taken_up_45_days" */
+  update_view_insurance_application_for_not_taken_up_45_days?: Maybe<View_Insurance_Application_For_Not_Taken_Up_45_Days_Mutation_Response>;
+  /** update multiples rows of table: "view_insurance_application_for_not_taken_up_45_days" */
+  update_view_insurance_application_for_not_taken_up_45_days_many?: Maybe<Array<Maybe<View_Insurance_Application_For_Not_Taken_Up_45_Days_Mutation_Response>>>;
+};
+
+
+/** mutation root */
+export type Mutation_RootAdminResetPasswordArgs = {
+  input: ResetPasswordInput;
+};
+
+
+/** mutation root */
+export type Mutation_RootCreateBrokerUsersArgs = {
+  input: Array<CreateBrokerUserInput>;
+};
+
+
+/** mutation root */
+export type Mutation_RootCreateCustomQuoteArgs = {
+  object: CustomQuoteInput;
+};
+
+
+/** mutation root */
+export type Mutation_RootCreateInsuredApplicationArgs = {
+  object: InsuredApplicationInput;
+};
+
+
+/** mutation root */
+export type Mutation_RootCreateInsuredApplicationFromUiArgs = {
+  object: UiInsuredApplicationInput;
+};
+
+
+/** mutation root */
+export type Mutation_RootCreatePdfQuoteSelectionArgs = {
+  object: CreateQuotePdfSelectionInput;
+};
+
+
+/** mutation root */
+export type Mutation_RootCreateTenantAdminsArgs = {
+  input: Array<CreateTenantAdminInput>;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Broker_AgencyArgs = {
+  where: Broker_Agency_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Broker_Agency_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Broker_ProducerArgs = {
+  where: Broker_Producer_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Broker_Producer_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Document_FormsArgs = {
+  where: Document_Forms_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Document_Forms_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Domain_ScanArgs = {
+  where: Domain_Scan_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Domain_Scan_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_DomainsArgs = {
+  where: Domains_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Domains_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_External_ScanArgs = {
+  where: External_Scan_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_External_Scan_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Ims_Applications_Not_Taken_UpArgs = {
+  where: Ims_Applications_Not_Taken_Up_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Ims_Applications_Not_Taken_Up_By_PkArgs = {
+  application_id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Ims_ChargeArgs = {
+  where: Ims_Charge_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Ims_Charge_By_PkArgs = {
+  charge_code: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Ims_Company_Business_TypeArgs = {
+  where: Ims_Company_Business_Type_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Ims_Company_Business_Type_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Ims_ResponsesArgs = {
+  where: Ims_Responses_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Ims_Responses_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Ims_StateArgs = {
+  where: Ims_State_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Ims_State_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Insurance_ApplicationArgs = {
+  where: Insurance_Application_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Insurance_Application_ArtifactArgs = {
+  where: Insurance_Application_Artifact_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Insurance_Application_Artifact_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Insurance_Application_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Insurance_PolicyArgs = {
+  where: Insurance_Policy_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Insurance_Policy_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Insurance_QuoteArgs = {
+  where: Insurance_Quote_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Insurance_Quote_By_PkArgs = {
+  id: Scalars['bigint'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Insurance_Quote_EmailArgs = {
+  where: Insurance_Quote_Email_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Insurance_Quote_Email_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Insurance_Quote_Pdf_SelectionArgs = {
+  where: Insurance_Quote_Pdf_Selection_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Insurance_Quote_Pdf_Selection_ArtifactArgs = {
+  where: Insurance_Quote_Pdf_Selection_Artifact_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Insurance_Quote_Pdf_Selection_Artifact_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Insurance_Quote_Pdf_Selection_By_PkArgs = {
+  application_id: Scalars['uuid'];
+  pdf_selection_artifact_id: Scalars['Int'];
+  quote_id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Insurance_Quote_SelectionArgs = {
+  where: Insurance_Quote_Selection_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Insurance_Quote_Selection_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Insured_OrganizationArgs = {
+  where: Insured_Organization_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Insured_Organization_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Insured_Organization_ContactArgs = {
+  where: Insured_Organization_Contact_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Insured_Organization_Contact_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_MeArgs = {
+  where: Me_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Naics_CodeArgs = {
+  where: Naics_Code_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Naics_Code_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Naics_MappingArgs = {
+  where: Naics_Mapping_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Organization_DomainsArgs = {
+  where: Organization_Domains_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Organization_Domains_By_PkArgs = {
+  id: Scalars['bigint'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Organization_IndustryArgs = {
+  where: Organization_Industry_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Organization_Industry_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Policy_PaymentArgs = {
+  where: Policy_Payment_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Policy_Payment_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Policy_Seq_CounterArgs = {
+  where: Policy_Seq_Counter_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Rqb_SystemArgs = {
+  where: Rqb_System_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Rqb_System_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_TenantArgs = {
+  where: Tenant_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Tenant_AdminArgs = {
+  where: Tenant_Admin_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Tenant_Admin_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Tenant_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Tld_ExclusionsArgs = {
+  where: Tld_Exclusions_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Tld_Exclusions_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Underwriter_Broker_AgenciesArgs = {
+  where: Underwriter_Broker_Agencies_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Underwriter_Broker_Agencies_By_PkArgs = {
+  broker_agency_id: Scalars['Int'];
+  underwriter_organization_id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Underwriter_OrganizationArgs = {
+  where: Underwriter_Organization_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Underwriter_Organization_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Underwriter_UserArgs = {
+  where: Underwriter_User_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Underwriter_User_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_UserArgs = {
+  where: User_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_User_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_User_Password_ResetArgs = {
+  where: User_Password_Reset_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_User_Password_Reset_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_View_Insurance_Application_For_Not_Taken_Up_45_DaysArgs = {
+  where: View_Insurance_Application_For_Not_Taken_Up_45_Days_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootForgotPasswordArgs = {
+  input: ForgotPasswordInput;
+};
+
+
+/** mutation root */
+export type Mutation_RootGenerateQuotesArgs = {
+  calculateFee?: Maybe<Scalars['Boolean']>;
+  calculateTax?: Maybe<Scalars['Boolean']>;
+  employees?: Maybe<Scalars['String']>;
+  industry?: Maybe<Scalars['String']>;
+  paymentOption?: Maybe<Scalars['String']>;
+  revenue?: Maybe<Scalars['String']>;
+  state?: Maybe<Scalars['String']>;
+};
+
+
+/** mutation root */
+export type Mutation_RootGetUnusedRetentionsArgs = {
+  object: UnusedRetentionsInput;
+};
+
+
+/** mutation root */
+export type Mutation_RootHandleAgentBindArgs = {
+  applicationId: Scalars['uuid'];
+  insuranceQuoteSelectionId: Scalars['String'];
+};
+
+
+/** mutation root */
+export type Mutation_RootHandleIpfsIntegrationArgs = {
+  applicationId: Scalars['uuid'];
+  brokerEmail: Scalars['String'];
+  insuranceQuoteSelectionId: Scalars['Int'];
+  payer: Scalars['String'];
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Broker_AgencyArgs = {
+  objects: Array<Broker_Agency_Insert_Input>;
+  on_conflict?: Maybe<Broker_Agency_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Broker_Agency_OneArgs = {
+  object: Broker_Agency_Insert_Input;
+  on_conflict?: Maybe<Broker_Agency_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Broker_ProducerArgs = {
+  objects: Array<Broker_Producer_Insert_Input>;
+  on_conflict?: Maybe<Broker_Producer_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Broker_Producer_OneArgs = {
+  object: Broker_Producer_Insert_Input;
+  on_conflict?: Maybe<Broker_Producer_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Document_FormsArgs = {
+  objects: Array<Document_Forms_Insert_Input>;
+  on_conflict?: Maybe<Document_Forms_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Document_Forms_OneArgs = {
+  object: Document_Forms_Insert_Input;
+  on_conflict?: Maybe<Document_Forms_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Domain_ScanArgs = {
+  objects: Array<Domain_Scan_Insert_Input>;
+  on_conflict?: Maybe<Domain_Scan_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Domain_Scan_OneArgs = {
+  object: Domain_Scan_Insert_Input;
+  on_conflict?: Maybe<Domain_Scan_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_DomainsArgs = {
+  objects: Array<Domains_Insert_Input>;
+  on_conflict?: Maybe<Domains_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Domains_OneArgs = {
+  object: Domains_Insert_Input;
+  on_conflict?: Maybe<Domains_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_External_ScanArgs = {
+  objects: Array<External_Scan_Insert_Input>;
+  on_conflict?: Maybe<External_Scan_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_External_Scan_OneArgs = {
+  object: External_Scan_Insert_Input;
+  on_conflict?: Maybe<External_Scan_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Ims_Applications_Not_Taken_UpArgs = {
+  objects: Array<Ims_Applications_Not_Taken_Up_Insert_Input>;
+  on_conflict?: Maybe<Ims_Applications_Not_Taken_Up_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Ims_Applications_Not_Taken_Up_OneArgs = {
+  object: Ims_Applications_Not_Taken_Up_Insert_Input;
+  on_conflict?: Maybe<Ims_Applications_Not_Taken_Up_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Ims_ChargeArgs = {
+  objects: Array<Ims_Charge_Insert_Input>;
+  on_conflict?: Maybe<Ims_Charge_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Ims_Charge_OneArgs = {
+  object: Ims_Charge_Insert_Input;
+  on_conflict?: Maybe<Ims_Charge_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Ims_Company_Business_TypeArgs = {
+  objects: Array<Ims_Company_Business_Type_Insert_Input>;
+  on_conflict?: Maybe<Ims_Company_Business_Type_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Ims_Company_Business_Type_OneArgs = {
+  object: Ims_Company_Business_Type_Insert_Input;
+  on_conflict?: Maybe<Ims_Company_Business_Type_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Ims_ResponsesArgs = {
+  objects: Array<Ims_Responses_Insert_Input>;
+  on_conflict?: Maybe<Ims_Responses_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Ims_Responses_OneArgs = {
+  object: Ims_Responses_Insert_Input;
+  on_conflict?: Maybe<Ims_Responses_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Ims_StateArgs = {
+  objects: Array<Ims_State_Insert_Input>;
+  on_conflict?: Maybe<Ims_State_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Ims_State_OneArgs = {
+  object: Ims_State_Insert_Input;
+  on_conflict?: Maybe<Ims_State_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Insurance_ApplicationArgs = {
+  objects: Array<Insurance_Application_Insert_Input>;
+  on_conflict?: Maybe<Insurance_Application_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Insurance_Application_ArtifactArgs = {
+  objects: Array<Insurance_Application_Artifact_Insert_Input>;
+  on_conflict?: Maybe<Insurance_Application_Artifact_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Insurance_Application_Artifact_OneArgs = {
+  object: Insurance_Application_Artifact_Insert_Input;
+  on_conflict?: Maybe<Insurance_Application_Artifact_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Insurance_Application_OneArgs = {
+  object: Insurance_Application_Insert_Input;
+  on_conflict?: Maybe<Insurance_Application_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Insurance_PolicyArgs = {
+  objects: Array<Insurance_Policy_Insert_Input>;
+  on_conflict?: Maybe<Insurance_Policy_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Insurance_Policy_OneArgs = {
+  object: Insurance_Policy_Insert_Input;
+  on_conflict?: Maybe<Insurance_Policy_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Insurance_QuoteArgs = {
+  objects: Array<Insurance_Quote_Insert_Input>;
+  on_conflict?: Maybe<Insurance_Quote_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Insurance_Quote_EmailArgs = {
+  objects: Array<Insurance_Quote_Email_Insert_Input>;
+  on_conflict?: Maybe<Insurance_Quote_Email_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Insurance_Quote_Email_OneArgs = {
+  object: Insurance_Quote_Email_Insert_Input;
+  on_conflict?: Maybe<Insurance_Quote_Email_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Insurance_Quote_OneArgs = {
+  object: Insurance_Quote_Insert_Input;
+  on_conflict?: Maybe<Insurance_Quote_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Insurance_Quote_Pdf_SelectionArgs = {
+  objects: Array<Insurance_Quote_Pdf_Selection_Insert_Input>;
+  on_conflict?: Maybe<Insurance_Quote_Pdf_Selection_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Insurance_Quote_Pdf_Selection_ArtifactArgs = {
+  objects: Array<Insurance_Quote_Pdf_Selection_Artifact_Insert_Input>;
+  on_conflict?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Insurance_Quote_Pdf_Selection_Artifact_OneArgs = {
+  object: Insurance_Quote_Pdf_Selection_Artifact_Insert_Input;
+  on_conflict?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Insurance_Quote_Pdf_Selection_OneArgs = {
+  object: Insurance_Quote_Pdf_Selection_Insert_Input;
+  on_conflict?: Maybe<Insurance_Quote_Pdf_Selection_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Insurance_Quote_SelectionArgs = {
+  objects: Array<Insurance_Quote_Selection_Insert_Input>;
+  on_conflict?: Maybe<Insurance_Quote_Selection_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Insurance_Quote_Selection_OneArgs = {
+  object: Insurance_Quote_Selection_Insert_Input;
+  on_conflict?: Maybe<Insurance_Quote_Selection_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Insured_OrganizationArgs = {
+  objects: Array<Insured_Organization_Insert_Input>;
+  on_conflict?: Maybe<Insured_Organization_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Insured_Organization_ContactArgs = {
+  objects: Array<Insured_Organization_Contact_Insert_Input>;
+  on_conflict?: Maybe<Insured_Organization_Contact_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Insured_Organization_Contact_OneArgs = {
+  object: Insured_Organization_Contact_Insert_Input;
+  on_conflict?: Maybe<Insured_Organization_Contact_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Insured_Organization_OneArgs = {
+  object: Insured_Organization_Insert_Input;
+  on_conflict?: Maybe<Insured_Organization_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_MeArgs = {
+  objects: Array<Me_Insert_Input>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Me_OneArgs = {
+  object: Me_Insert_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Naics_CodeArgs = {
+  objects: Array<Naics_Code_Insert_Input>;
+  on_conflict?: Maybe<Naics_Code_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Naics_Code_OneArgs = {
+  object: Naics_Code_Insert_Input;
+  on_conflict?: Maybe<Naics_Code_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Naics_MappingArgs = {
+  objects: Array<Naics_Mapping_Insert_Input>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Naics_Mapping_OneArgs = {
+  object: Naics_Mapping_Insert_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Organization_DomainsArgs = {
+  objects: Array<Organization_Domains_Insert_Input>;
+  on_conflict?: Maybe<Organization_Domains_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Organization_Domains_OneArgs = {
+  object: Organization_Domains_Insert_Input;
+  on_conflict?: Maybe<Organization_Domains_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Organization_IndustryArgs = {
+  objects: Array<Organization_Industry_Insert_Input>;
+  on_conflict?: Maybe<Organization_Industry_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Organization_Industry_OneArgs = {
+  object: Organization_Industry_Insert_Input;
+  on_conflict?: Maybe<Organization_Industry_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Policy_PaymentArgs = {
+  objects: Array<Policy_Payment_Insert_Input>;
+  on_conflict?: Maybe<Policy_Payment_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Policy_Payment_OneArgs = {
+  object: Policy_Payment_Insert_Input;
+  on_conflict?: Maybe<Policy_Payment_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Policy_Seq_CounterArgs = {
+  objects: Array<Policy_Seq_Counter_Insert_Input>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Policy_Seq_Counter_OneArgs = {
+  object: Policy_Seq_Counter_Insert_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Rqb_SystemArgs = {
+  objects: Array<Rqb_System_Insert_Input>;
+  on_conflict?: Maybe<Rqb_System_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Rqb_System_OneArgs = {
+  object: Rqb_System_Insert_Input;
+  on_conflict?: Maybe<Rqb_System_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_TenantArgs = {
+  objects: Array<Tenant_Insert_Input>;
+  on_conflict?: Maybe<Tenant_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Tenant_AdminArgs = {
+  objects: Array<Tenant_Admin_Insert_Input>;
+  on_conflict?: Maybe<Tenant_Admin_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Tenant_Admin_OneArgs = {
+  object: Tenant_Admin_Insert_Input;
+  on_conflict?: Maybe<Tenant_Admin_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Tenant_OneArgs = {
+  object: Tenant_Insert_Input;
+  on_conflict?: Maybe<Tenant_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Tld_ExclusionsArgs = {
+  objects: Array<Tld_Exclusions_Insert_Input>;
+  on_conflict?: Maybe<Tld_Exclusions_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Tld_Exclusions_OneArgs = {
+  object: Tld_Exclusions_Insert_Input;
+  on_conflict?: Maybe<Tld_Exclusions_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Underwriter_Broker_AgenciesArgs = {
+  objects: Array<Underwriter_Broker_Agencies_Insert_Input>;
+  on_conflict?: Maybe<Underwriter_Broker_Agencies_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Underwriter_Broker_Agencies_OneArgs = {
+  object: Underwriter_Broker_Agencies_Insert_Input;
+  on_conflict?: Maybe<Underwriter_Broker_Agencies_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Underwriter_OrganizationArgs = {
+  objects: Array<Underwriter_Organization_Insert_Input>;
+  on_conflict?: Maybe<Underwriter_Organization_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Underwriter_Organization_OneArgs = {
+  object: Underwriter_Organization_Insert_Input;
+  on_conflict?: Maybe<Underwriter_Organization_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Underwriter_UserArgs = {
+  objects: Array<Underwriter_User_Insert_Input>;
+  on_conflict?: Maybe<Underwriter_User_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Underwriter_User_OneArgs = {
+  object: Underwriter_User_Insert_Input;
+  on_conflict?: Maybe<Underwriter_User_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_UserArgs = {
+  objects: Array<User_Insert_Input>;
+  on_conflict?: Maybe<User_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_User_OneArgs = {
+  object: User_Insert_Input;
+  on_conflict?: Maybe<User_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_User_Password_ResetArgs = {
+  objects: Array<User_Password_Reset_Insert_Input>;
+  on_conflict?: Maybe<User_Password_Reset_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_User_Password_Reset_OneArgs = {
+  object: User_Password_Reset_Insert_Input;
+  on_conflict?: Maybe<User_Password_Reset_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_View_Insurance_Application_For_Not_Taken_Up_45_DaysArgs = {
+  objects: Array<View_Insurance_Application_For_Not_Taken_Up_45_Days_Insert_Input>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_View_Insurance_Application_For_Not_Taken_Up_45_Days_OneArgs = {
+  object: View_Insurance_Application_For_Not_Taken_Up_45_Days_Insert_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootLogoUploadArgs = {
+  base64str: Scalars['String'];
+  tenant_id: Scalars['String'];
+  type: Scalars['String'];
+};
+
+
+/** mutation root */
+export type Mutation_RootManualTriggerQuotePdfArgs = {
+  applicationId: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootManualTriggerScanArgs = {
+  applicationId: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootResendQuotePdfEmailFromUiArgs = {
+  object: ResendInput;
+};
+
+
+/** mutation root */
+export type Mutation_RootSearchDnBArgs = {
+  domain: Scalars['String'];
+};
+
+
+/** mutation root */
+export type Mutation_RootSendQuotePdfEmailsFromUiArgs = {
+  object: EmailRecipientInput;
+};
+
+
+/** mutation root */
+export type Mutation_RootSendToIpfsArgs = {
+  applicationId: Scalars['uuid'];
+  brokerEmail: Scalars['String'];
+  insuranceQuoteSelectionId: Scalars['Int'];
+  payer: Scalars['String'];
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdatePremiumArgs = {
+  object: UpdatePremiumInput;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdateUserStatusArgs = {
+  input: UserStatusInput;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Broker_AgencyArgs = {
+  _inc?: Maybe<Broker_Agency_Inc_Input>;
+  _set?: Maybe<Broker_Agency_Set_Input>;
+  where: Broker_Agency_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Broker_Agency_By_PkArgs = {
+  _inc?: Maybe<Broker_Agency_Inc_Input>;
+  _set?: Maybe<Broker_Agency_Set_Input>;
+  pk_columns: Broker_Agency_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Broker_Agency_ManyArgs = {
+  updates: Array<Broker_Agency_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Broker_ProducerArgs = {
+  _inc?: Maybe<Broker_Producer_Inc_Input>;
+  _set?: Maybe<Broker_Producer_Set_Input>;
+  where: Broker_Producer_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Broker_Producer_By_PkArgs = {
+  _inc?: Maybe<Broker_Producer_Inc_Input>;
+  _set?: Maybe<Broker_Producer_Set_Input>;
+  pk_columns: Broker_Producer_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Broker_Producer_ManyArgs = {
+  updates: Array<Broker_Producer_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Document_FormsArgs = {
+  _inc?: Maybe<Document_Forms_Inc_Input>;
+  _set?: Maybe<Document_Forms_Set_Input>;
+  where: Document_Forms_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Document_Forms_By_PkArgs = {
+  _inc?: Maybe<Document_Forms_Inc_Input>;
+  _set?: Maybe<Document_Forms_Set_Input>;
+  pk_columns: Document_Forms_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Document_Forms_ManyArgs = {
+  updates: Array<Document_Forms_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Domain_ScanArgs = {
+  _inc?: Maybe<Domain_Scan_Inc_Input>;
+  _set?: Maybe<Domain_Scan_Set_Input>;
+  where: Domain_Scan_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Domain_Scan_By_PkArgs = {
+  _inc?: Maybe<Domain_Scan_Inc_Input>;
+  _set?: Maybe<Domain_Scan_Set_Input>;
+  pk_columns: Domain_Scan_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Domain_Scan_ManyArgs = {
+  updates: Array<Domain_Scan_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_DomainsArgs = {
+  _inc?: Maybe<Domains_Inc_Input>;
+  _set?: Maybe<Domains_Set_Input>;
+  where: Domains_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Domains_By_PkArgs = {
+  _inc?: Maybe<Domains_Inc_Input>;
+  _set?: Maybe<Domains_Set_Input>;
+  pk_columns: Domains_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Domains_ManyArgs = {
+  updates: Array<Domains_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_External_ScanArgs = {
+  _append?: Maybe<External_Scan_Append_Input>;
+  _delete_at_path?: Maybe<External_Scan_Delete_At_Path_Input>;
+  _delete_elem?: Maybe<External_Scan_Delete_Elem_Input>;
+  _delete_key?: Maybe<External_Scan_Delete_Key_Input>;
+  _inc?: Maybe<External_Scan_Inc_Input>;
+  _prepend?: Maybe<External_Scan_Prepend_Input>;
+  _set?: Maybe<External_Scan_Set_Input>;
+  where: External_Scan_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_External_Scan_By_PkArgs = {
+  _append?: Maybe<External_Scan_Append_Input>;
+  _delete_at_path?: Maybe<External_Scan_Delete_At_Path_Input>;
+  _delete_elem?: Maybe<External_Scan_Delete_Elem_Input>;
+  _delete_key?: Maybe<External_Scan_Delete_Key_Input>;
+  _inc?: Maybe<External_Scan_Inc_Input>;
+  _prepend?: Maybe<External_Scan_Prepend_Input>;
+  _set?: Maybe<External_Scan_Set_Input>;
+  pk_columns: External_Scan_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_External_Scan_ManyArgs = {
+  updates: Array<External_Scan_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Ims_Applications_Not_Taken_UpArgs = {
+  _set?: Maybe<Ims_Applications_Not_Taken_Up_Set_Input>;
+  where: Ims_Applications_Not_Taken_Up_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Ims_Applications_Not_Taken_Up_By_PkArgs = {
+  _set?: Maybe<Ims_Applications_Not_Taken_Up_Set_Input>;
+  pk_columns: Ims_Applications_Not_Taken_Up_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Ims_Applications_Not_Taken_Up_ManyArgs = {
+  updates: Array<Ims_Applications_Not_Taken_Up_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Ims_ChargeArgs = {
+  _inc?: Maybe<Ims_Charge_Inc_Input>;
+  _set?: Maybe<Ims_Charge_Set_Input>;
+  where: Ims_Charge_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Ims_Charge_By_PkArgs = {
+  _inc?: Maybe<Ims_Charge_Inc_Input>;
+  _set?: Maybe<Ims_Charge_Set_Input>;
+  pk_columns: Ims_Charge_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Ims_Charge_ManyArgs = {
+  updates: Array<Ims_Charge_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Ims_Company_Business_TypeArgs = {
+  _inc?: Maybe<Ims_Company_Business_Type_Inc_Input>;
+  _set?: Maybe<Ims_Company_Business_Type_Set_Input>;
+  where: Ims_Company_Business_Type_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Ims_Company_Business_Type_By_PkArgs = {
+  _inc?: Maybe<Ims_Company_Business_Type_Inc_Input>;
+  _set?: Maybe<Ims_Company_Business_Type_Set_Input>;
+  pk_columns: Ims_Company_Business_Type_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Ims_Company_Business_Type_ManyArgs = {
+  updates: Array<Ims_Company_Business_Type_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Ims_ResponsesArgs = {
+  _append?: Maybe<Ims_Responses_Append_Input>;
+  _delete_at_path?: Maybe<Ims_Responses_Delete_At_Path_Input>;
+  _delete_elem?: Maybe<Ims_Responses_Delete_Elem_Input>;
+  _delete_key?: Maybe<Ims_Responses_Delete_Key_Input>;
+  _inc?: Maybe<Ims_Responses_Inc_Input>;
+  _prepend?: Maybe<Ims_Responses_Prepend_Input>;
+  _set?: Maybe<Ims_Responses_Set_Input>;
+  where: Ims_Responses_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Ims_Responses_By_PkArgs = {
+  _append?: Maybe<Ims_Responses_Append_Input>;
+  _delete_at_path?: Maybe<Ims_Responses_Delete_At_Path_Input>;
+  _delete_elem?: Maybe<Ims_Responses_Delete_Elem_Input>;
+  _delete_key?: Maybe<Ims_Responses_Delete_Key_Input>;
+  _inc?: Maybe<Ims_Responses_Inc_Input>;
+  _prepend?: Maybe<Ims_Responses_Prepend_Input>;
+  _set?: Maybe<Ims_Responses_Set_Input>;
+  pk_columns: Ims_Responses_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Ims_Responses_ManyArgs = {
+  updates: Array<Ims_Responses_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Ims_StateArgs = {
+  _inc?: Maybe<Ims_State_Inc_Input>;
+  _set?: Maybe<Ims_State_Set_Input>;
+  where: Ims_State_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Ims_State_By_PkArgs = {
+  _inc?: Maybe<Ims_State_Inc_Input>;
+  _set?: Maybe<Ims_State_Set_Input>;
+  pk_columns: Ims_State_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Ims_State_ManyArgs = {
+  updates: Array<Ims_State_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Insurance_ApplicationArgs = {
+  _append?: Maybe<Insurance_Application_Append_Input>;
+  _delete_at_path?: Maybe<Insurance_Application_Delete_At_Path_Input>;
+  _delete_elem?: Maybe<Insurance_Application_Delete_Elem_Input>;
+  _delete_key?: Maybe<Insurance_Application_Delete_Key_Input>;
+  _inc?: Maybe<Insurance_Application_Inc_Input>;
+  _prepend?: Maybe<Insurance_Application_Prepend_Input>;
+  _set?: Maybe<Insurance_Application_Set_Input>;
+  where: Insurance_Application_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Insurance_Application_ArtifactArgs = {
+  _inc?: Maybe<Insurance_Application_Artifact_Inc_Input>;
+  _set?: Maybe<Insurance_Application_Artifact_Set_Input>;
+  where: Insurance_Application_Artifact_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Insurance_Application_Artifact_By_PkArgs = {
+  _inc?: Maybe<Insurance_Application_Artifact_Inc_Input>;
+  _set?: Maybe<Insurance_Application_Artifact_Set_Input>;
+  pk_columns: Insurance_Application_Artifact_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Insurance_Application_Artifact_ManyArgs = {
+  updates: Array<Insurance_Application_Artifact_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Insurance_Application_By_PkArgs = {
+  _append?: Maybe<Insurance_Application_Append_Input>;
+  _delete_at_path?: Maybe<Insurance_Application_Delete_At_Path_Input>;
+  _delete_elem?: Maybe<Insurance_Application_Delete_Elem_Input>;
+  _delete_key?: Maybe<Insurance_Application_Delete_Key_Input>;
+  _inc?: Maybe<Insurance_Application_Inc_Input>;
+  _prepend?: Maybe<Insurance_Application_Prepend_Input>;
+  _set?: Maybe<Insurance_Application_Set_Input>;
+  pk_columns: Insurance_Application_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Insurance_Application_ManyArgs = {
+  updates: Array<Insurance_Application_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Insurance_PolicyArgs = {
+  _append?: Maybe<Insurance_Policy_Append_Input>;
+  _delete_at_path?: Maybe<Insurance_Policy_Delete_At_Path_Input>;
+  _delete_elem?: Maybe<Insurance_Policy_Delete_Elem_Input>;
+  _delete_key?: Maybe<Insurance_Policy_Delete_Key_Input>;
+  _inc?: Maybe<Insurance_Policy_Inc_Input>;
+  _prepend?: Maybe<Insurance_Policy_Prepend_Input>;
+  _set?: Maybe<Insurance_Policy_Set_Input>;
+  where: Insurance_Policy_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Insurance_Policy_By_PkArgs = {
+  _append?: Maybe<Insurance_Policy_Append_Input>;
+  _delete_at_path?: Maybe<Insurance_Policy_Delete_At_Path_Input>;
+  _delete_elem?: Maybe<Insurance_Policy_Delete_Elem_Input>;
+  _delete_key?: Maybe<Insurance_Policy_Delete_Key_Input>;
+  _inc?: Maybe<Insurance_Policy_Inc_Input>;
+  _prepend?: Maybe<Insurance_Policy_Prepend_Input>;
+  _set?: Maybe<Insurance_Policy_Set_Input>;
+  pk_columns: Insurance_Policy_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Insurance_Policy_ManyArgs = {
+  updates: Array<Insurance_Policy_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Insurance_QuoteArgs = {
+  _append?: Maybe<Insurance_Quote_Append_Input>;
+  _delete_at_path?: Maybe<Insurance_Quote_Delete_At_Path_Input>;
+  _delete_elem?: Maybe<Insurance_Quote_Delete_Elem_Input>;
+  _delete_key?: Maybe<Insurance_Quote_Delete_Key_Input>;
+  _inc?: Maybe<Insurance_Quote_Inc_Input>;
+  _prepend?: Maybe<Insurance_Quote_Prepend_Input>;
+  _set?: Maybe<Insurance_Quote_Set_Input>;
+  where: Insurance_Quote_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Insurance_Quote_By_PkArgs = {
+  _append?: Maybe<Insurance_Quote_Append_Input>;
+  _delete_at_path?: Maybe<Insurance_Quote_Delete_At_Path_Input>;
+  _delete_elem?: Maybe<Insurance_Quote_Delete_Elem_Input>;
+  _delete_key?: Maybe<Insurance_Quote_Delete_Key_Input>;
+  _inc?: Maybe<Insurance_Quote_Inc_Input>;
+  _prepend?: Maybe<Insurance_Quote_Prepend_Input>;
+  _set?: Maybe<Insurance_Quote_Set_Input>;
+  pk_columns: Insurance_Quote_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Insurance_Quote_EmailArgs = {
+  _inc?: Maybe<Insurance_Quote_Email_Inc_Input>;
+  _set?: Maybe<Insurance_Quote_Email_Set_Input>;
+  where: Insurance_Quote_Email_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Insurance_Quote_Email_By_PkArgs = {
+  _inc?: Maybe<Insurance_Quote_Email_Inc_Input>;
+  _set?: Maybe<Insurance_Quote_Email_Set_Input>;
+  pk_columns: Insurance_Quote_Email_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Insurance_Quote_Email_ManyArgs = {
+  updates: Array<Insurance_Quote_Email_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Insurance_Quote_ManyArgs = {
+  updates: Array<Insurance_Quote_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Insurance_Quote_Pdf_SelectionArgs = {
+  _inc?: Maybe<Insurance_Quote_Pdf_Selection_Inc_Input>;
+  _set?: Maybe<Insurance_Quote_Pdf_Selection_Set_Input>;
+  where: Insurance_Quote_Pdf_Selection_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Insurance_Quote_Pdf_Selection_ArtifactArgs = {
+  _inc?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Inc_Input>;
+  _set?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Set_Input>;
+  where: Insurance_Quote_Pdf_Selection_Artifact_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Insurance_Quote_Pdf_Selection_Artifact_By_PkArgs = {
+  _inc?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Inc_Input>;
+  _set?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Set_Input>;
+  pk_columns: Insurance_Quote_Pdf_Selection_Artifact_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Insurance_Quote_Pdf_Selection_Artifact_ManyArgs = {
+  updates: Array<Insurance_Quote_Pdf_Selection_Artifact_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Insurance_Quote_Pdf_Selection_By_PkArgs = {
+  _inc?: Maybe<Insurance_Quote_Pdf_Selection_Inc_Input>;
+  _set?: Maybe<Insurance_Quote_Pdf_Selection_Set_Input>;
+  pk_columns: Insurance_Quote_Pdf_Selection_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Insurance_Quote_Pdf_Selection_ManyArgs = {
+  updates: Array<Insurance_Quote_Pdf_Selection_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Insurance_Quote_SelectionArgs = {
+  _inc?: Maybe<Insurance_Quote_Selection_Inc_Input>;
+  _set?: Maybe<Insurance_Quote_Selection_Set_Input>;
+  where: Insurance_Quote_Selection_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Insurance_Quote_Selection_By_PkArgs = {
+  _inc?: Maybe<Insurance_Quote_Selection_Inc_Input>;
+  _set?: Maybe<Insurance_Quote_Selection_Set_Input>;
+  pk_columns: Insurance_Quote_Selection_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Insurance_Quote_Selection_ManyArgs = {
+  updates: Array<Insurance_Quote_Selection_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Insured_OrganizationArgs = {
+  _inc?: Maybe<Insured_Organization_Inc_Input>;
+  _set?: Maybe<Insured_Organization_Set_Input>;
+  where: Insured_Organization_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Insured_Organization_By_PkArgs = {
+  _inc?: Maybe<Insured_Organization_Inc_Input>;
+  _set?: Maybe<Insured_Organization_Set_Input>;
+  pk_columns: Insured_Organization_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Insured_Organization_ContactArgs = {
+  _inc?: Maybe<Insured_Organization_Contact_Inc_Input>;
+  _set?: Maybe<Insured_Organization_Contact_Set_Input>;
+  where: Insured_Organization_Contact_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Insured_Organization_Contact_By_PkArgs = {
+  _inc?: Maybe<Insured_Organization_Contact_Inc_Input>;
+  _set?: Maybe<Insured_Organization_Contact_Set_Input>;
+  pk_columns: Insured_Organization_Contact_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Insured_Organization_Contact_ManyArgs = {
+  updates: Array<Insured_Organization_Contact_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Insured_Organization_ManyArgs = {
+  updates: Array<Insured_Organization_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_MeArgs = {
+  _inc?: Maybe<Me_Inc_Input>;
+  _set?: Maybe<Me_Set_Input>;
+  where: Me_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Me_ManyArgs = {
+  updates: Array<Me_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Naics_CodeArgs = {
+  _inc?: Maybe<Naics_Code_Inc_Input>;
+  _set?: Maybe<Naics_Code_Set_Input>;
+  where: Naics_Code_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Naics_Code_By_PkArgs = {
+  _inc?: Maybe<Naics_Code_Inc_Input>;
+  _set?: Maybe<Naics_Code_Set_Input>;
+  pk_columns: Naics_Code_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Naics_Code_ManyArgs = {
+  updates: Array<Naics_Code_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Naics_MappingArgs = {
+  _set?: Maybe<Naics_Mapping_Set_Input>;
+  where: Naics_Mapping_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Naics_Mapping_ManyArgs = {
+  updates: Array<Naics_Mapping_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Organization_DomainsArgs = {
+  _inc?: Maybe<Organization_Domains_Inc_Input>;
+  _set?: Maybe<Organization_Domains_Set_Input>;
+  where: Organization_Domains_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Organization_Domains_By_PkArgs = {
+  _inc?: Maybe<Organization_Domains_Inc_Input>;
+  _set?: Maybe<Organization_Domains_Set_Input>;
+  pk_columns: Organization_Domains_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Organization_Domains_ManyArgs = {
+  updates: Array<Organization_Domains_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Organization_IndustryArgs = {
+  _inc?: Maybe<Organization_Industry_Inc_Input>;
+  _set?: Maybe<Organization_Industry_Set_Input>;
+  where: Organization_Industry_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Organization_Industry_By_PkArgs = {
+  _inc?: Maybe<Organization_Industry_Inc_Input>;
+  _set?: Maybe<Organization_Industry_Set_Input>;
+  pk_columns: Organization_Industry_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Organization_Industry_ManyArgs = {
+  updates: Array<Organization_Industry_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Policy_PaymentArgs = {
+  _inc?: Maybe<Policy_Payment_Inc_Input>;
+  _set?: Maybe<Policy_Payment_Set_Input>;
+  where: Policy_Payment_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Policy_Payment_By_PkArgs = {
+  _inc?: Maybe<Policy_Payment_Inc_Input>;
+  _set?: Maybe<Policy_Payment_Set_Input>;
+  pk_columns: Policy_Payment_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Policy_Payment_ManyArgs = {
+  updates: Array<Policy_Payment_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Policy_Seq_CounterArgs = {
+  _inc?: Maybe<Policy_Seq_Counter_Inc_Input>;
+  _set?: Maybe<Policy_Seq_Counter_Set_Input>;
+  where: Policy_Seq_Counter_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Policy_Seq_Counter_ManyArgs = {
+  updates: Array<Policy_Seq_Counter_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Rqb_SystemArgs = {
+  _append?: Maybe<Rqb_System_Append_Input>;
+  _delete_at_path?: Maybe<Rqb_System_Delete_At_Path_Input>;
+  _delete_elem?: Maybe<Rqb_System_Delete_Elem_Input>;
+  _delete_key?: Maybe<Rqb_System_Delete_Key_Input>;
+  _inc?: Maybe<Rqb_System_Inc_Input>;
+  _prepend?: Maybe<Rqb_System_Prepend_Input>;
+  _set?: Maybe<Rqb_System_Set_Input>;
+  where: Rqb_System_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Rqb_System_By_PkArgs = {
+  _append?: Maybe<Rqb_System_Append_Input>;
+  _delete_at_path?: Maybe<Rqb_System_Delete_At_Path_Input>;
+  _delete_elem?: Maybe<Rqb_System_Delete_Elem_Input>;
+  _delete_key?: Maybe<Rqb_System_Delete_Key_Input>;
+  _inc?: Maybe<Rqb_System_Inc_Input>;
+  _prepend?: Maybe<Rqb_System_Prepend_Input>;
+  _set?: Maybe<Rqb_System_Set_Input>;
+  pk_columns: Rqb_System_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Rqb_System_ManyArgs = {
+  updates: Array<Rqb_System_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_TenantArgs = {
+  _inc?: Maybe<Tenant_Inc_Input>;
+  _set?: Maybe<Tenant_Set_Input>;
+  where: Tenant_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Tenant_AdminArgs = {
+  _inc?: Maybe<Tenant_Admin_Inc_Input>;
+  _set?: Maybe<Tenant_Admin_Set_Input>;
+  where: Tenant_Admin_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Tenant_Admin_By_PkArgs = {
+  _inc?: Maybe<Tenant_Admin_Inc_Input>;
+  _set?: Maybe<Tenant_Admin_Set_Input>;
+  pk_columns: Tenant_Admin_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Tenant_Admin_ManyArgs = {
+  updates: Array<Tenant_Admin_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Tenant_By_PkArgs = {
+  _inc?: Maybe<Tenant_Inc_Input>;
+  _set?: Maybe<Tenant_Set_Input>;
+  pk_columns: Tenant_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Tenant_ManyArgs = {
+  updates: Array<Tenant_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Tld_ExclusionsArgs = {
+  _inc?: Maybe<Tld_Exclusions_Inc_Input>;
+  _set?: Maybe<Tld_Exclusions_Set_Input>;
+  where: Tld_Exclusions_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Tld_Exclusions_By_PkArgs = {
+  _inc?: Maybe<Tld_Exclusions_Inc_Input>;
+  _set?: Maybe<Tld_Exclusions_Set_Input>;
+  pk_columns: Tld_Exclusions_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Tld_Exclusions_ManyArgs = {
+  updates: Array<Tld_Exclusions_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Underwriter_Broker_AgenciesArgs = {
+  _inc?: Maybe<Underwriter_Broker_Agencies_Inc_Input>;
+  _set?: Maybe<Underwriter_Broker_Agencies_Set_Input>;
+  where: Underwriter_Broker_Agencies_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Underwriter_Broker_Agencies_By_PkArgs = {
+  _inc?: Maybe<Underwriter_Broker_Agencies_Inc_Input>;
+  _set?: Maybe<Underwriter_Broker_Agencies_Set_Input>;
+  pk_columns: Underwriter_Broker_Agencies_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Underwriter_Broker_Agencies_ManyArgs = {
+  updates: Array<Underwriter_Broker_Agencies_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Underwriter_OrganizationArgs = {
+  _inc?: Maybe<Underwriter_Organization_Inc_Input>;
+  _set?: Maybe<Underwriter_Organization_Set_Input>;
+  where: Underwriter_Organization_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Underwriter_Organization_By_PkArgs = {
+  _inc?: Maybe<Underwriter_Organization_Inc_Input>;
+  _set?: Maybe<Underwriter_Organization_Set_Input>;
+  pk_columns: Underwriter_Organization_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Underwriter_Organization_ManyArgs = {
+  updates: Array<Underwriter_Organization_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Underwriter_UserArgs = {
+  _inc?: Maybe<Underwriter_User_Inc_Input>;
+  _set?: Maybe<Underwriter_User_Set_Input>;
+  where: Underwriter_User_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Underwriter_User_By_PkArgs = {
+  _inc?: Maybe<Underwriter_User_Inc_Input>;
+  _set?: Maybe<Underwriter_User_Set_Input>;
+  pk_columns: Underwriter_User_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Underwriter_User_ManyArgs = {
+  updates: Array<Underwriter_User_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_UserArgs = {
+  _inc?: Maybe<User_Inc_Input>;
+  _set?: Maybe<User_Set_Input>;
+  where: User_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_User_By_PkArgs = {
+  _inc?: Maybe<User_Inc_Input>;
+  _set?: Maybe<User_Set_Input>;
+  pk_columns: User_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_User_ManyArgs = {
+  updates: Array<User_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_User_Password_ResetArgs = {
+  _inc?: Maybe<User_Password_Reset_Inc_Input>;
+  _set?: Maybe<User_Password_Reset_Set_Input>;
+  where: User_Password_Reset_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_User_Password_Reset_By_PkArgs = {
+  _inc?: Maybe<User_Password_Reset_Inc_Input>;
+  _set?: Maybe<User_Password_Reset_Set_Input>;
+  pk_columns: User_Password_Reset_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_User_Password_Reset_ManyArgs = {
+  updates: Array<User_Password_Reset_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_View_Insurance_Application_For_Not_Taken_Up_45_DaysArgs = {
+  _set?: Maybe<View_Insurance_Application_For_Not_Taken_Up_45_Days_Set_Input>;
+  where: View_Insurance_Application_For_Not_Taken_Up_45_Days_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_View_Insurance_Application_For_Not_Taken_Up_45_Days_ManyArgs = {
+  updates: Array<View_Insurance_Application_For_Not_Taken_Up_45_Days_Updates>;
+};
+
+/** columns and relationships of "naics_code" */
+export type Naics_Code = {
+  __typename?: 'naics_code';
+  created_at: Scalars['timestamptz'];
+  icb: Scalars['String'];
+  id: Scalars['Int'];
+  naics: Scalars['String'];
+  /** An object relationship */
+  organization_industry: Organization_Industry;
+  updated_at: Scalars['timestamptz'];
+};
+
+/** aggregated selection of "naics_code" */
+export type Naics_Code_Aggregate = {
+  __typename?: 'naics_code_aggregate';
+  aggregate?: Maybe<Naics_Code_Aggregate_Fields>;
+  nodes: Array<Naics_Code>;
+};
+
+export type Naics_Code_Aggregate_Bool_Exp = {
+  count?: Maybe<Naics_Code_Aggregate_Bool_Exp_Count>;
+};
+
+export type Naics_Code_Aggregate_Bool_Exp_Count = {
+  arguments?: Maybe<Array<Naics_Code_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+  filter?: Maybe<Naics_Code_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "naics_code" */
+export type Naics_Code_Aggregate_Fields = {
+  __typename?: 'naics_code_aggregate_fields';
+  avg?: Maybe<Naics_Code_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Naics_Code_Max_Fields>;
+  min?: Maybe<Naics_Code_Min_Fields>;
+  stddev?: Maybe<Naics_Code_Stddev_Fields>;
+  stddev_pop?: Maybe<Naics_Code_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Naics_Code_Stddev_Samp_Fields>;
+  sum?: Maybe<Naics_Code_Sum_Fields>;
+  var_pop?: Maybe<Naics_Code_Var_Pop_Fields>;
+  var_samp?: Maybe<Naics_Code_Var_Samp_Fields>;
+  variance?: Maybe<Naics_Code_Variance_Fields>;
+};
+
+
+/** aggregate fields of "naics_code" */
+export type Naics_Code_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Naics_Code_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "naics_code" */
+export type Naics_Code_Aggregate_Order_By = {
+  avg?: Maybe<Naics_Code_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Naics_Code_Max_Order_By>;
+  min?: Maybe<Naics_Code_Min_Order_By>;
+  stddev?: Maybe<Naics_Code_Stddev_Order_By>;
+  stddev_pop?: Maybe<Naics_Code_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Naics_Code_Stddev_Samp_Order_By>;
+  sum?: Maybe<Naics_Code_Sum_Order_By>;
+  var_pop?: Maybe<Naics_Code_Var_Pop_Order_By>;
+  var_samp?: Maybe<Naics_Code_Var_Samp_Order_By>;
+  variance?: Maybe<Naics_Code_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "naics_code" */
+export type Naics_Code_Arr_Rel_Insert_Input = {
+  data: Array<Naics_Code_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: Maybe<Naics_Code_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Naics_Code_Avg_Fields = {
+  __typename?: 'naics_code_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "naics_code" */
+export type Naics_Code_Avg_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "naics_code". All fields are combined with a logical 'AND'. */
+export type Naics_Code_Bool_Exp = {
+  _and?: Maybe<Array<Naics_Code_Bool_Exp>>;
+  _not?: Maybe<Naics_Code_Bool_Exp>;
+  _or?: Maybe<Array<Naics_Code_Bool_Exp>>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  icb?: Maybe<String_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  naics?: Maybe<String_Comparison_Exp>;
+  organization_industry?: Maybe<Organization_Industry_Bool_Exp>;
+  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "naics_code" */
+export enum Naics_Code_Constraint {
+  /** unique or primary key constraint on columns "icb", "naics" */
+  NaicsCodeIcbNaicsKey = 'naics_code_icb_naics_key',
+  /** unique or primary key constraint on columns "id" */
+  NaicsCodePkey = 'naics_code_pkey'
+}
+
+/** input type for incrementing numeric columns in table "naics_code" */
+export type Naics_Code_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "naics_code" */
+export type Naics_Code_Insert_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  icb?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  naics?: Maybe<Scalars['String']>;
+  organization_industry?: Maybe<Organization_Industry_Obj_Rel_Insert_Input>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type Naics_Code_Max_Fields = {
+  __typename?: 'naics_code_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  icb?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  naics?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** order by max() on columns of table "naics_code" */
+export type Naics_Code_Max_Order_By = {
+  created_at?: Maybe<Order_By>;
+  icb?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  naics?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Naics_Code_Min_Fields = {
+  __typename?: 'naics_code_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  icb?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  naics?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** order by min() on columns of table "naics_code" */
+export type Naics_Code_Min_Order_By = {
+  created_at?: Maybe<Order_By>;
+  icb?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  naics?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "naics_code" */
+export type Naics_Code_Mutation_Response = {
+  __typename?: 'naics_code_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Naics_Code>;
+};
+
+/** on_conflict condition type for table "naics_code" */
+export type Naics_Code_On_Conflict = {
+  constraint: Naics_Code_Constraint;
+  update_columns?: Array<Naics_Code_Update_Column>;
+  where?: Maybe<Naics_Code_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "naics_code". */
+export type Naics_Code_Order_By = {
+  created_at?: Maybe<Order_By>;
+  icb?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  naics?: Maybe<Order_By>;
+  organization_industry?: Maybe<Organization_Industry_Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: naics_code */
+export type Naics_Code_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "naics_code" */
+export enum Naics_Code_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Icb = 'icb',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Naics = 'naics',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "naics_code" */
+export type Naics_Code_Set_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  icb?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  naics?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate stddev on columns */
+export type Naics_Code_Stddev_Fields = {
+  __typename?: 'naics_code_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "naics_code" */
+export type Naics_Code_Stddev_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Naics_Code_Stddev_Pop_Fields = {
+  __typename?: 'naics_code_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "naics_code" */
+export type Naics_Code_Stddev_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Naics_Code_Stddev_Samp_Fields = {
+  __typename?: 'naics_code_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "naics_code" */
+export type Naics_Code_Stddev_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** Streaming cursor of the table "naics_code" */
+export type Naics_Code_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Naics_Code_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Naics_Code_Stream_Cursor_Value_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  icb?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  naics?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate sum on columns */
+export type Naics_Code_Sum_Fields = {
+  __typename?: 'naics_code_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "naics_code" */
+export type Naics_Code_Sum_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** update columns of table "naics_code" */
+export enum Naics_Code_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Icb = 'icb',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Naics = 'naics',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+export type Naics_Code_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: Maybe<Naics_Code_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<Naics_Code_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Naics_Code_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Naics_Code_Var_Pop_Fields = {
+  __typename?: 'naics_code_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "naics_code" */
+export type Naics_Code_Var_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Naics_Code_Var_Samp_Fields = {
+  __typename?: 'naics_code_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "naics_code" */
+export type Naics_Code_Var_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Naics_Code_Variance_Fields = {
+  __typename?: 'naics_code_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "naics_code" */
+export type Naics_Code_Variance_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** columns and relationships of "naics_mapping" */
+export type Naics_Mapping = {
+  __typename?: 'naics_mapping';
+  icb?: Maybe<Scalars['String']>;
+  naics?: Maybe<Scalars['String']>;
+  /** An object relationship */
+  organization_industry?: Maybe<Organization_Industry>;
+};
+
+/** aggregated selection of "naics_mapping" */
+export type Naics_Mapping_Aggregate = {
+  __typename?: 'naics_mapping_aggregate';
+  aggregate?: Maybe<Naics_Mapping_Aggregate_Fields>;
+  nodes: Array<Naics_Mapping>;
+};
+
+/** aggregate fields of "naics_mapping" */
+export type Naics_Mapping_Aggregate_Fields = {
+  __typename?: 'naics_mapping_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Naics_Mapping_Max_Fields>;
+  min?: Maybe<Naics_Mapping_Min_Fields>;
+};
+
+
+/** aggregate fields of "naics_mapping" */
+export type Naics_Mapping_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Naics_Mapping_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "naics_mapping". All fields are combined with a logical 'AND'. */
+export type Naics_Mapping_Bool_Exp = {
+  _and?: Maybe<Array<Naics_Mapping_Bool_Exp>>;
+  _not?: Maybe<Naics_Mapping_Bool_Exp>;
+  _or?: Maybe<Array<Naics_Mapping_Bool_Exp>>;
+  icb?: Maybe<String_Comparison_Exp>;
+  naics?: Maybe<String_Comparison_Exp>;
+  organization_industry?: Maybe<Organization_Industry_Bool_Exp>;
+};
+
+/** input type for inserting data into table "naics_mapping" */
+export type Naics_Mapping_Insert_Input = {
+  icb?: Maybe<Scalars['String']>;
+  naics?: Maybe<Scalars['String']>;
+  organization_industry?: Maybe<Organization_Industry_Obj_Rel_Insert_Input>;
+};
+
+/** aggregate max on columns */
+export type Naics_Mapping_Max_Fields = {
+  __typename?: 'naics_mapping_max_fields';
+  icb?: Maybe<Scalars['String']>;
+  naics?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type Naics_Mapping_Min_Fields = {
+  __typename?: 'naics_mapping_min_fields';
+  icb?: Maybe<Scalars['String']>;
+  naics?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "naics_mapping" */
+export type Naics_Mapping_Mutation_Response = {
+  __typename?: 'naics_mapping_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Naics_Mapping>;
+};
+
+/** Ordering options when selecting data from "naics_mapping". */
+export type Naics_Mapping_Order_By = {
+  icb?: Maybe<Order_By>;
+  naics?: Maybe<Order_By>;
+  organization_industry?: Maybe<Organization_Industry_Order_By>;
+};
+
+/** select columns of table "naics_mapping" */
+export enum Naics_Mapping_Select_Column {
+  /** column name */
+  Icb = 'icb',
+  /** column name */
+  Naics = 'naics'
+}
+
+/** input type for updating data in table "naics_mapping" */
+export type Naics_Mapping_Set_Input = {
+  icb?: Maybe<Scalars['String']>;
+  naics?: Maybe<Scalars['String']>;
+};
+
+/** Streaming cursor of the table "naics_mapping" */
+export type Naics_Mapping_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Naics_Mapping_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Naics_Mapping_Stream_Cursor_Value_Input = {
+  icb?: Maybe<Scalars['String']>;
+  naics?: Maybe<Scalars['String']>;
+};
+
+export type Naics_Mapping_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<Naics_Mapping_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Naics_Mapping_Bool_Exp;
+};
+
+/** Boolean expression to compare columns of type "numeric". All fields are combined with logical 'AND'. */
+export type Numeric_Comparison_Exp = {
+  _eq?: Maybe<Scalars['numeric']>;
+  _gt?: Maybe<Scalars['numeric']>;
+  _gte?: Maybe<Scalars['numeric']>;
+  _in?: Maybe<Array<Scalars['numeric']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['numeric']>;
+  _lte?: Maybe<Scalars['numeric']>;
+  _neq?: Maybe<Scalars['numeric']>;
+  _nin?: Maybe<Array<Scalars['numeric']>>;
+};
+
+/** column ordering options */
+export enum Order_By {
+  /** in ascending order, nulls last */
+  Asc = 'asc',
+  /** in ascending order, nulls first */
+  AscNullsFirst = 'asc_nulls_first',
+  /** in ascending order, nulls last */
+  AscNullsLast = 'asc_nulls_last',
+  /** in descending order, nulls first */
+  Desc = 'desc',
+  /** in descending order, nulls first */
+  DescNullsFirst = 'desc_nulls_first',
+  /** in descending order, nulls last */
+  DescNullsLast = 'desc_nulls_last'
+}
+
+/** columns and relationships of "organization_domains" */
+export type Organization_Domains = {
+  __typename?: 'organization_domains';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  /** An object relationship */
+  domain: Domains;
+  domain_id: Scalars['Int'];
+  id: Scalars['bigint'];
+  /** An object relationship */
+  insured_organization: Insured_Organization;
+  organization_id: Scalars['Int'];
+};
+
+/** aggregated selection of "organization_domains" */
+export type Organization_Domains_Aggregate = {
+  __typename?: 'organization_domains_aggregate';
+  aggregate?: Maybe<Organization_Domains_Aggregate_Fields>;
+  nodes: Array<Organization_Domains>;
+};
+
+export type Organization_Domains_Aggregate_Bool_Exp = {
+  count?: Maybe<Organization_Domains_Aggregate_Bool_Exp_Count>;
+};
+
+export type Organization_Domains_Aggregate_Bool_Exp_Count = {
+  arguments?: Maybe<Array<Organization_Domains_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+  filter?: Maybe<Organization_Domains_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "organization_domains" */
+export type Organization_Domains_Aggregate_Fields = {
+  __typename?: 'organization_domains_aggregate_fields';
+  avg?: Maybe<Organization_Domains_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Organization_Domains_Max_Fields>;
+  min?: Maybe<Organization_Domains_Min_Fields>;
+  stddev?: Maybe<Organization_Domains_Stddev_Fields>;
+  stddev_pop?: Maybe<Organization_Domains_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Organization_Domains_Stddev_Samp_Fields>;
+  sum?: Maybe<Organization_Domains_Sum_Fields>;
+  var_pop?: Maybe<Organization_Domains_Var_Pop_Fields>;
+  var_samp?: Maybe<Organization_Domains_Var_Samp_Fields>;
+  variance?: Maybe<Organization_Domains_Variance_Fields>;
+};
+
+
+/** aggregate fields of "organization_domains" */
+export type Organization_Domains_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Organization_Domains_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "organization_domains" */
+export type Organization_Domains_Aggregate_Order_By = {
+  avg?: Maybe<Organization_Domains_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Organization_Domains_Max_Order_By>;
+  min?: Maybe<Organization_Domains_Min_Order_By>;
+  stddev?: Maybe<Organization_Domains_Stddev_Order_By>;
+  stddev_pop?: Maybe<Organization_Domains_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Organization_Domains_Stddev_Samp_Order_By>;
+  sum?: Maybe<Organization_Domains_Sum_Order_By>;
+  var_pop?: Maybe<Organization_Domains_Var_Pop_Order_By>;
+  var_samp?: Maybe<Organization_Domains_Var_Samp_Order_By>;
+  variance?: Maybe<Organization_Domains_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "organization_domains" */
+export type Organization_Domains_Arr_Rel_Insert_Input = {
+  data: Array<Organization_Domains_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: Maybe<Organization_Domains_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Organization_Domains_Avg_Fields = {
+  __typename?: 'organization_domains_avg_fields';
+  domain_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  organization_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "organization_domains" */
+export type Organization_Domains_Avg_Order_By = {
+  domain_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  organization_id?: Maybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "organization_domains". All fields are combined with a logical 'AND'. */
+export type Organization_Domains_Bool_Exp = {
+  _and?: Maybe<Array<Organization_Domains_Bool_Exp>>;
+  _not?: Maybe<Organization_Domains_Bool_Exp>;
+  _or?: Maybe<Array<Organization_Domains_Bool_Exp>>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  domain?: Maybe<Domains_Bool_Exp>;
+  domain_id?: Maybe<Int_Comparison_Exp>;
+  id?: Maybe<Bigint_Comparison_Exp>;
+  insured_organization?: Maybe<Insured_Organization_Bool_Exp>;
+  organization_id?: Maybe<Int_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "organization_domains" */
+export enum Organization_Domains_Constraint {
+  /** unique or primary key constraint on columns "organization_id", "domain_id" */
+  OrganizationDomainsDomainIdOrganizationIdKey = 'organization_domains_domain_id_organization_id_key',
+  /** unique or primary key constraint on columns "id" */
+  OrganizationDomainsPkey = 'organization_domains_pkey'
+}
+
+/** input type for incrementing numeric columns in table "organization_domains" */
+export type Organization_Domains_Inc_Input = {
+  domain_id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['bigint']>;
+  organization_id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "organization_domains" */
+export type Organization_Domains_Insert_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  domain?: Maybe<Domains_Obj_Rel_Insert_Input>;
+  domain_id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['bigint']>;
+  insured_organization?: Maybe<Insured_Organization_Obj_Rel_Insert_Input>;
+  organization_id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate max on columns */
+export type Organization_Domains_Max_Fields = {
+  __typename?: 'organization_domains_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  domain_id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['bigint']>;
+  organization_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by max() on columns of table "organization_domains" */
+export type Organization_Domains_Max_Order_By = {
+  created_at?: Maybe<Order_By>;
+  domain_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  organization_id?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Organization_Domains_Min_Fields = {
+  __typename?: 'organization_domains_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  domain_id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['bigint']>;
+  organization_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by min() on columns of table "organization_domains" */
+export type Organization_Domains_Min_Order_By = {
+  created_at?: Maybe<Order_By>;
+  domain_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  organization_id?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "organization_domains" */
+export type Organization_Domains_Mutation_Response = {
+  __typename?: 'organization_domains_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Organization_Domains>;
+};
+
+/** on_conflict condition type for table "organization_domains" */
+export type Organization_Domains_On_Conflict = {
+  constraint: Organization_Domains_Constraint;
+  update_columns?: Array<Organization_Domains_Update_Column>;
+  where?: Maybe<Organization_Domains_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "organization_domains". */
+export type Organization_Domains_Order_By = {
+  created_at?: Maybe<Order_By>;
+  domain?: Maybe<Domains_Order_By>;
+  domain_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  insured_organization?: Maybe<Insured_Organization_Order_By>;
+  organization_id?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: organization_domains */
+export type Organization_Domains_Pk_Columns_Input = {
+  id: Scalars['bigint'];
+};
+
+/** select columns of table "organization_domains" */
+export enum Organization_Domains_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  DomainId = 'domain_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  OrganizationId = 'organization_id'
+}
+
+/** input type for updating data in table "organization_domains" */
+export type Organization_Domains_Set_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  domain_id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['bigint']>;
+  organization_id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate stddev on columns */
+export type Organization_Domains_Stddev_Fields = {
+  __typename?: 'organization_domains_stddev_fields';
+  domain_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  organization_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "organization_domains" */
+export type Organization_Domains_Stddev_Order_By = {
+  domain_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  organization_id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Organization_Domains_Stddev_Pop_Fields = {
+  __typename?: 'organization_domains_stddev_pop_fields';
+  domain_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  organization_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "organization_domains" */
+export type Organization_Domains_Stddev_Pop_Order_By = {
+  domain_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  organization_id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Organization_Domains_Stddev_Samp_Fields = {
+  __typename?: 'organization_domains_stddev_samp_fields';
+  domain_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  organization_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "organization_domains" */
+export type Organization_Domains_Stddev_Samp_Order_By = {
+  domain_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  organization_id?: Maybe<Order_By>;
+};
+
+/** Streaming cursor of the table "organization_domains" */
+export type Organization_Domains_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Organization_Domains_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Organization_Domains_Stream_Cursor_Value_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  domain_id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['bigint']>;
+  organization_id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate sum on columns */
+export type Organization_Domains_Sum_Fields = {
+  __typename?: 'organization_domains_sum_fields';
+  domain_id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['bigint']>;
+  organization_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "organization_domains" */
+export type Organization_Domains_Sum_Order_By = {
+  domain_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  organization_id?: Maybe<Order_By>;
+};
+
+/** update columns of table "organization_domains" */
+export enum Organization_Domains_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  DomainId = 'domain_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  OrganizationId = 'organization_id'
+}
+
+export type Organization_Domains_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: Maybe<Organization_Domains_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<Organization_Domains_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Organization_Domains_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Organization_Domains_Var_Pop_Fields = {
+  __typename?: 'organization_domains_var_pop_fields';
+  domain_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  organization_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "organization_domains" */
+export type Organization_Domains_Var_Pop_Order_By = {
+  domain_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  organization_id?: Maybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Organization_Domains_Var_Samp_Fields = {
+  __typename?: 'organization_domains_var_samp_fields';
+  domain_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  organization_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "organization_domains" */
+export type Organization_Domains_Var_Samp_Order_By = {
+  domain_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  organization_id?: Maybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Organization_Domains_Variance_Fields = {
+  __typename?: 'organization_domains_variance_fields';
+  domain_id?: Maybe<Scalars['Float']>;
+  id?: Maybe<Scalars['Float']>;
+  organization_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "organization_domains" */
+export type Organization_Domains_Variance_Order_By = {
+  domain_id?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  organization_id?: Maybe<Order_By>;
+};
+
+/** columns and relationships of "organization_industry" */
+export type Organization_Industry = {
+  __typename?: 'organization_industry';
+  created_at: Scalars['timestamptz'];
+  icb: Scalars['String'];
+  icb_desc: Scalars['String'];
+  id: Scalars['Int'];
+  industry: Scalars['String'];
+  /** An array relationship */
+  naics_codes: Array<Naics_Code>;
+  /** An aggregate relationship */
+  naics_codes_aggregate: Naics_Code_Aggregate;
+  status: Scalars['String'];
+  updated_at: Scalars['timestamptz'];
+};
+
+
+/** columns and relationships of "organization_industry" */
+export type Organization_IndustryNaics_CodesArgs = {
+  distinct_on?: Maybe<Array<Naics_Code_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Naics_Code_Order_By>>;
+  where?: Maybe<Naics_Code_Bool_Exp>;
+};
+
+
+/** columns and relationships of "organization_industry" */
+export type Organization_IndustryNaics_Codes_AggregateArgs = {
+  distinct_on?: Maybe<Array<Naics_Code_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Naics_Code_Order_By>>;
+  where?: Maybe<Naics_Code_Bool_Exp>;
+};
+
+/** aggregated selection of "organization_industry" */
+export type Organization_Industry_Aggregate = {
+  __typename?: 'organization_industry_aggregate';
+  aggregate?: Maybe<Organization_Industry_Aggregate_Fields>;
+  nodes: Array<Organization_Industry>;
+};
+
+/** aggregate fields of "organization_industry" */
+export type Organization_Industry_Aggregate_Fields = {
+  __typename?: 'organization_industry_aggregate_fields';
+  avg?: Maybe<Organization_Industry_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Organization_Industry_Max_Fields>;
+  min?: Maybe<Organization_Industry_Min_Fields>;
+  stddev?: Maybe<Organization_Industry_Stddev_Fields>;
+  stddev_pop?: Maybe<Organization_Industry_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Organization_Industry_Stddev_Samp_Fields>;
+  sum?: Maybe<Organization_Industry_Sum_Fields>;
+  var_pop?: Maybe<Organization_Industry_Var_Pop_Fields>;
+  var_samp?: Maybe<Organization_Industry_Var_Samp_Fields>;
+  variance?: Maybe<Organization_Industry_Variance_Fields>;
+};
+
+
+/** aggregate fields of "organization_industry" */
+export type Organization_Industry_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Organization_Industry_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Organization_Industry_Avg_Fields = {
+  __typename?: 'organization_industry_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "organization_industry". All fields are combined with a logical 'AND'. */
+export type Organization_Industry_Bool_Exp = {
+  _and?: Maybe<Array<Organization_Industry_Bool_Exp>>;
+  _not?: Maybe<Organization_Industry_Bool_Exp>;
+  _or?: Maybe<Array<Organization_Industry_Bool_Exp>>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  icb?: Maybe<String_Comparison_Exp>;
+  icb_desc?: Maybe<String_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  industry?: Maybe<String_Comparison_Exp>;
+  naics_codes?: Maybe<Naics_Code_Bool_Exp>;
+  naics_codes_aggregate?: Maybe<Naics_Code_Aggregate_Bool_Exp>;
+  status?: Maybe<String_Comparison_Exp>;
+  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "organization_industry" */
+export enum Organization_Industry_Constraint {
+  /** unique or primary key constraint on columns "icb" */
+  OrganizationIndustryIcbKey = 'organization_industry_icb_key',
+  /** unique or primary key constraint on columns "id" */
+  OrganizationIndustryPkey = 'organization_industry_pkey'
+}
+
+/** input type for incrementing numeric columns in table "organization_industry" */
+export type Organization_Industry_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "organization_industry" */
+export type Organization_Industry_Insert_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  icb?: Maybe<Scalars['String']>;
+  icb_desc?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  industry?: Maybe<Scalars['String']>;
+  naics_codes?: Maybe<Naics_Code_Arr_Rel_Insert_Input>;
+  status?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type Organization_Industry_Max_Fields = {
+  __typename?: 'organization_industry_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  icb?: Maybe<Scalars['String']>;
+  icb_desc?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  industry?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate min on columns */
+export type Organization_Industry_Min_Fields = {
+  __typename?: 'organization_industry_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  icb?: Maybe<Scalars['String']>;
+  icb_desc?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  industry?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** response of any mutation on the table "organization_industry" */
+export type Organization_Industry_Mutation_Response = {
+  __typename?: 'organization_industry_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Organization_Industry>;
+};
+
+/** input type for inserting object relation for remote table "organization_industry" */
+export type Organization_Industry_Obj_Rel_Insert_Input = {
+  data: Organization_Industry_Insert_Input;
+  /** upsert condition */
+  on_conflict?: Maybe<Organization_Industry_On_Conflict>;
+};
+
+/** on_conflict condition type for table "organization_industry" */
+export type Organization_Industry_On_Conflict = {
+  constraint: Organization_Industry_Constraint;
+  update_columns?: Array<Organization_Industry_Update_Column>;
+  where?: Maybe<Organization_Industry_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "organization_industry". */
+export type Organization_Industry_Order_By = {
+  created_at?: Maybe<Order_By>;
+  icb?: Maybe<Order_By>;
+  icb_desc?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  industry?: Maybe<Order_By>;
+  naics_codes_aggregate?: Maybe<Naics_Code_Aggregate_Order_By>;
+  status?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: organization_industry */
+export type Organization_Industry_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "organization_industry" */
+export enum Organization_Industry_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Icb = 'icb',
+  /** column name */
+  IcbDesc = 'icb_desc',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Industry = 'industry',
+  /** column name */
+  Status = 'status',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "organization_industry" */
+export type Organization_Industry_Set_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  icb?: Maybe<Scalars['String']>;
+  icb_desc?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  industry?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate stddev on columns */
+export type Organization_Industry_Stddev_Fields = {
+  __typename?: 'organization_industry_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Organization_Industry_Stddev_Pop_Fields = {
+  __typename?: 'organization_industry_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Organization_Industry_Stddev_Samp_Fields = {
+  __typename?: 'organization_industry_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Streaming cursor of the table "organization_industry" */
+export type Organization_Industry_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Organization_Industry_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Organization_Industry_Stream_Cursor_Value_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  icb?: Maybe<Scalars['String']>;
+  icb_desc?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  industry?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate sum on columns */
+export type Organization_Industry_Sum_Fields = {
+  __typename?: 'organization_industry_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "organization_industry" */
+export enum Organization_Industry_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Icb = 'icb',
+  /** column name */
+  IcbDesc = 'icb_desc',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Industry = 'industry',
+  /** column name */
+  Status = 'status',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+export type Organization_Industry_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: Maybe<Organization_Industry_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<Organization_Industry_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Organization_Industry_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Organization_Industry_Var_Pop_Fields = {
+  __typename?: 'organization_industry_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Organization_Industry_Var_Samp_Fields = {
+  __typename?: 'organization_industry_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Organization_Industry_Variance_Fields = {
+  __typename?: 'organization_industry_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** columns and relationships of "policy_payment" */
+export type Policy_Payment = {
+  __typename?: 'policy_payment';
+  created_at: Scalars['timestamptz'];
+  id: Scalars['Int'];
+  /** An object relationship */
+  insurance_policy: Insurance_Policy;
+  insurance_policy_id: Scalars['Int'];
+  payment_state?: Maybe<Scalars['String']>;
+  updated_at: Scalars['timestamptz'];
+};
+
+/** aggregated selection of "policy_payment" */
+export type Policy_Payment_Aggregate = {
+  __typename?: 'policy_payment_aggregate';
+  aggregate?: Maybe<Policy_Payment_Aggregate_Fields>;
+  nodes: Array<Policy_Payment>;
+};
+
+/** aggregate fields of "policy_payment" */
+export type Policy_Payment_Aggregate_Fields = {
+  __typename?: 'policy_payment_aggregate_fields';
+  avg?: Maybe<Policy_Payment_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Policy_Payment_Max_Fields>;
+  min?: Maybe<Policy_Payment_Min_Fields>;
+  stddev?: Maybe<Policy_Payment_Stddev_Fields>;
+  stddev_pop?: Maybe<Policy_Payment_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Policy_Payment_Stddev_Samp_Fields>;
+  sum?: Maybe<Policy_Payment_Sum_Fields>;
+  var_pop?: Maybe<Policy_Payment_Var_Pop_Fields>;
+  var_samp?: Maybe<Policy_Payment_Var_Samp_Fields>;
+  variance?: Maybe<Policy_Payment_Variance_Fields>;
+};
+
+
+/** aggregate fields of "policy_payment" */
+export type Policy_Payment_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Policy_Payment_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Policy_Payment_Avg_Fields = {
+  __typename?: 'policy_payment_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+  insurance_policy_id?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "policy_payment". All fields are combined with a logical 'AND'. */
+export type Policy_Payment_Bool_Exp = {
+  _and?: Maybe<Array<Policy_Payment_Bool_Exp>>;
+  _not?: Maybe<Policy_Payment_Bool_Exp>;
+  _or?: Maybe<Array<Policy_Payment_Bool_Exp>>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  insurance_policy?: Maybe<Insurance_Policy_Bool_Exp>;
+  insurance_policy_id?: Maybe<Int_Comparison_Exp>;
+  payment_state?: Maybe<String_Comparison_Exp>;
+  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "policy_payment" */
+export enum Policy_Payment_Constraint {
+  /** unique or primary key constraint on columns "insurance_policy_id" */
+  PolicyPaymentInsurancePolicyIdKey = 'policy_payment_insurance_policy_id_key',
+  /** unique or primary key constraint on columns "id" */
+  PolicyPaymentPkey = 'policy_payment_pkey'
+}
+
+/** input type for incrementing numeric columns in table "policy_payment" */
+export type Policy_Payment_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+  insurance_policy_id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "policy_payment" */
+export type Policy_Payment_Insert_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  insurance_policy?: Maybe<Insurance_Policy_Obj_Rel_Insert_Input>;
+  insurance_policy_id?: Maybe<Scalars['Int']>;
+  payment_state?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type Policy_Payment_Max_Fields = {
+  __typename?: 'policy_payment_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  insurance_policy_id?: Maybe<Scalars['Int']>;
+  payment_state?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate min on columns */
+export type Policy_Payment_Min_Fields = {
+  __typename?: 'policy_payment_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  insurance_policy_id?: Maybe<Scalars['Int']>;
+  payment_state?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** response of any mutation on the table "policy_payment" */
+export type Policy_Payment_Mutation_Response = {
+  __typename?: 'policy_payment_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Policy_Payment>;
+};
+
+/** input type for inserting object relation for remote table "policy_payment" */
+export type Policy_Payment_Obj_Rel_Insert_Input = {
+  data: Policy_Payment_Insert_Input;
+  /** upsert condition */
+  on_conflict?: Maybe<Policy_Payment_On_Conflict>;
+};
+
+/** on_conflict condition type for table "policy_payment" */
+export type Policy_Payment_On_Conflict = {
+  constraint: Policy_Payment_Constraint;
+  update_columns?: Array<Policy_Payment_Update_Column>;
+  where?: Maybe<Policy_Payment_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "policy_payment". */
+export type Policy_Payment_Order_By = {
+  created_at?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  insurance_policy?: Maybe<Insurance_Policy_Order_By>;
+  insurance_policy_id?: Maybe<Order_By>;
+  payment_state?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: policy_payment */
+export type Policy_Payment_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "policy_payment" */
+export enum Policy_Payment_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  InsurancePolicyId = 'insurance_policy_id',
+  /** column name */
+  PaymentState = 'payment_state',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "policy_payment" */
+export type Policy_Payment_Set_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  insurance_policy_id?: Maybe<Scalars['Int']>;
+  payment_state?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate stddev on columns */
+export type Policy_Payment_Stddev_Fields = {
+  __typename?: 'policy_payment_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+  insurance_policy_id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Policy_Payment_Stddev_Pop_Fields = {
+  __typename?: 'policy_payment_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  insurance_policy_id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Policy_Payment_Stddev_Samp_Fields = {
+  __typename?: 'policy_payment_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  insurance_policy_id?: Maybe<Scalars['Float']>;
+};
+
+/** Streaming cursor of the table "policy_payment" */
+export type Policy_Payment_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Policy_Payment_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Policy_Payment_Stream_Cursor_Value_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  insurance_policy_id?: Maybe<Scalars['Int']>;
+  payment_state?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate sum on columns */
+export type Policy_Payment_Sum_Fields = {
+  __typename?: 'policy_payment_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+  insurance_policy_id?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "policy_payment" */
+export enum Policy_Payment_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  InsurancePolicyId = 'insurance_policy_id',
+  /** column name */
+  PaymentState = 'payment_state',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+export type Policy_Payment_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: Maybe<Policy_Payment_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<Policy_Payment_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Policy_Payment_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Policy_Payment_Var_Pop_Fields = {
+  __typename?: 'policy_payment_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  insurance_policy_id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Policy_Payment_Var_Samp_Fields = {
+  __typename?: 'policy_payment_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  insurance_policy_id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Policy_Payment_Variance_Fields = {
+  __typename?: 'policy_payment_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+  insurance_policy_id?: Maybe<Scalars['Float']>;
+};
+
+/** columns and relationships of "policy_seq_counter" */
+export type Policy_Seq_Counter = {
+  __typename?: 'policy_seq_counter';
+  last_seq: Scalars['Int'];
+};
+
+/** aggregated selection of "policy_seq_counter" */
+export type Policy_Seq_Counter_Aggregate = {
+  __typename?: 'policy_seq_counter_aggregate';
+  aggregate?: Maybe<Policy_Seq_Counter_Aggregate_Fields>;
+  nodes: Array<Policy_Seq_Counter>;
+};
+
+/** aggregate fields of "policy_seq_counter" */
+export type Policy_Seq_Counter_Aggregate_Fields = {
+  __typename?: 'policy_seq_counter_aggregate_fields';
+  avg?: Maybe<Policy_Seq_Counter_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Policy_Seq_Counter_Max_Fields>;
+  min?: Maybe<Policy_Seq_Counter_Min_Fields>;
+  stddev?: Maybe<Policy_Seq_Counter_Stddev_Fields>;
+  stddev_pop?: Maybe<Policy_Seq_Counter_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Policy_Seq_Counter_Stddev_Samp_Fields>;
+  sum?: Maybe<Policy_Seq_Counter_Sum_Fields>;
+  var_pop?: Maybe<Policy_Seq_Counter_Var_Pop_Fields>;
+  var_samp?: Maybe<Policy_Seq_Counter_Var_Samp_Fields>;
+  variance?: Maybe<Policy_Seq_Counter_Variance_Fields>;
+};
+
+
+/** aggregate fields of "policy_seq_counter" */
+export type Policy_Seq_Counter_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Policy_Seq_Counter_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Policy_Seq_Counter_Avg_Fields = {
+  __typename?: 'policy_seq_counter_avg_fields';
+  last_seq?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "policy_seq_counter". All fields are combined with a logical 'AND'. */
+export type Policy_Seq_Counter_Bool_Exp = {
+  _and?: Maybe<Array<Policy_Seq_Counter_Bool_Exp>>;
+  _not?: Maybe<Policy_Seq_Counter_Bool_Exp>;
+  _or?: Maybe<Array<Policy_Seq_Counter_Bool_Exp>>;
+  last_seq?: Maybe<Int_Comparison_Exp>;
+};
+
+/** input type for incrementing numeric columns in table "policy_seq_counter" */
+export type Policy_Seq_Counter_Inc_Input = {
+  last_seq?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "policy_seq_counter" */
+export type Policy_Seq_Counter_Insert_Input = {
+  last_seq?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate max on columns */
+export type Policy_Seq_Counter_Max_Fields = {
+  __typename?: 'policy_seq_counter_max_fields';
+  last_seq?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate min on columns */
+export type Policy_Seq_Counter_Min_Fields = {
+  __typename?: 'policy_seq_counter_min_fields';
+  last_seq?: Maybe<Scalars['Int']>;
+};
+
+/** response of any mutation on the table "policy_seq_counter" */
+export type Policy_Seq_Counter_Mutation_Response = {
+  __typename?: 'policy_seq_counter_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Policy_Seq_Counter>;
+};
+
+/** Ordering options when selecting data from "policy_seq_counter". */
+export type Policy_Seq_Counter_Order_By = {
+  last_seq?: Maybe<Order_By>;
+};
+
+/** select columns of table "policy_seq_counter" */
+export enum Policy_Seq_Counter_Select_Column {
+  /** column name */
+  LastSeq = 'last_seq'
+}
+
+/** input type for updating data in table "policy_seq_counter" */
+export type Policy_Seq_Counter_Set_Input = {
+  last_seq?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate stddev on columns */
+export type Policy_Seq_Counter_Stddev_Fields = {
+  __typename?: 'policy_seq_counter_stddev_fields';
+  last_seq?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Policy_Seq_Counter_Stddev_Pop_Fields = {
+  __typename?: 'policy_seq_counter_stddev_pop_fields';
+  last_seq?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Policy_Seq_Counter_Stddev_Samp_Fields = {
+  __typename?: 'policy_seq_counter_stddev_samp_fields';
+  last_seq?: Maybe<Scalars['Float']>;
+};
+
+/** Streaming cursor of the table "policy_seq_counter" */
+export type Policy_Seq_Counter_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Policy_Seq_Counter_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Policy_Seq_Counter_Stream_Cursor_Value_Input = {
+  last_seq?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate sum on columns */
+export type Policy_Seq_Counter_Sum_Fields = {
+  __typename?: 'policy_seq_counter_sum_fields';
+  last_seq?: Maybe<Scalars['Int']>;
+};
+
+export type Policy_Seq_Counter_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: Maybe<Policy_Seq_Counter_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<Policy_Seq_Counter_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Policy_Seq_Counter_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Policy_Seq_Counter_Var_Pop_Fields = {
+  __typename?: 'policy_seq_counter_var_pop_fields';
+  last_seq?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Policy_Seq_Counter_Var_Samp_Fields = {
+  __typename?: 'policy_seq_counter_var_samp_fields';
+  last_seq?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Policy_Seq_Counter_Variance_Fields = {
+  __typename?: 'policy_seq_counter_variance_fields';
+  last_seq?: Maybe<Scalars['Float']>;
+};
+
+export type Query_Root = {
+  __typename?: 'query_root';
+  /** fetch data from the table: "broker_agency" */
+  broker_agency: Array<Broker_Agency>;
+  /** fetch aggregated fields from the table: "broker_agency" */
+  broker_agency_aggregate: Broker_Agency_Aggregate;
+  /** fetch data from the table: "broker_agency" using primary key columns */
+  broker_agency_by_pk?: Maybe<Broker_Agency>;
+  /** fetch data from the table: "broker_producer" */
+  broker_producer: Array<Broker_Producer>;
+  /** fetch aggregated fields from the table: "broker_producer" */
+  broker_producer_aggregate: Broker_Producer_Aggregate;
+  /** fetch data from the table: "broker_producer" using primary key columns */
+  broker_producer_by_pk?: Maybe<Broker_Producer>;
+  /** execute function "check_tld_exclusion" which returns "tld_exclusions" */
+  check_tld_exclusion: Array<Tld_Exclusions>;
+  /** execute function "check_tld_exclusion" and query aggregates on result of table type "tld_exclusions" */
+  check_tld_exclusion_aggregate: Tld_Exclusions_Aggregate;
+  /** An array relationship */
+  document_forms: Array<Document_Forms>;
+  /** An aggregate relationship */
+  document_forms_aggregate: Document_Forms_Aggregate;
+  /** fetch data from the table: "document_forms" using primary key columns */
+  document_forms_by_pk?: Maybe<Document_Forms>;
+  /** fetch data from the table: "domain_scan" */
+  domain_scan: Array<Domain_Scan>;
+  /** fetch aggregated fields from the table: "domain_scan" */
+  domain_scan_aggregate: Domain_Scan_Aggregate;
+  /** fetch data from the table: "domain_scan" using primary key columns */
+  domain_scan_by_pk?: Maybe<Domain_Scan>;
+  /** fetch data from the table: "domains" */
+  domains: Array<Domains>;
+  /** fetch aggregated fields from the table: "domains" */
+  domains_aggregate: Domains_Aggregate;
+  /** fetch data from the table: "domains" using primary key columns */
+  domains_by_pk?: Maybe<Domains>;
+  /** fetch data from the table: "external_scan" */
+  external_scan: Array<External_Scan>;
+  /** fetch aggregated fields from the table: "external_scan" */
+  external_scan_aggregate: External_Scan_Aggregate;
+  /** fetch data from the table: "external_scan" using primary key columns */
+  external_scan_by_pk?: Maybe<External_Scan>;
+  getCustomPolicies?: Maybe<CustomPolicyOutput>;
+  getIpfsFile?: Maybe<IpfsFileOutput>;
+  getLogo?: Maybe<FileLink>;
+  getScanResult?: Maybe<ScanOutput>;
+  /** fetch data from the table: "ims_applications_not_taken_up" */
+  ims_applications_not_taken_up: Array<Ims_Applications_Not_Taken_Up>;
+  /** fetch aggregated fields from the table: "ims_applications_not_taken_up" */
+  ims_applications_not_taken_up_aggregate: Ims_Applications_Not_Taken_Up_Aggregate;
+  /** fetch data from the table: "ims_applications_not_taken_up" using primary key columns */
+  ims_applications_not_taken_up_by_pk?: Maybe<Ims_Applications_Not_Taken_Up>;
+  /** fetch data from the table: "ims_charge" */
+  ims_charge: Array<Ims_Charge>;
+  /** fetch aggregated fields from the table: "ims_charge" */
+  ims_charge_aggregate: Ims_Charge_Aggregate;
+  /** fetch data from the table: "ims_charge" using primary key columns */
+  ims_charge_by_pk?: Maybe<Ims_Charge>;
+  /** fetch data from the table: "ims_company_business_type" */
+  ims_company_business_type: Array<Ims_Company_Business_Type>;
+  /** fetch aggregated fields from the table: "ims_company_business_type" */
+  ims_company_business_type_aggregate: Ims_Company_Business_Type_Aggregate;
+  /** fetch data from the table: "ims_company_business_type" using primary key columns */
+  ims_company_business_type_by_pk?: Maybe<Ims_Company_Business_Type>;
+  /** An array relationship */
+  ims_responses: Array<Ims_Responses>;
+  /** An aggregate relationship */
+  ims_responses_aggregate: Ims_Responses_Aggregate;
+  /** fetch data from the table: "ims_responses" using primary key columns */
+  ims_responses_by_pk?: Maybe<Ims_Responses>;
+  /** fetch data from the table: "ims_state" */
+  ims_state: Array<Ims_State>;
+  /** fetch aggregated fields from the table: "ims_state" */
+  ims_state_aggregate: Ims_State_Aggregate;
+  /** fetch data from the table: "ims_state" using primary key columns */
+  ims_state_by_pk?: Maybe<Ims_State>;
+  /** fetch data from the table: "insurance_application" */
+  insurance_application: Array<Insurance_Application>;
+  /** fetch aggregated fields from the table: "insurance_application" */
+  insurance_application_aggregate: Insurance_Application_Aggregate;
+  /** fetch data from the table: "insurance_application_artifact" */
+  insurance_application_artifact: Array<Insurance_Application_Artifact>;
+  /** fetch aggregated fields from the table: "insurance_application_artifact" */
+  insurance_application_artifact_aggregate: Insurance_Application_Artifact_Aggregate;
+  /** fetch data from the table: "insurance_application_artifact" using primary key columns */
+  insurance_application_artifact_by_pk?: Maybe<Insurance_Application_Artifact>;
+  /** fetch data from the table: "insurance_application" using primary key columns */
+  insurance_application_by_pk?: Maybe<Insurance_Application>;
+  /** execute function "insurance_applications_from_n_days_ago" which returns "insurance_application" */
+  insurance_applications_from_n_days_ago: Array<Insurance_Application>;
+  /** execute function "insurance_applications_from_n_days_ago" and query aggregates on result of table type "insurance_application" */
+  insurance_applications_from_n_days_ago_aggregate: Insurance_Application_Aggregate;
+  /** fetch data from the table: "insurance_policy" */
+  insurance_policy: Array<Insurance_Policy>;
+  /** fetch aggregated fields from the table: "insurance_policy" */
+  insurance_policy_aggregate: Insurance_Policy_Aggregate;
+  /** fetch data from the table: "insurance_policy" using primary key columns */
+  insurance_policy_by_pk?: Maybe<Insurance_Policy>;
+  /** fetch data from the table: "insurance_quote" */
+  insurance_quote: Array<Insurance_Quote>;
+  /** fetch aggregated fields from the table: "insurance_quote" */
+  insurance_quote_aggregate: Insurance_Quote_Aggregate;
+  /** fetch data from the table: "insurance_quote" using primary key columns */
+  insurance_quote_by_pk?: Maybe<Insurance_Quote>;
+  /** fetch data from the table: "insurance_quote_email" */
+  insurance_quote_email: Array<Insurance_Quote_Email>;
+  /** fetch aggregated fields from the table: "insurance_quote_email" */
+  insurance_quote_email_aggregate: Insurance_Quote_Email_Aggregate;
+  /** fetch data from the table: "insurance_quote_email" using primary key columns */
+  insurance_quote_email_by_pk?: Maybe<Insurance_Quote_Email>;
+  /** fetch data from the table: "insurance_quote_pdf_selection" */
+  insurance_quote_pdf_selection: Array<Insurance_Quote_Pdf_Selection>;
+  /** fetch aggregated fields from the table: "insurance_quote_pdf_selection" */
+  insurance_quote_pdf_selection_aggregate: Insurance_Quote_Pdf_Selection_Aggregate;
+  /** fetch data from the table: "insurance_quote_pdf_selection_artifact" */
+  insurance_quote_pdf_selection_artifact: Array<Insurance_Quote_Pdf_Selection_Artifact>;
+  /** fetch aggregated fields from the table: "insurance_quote_pdf_selection_artifact" */
+  insurance_quote_pdf_selection_artifact_aggregate: Insurance_Quote_Pdf_Selection_Artifact_Aggregate;
+  /** fetch data from the table: "insurance_quote_pdf_selection_artifact" using primary key columns */
+  insurance_quote_pdf_selection_artifact_by_pk?: Maybe<Insurance_Quote_Pdf_Selection_Artifact>;
+  /** fetch data from the table: "insurance_quote_pdf_selection" using primary key columns */
+  insurance_quote_pdf_selection_by_pk?: Maybe<Insurance_Quote_Pdf_Selection>;
+  /** fetch data from the table: "insurance_quote_selection" */
+  insurance_quote_selection: Array<Insurance_Quote_Selection>;
+  /** fetch aggregated fields from the table: "insurance_quote_selection" */
+  insurance_quote_selection_aggregate: Insurance_Quote_Selection_Aggregate;
+  /** fetch data from the table: "insurance_quote_selection" using primary key columns */
+  insurance_quote_selection_by_pk?: Maybe<Insurance_Quote_Selection>;
+  /** fetch data from the table: "insured_organization" */
+  insured_organization: Array<Insured_Organization>;
+  /** fetch aggregated fields from the table: "insured_organization" */
+  insured_organization_aggregate: Insured_Organization_Aggregate;
+  /** fetch data from the table: "insured_organization" using primary key columns */
+  insured_organization_by_pk?: Maybe<Insured_Organization>;
+  /** fetch data from the table: "insured_organization_contact" */
+  insured_organization_contact: Array<Insured_Organization_Contact>;
+  /** fetch aggregated fields from the table: "insured_organization_contact" */
+  insured_organization_contact_aggregate: Insured_Organization_Contact_Aggregate;
+  /** fetch data from the table: "insured_organization_contact" using primary key columns */
+  insured_organization_contact_by_pk?: Maybe<Insured_Organization_Contact>;
+  /** fetch data from the table: "latest_app_artifacts_quote_policy" */
+  latest_app_artifacts_quote_policy: Array<Latest_App_Artifacts_Quote_Policy>;
+  /** fetch aggregated fields from the table: "latest_app_artifacts_quote_policy" */
+  latest_app_artifacts_quote_policy_aggregate: Latest_App_Artifacts_Quote_Policy_Aggregate;
+  /** fetch data from the table: "latest_insurance_applications" */
+  latest_insurance_applications: Array<Latest_Insurance_Applications>;
+  /** fetch aggregated fields from the table: "latest_insurance_applications" */
+  latest_insurance_applications_aggregate: Latest_Insurance_Applications_Aggregate;
+  /** fetch data from the table: "me" */
+  me: Array<Me>;
+  /** fetch aggregated fields from the table: "me" */
+  me_aggregate: Me_Aggregate;
+  /** fetch data from the table: "naics_code" */
+  naics_code: Array<Naics_Code>;
+  /** fetch aggregated fields from the table: "naics_code" */
+  naics_code_aggregate: Naics_Code_Aggregate;
+  /** fetch data from the table: "naics_code" using primary key columns */
+  naics_code_by_pk?: Maybe<Naics_Code>;
+  /** fetch data from the table: "naics_mapping" */
+  naics_mapping: Array<Naics_Mapping>;
+  /** fetch aggregated fields from the table: "naics_mapping" */
+  naics_mapping_aggregate: Naics_Mapping_Aggregate;
+  /** An array relationship */
+  organization_domains: Array<Organization_Domains>;
+  /** An aggregate relationship */
+  organization_domains_aggregate: Organization_Domains_Aggregate;
+  /** fetch data from the table: "organization_domains" using primary key columns */
+  organization_domains_by_pk?: Maybe<Organization_Domains>;
+  /** fetch data from the table: "organization_industry" */
+  organization_industry: Array<Organization_Industry>;
+  /** fetch aggregated fields from the table: "organization_industry" */
+  organization_industry_aggregate: Organization_Industry_Aggregate;
+  /** fetch data from the table: "organization_industry" using primary key columns */
+  organization_industry_by_pk?: Maybe<Organization_Industry>;
+  /** fetch data from the table: "policy_payment" */
+  policy_payment: Array<Policy_Payment>;
+  /** fetch aggregated fields from the table: "policy_payment" */
+  policy_payment_aggregate: Policy_Payment_Aggregate;
+  /** fetch data from the table: "policy_payment" using primary key columns */
+  policy_payment_by_pk?: Maybe<Policy_Payment>;
+  /** fetch data from the table: "policy_seq_counter" */
+  policy_seq_counter: Array<Policy_Seq_Counter>;
+  /** fetch aggregated fields from the table: "policy_seq_counter" */
+  policy_seq_counter_aggregate: Policy_Seq_Counter_Aggregate;
+  /** fetch data from the table: "rqb_system" */
+  rqb_system: Array<Rqb_System>;
+  /** fetch aggregated fields from the table: "rqb_system" */
+  rqb_system_aggregate: Rqb_System_Aggregate;
+  /** fetch data from the table: "rqb_system" using primary key columns */
+  rqb_system_by_pk?: Maybe<Rqb_System>;
+  sendToIPFS?: Maybe<SendToIpfs>;
+  /** fetch data from the table: "tenant" */
+  tenant: Array<Tenant>;
+  /** fetch data from the table: "tenant_admin" */
+  tenant_admin: Array<Tenant_Admin>;
+  /** fetch aggregated fields from the table: "tenant_admin" */
+  tenant_admin_aggregate: Tenant_Admin_Aggregate;
+  /** fetch data from the table: "tenant_admin" using primary key columns */
+  tenant_admin_by_pk?: Maybe<Tenant_Admin>;
+  /** fetch aggregated fields from the table: "tenant" */
+  tenant_aggregate: Tenant_Aggregate;
+  /** fetch data from the table: "tenant" using primary key columns */
+  tenant_by_pk?: Maybe<Tenant>;
+  /** An array relationship */
+  tld_exclusions: Array<Tld_Exclusions>;
+  /** An aggregate relationship */
+  tld_exclusions_aggregate: Tld_Exclusions_Aggregate;
+  /** fetch data from the table: "tld_exclusions" using primary key columns */
+  tld_exclusions_by_pk?: Maybe<Tld_Exclusions>;
+  /** An array relationship */
+  underwriter_broker_agencies: Array<Underwriter_Broker_Agencies>;
+  /** An aggregate relationship */
+  underwriter_broker_agencies_aggregate: Underwriter_Broker_Agencies_Aggregate;
+  /** fetch data from the table: "underwriter_broker_agencies" using primary key columns */
+  underwriter_broker_agencies_by_pk?: Maybe<Underwriter_Broker_Agencies>;
+  /** fetch data from the table: "underwriter_organization" */
+  underwriter_organization: Array<Underwriter_Organization>;
+  /** fetch aggregated fields from the table: "underwriter_organization" */
+  underwriter_organization_aggregate: Underwriter_Organization_Aggregate;
+  /** fetch data from the table: "underwriter_organization" using primary key columns */
+  underwriter_organization_by_pk?: Maybe<Underwriter_Organization>;
+  /** fetch data from the table: "underwriter_user" */
+  underwriter_user: Array<Underwriter_User>;
+  /** fetch aggregated fields from the table: "underwriter_user" */
+  underwriter_user_aggregate: Underwriter_User_Aggregate;
+  /** fetch data from the table: "underwriter_user" using primary key columns */
+  underwriter_user_by_pk?: Maybe<Underwriter_User>;
+  /** fetch data from the table: "user" */
+  user: Array<User>;
+  /** fetch aggregated fields from the table: "user" */
+  user_aggregate: User_Aggregate;
+  /** fetch data from the table: "user" using primary key columns */
+  user_by_pk?: Maybe<User>;
+  /** fetch data from the table: "user_password_reset" */
+  user_password_reset: Array<User_Password_Reset>;
+  /** fetch aggregated fields from the table: "user_password_reset" */
+  user_password_reset_aggregate: User_Password_Reset_Aggregate;
+  /** fetch data from the table: "user_password_reset" using primary key columns */
+  user_password_reset_by_pk?: Maybe<User_Password_Reset>;
+  /** fetch data from the table: "view_insurance_application_for_not_taken_up_45_days" */
+  view_insurance_application_for_not_taken_up_45_days: Array<View_Insurance_Application_For_Not_Taken_Up_45_Days>;
+  /** fetch aggregated fields from the table: "view_insurance_application_for_not_taken_up_45_days" */
+  view_insurance_application_for_not_taken_up_45_days_aggregate: View_Insurance_Application_For_Not_Taken_Up_45_Days_Aggregate;
+};
+
+
+export type Query_RootBroker_AgencyArgs = {
+  distinct_on?: Maybe<Array<Broker_Agency_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Broker_Agency_Order_By>>;
+  where?: Maybe<Broker_Agency_Bool_Exp>;
+};
+
+
+export type Query_RootBroker_Agency_AggregateArgs = {
+  distinct_on?: Maybe<Array<Broker_Agency_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Broker_Agency_Order_By>>;
+  where?: Maybe<Broker_Agency_Bool_Exp>;
+};
+
+
+export type Query_RootBroker_Agency_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Query_RootBroker_ProducerArgs = {
+  distinct_on?: Maybe<Array<Broker_Producer_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Broker_Producer_Order_By>>;
+  where?: Maybe<Broker_Producer_Bool_Exp>;
+};
+
+
+export type Query_RootBroker_Producer_AggregateArgs = {
+  distinct_on?: Maybe<Array<Broker_Producer_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Broker_Producer_Order_By>>;
+  where?: Maybe<Broker_Producer_Bool_Exp>;
+};
+
+
+export type Query_RootBroker_Producer_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Query_RootCheck_Tld_ExclusionArgs = {
+  args: Check_Tld_Exclusion_Args;
+  distinct_on?: Maybe<Array<Tld_Exclusions_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Tld_Exclusions_Order_By>>;
+  where?: Maybe<Tld_Exclusions_Bool_Exp>;
+};
+
+
+export type Query_RootCheck_Tld_Exclusion_AggregateArgs = {
+  args: Check_Tld_Exclusion_Args;
+  distinct_on?: Maybe<Array<Tld_Exclusions_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Tld_Exclusions_Order_By>>;
+  where?: Maybe<Tld_Exclusions_Bool_Exp>;
+};
+
+
+export type Query_RootDocument_FormsArgs = {
+  distinct_on?: Maybe<Array<Document_Forms_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Document_Forms_Order_By>>;
+  where?: Maybe<Document_Forms_Bool_Exp>;
+};
+
+
+export type Query_RootDocument_Forms_AggregateArgs = {
+  distinct_on?: Maybe<Array<Document_Forms_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Document_Forms_Order_By>>;
+  where?: Maybe<Document_Forms_Bool_Exp>;
+};
+
+
+export type Query_RootDocument_Forms_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Query_RootDomain_ScanArgs = {
+  distinct_on?: Maybe<Array<Domain_Scan_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Domain_Scan_Order_By>>;
+  where?: Maybe<Domain_Scan_Bool_Exp>;
+};
+
+
+export type Query_RootDomain_Scan_AggregateArgs = {
+  distinct_on?: Maybe<Array<Domain_Scan_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Domain_Scan_Order_By>>;
+  where?: Maybe<Domain_Scan_Bool_Exp>;
+};
+
+
+export type Query_RootDomain_Scan_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Query_RootDomainsArgs = {
+  distinct_on?: Maybe<Array<Domains_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Domains_Order_By>>;
+  where?: Maybe<Domains_Bool_Exp>;
+};
+
+
+export type Query_RootDomains_AggregateArgs = {
+  distinct_on?: Maybe<Array<Domains_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Domains_Order_By>>;
+  where?: Maybe<Domains_Bool_Exp>;
+};
+
+
+export type Query_RootDomains_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Query_RootExternal_ScanArgs = {
+  distinct_on?: Maybe<Array<External_Scan_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<External_Scan_Order_By>>;
+  where?: Maybe<External_Scan_Bool_Exp>;
+};
+
+
+export type Query_RootExternal_Scan_AggregateArgs = {
+  distinct_on?: Maybe<Array<External_Scan_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<External_Scan_Order_By>>;
+  where?: Maybe<External_Scan_Bool_Exp>;
+};
+
+
+export type Query_RootExternal_Scan_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Query_RootGetIpfsFileArgs = {
+  filename: Scalars['String'];
+};
+
+
+export type Query_RootGetLogoArgs = {
+  key: Scalars['String'];
+};
+
+
+export type Query_RootGetScanResultArgs = {
+  external_id: Scalars['uuid'];
+};
+
+
+export type Query_RootIms_Applications_Not_Taken_UpArgs = {
+  distinct_on?: Maybe<Array<Ims_Applications_Not_Taken_Up_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Ims_Applications_Not_Taken_Up_Order_By>>;
+  where?: Maybe<Ims_Applications_Not_Taken_Up_Bool_Exp>;
+};
+
+
+export type Query_RootIms_Applications_Not_Taken_Up_AggregateArgs = {
+  distinct_on?: Maybe<Array<Ims_Applications_Not_Taken_Up_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Ims_Applications_Not_Taken_Up_Order_By>>;
+  where?: Maybe<Ims_Applications_Not_Taken_Up_Bool_Exp>;
+};
+
+
+export type Query_RootIms_Applications_Not_Taken_Up_By_PkArgs = {
+  application_id: Scalars['uuid'];
+};
+
+
+export type Query_RootIms_ChargeArgs = {
+  distinct_on?: Maybe<Array<Ims_Charge_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Ims_Charge_Order_By>>;
+  where?: Maybe<Ims_Charge_Bool_Exp>;
+};
+
+
+export type Query_RootIms_Charge_AggregateArgs = {
+  distinct_on?: Maybe<Array<Ims_Charge_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Ims_Charge_Order_By>>;
+  where?: Maybe<Ims_Charge_Bool_Exp>;
+};
+
+
+export type Query_RootIms_Charge_By_PkArgs = {
+  charge_code: Scalars['Int'];
+};
+
+
+export type Query_RootIms_Company_Business_TypeArgs = {
+  distinct_on?: Maybe<Array<Ims_Company_Business_Type_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Ims_Company_Business_Type_Order_By>>;
+  where?: Maybe<Ims_Company_Business_Type_Bool_Exp>;
+};
+
+
+export type Query_RootIms_Company_Business_Type_AggregateArgs = {
+  distinct_on?: Maybe<Array<Ims_Company_Business_Type_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Ims_Company_Business_Type_Order_By>>;
+  where?: Maybe<Ims_Company_Business_Type_Bool_Exp>;
+};
+
+
+export type Query_RootIms_Company_Business_Type_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Query_RootIms_ResponsesArgs = {
+  distinct_on?: Maybe<Array<Ims_Responses_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Ims_Responses_Order_By>>;
+  where?: Maybe<Ims_Responses_Bool_Exp>;
+};
+
+
+export type Query_RootIms_Responses_AggregateArgs = {
+  distinct_on?: Maybe<Array<Ims_Responses_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Ims_Responses_Order_By>>;
+  where?: Maybe<Ims_Responses_Bool_Exp>;
+};
+
+
+export type Query_RootIms_Responses_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Query_RootIms_StateArgs = {
+  distinct_on?: Maybe<Array<Ims_State_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Ims_State_Order_By>>;
+  where?: Maybe<Ims_State_Bool_Exp>;
+};
+
+
+export type Query_RootIms_State_AggregateArgs = {
+  distinct_on?: Maybe<Array<Ims_State_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Ims_State_Order_By>>;
+  where?: Maybe<Ims_State_Bool_Exp>;
+};
+
+
+export type Query_RootIms_State_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Query_RootInsurance_ApplicationArgs = {
+  distinct_on?: Maybe<Array<Insurance_Application_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Application_Order_By>>;
+  where?: Maybe<Insurance_Application_Bool_Exp>;
+};
+
+
+export type Query_RootInsurance_Application_AggregateArgs = {
+  distinct_on?: Maybe<Array<Insurance_Application_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Application_Order_By>>;
+  where?: Maybe<Insurance_Application_Bool_Exp>;
+};
+
+
+export type Query_RootInsurance_Application_ArtifactArgs = {
+  distinct_on?: Maybe<Array<Insurance_Application_Artifact_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Application_Artifact_Order_By>>;
+  where?: Maybe<Insurance_Application_Artifact_Bool_Exp>;
+};
+
+
+export type Query_RootInsurance_Application_Artifact_AggregateArgs = {
+  distinct_on?: Maybe<Array<Insurance_Application_Artifact_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Application_Artifact_Order_By>>;
+  where?: Maybe<Insurance_Application_Artifact_Bool_Exp>;
+};
+
+
+export type Query_RootInsurance_Application_Artifact_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Query_RootInsurance_Application_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Query_RootInsurance_Applications_From_N_Days_AgoArgs = {
+  args: Insurance_Applications_From_N_Days_Ago_Args;
+  distinct_on?: Maybe<Array<Insurance_Application_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Application_Order_By>>;
+  where?: Maybe<Insurance_Application_Bool_Exp>;
+};
+
+
+export type Query_RootInsurance_Applications_From_N_Days_Ago_AggregateArgs = {
+  args: Insurance_Applications_From_N_Days_Ago_Args;
+  distinct_on?: Maybe<Array<Insurance_Application_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Application_Order_By>>;
+  where?: Maybe<Insurance_Application_Bool_Exp>;
+};
+
+
+export type Query_RootInsurance_PolicyArgs = {
+  distinct_on?: Maybe<Array<Insurance_Policy_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Policy_Order_By>>;
+  where?: Maybe<Insurance_Policy_Bool_Exp>;
+};
+
+
+export type Query_RootInsurance_Policy_AggregateArgs = {
+  distinct_on?: Maybe<Array<Insurance_Policy_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Policy_Order_By>>;
+  where?: Maybe<Insurance_Policy_Bool_Exp>;
+};
+
+
+export type Query_RootInsurance_Policy_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Query_RootInsurance_QuoteArgs = {
+  distinct_on?: Maybe<Array<Insurance_Quote_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Quote_Order_By>>;
+  where?: Maybe<Insurance_Quote_Bool_Exp>;
+};
+
+
+export type Query_RootInsurance_Quote_AggregateArgs = {
+  distinct_on?: Maybe<Array<Insurance_Quote_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Quote_Order_By>>;
+  where?: Maybe<Insurance_Quote_Bool_Exp>;
+};
+
+
+export type Query_RootInsurance_Quote_By_PkArgs = {
+  id: Scalars['bigint'];
+};
+
+
+export type Query_RootInsurance_Quote_EmailArgs = {
+  distinct_on?: Maybe<Array<Insurance_Quote_Email_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Quote_Email_Order_By>>;
+  where?: Maybe<Insurance_Quote_Email_Bool_Exp>;
+};
+
+
+export type Query_RootInsurance_Quote_Email_AggregateArgs = {
+  distinct_on?: Maybe<Array<Insurance_Quote_Email_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Quote_Email_Order_By>>;
+  where?: Maybe<Insurance_Quote_Email_Bool_Exp>;
+};
+
+
+export type Query_RootInsurance_Quote_Email_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Query_RootInsurance_Quote_Pdf_SelectionArgs = {
+  distinct_on?: Maybe<Array<Insurance_Quote_Pdf_Selection_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Quote_Pdf_Selection_Order_By>>;
+  where?: Maybe<Insurance_Quote_Pdf_Selection_Bool_Exp>;
+};
+
+
+export type Query_RootInsurance_Quote_Pdf_Selection_AggregateArgs = {
+  distinct_on?: Maybe<Array<Insurance_Quote_Pdf_Selection_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Quote_Pdf_Selection_Order_By>>;
+  where?: Maybe<Insurance_Quote_Pdf_Selection_Bool_Exp>;
+};
+
+
+export type Query_RootInsurance_Quote_Pdf_Selection_ArtifactArgs = {
+  distinct_on?: Maybe<Array<Insurance_Quote_Pdf_Selection_Artifact_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Quote_Pdf_Selection_Artifact_Order_By>>;
+  where?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Bool_Exp>;
+};
+
+
+export type Query_RootInsurance_Quote_Pdf_Selection_Artifact_AggregateArgs = {
+  distinct_on?: Maybe<Array<Insurance_Quote_Pdf_Selection_Artifact_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Quote_Pdf_Selection_Artifact_Order_By>>;
+  where?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Bool_Exp>;
+};
+
+
+export type Query_RootInsurance_Quote_Pdf_Selection_Artifact_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Query_RootInsurance_Quote_Pdf_Selection_By_PkArgs = {
+  application_id: Scalars['uuid'];
+  pdf_selection_artifact_id: Scalars['Int'];
+  quote_id: Scalars['Int'];
+};
+
+
+export type Query_RootInsurance_Quote_SelectionArgs = {
+  distinct_on?: Maybe<Array<Insurance_Quote_Selection_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Quote_Selection_Order_By>>;
+  where?: Maybe<Insurance_Quote_Selection_Bool_Exp>;
+};
+
+
+export type Query_RootInsurance_Quote_Selection_AggregateArgs = {
+  distinct_on?: Maybe<Array<Insurance_Quote_Selection_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Quote_Selection_Order_By>>;
+  where?: Maybe<Insurance_Quote_Selection_Bool_Exp>;
+};
+
+
+export type Query_RootInsurance_Quote_Selection_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Query_RootInsured_OrganizationArgs = {
+  distinct_on?: Maybe<Array<Insured_Organization_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insured_Organization_Order_By>>;
+  where?: Maybe<Insured_Organization_Bool_Exp>;
+};
+
+
+export type Query_RootInsured_Organization_AggregateArgs = {
+  distinct_on?: Maybe<Array<Insured_Organization_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insured_Organization_Order_By>>;
+  where?: Maybe<Insured_Organization_Bool_Exp>;
+};
+
+
+export type Query_RootInsured_Organization_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Query_RootInsured_Organization_ContactArgs = {
+  distinct_on?: Maybe<Array<Insured_Organization_Contact_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insured_Organization_Contact_Order_By>>;
+  where?: Maybe<Insured_Organization_Contact_Bool_Exp>;
+};
+
+
+export type Query_RootInsured_Organization_Contact_AggregateArgs = {
+  distinct_on?: Maybe<Array<Insured_Organization_Contact_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insured_Organization_Contact_Order_By>>;
+  where?: Maybe<Insured_Organization_Contact_Bool_Exp>;
+};
+
+
+export type Query_RootInsured_Organization_Contact_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Query_RootLatest_App_Artifacts_Quote_PolicyArgs = {
+  distinct_on?: Maybe<Array<Latest_App_Artifacts_Quote_Policy_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Latest_App_Artifacts_Quote_Policy_Order_By>>;
+  where?: Maybe<Latest_App_Artifacts_Quote_Policy_Bool_Exp>;
+};
+
+
+export type Query_RootLatest_App_Artifacts_Quote_Policy_AggregateArgs = {
+  distinct_on?: Maybe<Array<Latest_App_Artifacts_Quote_Policy_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Latest_App_Artifacts_Quote_Policy_Order_By>>;
+  where?: Maybe<Latest_App_Artifacts_Quote_Policy_Bool_Exp>;
+};
+
+
+export type Query_RootLatest_Insurance_ApplicationsArgs = {
+  distinct_on?: Maybe<Array<Latest_Insurance_Applications_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Latest_Insurance_Applications_Order_By>>;
+  where?: Maybe<Latest_Insurance_Applications_Bool_Exp>;
+};
+
+
+export type Query_RootLatest_Insurance_Applications_AggregateArgs = {
+  distinct_on?: Maybe<Array<Latest_Insurance_Applications_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Latest_Insurance_Applications_Order_By>>;
+  where?: Maybe<Latest_Insurance_Applications_Bool_Exp>;
+};
+
+
+export type Query_RootMeArgs = {
+  distinct_on?: Maybe<Array<Me_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Me_Order_By>>;
+  where?: Maybe<Me_Bool_Exp>;
+};
+
+
+export type Query_RootMe_AggregateArgs = {
+  distinct_on?: Maybe<Array<Me_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Me_Order_By>>;
+  where?: Maybe<Me_Bool_Exp>;
+};
+
+
+export type Query_RootNaics_CodeArgs = {
+  distinct_on?: Maybe<Array<Naics_Code_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Naics_Code_Order_By>>;
+  where?: Maybe<Naics_Code_Bool_Exp>;
+};
+
+
+export type Query_RootNaics_Code_AggregateArgs = {
+  distinct_on?: Maybe<Array<Naics_Code_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Naics_Code_Order_By>>;
+  where?: Maybe<Naics_Code_Bool_Exp>;
+};
+
+
+export type Query_RootNaics_Code_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Query_RootNaics_MappingArgs = {
+  distinct_on?: Maybe<Array<Naics_Mapping_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Naics_Mapping_Order_By>>;
+  where?: Maybe<Naics_Mapping_Bool_Exp>;
+};
+
+
+export type Query_RootNaics_Mapping_AggregateArgs = {
+  distinct_on?: Maybe<Array<Naics_Mapping_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Naics_Mapping_Order_By>>;
+  where?: Maybe<Naics_Mapping_Bool_Exp>;
+};
+
+
+export type Query_RootOrganization_DomainsArgs = {
+  distinct_on?: Maybe<Array<Organization_Domains_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Organization_Domains_Order_By>>;
+  where?: Maybe<Organization_Domains_Bool_Exp>;
+};
+
+
+export type Query_RootOrganization_Domains_AggregateArgs = {
+  distinct_on?: Maybe<Array<Organization_Domains_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Organization_Domains_Order_By>>;
+  where?: Maybe<Organization_Domains_Bool_Exp>;
+};
+
+
+export type Query_RootOrganization_Domains_By_PkArgs = {
+  id: Scalars['bigint'];
+};
+
+
+export type Query_RootOrganization_IndustryArgs = {
+  distinct_on?: Maybe<Array<Organization_Industry_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Organization_Industry_Order_By>>;
+  where?: Maybe<Organization_Industry_Bool_Exp>;
+};
+
+
+export type Query_RootOrganization_Industry_AggregateArgs = {
+  distinct_on?: Maybe<Array<Organization_Industry_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Organization_Industry_Order_By>>;
+  where?: Maybe<Organization_Industry_Bool_Exp>;
+};
+
+
+export type Query_RootOrganization_Industry_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Query_RootPolicy_PaymentArgs = {
+  distinct_on?: Maybe<Array<Policy_Payment_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Policy_Payment_Order_By>>;
+  where?: Maybe<Policy_Payment_Bool_Exp>;
+};
+
+
+export type Query_RootPolicy_Payment_AggregateArgs = {
+  distinct_on?: Maybe<Array<Policy_Payment_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Policy_Payment_Order_By>>;
+  where?: Maybe<Policy_Payment_Bool_Exp>;
+};
+
+
+export type Query_RootPolicy_Payment_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Query_RootPolicy_Seq_CounterArgs = {
+  distinct_on?: Maybe<Array<Policy_Seq_Counter_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Policy_Seq_Counter_Order_By>>;
+  where?: Maybe<Policy_Seq_Counter_Bool_Exp>;
+};
+
+
+export type Query_RootPolicy_Seq_Counter_AggregateArgs = {
+  distinct_on?: Maybe<Array<Policy_Seq_Counter_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Policy_Seq_Counter_Order_By>>;
+  where?: Maybe<Policy_Seq_Counter_Bool_Exp>;
+};
+
+
+export type Query_RootRqb_SystemArgs = {
+  distinct_on?: Maybe<Array<Rqb_System_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Rqb_System_Order_By>>;
+  where?: Maybe<Rqb_System_Bool_Exp>;
+};
+
+
+export type Query_RootRqb_System_AggregateArgs = {
+  distinct_on?: Maybe<Array<Rqb_System_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Rqb_System_Order_By>>;
+  where?: Maybe<Rqb_System_Bool_Exp>;
+};
+
+
+export type Query_RootRqb_System_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Query_RootSendToIpfsArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Query_RootTenantArgs = {
+  distinct_on?: Maybe<Array<Tenant_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Tenant_Order_By>>;
+  where?: Maybe<Tenant_Bool_Exp>;
+};
+
+
+export type Query_RootTenant_AdminArgs = {
+  distinct_on?: Maybe<Array<Tenant_Admin_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Tenant_Admin_Order_By>>;
+  where?: Maybe<Tenant_Admin_Bool_Exp>;
+};
+
+
+export type Query_RootTenant_Admin_AggregateArgs = {
+  distinct_on?: Maybe<Array<Tenant_Admin_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Tenant_Admin_Order_By>>;
+  where?: Maybe<Tenant_Admin_Bool_Exp>;
+};
+
+
+export type Query_RootTenant_Admin_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Query_RootTenant_AggregateArgs = {
+  distinct_on?: Maybe<Array<Tenant_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Tenant_Order_By>>;
+  where?: Maybe<Tenant_Bool_Exp>;
+};
+
+
+export type Query_RootTenant_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Query_RootTld_ExclusionsArgs = {
+  distinct_on?: Maybe<Array<Tld_Exclusions_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Tld_Exclusions_Order_By>>;
+  where?: Maybe<Tld_Exclusions_Bool_Exp>;
+};
+
+
+export type Query_RootTld_Exclusions_AggregateArgs = {
+  distinct_on?: Maybe<Array<Tld_Exclusions_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Tld_Exclusions_Order_By>>;
+  where?: Maybe<Tld_Exclusions_Bool_Exp>;
+};
+
+
+export type Query_RootTld_Exclusions_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Query_RootUnderwriter_Broker_AgenciesArgs = {
+  distinct_on?: Maybe<Array<Underwriter_Broker_Agencies_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Underwriter_Broker_Agencies_Order_By>>;
+  where?: Maybe<Underwriter_Broker_Agencies_Bool_Exp>;
+};
+
+
+export type Query_RootUnderwriter_Broker_Agencies_AggregateArgs = {
+  distinct_on?: Maybe<Array<Underwriter_Broker_Agencies_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Underwriter_Broker_Agencies_Order_By>>;
+  where?: Maybe<Underwriter_Broker_Agencies_Bool_Exp>;
+};
+
+
+export type Query_RootUnderwriter_Broker_Agencies_By_PkArgs = {
+  broker_agency_id: Scalars['Int'];
+  underwriter_organization_id: Scalars['Int'];
+};
+
+
+export type Query_RootUnderwriter_OrganizationArgs = {
+  distinct_on?: Maybe<Array<Underwriter_Organization_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Underwriter_Organization_Order_By>>;
+  where?: Maybe<Underwriter_Organization_Bool_Exp>;
+};
+
+
+export type Query_RootUnderwriter_Organization_AggregateArgs = {
+  distinct_on?: Maybe<Array<Underwriter_Organization_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Underwriter_Organization_Order_By>>;
+  where?: Maybe<Underwriter_Organization_Bool_Exp>;
+};
+
+
+export type Query_RootUnderwriter_Organization_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Query_RootUnderwriter_UserArgs = {
+  distinct_on?: Maybe<Array<Underwriter_User_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Underwriter_User_Order_By>>;
+  where?: Maybe<Underwriter_User_Bool_Exp>;
+};
+
+
+export type Query_RootUnderwriter_User_AggregateArgs = {
+  distinct_on?: Maybe<Array<Underwriter_User_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Underwriter_User_Order_By>>;
+  where?: Maybe<Underwriter_User_Bool_Exp>;
+};
+
+
+export type Query_RootUnderwriter_User_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Query_RootUserArgs = {
+  distinct_on?: Maybe<Array<User_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<User_Order_By>>;
+  where?: Maybe<User_Bool_Exp>;
+};
+
+
+export type Query_RootUser_AggregateArgs = {
+  distinct_on?: Maybe<Array<User_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<User_Order_By>>;
+  where?: Maybe<User_Bool_Exp>;
+};
+
+
+export type Query_RootUser_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Query_RootUser_Password_ResetArgs = {
+  distinct_on?: Maybe<Array<User_Password_Reset_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<User_Password_Reset_Order_By>>;
+  where?: Maybe<User_Password_Reset_Bool_Exp>;
+};
+
+
+export type Query_RootUser_Password_Reset_AggregateArgs = {
+  distinct_on?: Maybe<Array<User_Password_Reset_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<User_Password_Reset_Order_By>>;
+  where?: Maybe<User_Password_Reset_Bool_Exp>;
+};
+
+
+export type Query_RootUser_Password_Reset_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Query_RootView_Insurance_Application_For_Not_Taken_Up_45_DaysArgs = {
+  distinct_on?: Maybe<Array<View_Insurance_Application_For_Not_Taken_Up_45_Days_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<View_Insurance_Application_For_Not_Taken_Up_45_Days_Order_By>>;
+  where?: Maybe<View_Insurance_Application_For_Not_Taken_Up_45_Days_Bool_Exp>;
+};
+
+
+export type Query_RootView_Insurance_Application_For_Not_Taken_Up_45_Days_AggregateArgs = {
+  distinct_on?: Maybe<Array<View_Insurance_Application_For_Not_Taken_Up_45_Days_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<View_Insurance_Application_For_Not_Taken_Up_45_Days_Order_By>>;
+  where?: Maybe<View_Insurance_Application_For_Not_Taken_Up_45_Days_Bool_Exp>;
+};
+
+/** columns and relationships of "rqb_system" */
+export type Rqb_System = {
+  __typename?: 'rqb_system';
+  created_at: Scalars['timestamptz'];
+  id: Scalars['Int'];
+  key: Scalars['String'];
+  updated_at: Scalars['timestamptz'];
+  value: Scalars['jsonb'];
+};
+
+
+/** columns and relationships of "rqb_system" */
+export type Rqb_SystemValueArgs = {
+  path?: Maybe<Scalars['String']>;
+};
+
+/** aggregated selection of "rqb_system" */
+export type Rqb_System_Aggregate = {
+  __typename?: 'rqb_system_aggregate';
+  aggregate?: Maybe<Rqb_System_Aggregate_Fields>;
+  nodes: Array<Rqb_System>;
+};
+
+/** aggregate fields of "rqb_system" */
+export type Rqb_System_Aggregate_Fields = {
+  __typename?: 'rqb_system_aggregate_fields';
+  avg?: Maybe<Rqb_System_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Rqb_System_Max_Fields>;
+  min?: Maybe<Rqb_System_Min_Fields>;
+  stddev?: Maybe<Rqb_System_Stddev_Fields>;
+  stddev_pop?: Maybe<Rqb_System_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Rqb_System_Stddev_Samp_Fields>;
+  sum?: Maybe<Rqb_System_Sum_Fields>;
+  var_pop?: Maybe<Rqb_System_Var_Pop_Fields>;
+  var_samp?: Maybe<Rqb_System_Var_Samp_Fields>;
+  variance?: Maybe<Rqb_System_Variance_Fields>;
+};
+
+
+/** aggregate fields of "rqb_system" */
+export type Rqb_System_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Rqb_System_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** append existing jsonb value of filtered columns with new jsonb value */
+export type Rqb_System_Append_Input = {
+  value?: Maybe<Scalars['jsonb']>;
+};
+
+/** aggregate avg on columns */
+export type Rqb_System_Avg_Fields = {
+  __typename?: 'rqb_system_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "rqb_system". All fields are combined with a logical 'AND'. */
+export type Rqb_System_Bool_Exp = {
+  _and?: Maybe<Array<Rqb_System_Bool_Exp>>;
+  _not?: Maybe<Rqb_System_Bool_Exp>;
+  _or?: Maybe<Array<Rqb_System_Bool_Exp>>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  key?: Maybe<String_Comparison_Exp>;
+  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+  value?: Maybe<Jsonb_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "rqb_system" */
+export enum Rqb_System_Constraint {
+  /** unique or primary key constraint on columns "key" */
+  RqbSystemKeyKey = 'rqb_system_key_key',
+  /** unique or primary key constraint on columns "id" */
+  RqbSystemPkey = 'rqb_system_pkey'
+}
+
+/** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+export type Rqb_System_Delete_At_Path_Input = {
+  value?: Maybe<Array<Scalars['String']>>;
+};
+
+/** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+export type Rqb_System_Delete_Elem_Input = {
+  value?: Maybe<Scalars['Int']>;
+};
+
+/** delete key/value pair or string element. key/value pairs are matched based on their key value */
+export type Rqb_System_Delete_Key_Input = {
+  value?: Maybe<Scalars['String']>;
+};
+
+/** input type for incrementing numeric columns in table "rqb_system" */
+export type Rqb_System_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "rqb_system" */
+export type Rqb_System_Insert_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  key?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  value?: Maybe<Scalars['jsonb']>;
+};
+
+/** aggregate max on columns */
+export type Rqb_System_Max_Fields = {
+  __typename?: 'rqb_system_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  key?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate min on columns */
+export type Rqb_System_Min_Fields = {
+  __typename?: 'rqb_system_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  key?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** response of any mutation on the table "rqb_system" */
+export type Rqb_System_Mutation_Response = {
+  __typename?: 'rqb_system_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Rqb_System>;
+};
+
+/** on_conflict condition type for table "rqb_system" */
+export type Rqb_System_On_Conflict = {
+  constraint: Rqb_System_Constraint;
+  update_columns?: Array<Rqb_System_Update_Column>;
+  where?: Maybe<Rqb_System_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "rqb_system". */
+export type Rqb_System_Order_By = {
+  created_at?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  key?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+  value?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: rqb_system */
+export type Rqb_System_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** prepend existing jsonb value of filtered columns with new jsonb value */
+export type Rqb_System_Prepend_Input = {
+  value?: Maybe<Scalars['jsonb']>;
+};
+
+/** select columns of table "rqb_system" */
+export enum Rqb_System_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Key = 'key',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  Value = 'value'
+}
+
+/** input type for updating data in table "rqb_system" */
+export type Rqb_System_Set_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  key?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  value?: Maybe<Scalars['jsonb']>;
+};
+
+/** aggregate stddev on columns */
+export type Rqb_System_Stddev_Fields = {
+  __typename?: 'rqb_system_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Rqb_System_Stddev_Pop_Fields = {
+  __typename?: 'rqb_system_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Rqb_System_Stddev_Samp_Fields = {
+  __typename?: 'rqb_system_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Streaming cursor of the table "rqb_system" */
+export type Rqb_System_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Rqb_System_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Rqb_System_Stream_Cursor_Value_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  key?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  value?: Maybe<Scalars['jsonb']>;
+};
+
+/** aggregate sum on columns */
+export type Rqb_System_Sum_Fields = {
+  __typename?: 'rqb_system_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "rqb_system" */
+export enum Rqb_System_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Key = 'key',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  Value = 'value'
+}
+
+export type Rqb_System_Updates = {
+  /** append existing jsonb value of filtered columns with new jsonb value */
+  _append?: Maybe<Rqb_System_Append_Input>;
+  /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+  _delete_at_path?: Maybe<Rqb_System_Delete_At_Path_Input>;
+  /** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+  _delete_elem?: Maybe<Rqb_System_Delete_Elem_Input>;
+  /** delete key/value pair or string element. key/value pairs are matched based on their key value */
+  _delete_key?: Maybe<Rqb_System_Delete_Key_Input>;
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: Maybe<Rqb_System_Inc_Input>;
+  /** prepend existing jsonb value of filtered columns with new jsonb value */
+  _prepend?: Maybe<Rqb_System_Prepend_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<Rqb_System_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Rqb_System_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Rqb_System_Var_Pop_Fields = {
+  __typename?: 'rqb_system_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Rqb_System_Var_Samp_Fields = {
+  __typename?: 'rqb_system_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Rqb_System_Variance_Fields = {
+  __typename?: 'rqb_system_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** fields of action: "sendToIPFS" */
+export type SendToIpfs = {
+  __typename?: 'sendToIPFS';
+  /** the time at which this action was created */
+  created_at: Scalars['timestamptz'];
+  /** errors related to the invocation */
+  errors?: Maybe<Scalars['json']>;
+  /** the unique id of an action */
+  id: Scalars['uuid'];
+  /** the output fields of this action */
+  output?: Maybe<InsuredOutput>;
+};
+
+export type Subscription_Root = {
+  __typename?: 'subscription_root';
+  /** fetch data from the table: "broker_agency" */
+  broker_agency: Array<Broker_Agency>;
+  /** fetch aggregated fields from the table: "broker_agency" */
+  broker_agency_aggregate: Broker_Agency_Aggregate;
+  /** fetch data from the table: "broker_agency" using primary key columns */
+  broker_agency_by_pk?: Maybe<Broker_Agency>;
+  /** fetch data from the table in a streaming manner: "broker_agency" */
+  broker_agency_stream: Array<Broker_Agency>;
+  /** fetch data from the table: "broker_producer" */
+  broker_producer: Array<Broker_Producer>;
+  /** fetch aggregated fields from the table: "broker_producer" */
+  broker_producer_aggregate: Broker_Producer_Aggregate;
+  /** fetch data from the table: "broker_producer" using primary key columns */
+  broker_producer_by_pk?: Maybe<Broker_Producer>;
+  /** fetch data from the table in a streaming manner: "broker_producer" */
+  broker_producer_stream: Array<Broker_Producer>;
+  /** execute function "check_tld_exclusion" which returns "tld_exclusions" */
+  check_tld_exclusion: Array<Tld_Exclusions>;
+  /** execute function "check_tld_exclusion" and query aggregates on result of table type "tld_exclusions" */
+  check_tld_exclusion_aggregate: Tld_Exclusions_Aggregate;
+  /** An array relationship */
+  document_forms: Array<Document_Forms>;
+  /** An aggregate relationship */
+  document_forms_aggregate: Document_Forms_Aggregate;
+  /** fetch data from the table: "document_forms" using primary key columns */
+  document_forms_by_pk?: Maybe<Document_Forms>;
+  /** fetch data from the table in a streaming manner: "document_forms" */
+  document_forms_stream: Array<Document_Forms>;
+  /** fetch data from the table: "domain_scan" */
+  domain_scan: Array<Domain_Scan>;
+  /** fetch aggregated fields from the table: "domain_scan" */
+  domain_scan_aggregate: Domain_Scan_Aggregate;
+  /** fetch data from the table: "domain_scan" using primary key columns */
+  domain_scan_by_pk?: Maybe<Domain_Scan>;
+  /** fetch data from the table in a streaming manner: "domain_scan" */
+  domain_scan_stream: Array<Domain_Scan>;
+  /** fetch data from the table: "domains" */
+  domains: Array<Domains>;
+  /** fetch aggregated fields from the table: "domains" */
+  domains_aggregate: Domains_Aggregate;
+  /** fetch data from the table: "domains" using primary key columns */
+  domains_by_pk?: Maybe<Domains>;
+  /** fetch data from the table in a streaming manner: "domains" */
+  domains_stream: Array<Domains>;
+  /** fetch data from the table: "external_scan" */
+  external_scan: Array<External_Scan>;
+  /** fetch aggregated fields from the table: "external_scan" */
+  external_scan_aggregate: External_Scan_Aggregate;
+  /** fetch data from the table: "external_scan" using primary key columns */
+  external_scan_by_pk?: Maybe<External_Scan>;
+  /** fetch data from the table in a streaming manner: "external_scan" */
+  external_scan_stream: Array<External_Scan>;
+  /** fetch data from the table: "ims_applications_not_taken_up" */
+  ims_applications_not_taken_up: Array<Ims_Applications_Not_Taken_Up>;
+  /** fetch aggregated fields from the table: "ims_applications_not_taken_up" */
+  ims_applications_not_taken_up_aggregate: Ims_Applications_Not_Taken_Up_Aggregate;
+  /** fetch data from the table: "ims_applications_not_taken_up" using primary key columns */
+  ims_applications_not_taken_up_by_pk?: Maybe<Ims_Applications_Not_Taken_Up>;
+  /** fetch data from the table in a streaming manner: "ims_applications_not_taken_up" */
+  ims_applications_not_taken_up_stream: Array<Ims_Applications_Not_Taken_Up>;
+  /** fetch data from the table: "ims_charge" */
+  ims_charge: Array<Ims_Charge>;
+  /** fetch aggregated fields from the table: "ims_charge" */
+  ims_charge_aggregate: Ims_Charge_Aggregate;
+  /** fetch data from the table: "ims_charge" using primary key columns */
+  ims_charge_by_pk?: Maybe<Ims_Charge>;
+  /** fetch data from the table in a streaming manner: "ims_charge" */
+  ims_charge_stream: Array<Ims_Charge>;
+  /** fetch data from the table: "ims_company_business_type" */
+  ims_company_business_type: Array<Ims_Company_Business_Type>;
+  /** fetch aggregated fields from the table: "ims_company_business_type" */
+  ims_company_business_type_aggregate: Ims_Company_Business_Type_Aggregate;
+  /** fetch data from the table: "ims_company_business_type" using primary key columns */
+  ims_company_business_type_by_pk?: Maybe<Ims_Company_Business_Type>;
+  /** fetch data from the table in a streaming manner: "ims_company_business_type" */
+  ims_company_business_type_stream: Array<Ims_Company_Business_Type>;
+  /** An array relationship */
+  ims_responses: Array<Ims_Responses>;
+  /** An aggregate relationship */
+  ims_responses_aggregate: Ims_Responses_Aggregate;
+  /** fetch data from the table: "ims_responses" using primary key columns */
+  ims_responses_by_pk?: Maybe<Ims_Responses>;
+  /** fetch data from the table in a streaming manner: "ims_responses" */
+  ims_responses_stream: Array<Ims_Responses>;
+  /** fetch data from the table: "ims_state" */
+  ims_state: Array<Ims_State>;
+  /** fetch aggregated fields from the table: "ims_state" */
+  ims_state_aggregate: Ims_State_Aggregate;
+  /** fetch data from the table: "ims_state" using primary key columns */
+  ims_state_by_pk?: Maybe<Ims_State>;
+  /** fetch data from the table in a streaming manner: "ims_state" */
+  ims_state_stream: Array<Ims_State>;
+  /** fetch data from the table: "insurance_application" */
+  insurance_application: Array<Insurance_Application>;
+  /** fetch aggregated fields from the table: "insurance_application" */
+  insurance_application_aggregate: Insurance_Application_Aggregate;
+  /** fetch data from the table: "insurance_application_artifact" */
+  insurance_application_artifact: Array<Insurance_Application_Artifact>;
+  /** fetch aggregated fields from the table: "insurance_application_artifact" */
+  insurance_application_artifact_aggregate: Insurance_Application_Artifact_Aggregate;
+  /** fetch data from the table: "insurance_application_artifact" using primary key columns */
+  insurance_application_artifact_by_pk?: Maybe<Insurance_Application_Artifact>;
+  /** fetch data from the table in a streaming manner: "insurance_application_artifact" */
+  insurance_application_artifact_stream: Array<Insurance_Application_Artifact>;
+  /** fetch data from the table: "insurance_application" using primary key columns */
+  insurance_application_by_pk?: Maybe<Insurance_Application>;
+  /** fetch data from the table in a streaming manner: "insurance_application" */
+  insurance_application_stream: Array<Insurance_Application>;
+  /** execute function "insurance_applications_from_n_days_ago" which returns "insurance_application" */
+  insurance_applications_from_n_days_ago: Array<Insurance_Application>;
+  /** execute function "insurance_applications_from_n_days_ago" and query aggregates on result of table type "insurance_application" */
+  insurance_applications_from_n_days_ago_aggregate: Insurance_Application_Aggregate;
+  /** fetch data from the table: "insurance_policy" */
+  insurance_policy: Array<Insurance_Policy>;
+  /** fetch aggregated fields from the table: "insurance_policy" */
+  insurance_policy_aggregate: Insurance_Policy_Aggregate;
+  /** fetch data from the table: "insurance_policy" using primary key columns */
+  insurance_policy_by_pk?: Maybe<Insurance_Policy>;
+  /** fetch data from the table in a streaming manner: "insurance_policy" */
+  insurance_policy_stream: Array<Insurance_Policy>;
+  /** fetch data from the table: "insurance_quote" */
+  insurance_quote: Array<Insurance_Quote>;
+  /** fetch aggregated fields from the table: "insurance_quote" */
+  insurance_quote_aggregate: Insurance_Quote_Aggregate;
+  /** fetch data from the table: "insurance_quote" using primary key columns */
+  insurance_quote_by_pk?: Maybe<Insurance_Quote>;
+  /** fetch data from the table: "insurance_quote_email" */
+  insurance_quote_email: Array<Insurance_Quote_Email>;
+  /** fetch aggregated fields from the table: "insurance_quote_email" */
+  insurance_quote_email_aggregate: Insurance_Quote_Email_Aggregate;
+  /** fetch data from the table: "insurance_quote_email" using primary key columns */
+  insurance_quote_email_by_pk?: Maybe<Insurance_Quote_Email>;
+  /** fetch data from the table in a streaming manner: "insurance_quote_email" */
+  insurance_quote_email_stream: Array<Insurance_Quote_Email>;
+  /** fetch data from the table: "insurance_quote_pdf_selection" */
+  insurance_quote_pdf_selection: Array<Insurance_Quote_Pdf_Selection>;
+  /** fetch aggregated fields from the table: "insurance_quote_pdf_selection" */
+  insurance_quote_pdf_selection_aggregate: Insurance_Quote_Pdf_Selection_Aggregate;
+  /** fetch data from the table: "insurance_quote_pdf_selection_artifact" */
+  insurance_quote_pdf_selection_artifact: Array<Insurance_Quote_Pdf_Selection_Artifact>;
+  /** fetch aggregated fields from the table: "insurance_quote_pdf_selection_artifact" */
+  insurance_quote_pdf_selection_artifact_aggregate: Insurance_Quote_Pdf_Selection_Artifact_Aggregate;
+  /** fetch data from the table: "insurance_quote_pdf_selection_artifact" using primary key columns */
+  insurance_quote_pdf_selection_artifact_by_pk?: Maybe<Insurance_Quote_Pdf_Selection_Artifact>;
+  /** fetch data from the table in a streaming manner: "insurance_quote_pdf_selection_artifact" */
+  insurance_quote_pdf_selection_artifact_stream: Array<Insurance_Quote_Pdf_Selection_Artifact>;
+  /** fetch data from the table: "insurance_quote_pdf_selection" using primary key columns */
+  insurance_quote_pdf_selection_by_pk?: Maybe<Insurance_Quote_Pdf_Selection>;
+  /** fetch data from the table in a streaming manner: "insurance_quote_pdf_selection" */
+  insurance_quote_pdf_selection_stream: Array<Insurance_Quote_Pdf_Selection>;
+  /** fetch data from the table: "insurance_quote_selection" */
+  insurance_quote_selection: Array<Insurance_Quote_Selection>;
+  /** fetch aggregated fields from the table: "insurance_quote_selection" */
+  insurance_quote_selection_aggregate: Insurance_Quote_Selection_Aggregate;
+  /** fetch data from the table: "insurance_quote_selection" using primary key columns */
+  insurance_quote_selection_by_pk?: Maybe<Insurance_Quote_Selection>;
+  /** fetch data from the table in a streaming manner: "insurance_quote_selection" */
+  insurance_quote_selection_stream: Array<Insurance_Quote_Selection>;
+  /** fetch data from the table in a streaming manner: "insurance_quote" */
+  insurance_quote_stream: Array<Insurance_Quote>;
+  /** fetch data from the table: "insured_organization" */
+  insured_organization: Array<Insured_Organization>;
+  /** fetch aggregated fields from the table: "insured_organization" */
+  insured_organization_aggregate: Insured_Organization_Aggregate;
+  /** fetch data from the table: "insured_organization" using primary key columns */
+  insured_organization_by_pk?: Maybe<Insured_Organization>;
+  /** fetch data from the table: "insured_organization_contact" */
+  insured_organization_contact: Array<Insured_Organization_Contact>;
+  /** fetch aggregated fields from the table: "insured_organization_contact" */
+  insured_organization_contact_aggregate: Insured_Organization_Contact_Aggregate;
+  /** fetch data from the table: "insured_organization_contact" using primary key columns */
+  insured_organization_contact_by_pk?: Maybe<Insured_Organization_Contact>;
+  /** fetch data from the table in a streaming manner: "insured_organization_contact" */
+  insured_organization_contact_stream: Array<Insured_Organization_Contact>;
+  /** fetch data from the table in a streaming manner: "insured_organization" */
+  insured_organization_stream: Array<Insured_Organization>;
+  /** fetch data from the table: "latest_app_artifacts_quote_policy" */
+  latest_app_artifacts_quote_policy: Array<Latest_App_Artifacts_Quote_Policy>;
+  /** fetch aggregated fields from the table: "latest_app_artifacts_quote_policy" */
+  latest_app_artifacts_quote_policy_aggregate: Latest_App_Artifacts_Quote_Policy_Aggregate;
+  /** fetch data from the table in a streaming manner: "latest_app_artifacts_quote_policy" */
+  latest_app_artifacts_quote_policy_stream: Array<Latest_App_Artifacts_Quote_Policy>;
+  /** fetch data from the table: "latest_insurance_applications" */
+  latest_insurance_applications: Array<Latest_Insurance_Applications>;
+  /** fetch aggregated fields from the table: "latest_insurance_applications" */
+  latest_insurance_applications_aggregate: Latest_Insurance_Applications_Aggregate;
+  /** fetch data from the table in a streaming manner: "latest_insurance_applications" */
+  latest_insurance_applications_stream: Array<Latest_Insurance_Applications>;
+  /** fetch data from the table: "me" */
+  me: Array<Me>;
+  /** fetch aggregated fields from the table: "me" */
+  me_aggregate: Me_Aggregate;
+  /** fetch data from the table in a streaming manner: "me" */
+  me_stream: Array<Me>;
+  /** fetch data from the table: "naics_code" */
+  naics_code: Array<Naics_Code>;
+  /** fetch aggregated fields from the table: "naics_code" */
+  naics_code_aggregate: Naics_Code_Aggregate;
+  /** fetch data from the table: "naics_code" using primary key columns */
+  naics_code_by_pk?: Maybe<Naics_Code>;
+  /** fetch data from the table in a streaming manner: "naics_code" */
+  naics_code_stream: Array<Naics_Code>;
+  /** fetch data from the table: "naics_mapping" */
+  naics_mapping: Array<Naics_Mapping>;
+  /** fetch aggregated fields from the table: "naics_mapping" */
+  naics_mapping_aggregate: Naics_Mapping_Aggregate;
+  /** fetch data from the table in a streaming manner: "naics_mapping" */
+  naics_mapping_stream: Array<Naics_Mapping>;
+  /** An array relationship */
+  organization_domains: Array<Organization_Domains>;
+  /** An aggregate relationship */
+  organization_domains_aggregate: Organization_Domains_Aggregate;
+  /** fetch data from the table: "organization_domains" using primary key columns */
+  organization_domains_by_pk?: Maybe<Organization_Domains>;
+  /** fetch data from the table in a streaming manner: "organization_domains" */
+  organization_domains_stream: Array<Organization_Domains>;
+  /** fetch data from the table: "organization_industry" */
+  organization_industry: Array<Organization_Industry>;
+  /** fetch aggregated fields from the table: "organization_industry" */
+  organization_industry_aggregate: Organization_Industry_Aggregate;
+  /** fetch data from the table: "organization_industry" using primary key columns */
+  organization_industry_by_pk?: Maybe<Organization_Industry>;
+  /** fetch data from the table in a streaming manner: "organization_industry" */
+  organization_industry_stream: Array<Organization_Industry>;
+  /** fetch data from the table: "policy_payment" */
+  policy_payment: Array<Policy_Payment>;
+  /** fetch aggregated fields from the table: "policy_payment" */
+  policy_payment_aggregate: Policy_Payment_Aggregate;
+  /** fetch data from the table: "policy_payment" using primary key columns */
+  policy_payment_by_pk?: Maybe<Policy_Payment>;
+  /** fetch data from the table in a streaming manner: "policy_payment" */
+  policy_payment_stream: Array<Policy_Payment>;
+  /** fetch data from the table: "policy_seq_counter" */
+  policy_seq_counter: Array<Policy_Seq_Counter>;
+  /** fetch aggregated fields from the table: "policy_seq_counter" */
+  policy_seq_counter_aggregate: Policy_Seq_Counter_Aggregate;
+  /** fetch data from the table in a streaming manner: "policy_seq_counter" */
+  policy_seq_counter_stream: Array<Policy_Seq_Counter>;
+  /** fetch data from the table: "rqb_system" */
+  rqb_system: Array<Rqb_System>;
+  /** fetch aggregated fields from the table: "rqb_system" */
+  rqb_system_aggregate: Rqb_System_Aggregate;
+  /** fetch data from the table: "rqb_system" using primary key columns */
+  rqb_system_by_pk?: Maybe<Rqb_System>;
+  /** fetch data from the table in a streaming manner: "rqb_system" */
+  rqb_system_stream: Array<Rqb_System>;
+  sendToIPFS?: Maybe<SendToIpfs>;
+  /** fetch data from the table: "tenant" */
+  tenant: Array<Tenant>;
+  /** fetch data from the table: "tenant_admin" */
+  tenant_admin: Array<Tenant_Admin>;
+  /** fetch aggregated fields from the table: "tenant_admin" */
+  tenant_admin_aggregate: Tenant_Admin_Aggregate;
+  /** fetch data from the table: "tenant_admin" using primary key columns */
+  tenant_admin_by_pk?: Maybe<Tenant_Admin>;
+  /** fetch data from the table in a streaming manner: "tenant_admin" */
+  tenant_admin_stream: Array<Tenant_Admin>;
+  /** fetch aggregated fields from the table: "tenant" */
+  tenant_aggregate: Tenant_Aggregate;
+  /** fetch data from the table: "tenant" using primary key columns */
+  tenant_by_pk?: Maybe<Tenant>;
+  /** fetch data from the table in a streaming manner: "tenant" */
+  tenant_stream: Array<Tenant>;
+  /** An array relationship */
+  tld_exclusions: Array<Tld_Exclusions>;
+  /** An aggregate relationship */
+  tld_exclusions_aggregate: Tld_Exclusions_Aggregate;
+  /** fetch data from the table: "tld_exclusions" using primary key columns */
+  tld_exclusions_by_pk?: Maybe<Tld_Exclusions>;
+  /** fetch data from the table in a streaming manner: "tld_exclusions" */
+  tld_exclusions_stream: Array<Tld_Exclusions>;
+  /** An array relationship */
+  underwriter_broker_agencies: Array<Underwriter_Broker_Agencies>;
+  /** An aggregate relationship */
+  underwriter_broker_agencies_aggregate: Underwriter_Broker_Agencies_Aggregate;
+  /** fetch data from the table: "underwriter_broker_agencies" using primary key columns */
+  underwriter_broker_agencies_by_pk?: Maybe<Underwriter_Broker_Agencies>;
+  /** fetch data from the table in a streaming manner: "underwriter_broker_agencies" */
+  underwriter_broker_agencies_stream: Array<Underwriter_Broker_Agencies>;
+  /** fetch data from the table: "underwriter_organization" */
+  underwriter_organization: Array<Underwriter_Organization>;
+  /** fetch aggregated fields from the table: "underwriter_organization" */
+  underwriter_organization_aggregate: Underwriter_Organization_Aggregate;
+  /** fetch data from the table: "underwriter_organization" using primary key columns */
+  underwriter_organization_by_pk?: Maybe<Underwriter_Organization>;
+  /** fetch data from the table in a streaming manner: "underwriter_organization" */
+  underwriter_organization_stream: Array<Underwriter_Organization>;
+  /** fetch data from the table: "underwriter_user" */
+  underwriter_user: Array<Underwriter_User>;
+  /** fetch aggregated fields from the table: "underwriter_user" */
+  underwriter_user_aggregate: Underwriter_User_Aggregate;
+  /** fetch data from the table: "underwriter_user" using primary key columns */
+  underwriter_user_by_pk?: Maybe<Underwriter_User>;
+  /** fetch data from the table in a streaming manner: "underwriter_user" */
+  underwriter_user_stream: Array<Underwriter_User>;
+  /** fetch data from the table: "user" */
+  user: Array<User>;
+  /** fetch aggregated fields from the table: "user" */
+  user_aggregate: User_Aggregate;
+  /** fetch data from the table: "user" using primary key columns */
+  user_by_pk?: Maybe<User>;
+  /** fetch data from the table: "user_password_reset" */
+  user_password_reset: Array<User_Password_Reset>;
+  /** fetch aggregated fields from the table: "user_password_reset" */
+  user_password_reset_aggregate: User_Password_Reset_Aggregate;
+  /** fetch data from the table: "user_password_reset" using primary key columns */
+  user_password_reset_by_pk?: Maybe<User_Password_Reset>;
+  /** fetch data from the table in a streaming manner: "user_password_reset" */
+  user_password_reset_stream: Array<User_Password_Reset>;
+  /** fetch data from the table in a streaming manner: "user" */
+  user_stream: Array<User>;
+  /** fetch data from the table: "view_insurance_application_for_not_taken_up_45_days" */
+  view_insurance_application_for_not_taken_up_45_days: Array<View_Insurance_Application_For_Not_Taken_Up_45_Days>;
+  /** fetch aggregated fields from the table: "view_insurance_application_for_not_taken_up_45_days" */
+  view_insurance_application_for_not_taken_up_45_days_aggregate: View_Insurance_Application_For_Not_Taken_Up_45_Days_Aggregate;
+  /** fetch data from the table in a streaming manner: "view_insurance_application_for_not_taken_up_45_days" */
+  view_insurance_application_for_not_taken_up_45_days_stream: Array<View_Insurance_Application_For_Not_Taken_Up_45_Days>;
+};
+
+
+export type Subscription_RootBroker_AgencyArgs = {
+  distinct_on?: Maybe<Array<Broker_Agency_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Broker_Agency_Order_By>>;
+  where?: Maybe<Broker_Agency_Bool_Exp>;
+};
+
+
+export type Subscription_RootBroker_Agency_AggregateArgs = {
+  distinct_on?: Maybe<Array<Broker_Agency_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Broker_Agency_Order_By>>;
+  where?: Maybe<Broker_Agency_Bool_Exp>;
+};
+
+
+export type Subscription_RootBroker_Agency_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootBroker_Agency_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Broker_Agency_Stream_Cursor_Input>>;
+  where?: Maybe<Broker_Agency_Bool_Exp>;
+};
+
+
+export type Subscription_RootBroker_ProducerArgs = {
+  distinct_on?: Maybe<Array<Broker_Producer_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Broker_Producer_Order_By>>;
+  where?: Maybe<Broker_Producer_Bool_Exp>;
+};
+
+
+export type Subscription_RootBroker_Producer_AggregateArgs = {
+  distinct_on?: Maybe<Array<Broker_Producer_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Broker_Producer_Order_By>>;
+  where?: Maybe<Broker_Producer_Bool_Exp>;
+};
+
+
+export type Subscription_RootBroker_Producer_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootBroker_Producer_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Broker_Producer_Stream_Cursor_Input>>;
+  where?: Maybe<Broker_Producer_Bool_Exp>;
+};
+
+
+export type Subscription_RootCheck_Tld_ExclusionArgs = {
+  args: Check_Tld_Exclusion_Args;
+  distinct_on?: Maybe<Array<Tld_Exclusions_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Tld_Exclusions_Order_By>>;
+  where?: Maybe<Tld_Exclusions_Bool_Exp>;
+};
+
+
+export type Subscription_RootCheck_Tld_Exclusion_AggregateArgs = {
+  args: Check_Tld_Exclusion_Args;
+  distinct_on?: Maybe<Array<Tld_Exclusions_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Tld_Exclusions_Order_By>>;
+  where?: Maybe<Tld_Exclusions_Bool_Exp>;
+};
+
+
+export type Subscription_RootDocument_FormsArgs = {
+  distinct_on?: Maybe<Array<Document_Forms_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Document_Forms_Order_By>>;
+  where?: Maybe<Document_Forms_Bool_Exp>;
+};
+
+
+export type Subscription_RootDocument_Forms_AggregateArgs = {
+  distinct_on?: Maybe<Array<Document_Forms_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Document_Forms_Order_By>>;
+  where?: Maybe<Document_Forms_Bool_Exp>;
+};
+
+
+export type Subscription_RootDocument_Forms_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootDocument_Forms_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Document_Forms_Stream_Cursor_Input>>;
+  where?: Maybe<Document_Forms_Bool_Exp>;
+};
+
+
+export type Subscription_RootDomain_ScanArgs = {
+  distinct_on?: Maybe<Array<Domain_Scan_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Domain_Scan_Order_By>>;
+  where?: Maybe<Domain_Scan_Bool_Exp>;
+};
+
+
+export type Subscription_RootDomain_Scan_AggregateArgs = {
+  distinct_on?: Maybe<Array<Domain_Scan_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Domain_Scan_Order_By>>;
+  where?: Maybe<Domain_Scan_Bool_Exp>;
+};
+
+
+export type Subscription_RootDomain_Scan_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootDomain_Scan_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Domain_Scan_Stream_Cursor_Input>>;
+  where?: Maybe<Domain_Scan_Bool_Exp>;
+};
+
+
+export type Subscription_RootDomainsArgs = {
+  distinct_on?: Maybe<Array<Domains_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Domains_Order_By>>;
+  where?: Maybe<Domains_Bool_Exp>;
+};
+
+
+export type Subscription_RootDomains_AggregateArgs = {
+  distinct_on?: Maybe<Array<Domains_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Domains_Order_By>>;
+  where?: Maybe<Domains_Bool_Exp>;
+};
+
+
+export type Subscription_RootDomains_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootDomains_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Domains_Stream_Cursor_Input>>;
+  where?: Maybe<Domains_Bool_Exp>;
+};
+
+
+export type Subscription_RootExternal_ScanArgs = {
+  distinct_on?: Maybe<Array<External_Scan_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<External_Scan_Order_By>>;
+  where?: Maybe<External_Scan_Bool_Exp>;
+};
+
+
+export type Subscription_RootExternal_Scan_AggregateArgs = {
+  distinct_on?: Maybe<Array<External_Scan_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<External_Scan_Order_By>>;
+  where?: Maybe<External_Scan_Bool_Exp>;
+};
+
+
+export type Subscription_RootExternal_Scan_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootExternal_Scan_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<External_Scan_Stream_Cursor_Input>>;
+  where?: Maybe<External_Scan_Bool_Exp>;
+};
+
+
+export type Subscription_RootIms_Applications_Not_Taken_UpArgs = {
+  distinct_on?: Maybe<Array<Ims_Applications_Not_Taken_Up_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Ims_Applications_Not_Taken_Up_Order_By>>;
+  where?: Maybe<Ims_Applications_Not_Taken_Up_Bool_Exp>;
+};
+
+
+export type Subscription_RootIms_Applications_Not_Taken_Up_AggregateArgs = {
+  distinct_on?: Maybe<Array<Ims_Applications_Not_Taken_Up_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Ims_Applications_Not_Taken_Up_Order_By>>;
+  where?: Maybe<Ims_Applications_Not_Taken_Up_Bool_Exp>;
+};
+
+
+export type Subscription_RootIms_Applications_Not_Taken_Up_By_PkArgs = {
+  application_id: Scalars['uuid'];
+};
+
+
+export type Subscription_RootIms_Applications_Not_Taken_Up_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Ims_Applications_Not_Taken_Up_Stream_Cursor_Input>>;
+  where?: Maybe<Ims_Applications_Not_Taken_Up_Bool_Exp>;
+};
+
+
+export type Subscription_RootIms_ChargeArgs = {
+  distinct_on?: Maybe<Array<Ims_Charge_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Ims_Charge_Order_By>>;
+  where?: Maybe<Ims_Charge_Bool_Exp>;
+};
+
+
+export type Subscription_RootIms_Charge_AggregateArgs = {
+  distinct_on?: Maybe<Array<Ims_Charge_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Ims_Charge_Order_By>>;
+  where?: Maybe<Ims_Charge_Bool_Exp>;
+};
+
+
+export type Subscription_RootIms_Charge_By_PkArgs = {
+  charge_code: Scalars['Int'];
+};
+
+
+export type Subscription_RootIms_Charge_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Ims_Charge_Stream_Cursor_Input>>;
+  where?: Maybe<Ims_Charge_Bool_Exp>;
+};
+
+
+export type Subscription_RootIms_Company_Business_TypeArgs = {
+  distinct_on?: Maybe<Array<Ims_Company_Business_Type_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Ims_Company_Business_Type_Order_By>>;
+  where?: Maybe<Ims_Company_Business_Type_Bool_Exp>;
+};
+
+
+export type Subscription_RootIms_Company_Business_Type_AggregateArgs = {
+  distinct_on?: Maybe<Array<Ims_Company_Business_Type_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Ims_Company_Business_Type_Order_By>>;
+  where?: Maybe<Ims_Company_Business_Type_Bool_Exp>;
+};
+
+
+export type Subscription_RootIms_Company_Business_Type_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootIms_Company_Business_Type_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Ims_Company_Business_Type_Stream_Cursor_Input>>;
+  where?: Maybe<Ims_Company_Business_Type_Bool_Exp>;
+};
+
+
+export type Subscription_RootIms_ResponsesArgs = {
+  distinct_on?: Maybe<Array<Ims_Responses_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Ims_Responses_Order_By>>;
+  where?: Maybe<Ims_Responses_Bool_Exp>;
+};
+
+
+export type Subscription_RootIms_Responses_AggregateArgs = {
+  distinct_on?: Maybe<Array<Ims_Responses_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Ims_Responses_Order_By>>;
+  where?: Maybe<Ims_Responses_Bool_Exp>;
+};
+
+
+export type Subscription_RootIms_Responses_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootIms_Responses_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Ims_Responses_Stream_Cursor_Input>>;
+  where?: Maybe<Ims_Responses_Bool_Exp>;
+};
+
+
+export type Subscription_RootIms_StateArgs = {
+  distinct_on?: Maybe<Array<Ims_State_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Ims_State_Order_By>>;
+  where?: Maybe<Ims_State_Bool_Exp>;
+};
+
+
+export type Subscription_RootIms_State_AggregateArgs = {
+  distinct_on?: Maybe<Array<Ims_State_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Ims_State_Order_By>>;
+  where?: Maybe<Ims_State_Bool_Exp>;
+};
+
+
+export type Subscription_RootIms_State_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootIms_State_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Ims_State_Stream_Cursor_Input>>;
+  where?: Maybe<Ims_State_Bool_Exp>;
+};
+
+
+export type Subscription_RootInsurance_ApplicationArgs = {
+  distinct_on?: Maybe<Array<Insurance_Application_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Application_Order_By>>;
+  where?: Maybe<Insurance_Application_Bool_Exp>;
+};
+
+
+export type Subscription_RootInsurance_Application_AggregateArgs = {
+  distinct_on?: Maybe<Array<Insurance_Application_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Application_Order_By>>;
+  where?: Maybe<Insurance_Application_Bool_Exp>;
+};
+
+
+export type Subscription_RootInsurance_Application_ArtifactArgs = {
+  distinct_on?: Maybe<Array<Insurance_Application_Artifact_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Application_Artifact_Order_By>>;
+  where?: Maybe<Insurance_Application_Artifact_Bool_Exp>;
+};
+
+
+export type Subscription_RootInsurance_Application_Artifact_AggregateArgs = {
+  distinct_on?: Maybe<Array<Insurance_Application_Artifact_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Application_Artifact_Order_By>>;
+  where?: Maybe<Insurance_Application_Artifact_Bool_Exp>;
+};
+
+
+export type Subscription_RootInsurance_Application_Artifact_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootInsurance_Application_Artifact_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Insurance_Application_Artifact_Stream_Cursor_Input>>;
+  where?: Maybe<Insurance_Application_Artifact_Bool_Exp>;
+};
+
+
+export type Subscription_RootInsurance_Application_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Subscription_RootInsurance_Application_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Insurance_Application_Stream_Cursor_Input>>;
+  where?: Maybe<Insurance_Application_Bool_Exp>;
+};
+
+
+export type Subscription_RootInsurance_Applications_From_N_Days_AgoArgs = {
+  args: Insurance_Applications_From_N_Days_Ago_Args;
+  distinct_on?: Maybe<Array<Insurance_Application_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Application_Order_By>>;
+  where?: Maybe<Insurance_Application_Bool_Exp>;
+};
+
+
+export type Subscription_RootInsurance_Applications_From_N_Days_Ago_AggregateArgs = {
+  args: Insurance_Applications_From_N_Days_Ago_Args;
+  distinct_on?: Maybe<Array<Insurance_Application_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Application_Order_By>>;
+  where?: Maybe<Insurance_Application_Bool_Exp>;
+};
+
+
+export type Subscription_RootInsurance_PolicyArgs = {
+  distinct_on?: Maybe<Array<Insurance_Policy_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Policy_Order_By>>;
+  where?: Maybe<Insurance_Policy_Bool_Exp>;
+};
+
+
+export type Subscription_RootInsurance_Policy_AggregateArgs = {
+  distinct_on?: Maybe<Array<Insurance_Policy_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Policy_Order_By>>;
+  where?: Maybe<Insurance_Policy_Bool_Exp>;
+};
+
+
+export type Subscription_RootInsurance_Policy_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootInsurance_Policy_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Insurance_Policy_Stream_Cursor_Input>>;
+  where?: Maybe<Insurance_Policy_Bool_Exp>;
+};
+
+
+export type Subscription_RootInsurance_QuoteArgs = {
+  distinct_on?: Maybe<Array<Insurance_Quote_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Quote_Order_By>>;
+  where?: Maybe<Insurance_Quote_Bool_Exp>;
+};
+
+
+export type Subscription_RootInsurance_Quote_AggregateArgs = {
+  distinct_on?: Maybe<Array<Insurance_Quote_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Quote_Order_By>>;
+  where?: Maybe<Insurance_Quote_Bool_Exp>;
+};
+
+
+export type Subscription_RootInsurance_Quote_By_PkArgs = {
+  id: Scalars['bigint'];
+};
+
+
+export type Subscription_RootInsurance_Quote_EmailArgs = {
+  distinct_on?: Maybe<Array<Insurance_Quote_Email_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Quote_Email_Order_By>>;
+  where?: Maybe<Insurance_Quote_Email_Bool_Exp>;
+};
+
+
+export type Subscription_RootInsurance_Quote_Email_AggregateArgs = {
+  distinct_on?: Maybe<Array<Insurance_Quote_Email_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Quote_Email_Order_By>>;
+  where?: Maybe<Insurance_Quote_Email_Bool_Exp>;
+};
+
+
+export type Subscription_RootInsurance_Quote_Email_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootInsurance_Quote_Email_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Insurance_Quote_Email_Stream_Cursor_Input>>;
+  where?: Maybe<Insurance_Quote_Email_Bool_Exp>;
+};
+
+
+export type Subscription_RootInsurance_Quote_Pdf_SelectionArgs = {
+  distinct_on?: Maybe<Array<Insurance_Quote_Pdf_Selection_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Quote_Pdf_Selection_Order_By>>;
+  where?: Maybe<Insurance_Quote_Pdf_Selection_Bool_Exp>;
+};
+
+
+export type Subscription_RootInsurance_Quote_Pdf_Selection_AggregateArgs = {
+  distinct_on?: Maybe<Array<Insurance_Quote_Pdf_Selection_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Quote_Pdf_Selection_Order_By>>;
+  where?: Maybe<Insurance_Quote_Pdf_Selection_Bool_Exp>;
+};
+
+
+export type Subscription_RootInsurance_Quote_Pdf_Selection_ArtifactArgs = {
+  distinct_on?: Maybe<Array<Insurance_Quote_Pdf_Selection_Artifact_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Quote_Pdf_Selection_Artifact_Order_By>>;
+  where?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Bool_Exp>;
+};
+
+
+export type Subscription_RootInsurance_Quote_Pdf_Selection_Artifact_AggregateArgs = {
+  distinct_on?: Maybe<Array<Insurance_Quote_Pdf_Selection_Artifact_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Quote_Pdf_Selection_Artifact_Order_By>>;
+  where?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Bool_Exp>;
+};
+
+
+export type Subscription_RootInsurance_Quote_Pdf_Selection_Artifact_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootInsurance_Quote_Pdf_Selection_Artifact_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Insurance_Quote_Pdf_Selection_Artifact_Stream_Cursor_Input>>;
+  where?: Maybe<Insurance_Quote_Pdf_Selection_Artifact_Bool_Exp>;
+};
+
+
+export type Subscription_RootInsurance_Quote_Pdf_Selection_By_PkArgs = {
+  application_id: Scalars['uuid'];
+  pdf_selection_artifact_id: Scalars['Int'];
+  quote_id: Scalars['Int'];
+};
+
+
+export type Subscription_RootInsurance_Quote_Pdf_Selection_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Insurance_Quote_Pdf_Selection_Stream_Cursor_Input>>;
+  where?: Maybe<Insurance_Quote_Pdf_Selection_Bool_Exp>;
+};
+
+
+export type Subscription_RootInsurance_Quote_SelectionArgs = {
+  distinct_on?: Maybe<Array<Insurance_Quote_Selection_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Quote_Selection_Order_By>>;
+  where?: Maybe<Insurance_Quote_Selection_Bool_Exp>;
+};
+
+
+export type Subscription_RootInsurance_Quote_Selection_AggregateArgs = {
+  distinct_on?: Maybe<Array<Insurance_Quote_Selection_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Quote_Selection_Order_By>>;
+  where?: Maybe<Insurance_Quote_Selection_Bool_Exp>;
+};
+
+
+export type Subscription_RootInsurance_Quote_Selection_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootInsurance_Quote_Selection_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Insurance_Quote_Selection_Stream_Cursor_Input>>;
+  where?: Maybe<Insurance_Quote_Selection_Bool_Exp>;
+};
+
+
+export type Subscription_RootInsurance_Quote_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Insurance_Quote_Stream_Cursor_Input>>;
+  where?: Maybe<Insurance_Quote_Bool_Exp>;
+};
+
+
+export type Subscription_RootInsured_OrganizationArgs = {
+  distinct_on?: Maybe<Array<Insured_Organization_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insured_Organization_Order_By>>;
+  where?: Maybe<Insured_Organization_Bool_Exp>;
+};
+
+
+export type Subscription_RootInsured_Organization_AggregateArgs = {
+  distinct_on?: Maybe<Array<Insured_Organization_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insured_Organization_Order_By>>;
+  where?: Maybe<Insured_Organization_Bool_Exp>;
+};
+
+
+export type Subscription_RootInsured_Organization_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootInsured_Organization_ContactArgs = {
+  distinct_on?: Maybe<Array<Insured_Organization_Contact_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insured_Organization_Contact_Order_By>>;
+  where?: Maybe<Insured_Organization_Contact_Bool_Exp>;
+};
+
+
+export type Subscription_RootInsured_Organization_Contact_AggregateArgs = {
+  distinct_on?: Maybe<Array<Insured_Organization_Contact_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insured_Organization_Contact_Order_By>>;
+  where?: Maybe<Insured_Organization_Contact_Bool_Exp>;
+};
+
+
+export type Subscription_RootInsured_Organization_Contact_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootInsured_Organization_Contact_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Insured_Organization_Contact_Stream_Cursor_Input>>;
+  where?: Maybe<Insured_Organization_Contact_Bool_Exp>;
+};
+
+
+export type Subscription_RootInsured_Organization_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Insured_Organization_Stream_Cursor_Input>>;
+  where?: Maybe<Insured_Organization_Bool_Exp>;
+};
+
+
+export type Subscription_RootLatest_App_Artifacts_Quote_PolicyArgs = {
+  distinct_on?: Maybe<Array<Latest_App_Artifacts_Quote_Policy_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Latest_App_Artifacts_Quote_Policy_Order_By>>;
+  where?: Maybe<Latest_App_Artifacts_Quote_Policy_Bool_Exp>;
+};
+
+
+export type Subscription_RootLatest_App_Artifacts_Quote_Policy_AggregateArgs = {
+  distinct_on?: Maybe<Array<Latest_App_Artifacts_Quote_Policy_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Latest_App_Artifacts_Quote_Policy_Order_By>>;
+  where?: Maybe<Latest_App_Artifacts_Quote_Policy_Bool_Exp>;
+};
+
+
+export type Subscription_RootLatest_App_Artifacts_Quote_Policy_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Latest_App_Artifacts_Quote_Policy_Stream_Cursor_Input>>;
+  where?: Maybe<Latest_App_Artifacts_Quote_Policy_Bool_Exp>;
+};
+
+
+export type Subscription_RootLatest_Insurance_ApplicationsArgs = {
+  distinct_on?: Maybe<Array<Latest_Insurance_Applications_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Latest_Insurance_Applications_Order_By>>;
+  where?: Maybe<Latest_Insurance_Applications_Bool_Exp>;
+};
+
+
+export type Subscription_RootLatest_Insurance_Applications_AggregateArgs = {
+  distinct_on?: Maybe<Array<Latest_Insurance_Applications_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Latest_Insurance_Applications_Order_By>>;
+  where?: Maybe<Latest_Insurance_Applications_Bool_Exp>;
+};
+
+
+export type Subscription_RootLatest_Insurance_Applications_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Latest_Insurance_Applications_Stream_Cursor_Input>>;
+  where?: Maybe<Latest_Insurance_Applications_Bool_Exp>;
+};
+
+
+export type Subscription_RootMeArgs = {
+  distinct_on?: Maybe<Array<Me_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Me_Order_By>>;
+  where?: Maybe<Me_Bool_Exp>;
+};
+
+
+export type Subscription_RootMe_AggregateArgs = {
+  distinct_on?: Maybe<Array<Me_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Me_Order_By>>;
+  where?: Maybe<Me_Bool_Exp>;
+};
+
+
+export type Subscription_RootMe_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Me_Stream_Cursor_Input>>;
+  where?: Maybe<Me_Bool_Exp>;
+};
+
+
+export type Subscription_RootNaics_CodeArgs = {
+  distinct_on?: Maybe<Array<Naics_Code_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Naics_Code_Order_By>>;
+  where?: Maybe<Naics_Code_Bool_Exp>;
+};
+
+
+export type Subscription_RootNaics_Code_AggregateArgs = {
+  distinct_on?: Maybe<Array<Naics_Code_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Naics_Code_Order_By>>;
+  where?: Maybe<Naics_Code_Bool_Exp>;
+};
+
+
+export type Subscription_RootNaics_Code_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootNaics_Code_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Naics_Code_Stream_Cursor_Input>>;
+  where?: Maybe<Naics_Code_Bool_Exp>;
+};
+
+
+export type Subscription_RootNaics_MappingArgs = {
+  distinct_on?: Maybe<Array<Naics_Mapping_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Naics_Mapping_Order_By>>;
+  where?: Maybe<Naics_Mapping_Bool_Exp>;
+};
+
+
+export type Subscription_RootNaics_Mapping_AggregateArgs = {
+  distinct_on?: Maybe<Array<Naics_Mapping_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Naics_Mapping_Order_By>>;
+  where?: Maybe<Naics_Mapping_Bool_Exp>;
+};
+
+
+export type Subscription_RootNaics_Mapping_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Naics_Mapping_Stream_Cursor_Input>>;
+  where?: Maybe<Naics_Mapping_Bool_Exp>;
+};
+
+
+export type Subscription_RootOrganization_DomainsArgs = {
+  distinct_on?: Maybe<Array<Organization_Domains_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Organization_Domains_Order_By>>;
+  where?: Maybe<Organization_Domains_Bool_Exp>;
+};
+
+
+export type Subscription_RootOrganization_Domains_AggregateArgs = {
+  distinct_on?: Maybe<Array<Organization_Domains_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Organization_Domains_Order_By>>;
+  where?: Maybe<Organization_Domains_Bool_Exp>;
+};
+
+
+export type Subscription_RootOrganization_Domains_By_PkArgs = {
+  id: Scalars['bigint'];
+};
+
+
+export type Subscription_RootOrganization_Domains_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Organization_Domains_Stream_Cursor_Input>>;
+  where?: Maybe<Organization_Domains_Bool_Exp>;
+};
+
+
+export type Subscription_RootOrganization_IndustryArgs = {
+  distinct_on?: Maybe<Array<Organization_Industry_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Organization_Industry_Order_By>>;
+  where?: Maybe<Organization_Industry_Bool_Exp>;
+};
+
+
+export type Subscription_RootOrganization_Industry_AggregateArgs = {
+  distinct_on?: Maybe<Array<Organization_Industry_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Organization_Industry_Order_By>>;
+  where?: Maybe<Organization_Industry_Bool_Exp>;
+};
+
+
+export type Subscription_RootOrganization_Industry_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootOrganization_Industry_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Organization_Industry_Stream_Cursor_Input>>;
+  where?: Maybe<Organization_Industry_Bool_Exp>;
+};
+
+
+export type Subscription_RootPolicy_PaymentArgs = {
+  distinct_on?: Maybe<Array<Policy_Payment_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Policy_Payment_Order_By>>;
+  where?: Maybe<Policy_Payment_Bool_Exp>;
+};
+
+
+export type Subscription_RootPolicy_Payment_AggregateArgs = {
+  distinct_on?: Maybe<Array<Policy_Payment_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Policy_Payment_Order_By>>;
+  where?: Maybe<Policy_Payment_Bool_Exp>;
+};
+
+
+export type Subscription_RootPolicy_Payment_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootPolicy_Payment_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Policy_Payment_Stream_Cursor_Input>>;
+  where?: Maybe<Policy_Payment_Bool_Exp>;
+};
+
+
+export type Subscription_RootPolicy_Seq_CounterArgs = {
+  distinct_on?: Maybe<Array<Policy_Seq_Counter_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Policy_Seq_Counter_Order_By>>;
+  where?: Maybe<Policy_Seq_Counter_Bool_Exp>;
+};
+
+
+export type Subscription_RootPolicy_Seq_Counter_AggregateArgs = {
+  distinct_on?: Maybe<Array<Policy_Seq_Counter_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Policy_Seq_Counter_Order_By>>;
+  where?: Maybe<Policy_Seq_Counter_Bool_Exp>;
+};
+
+
+export type Subscription_RootPolicy_Seq_Counter_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Policy_Seq_Counter_Stream_Cursor_Input>>;
+  where?: Maybe<Policy_Seq_Counter_Bool_Exp>;
+};
+
+
+export type Subscription_RootRqb_SystemArgs = {
+  distinct_on?: Maybe<Array<Rqb_System_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Rqb_System_Order_By>>;
+  where?: Maybe<Rqb_System_Bool_Exp>;
+};
+
+
+export type Subscription_RootRqb_System_AggregateArgs = {
+  distinct_on?: Maybe<Array<Rqb_System_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Rqb_System_Order_By>>;
+  where?: Maybe<Rqb_System_Bool_Exp>;
+};
+
+
+export type Subscription_RootRqb_System_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootRqb_System_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Rqb_System_Stream_Cursor_Input>>;
+  where?: Maybe<Rqb_System_Bool_Exp>;
+};
+
+
+export type Subscription_RootSendToIpfsArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Subscription_RootTenantArgs = {
+  distinct_on?: Maybe<Array<Tenant_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Tenant_Order_By>>;
+  where?: Maybe<Tenant_Bool_Exp>;
+};
+
+
+export type Subscription_RootTenant_AdminArgs = {
+  distinct_on?: Maybe<Array<Tenant_Admin_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Tenant_Admin_Order_By>>;
+  where?: Maybe<Tenant_Admin_Bool_Exp>;
+};
+
+
+export type Subscription_RootTenant_Admin_AggregateArgs = {
+  distinct_on?: Maybe<Array<Tenant_Admin_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Tenant_Admin_Order_By>>;
+  where?: Maybe<Tenant_Admin_Bool_Exp>;
+};
+
+
+export type Subscription_RootTenant_Admin_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootTenant_Admin_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Tenant_Admin_Stream_Cursor_Input>>;
+  where?: Maybe<Tenant_Admin_Bool_Exp>;
+};
+
+
+export type Subscription_RootTenant_AggregateArgs = {
+  distinct_on?: Maybe<Array<Tenant_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Tenant_Order_By>>;
+  where?: Maybe<Tenant_Bool_Exp>;
+};
+
+
+export type Subscription_RootTenant_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootTenant_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Tenant_Stream_Cursor_Input>>;
+  where?: Maybe<Tenant_Bool_Exp>;
+};
+
+
+export type Subscription_RootTld_ExclusionsArgs = {
+  distinct_on?: Maybe<Array<Tld_Exclusions_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Tld_Exclusions_Order_By>>;
+  where?: Maybe<Tld_Exclusions_Bool_Exp>;
+};
+
+
+export type Subscription_RootTld_Exclusions_AggregateArgs = {
+  distinct_on?: Maybe<Array<Tld_Exclusions_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Tld_Exclusions_Order_By>>;
+  where?: Maybe<Tld_Exclusions_Bool_Exp>;
+};
+
+
+export type Subscription_RootTld_Exclusions_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootTld_Exclusions_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Tld_Exclusions_Stream_Cursor_Input>>;
+  where?: Maybe<Tld_Exclusions_Bool_Exp>;
+};
+
+
+export type Subscription_RootUnderwriter_Broker_AgenciesArgs = {
+  distinct_on?: Maybe<Array<Underwriter_Broker_Agencies_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Underwriter_Broker_Agencies_Order_By>>;
+  where?: Maybe<Underwriter_Broker_Agencies_Bool_Exp>;
+};
+
+
+export type Subscription_RootUnderwriter_Broker_Agencies_AggregateArgs = {
+  distinct_on?: Maybe<Array<Underwriter_Broker_Agencies_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Underwriter_Broker_Agencies_Order_By>>;
+  where?: Maybe<Underwriter_Broker_Agencies_Bool_Exp>;
+};
+
+
+export type Subscription_RootUnderwriter_Broker_Agencies_By_PkArgs = {
+  broker_agency_id: Scalars['Int'];
+  underwriter_organization_id: Scalars['Int'];
+};
+
+
+export type Subscription_RootUnderwriter_Broker_Agencies_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Underwriter_Broker_Agencies_Stream_Cursor_Input>>;
+  where?: Maybe<Underwriter_Broker_Agencies_Bool_Exp>;
+};
+
+
+export type Subscription_RootUnderwriter_OrganizationArgs = {
+  distinct_on?: Maybe<Array<Underwriter_Organization_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Underwriter_Organization_Order_By>>;
+  where?: Maybe<Underwriter_Organization_Bool_Exp>;
+};
+
+
+export type Subscription_RootUnderwriter_Organization_AggregateArgs = {
+  distinct_on?: Maybe<Array<Underwriter_Organization_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Underwriter_Organization_Order_By>>;
+  where?: Maybe<Underwriter_Organization_Bool_Exp>;
+};
+
+
+export type Subscription_RootUnderwriter_Organization_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootUnderwriter_Organization_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Underwriter_Organization_Stream_Cursor_Input>>;
+  where?: Maybe<Underwriter_Organization_Bool_Exp>;
+};
+
+
+export type Subscription_RootUnderwriter_UserArgs = {
+  distinct_on?: Maybe<Array<Underwriter_User_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Underwriter_User_Order_By>>;
+  where?: Maybe<Underwriter_User_Bool_Exp>;
+};
+
+
+export type Subscription_RootUnderwriter_User_AggregateArgs = {
+  distinct_on?: Maybe<Array<Underwriter_User_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Underwriter_User_Order_By>>;
+  where?: Maybe<Underwriter_User_Bool_Exp>;
+};
+
+
+export type Subscription_RootUnderwriter_User_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootUnderwriter_User_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<Underwriter_User_Stream_Cursor_Input>>;
+  where?: Maybe<Underwriter_User_Bool_Exp>;
+};
+
+
+export type Subscription_RootUserArgs = {
+  distinct_on?: Maybe<Array<User_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<User_Order_By>>;
+  where?: Maybe<User_Bool_Exp>;
+};
+
+
+export type Subscription_RootUser_AggregateArgs = {
+  distinct_on?: Maybe<Array<User_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<User_Order_By>>;
+  where?: Maybe<User_Bool_Exp>;
+};
+
+
+export type Subscription_RootUser_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootUser_Password_ResetArgs = {
+  distinct_on?: Maybe<Array<User_Password_Reset_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<User_Password_Reset_Order_By>>;
+  where?: Maybe<User_Password_Reset_Bool_Exp>;
+};
+
+
+export type Subscription_RootUser_Password_Reset_AggregateArgs = {
+  distinct_on?: Maybe<Array<User_Password_Reset_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<User_Password_Reset_Order_By>>;
+  where?: Maybe<User_Password_Reset_Bool_Exp>;
+};
+
+
+export type Subscription_RootUser_Password_Reset_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootUser_Password_Reset_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<User_Password_Reset_Stream_Cursor_Input>>;
+  where?: Maybe<User_Password_Reset_Bool_Exp>;
+};
+
+
+export type Subscription_RootUser_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<User_Stream_Cursor_Input>>;
+  where?: Maybe<User_Bool_Exp>;
+};
+
+
+export type Subscription_RootView_Insurance_Application_For_Not_Taken_Up_45_DaysArgs = {
+  distinct_on?: Maybe<Array<View_Insurance_Application_For_Not_Taken_Up_45_Days_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<View_Insurance_Application_For_Not_Taken_Up_45_Days_Order_By>>;
+  where?: Maybe<View_Insurance_Application_For_Not_Taken_Up_45_Days_Bool_Exp>;
+};
+
+
+export type Subscription_RootView_Insurance_Application_For_Not_Taken_Up_45_Days_AggregateArgs = {
+  distinct_on?: Maybe<Array<View_Insurance_Application_For_Not_Taken_Up_45_Days_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<View_Insurance_Application_For_Not_Taken_Up_45_Days_Order_By>>;
+  where?: Maybe<View_Insurance_Application_For_Not_Taken_Up_45_Days_Bool_Exp>;
+};
+
+
+export type Subscription_RootView_Insurance_Application_For_Not_Taken_Up_45_Days_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<Maybe<View_Insurance_Application_For_Not_Taken_Up_45_Days_Stream_Cursor_Input>>;
+  where?: Maybe<View_Insurance_Application_For_Not_Taken_Up_45_Days_Bool_Exp>;
+};
+
+/** columns and relationships of "tenant" */
+export type Tenant = {
+  __typename?: 'tenant';
+  /** An array relationship */
+  broker_agencies: Array<Broker_Agency>;
+  /** An aggregate relationship */
+  broker_agencies_aggregate: Broker_Agency_Aggregate;
+  class_of_business?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  /** An array relationship */
+  document_forms: Array<Document_Forms>;
+  /** An aggregate relationship */
+  document_forms_aggregate: Document_Forms_Aggregate;
+  id: Scalars['Int'];
+  logo: Scalars['String'];
+  name: Scalars['String'];
+  primary_color: Scalars['String'];
+  quote_template_id?: Maybe<Scalars['String']>;
+  report_template_Id: Scalars['String'];
+  scan_required?: Maybe<Scalars['Boolean']>;
+  secondary_color: Scalars['String'];
+  /** An array relationship */
+  tenant_admins: Array<Tenant_Admin>;
+  /** An aggregate relationship */
+  tenant_admins_aggregate: Tenant_Admin_Aggregate;
+  /** An array relationship */
+  tld_exclusions: Array<Tld_Exclusions>;
+  /** An aggregate relationship */
+  tld_exclusions_aggregate: Tld_Exclusions_Aggregate;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+
+/** columns and relationships of "tenant" */
+export type TenantBroker_AgenciesArgs = {
+  distinct_on?: Maybe<Array<Broker_Agency_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Broker_Agency_Order_By>>;
+  where?: Maybe<Broker_Agency_Bool_Exp>;
+};
+
+
+/** columns and relationships of "tenant" */
+export type TenantBroker_Agencies_AggregateArgs = {
+  distinct_on?: Maybe<Array<Broker_Agency_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Broker_Agency_Order_By>>;
+  where?: Maybe<Broker_Agency_Bool_Exp>;
+};
+
+
+/** columns and relationships of "tenant" */
+export type TenantDocument_FormsArgs = {
+  distinct_on?: Maybe<Array<Document_Forms_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Document_Forms_Order_By>>;
+  where?: Maybe<Document_Forms_Bool_Exp>;
+};
+
+
+/** columns and relationships of "tenant" */
+export type TenantDocument_Forms_AggregateArgs = {
+  distinct_on?: Maybe<Array<Document_Forms_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Document_Forms_Order_By>>;
+  where?: Maybe<Document_Forms_Bool_Exp>;
+};
+
+
+/** columns and relationships of "tenant" */
+export type TenantTenant_AdminsArgs = {
+  distinct_on?: Maybe<Array<Tenant_Admin_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Tenant_Admin_Order_By>>;
+  where?: Maybe<Tenant_Admin_Bool_Exp>;
+};
+
+
+/** columns and relationships of "tenant" */
+export type TenantTenant_Admins_AggregateArgs = {
+  distinct_on?: Maybe<Array<Tenant_Admin_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Tenant_Admin_Order_By>>;
+  where?: Maybe<Tenant_Admin_Bool_Exp>;
+};
+
+
+/** columns and relationships of "tenant" */
+export type TenantTld_ExclusionsArgs = {
+  distinct_on?: Maybe<Array<Tld_Exclusions_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Tld_Exclusions_Order_By>>;
+  where?: Maybe<Tld_Exclusions_Bool_Exp>;
+};
+
+
+/** columns and relationships of "tenant" */
+export type TenantTld_Exclusions_AggregateArgs = {
+  distinct_on?: Maybe<Array<Tld_Exclusions_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Tld_Exclusions_Order_By>>;
+  where?: Maybe<Tld_Exclusions_Bool_Exp>;
+};
+
+/** columns and relationships of "tenant_admin" */
+export type Tenant_Admin = {
+  __typename?: 'tenant_admin';
+  created_at: Scalars['timestamptz'];
+  id: Scalars['Int'];
+  /** An object relationship */
+  tenant: Tenant;
+  tenant_id: Scalars['Int'];
+  /** An object relationship */
+  user: User;
+  user_id: Scalars['Int'];
+};
+
+/** aggregated selection of "tenant_admin" */
+export type Tenant_Admin_Aggregate = {
+  __typename?: 'tenant_admin_aggregate';
+  aggregate?: Maybe<Tenant_Admin_Aggregate_Fields>;
+  nodes: Array<Tenant_Admin>;
+};
+
+export type Tenant_Admin_Aggregate_Bool_Exp = {
+  count?: Maybe<Tenant_Admin_Aggregate_Bool_Exp_Count>;
+};
+
+export type Tenant_Admin_Aggregate_Bool_Exp_Count = {
+  arguments?: Maybe<Array<Tenant_Admin_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+  filter?: Maybe<Tenant_Admin_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "tenant_admin" */
+export type Tenant_Admin_Aggregate_Fields = {
+  __typename?: 'tenant_admin_aggregate_fields';
+  avg?: Maybe<Tenant_Admin_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Tenant_Admin_Max_Fields>;
+  min?: Maybe<Tenant_Admin_Min_Fields>;
+  stddev?: Maybe<Tenant_Admin_Stddev_Fields>;
+  stddev_pop?: Maybe<Tenant_Admin_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Tenant_Admin_Stddev_Samp_Fields>;
+  sum?: Maybe<Tenant_Admin_Sum_Fields>;
+  var_pop?: Maybe<Tenant_Admin_Var_Pop_Fields>;
+  var_samp?: Maybe<Tenant_Admin_Var_Samp_Fields>;
+  variance?: Maybe<Tenant_Admin_Variance_Fields>;
+};
+
+
+/** aggregate fields of "tenant_admin" */
+export type Tenant_Admin_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Tenant_Admin_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "tenant_admin" */
+export type Tenant_Admin_Aggregate_Order_By = {
+  avg?: Maybe<Tenant_Admin_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Tenant_Admin_Max_Order_By>;
+  min?: Maybe<Tenant_Admin_Min_Order_By>;
+  stddev?: Maybe<Tenant_Admin_Stddev_Order_By>;
+  stddev_pop?: Maybe<Tenant_Admin_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Tenant_Admin_Stddev_Samp_Order_By>;
+  sum?: Maybe<Tenant_Admin_Sum_Order_By>;
+  var_pop?: Maybe<Tenant_Admin_Var_Pop_Order_By>;
+  var_samp?: Maybe<Tenant_Admin_Var_Samp_Order_By>;
+  variance?: Maybe<Tenant_Admin_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "tenant_admin" */
+export type Tenant_Admin_Arr_Rel_Insert_Input = {
+  data: Array<Tenant_Admin_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: Maybe<Tenant_Admin_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Tenant_Admin_Avg_Fields = {
+  __typename?: 'tenant_admin_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+  tenant_id?: Maybe<Scalars['Float']>;
+  user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "tenant_admin" */
+export type Tenant_Admin_Avg_Order_By = {
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "tenant_admin". All fields are combined with a logical 'AND'. */
+export type Tenant_Admin_Bool_Exp = {
+  _and?: Maybe<Array<Tenant_Admin_Bool_Exp>>;
+  _not?: Maybe<Tenant_Admin_Bool_Exp>;
+  _or?: Maybe<Array<Tenant_Admin_Bool_Exp>>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  tenant?: Maybe<Tenant_Bool_Exp>;
+  tenant_id?: Maybe<Int_Comparison_Exp>;
+  user?: Maybe<User_Bool_Exp>;
+  user_id?: Maybe<Int_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "tenant_admin" */
+export enum Tenant_Admin_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  TenantAdminPkey = 'tenant_admin_pkey'
+}
+
+/** input type for incrementing numeric columns in table "tenant_admin" */
+export type Tenant_Admin_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+  tenant_id?: Maybe<Scalars['Int']>;
+  user_id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "tenant_admin" */
+export type Tenant_Admin_Insert_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  tenant?: Maybe<Tenant_Obj_Rel_Insert_Input>;
+  tenant_id?: Maybe<Scalars['Int']>;
+  user?: Maybe<User_Obj_Rel_Insert_Input>;
+  user_id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate max on columns */
+export type Tenant_Admin_Max_Fields = {
+  __typename?: 'tenant_admin_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  tenant_id?: Maybe<Scalars['Int']>;
+  user_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by max() on columns of table "tenant_admin" */
+export type Tenant_Admin_Max_Order_By = {
+  created_at?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Tenant_Admin_Min_Fields = {
+  __typename?: 'tenant_admin_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  tenant_id?: Maybe<Scalars['Int']>;
+  user_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by min() on columns of table "tenant_admin" */
+export type Tenant_Admin_Min_Order_By = {
+  created_at?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "tenant_admin" */
+export type Tenant_Admin_Mutation_Response = {
+  __typename?: 'tenant_admin_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Tenant_Admin>;
+};
+
+/** input type for inserting object relation for remote table "tenant_admin" */
+export type Tenant_Admin_Obj_Rel_Insert_Input = {
+  data: Tenant_Admin_Insert_Input;
+  /** upsert condition */
+  on_conflict?: Maybe<Tenant_Admin_On_Conflict>;
+};
+
+/** on_conflict condition type for table "tenant_admin" */
+export type Tenant_Admin_On_Conflict = {
+  constraint: Tenant_Admin_Constraint;
+  update_columns?: Array<Tenant_Admin_Update_Column>;
+  where?: Maybe<Tenant_Admin_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "tenant_admin". */
+export type Tenant_Admin_Order_By = {
+  created_at?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  tenant?: Maybe<Tenant_Order_By>;
+  tenant_id?: Maybe<Order_By>;
+  user?: Maybe<User_Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: tenant_admin */
+export type Tenant_Admin_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "tenant_admin" */
+export enum Tenant_Admin_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  TenantId = 'tenant_id',
+  /** column name */
+  UserId = 'user_id'
+}
+
+/** input type for updating data in table "tenant_admin" */
+export type Tenant_Admin_Set_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  tenant_id?: Maybe<Scalars['Int']>;
+  user_id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate stddev on columns */
+export type Tenant_Admin_Stddev_Fields = {
+  __typename?: 'tenant_admin_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+  tenant_id?: Maybe<Scalars['Float']>;
+  user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "tenant_admin" */
+export type Tenant_Admin_Stddev_Order_By = {
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Tenant_Admin_Stddev_Pop_Fields = {
+  __typename?: 'tenant_admin_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  tenant_id?: Maybe<Scalars['Float']>;
+  user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "tenant_admin" */
+export type Tenant_Admin_Stddev_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Tenant_Admin_Stddev_Samp_Fields = {
+  __typename?: 'tenant_admin_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  tenant_id?: Maybe<Scalars['Float']>;
+  user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "tenant_admin" */
+export type Tenant_Admin_Stddev_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** Streaming cursor of the table "tenant_admin" */
+export type Tenant_Admin_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Tenant_Admin_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Tenant_Admin_Stream_Cursor_Value_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  tenant_id?: Maybe<Scalars['Int']>;
+  user_id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate sum on columns */
+export type Tenant_Admin_Sum_Fields = {
+  __typename?: 'tenant_admin_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+  tenant_id?: Maybe<Scalars['Int']>;
+  user_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "tenant_admin" */
+export type Tenant_Admin_Sum_Order_By = {
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** update columns of table "tenant_admin" */
+export enum Tenant_Admin_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  TenantId = 'tenant_id',
+  /** column name */
+  UserId = 'user_id'
+}
+
+export type Tenant_Admin_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: Maybe<Tenant_Admin_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<Tenant_Admin_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Tenant_Admin_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Tenant_Admin_Var_Pop_Fields = {
+  __typename?: 'tenant_admin_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  tenant_id?: Maybe<Scalars['Float']>;
+  user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "tenant_admin" */
+export type Tenant_Admin_Var_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Tenant_Admin_Var_Samp_Fields = {
+  __typename?: 'tenant_admin_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  tenant_id?: Maybe<Scalars['Float']>;
+  user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "tenant_admin" */
+export type Tenant_Admin_Var_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Tenant_Admin_Variance_Fields = {
+  __typename?: 'tenant_admin_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+  tenant_id?: Maybe<Scalars['Float']>;
+  user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "tenant_admin" */
+export type Tenant_Admin_Variance_Order_By = {
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** aggregated selection of "tenant" */
+export type Tenant_Aggregate = {
+  __typename?: 'tenant_aggregate';
+  aggregate?: Maybe<Tenant_Aggregate_Fields>;
+  nodes: Array<Tenant>;
+};
+
+/** aggregate fields of "tenant" */
+export type Tenant_Aggregate_Fields = {
+  __typename?: 'tenant_aggregate_fields';
+  avg?: Maybe<Tenant_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Tenant_Max_Fields>;
+  min?: Maybe<Tenant_Min_Fields>;
+  stddev?: Maybe<Tenant_Stddev_Fields>;
+  stddev_pop?: Maybe<Tenant_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Tenant_Stddev_Samp_Fields>;
+  sum?: Maybe<Tenant_Sum_Fields>;
+  var_pop?: Maybe<Tenant_Var_Pop_Fields>;
+  var_samp?: Maybe<Tenant_Var_Samp_Fields>;
+  variance?: Maybe<Tenant_Variance_Fields>;
+};
+
+
+/** aggregate fields of "tenant" */
+export type Tenant_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Tenant_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Tenant_Avg_Fields = {
+  __typename?: 'tenant_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "tenant". All fields are combined with a logical 'AND'. */
+export type Tenant_Bool_Exp = {
+  _and?: Maybe<Array<Tenant_Bool_Exp>>;
+  _not?: Maybe<Tenant_Bool_Exp>;
+  _or?: Maybe<Array<Tenant_Bool_Exp>>;
+  broker_agencies?: Maybe<Broker_Agency_Bool_Exp>;
+  broker_agencies_aggregate?: Maybe<Broker_Agency_Aggregate_Bool_Exp>;
+  class_of_business?: Maybe<String_Comparison_Exp>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  document_forms?: Maybe<Document_Forms_Bool_Exp>;
+  document_forms_aggregate?: Maybe<Document_Forms_Aggregate_Bool_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  logo?: Maybe<String_Comparison_Exp>;
+  name?: Maybe<String_Comparison_Exp>;
+  primary_color?: Maybe<String_Comparison_Exp>;
+  quote_template_id?: Maybe<String_Comparison_Exp>;
+  report_template_Id?: Maybe<String_Comparison_Exp>;
+  scan_required?: Maybe<Boolean_Comparison_Exp>;
+  secondary_color?: Maybe<String_Comparison_Exp>;
+  tenant_admins?: Maybe<Tenant_Admin_Bool_Exp>;
+  tenant_admins_aggregate?: Maybe<Tenant_Admin_Aggregate_Bool_Exp>;
+  tld_exclusions?: Maybe<Tld_Exclusions_Bool_Exp>;
+  tld_exclusions_aggregate?: Maybe<Tld_Exclusions_Aggregate_Bool_Exp>;
+  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "tenant" */
+export enum Tenant_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  TenentPkey = 'Tenent_pkey'
+}
+
+/** input type for incrementing numeric columns in table "tenant" */
+export type Tenant_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "tenant" */
+export type Tenant_Insert_Input = {
+  broker_agencies?: Maybe<Broker_Agency_Arr_Rel_Insert_Input>;
+  class_of_business?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  document_forms?: Maybe<Document_Forms_Arr_Rel_Insert_Input>;
+  id?: Maybe<Scalars['Int']>;
+  logo?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  primary_color?: Maybe<Scalars['String']>;
+  quote_template_id?: Maybe<Scalars['String']>;
+  report_template_Id?: Maybe<Scalars['String']>;
+  scan_required?: Maybe<Scalars['Boolean']>;
+  secondary_color?: Maybe<Scalars['String']>;
+  tenant_admins?: Maybe<Tenant_Admin_Arr_Rel_Insert_Input>;
+  tld_exclusions?: Maybe<Tld_Exclusions_Arr_Rel_Insert_Input>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type Tenant_Max_Fields = {
+  __typename?: 'tenant_max_fields';
+  class_of_business?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  logo?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  primary_color?: Maybe<Scalars['String']>;
+  quote_template_id?: Maybe<Scalars['String']>;
+  report_template_Id?: Maybe<Scalars['String']>;
+  secondary_color?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate min on columns */
+export type Tenant_Min_Fields = {
+  __typename?: 'tenant_min_fields';
+  class_of_business?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  logo?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  primary_color?: Maybe<Scalars['String']>;
+  quote_template_id?: Maybe<Scalars['String']>;
+  report_template_Id?: Maybe<Scalars['String']>;
+  secondary_color?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** response of any mutation on the table "tenant" */
+export type Tenant_Mutation_Response = {
+  __typename?: 'tenant_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Tenant>;
+};
+
+/** input type for inserting object relation for remote table "tenant" */
+export type Tenant_Obj_Rel_Insert_Input = {
+  data: Tenant_Insert_Input;
+  /** upsert condition */
+  on_conflict?: Maybe<Tenant_On_Conflict>;
+};
+
+/** on_conflict condition type for table "tenant" */
+export type Tenant_On_Conflict = {
+  constraint: Tenant_Constraint;
+  update_columns?: Array<Tenant_Update_Column>;
+  where?: Maybe<Tenant_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "tenant". */
+export type Tenant_Order_By = {
+  broker_agencies_aggregate?: Maybe<Broker_Agency_Aggregate_Order_By>;
+  class_of_business?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  document_forms_aggregate?: Maybe<Document_Forms_Aggregate_Order_By>;
+  id?: Maybe<Order_By>;
+  logo?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
+  primary_color?: Maybe<Order_By>;
+  quote_template_id?: Maybe<Order_By>;
+  report_template_Id?: Maybe<Order_By>;
+  scan_required?: Maybe<Order_By>;
+  secondary_color?: Maybe<Order_By>;
+  tenant_admins_aggregate?: Maybe<Tenant_Admin_Aggregate_Order_By>;
+  tld_exclusions_aggregate?: Maybe<Tld_Exclusions_Aggregate_Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: tenant */
+export type Tenant_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "tenant" */
+export enum Tenant_Select_Column {
+  /** column name */
+  ClassOfBusiness = 'class_of_business',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Logo = 'logo',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  PrimaryColor = 'primary_color',
+  /** column name */
+  QuoteTemplateId = 'quote_template_id',
+  /** column name */
+  ReportTemplateId = 'report_template_Id',
+  /** column name */
+  ScanRequired = 'scan_required',
+  /** column name */
+  SecondaryColor = 'secondary_color',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "tenant" */
+export type Tenant_Set_Input = {
+  class_of_business?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  logo?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  primary_color?: Maybe<Scalars['String']>;
+  quote_template_id?: Maybe<Scalars['String']>;
+  report_template_Id?: Maybe<Scalars['String']>;
+  scan_required?: Maybe<Scalars['Boolean']>;
+  secondary_color?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate stddev on columns */
+export type Tenant_Stddev_Fields = {
+  __typename?: 'tenant_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Tenant_Stddev_Pop_Fields = {
+  __typename?: 'tenant_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Tenant_Stddev_Samp_Fields = {
+  __typename?: 'tenant_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Streaming cursor of the table "tenant" */
+export type Tenant_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Tenant_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Tenant_Stream_Cursor_Value_Input = {
+  class_of_business?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  logo?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  primary_color?: Maybe<Scalars['String']>;
+  quote_template_id?: Maybe<Scalars['String']>;
+  report_template_Id?: Maybe<Scalars['String']>;
+  scan_required?: Maybe<Scalars['Boolean']>;
+  secondary_color?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate sum on columns */
+export type Tenant_Sum_Fields = {
+  __typename?: 'tenant_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "tenant" */
+export enum Tenant_Update_Column {
+  /** column name */
+  ClassOfBusiness = 'class_of_business',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Logo = 'logo',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  PrimaryColor = 'primary_color',
+  /** column name */
+  QuoteTemplateId = 'quote_template_id',
+  /** column name */
+  ReportTemplateId = 'report_template_Id',
+  /** column name */
+  ScanRequired = 'scan_required',
+  /** column name */
+  SecondaryColor = 'secondary_color',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+export type Tenant_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: Maybe<Tenant_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<Tenant_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Tenant_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Tenant_Var_Pop_Fields = {
+  __typename?: 'tenant_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Tenant_Var_Samp_Fields = {
+  __typename?: 'tenant_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Tenant_Variance_Fields = {
+  __typename?: 'tenant_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to compare columns of type "time". All fields are combined with logical 'AND'. */
+export type Time_Comparison_Exp = {
+  _eq?: Maybe<Scalars['time']>;
+  _gt?: Maybe<Scalars['time']>;
+  _gte?: Maybe<Scalars['time']>;
+  _in?: Maybe<Array<Scalars['time']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['time']>;
+  _lte?: Maybe<Scalars['time']>;
+  _neq?: Maybe<Scalars['time']>;
+  _nin?: Maybe<Array<Scalars['time']>>;
+};
+
+/** Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'. */
+export type Timestamptz_Comparison_Exp = {
+  _eq?: Maybe<Scalars['timestamptz']>;
+  _gt?: Maybe<Scalars['timestamptz']>;
+  _gte?: Maybe<Scalars['timestamptz']>;
+  _in?: Maybe<Array<Scalars['timestamptz']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['timestamptz']>;
+  _lte?: Maybe<Scalars['timestamptz']>;
+  _neq?: Maybe<Scalars['timestamptz']>;
+  _nin?: Maybe<Array<Scalars['timestamptz']>>;
+};
+
+/** columns and relationships of "tld_exclusions" */
+export type Tld_Exclusions = {
+  __typename?: 'tld_exclusions';
+  created_at: Scalars['timestamptz'];
+  created_by?: Maybe<Scalars['uuid']>;
+  id: Scalars['Int'];
+  /** An object relationship */
+  tenant: Tenant;
+  tenant_id: Scalars['Int'];
+  tld: Scalars['String'];
+};
+
+/** aggregated selection of "tld_exclusions" */
+export type Tld_Exclusions_Aggregate = {
+  __typename?: 'tld_exclusions_aggregate';
+  aggregate?: Maybe<Tld_Exclusions_Aggregate_Fields>;
+  nodes: Array<Tld_Exclusions>;
+};
+
+export type Tld_Exclusions_Aggregate_Bool_Exp = {
+  count?: Maybe<Tld_Exclusions_Aggregate_Bool_Exp_Count>;
+};
+
+export type Tld_Exclusions_Aggregate_Bool_Exp_Count = {
+  arguments?: Maybe<Array<Tld_Exclusions_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+  filter?: Maybe<Tld_Exclusions_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "tld_exclusions" */
+export type Tld_Exclusions_Aggregate_Fields = {
+  __typename?: 'tld_exclusions_aggregate_fields';
+  avg?: Maybe<Tld_Exclusions_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Tld_Exclusions_Max_Fields>;
+  min?: Maybe<Tld_Exclusions_Min_Fields>;
+  stddev?: Maybe<Tld_Exclusions_Stddev_Fields>;
+  stddev_pop?: Maybe<Tld_Exclusions_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Tld_Exclusions_Stddev_Samp_Fields>;
+  sum?: Maybe<Tld_Exclusions_Sum_Fields>;
+  var_pop?: Maybe<Tld_Exclusions_Var_Pop_Fields>;
+  var_samp?: Maybe<Tld_Exclusions_Var_Samp_Fields>;
+  variance?: Maybe<Tld_Exclusions_Variance_Fields>;
+};
+
+
+/** aggregate fields of "tld_exclusions" */
+export type Tld_Exclusions_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Tld_Exclusions_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "tld_exclusions" */
+export type Tld_Exclusions_Aggregate_Order_By = {
+  avg?: Maybe<Tld_Exclusions_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Tld_Exclusions_Max_Order_By>;
+  min?: Maybe<Tld_Exclusions_Min_Order_By>;
+  stddev?: Maybe<Tld_Exclusions_Stddev_Order_By>;
+  stddev_pop?: Maybe<Tld_Exclusions_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Tld_Exclusions_Stddev_Samp_Order_By>;
+  sum?: Maybe<Tld_Exclusions_Sum_Order_By>;
+  var_pop?: Maybe<Tld_Exclusions_Var_Pop_Order_By>;
+  var_samp?: Maybe<Tld_Exclusions_Var_Samp_Order_By>;
+  variance?: Maybe<Tld_Exclusions_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "tld_exclusions" */
+export type Tld_Exclusions_Arr_Rel_Insert_Input = {
+  data: Array<Tld_Exclusions_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: Maybe<Tld_Exclusions_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Tld_Exclusions_Avg_Fields = {
+  __typename?: 'tld_exclusions_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+  tenant_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "tld_exclusions" */
+export type Tld_Exclusions_Avg_Order_By = {
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "tld_exclusions". All fields are combined with a logical 'AND'. */
+export type Tld_Exclusions_Bool_Exp = {
+  _and?: Maybe<Array<Tld_Exclusions_Bool_Exp>>;
+  _not?: Maybe<Tld_Exclusions_Bool_Exp>;
+  _or?: Maybe<Array<Tld_Exclusions_Bool_Exp>>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  created_by?: Maybe<Uuid_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  tenant?: Maybe<Tenant_Bool_Exp>;
+  tenant_id?: Maybe<Int_Comparison_Exp>;
+  tld?: Maybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "tld_exclusions" */
+export enum Tld_Exclusions_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  TldExclusionsPkey = 'tld_exclusions_pkey',
+  /** unique or primary key constraint on columns "tld", "tenant_id" */
+  TldExclusionsTldTenantIdKey = 'tld_exclusions_tld_tenant_id_key'
+}
+
+/** input type for incrementing numeric columns in table "tld_exclusions" */
+export type Tld_Exclusions_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+  tenant_id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "tld_exclusions" */
+export type Tld_Exclusions_Insert_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by?: Maybe<Scalars['uuid']>;
+  id?: Maybe<Scalars['Int']>;
+  tenant?: Maybe<Tenant_Obj_Rel_Insert_Input>;
+  tenant_id?: Maybe<Scalars['Int']>;
+  tld?: Maybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Tld_Exclusions_Max_Fields = {
+  __typename?: 'tld_exclusions_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by?: Maybe<Scalars['uuid']>;
+  id?: Maybe<Scalars['Int']>;
+  tenant_id?: Maybe<Scalars['Int']>;
+  tld?: Maybe<Scalars['String']>;
+};
+
+/** order by max() on columns of table "tld_exclusions" */
+export type Tld_Exclusions_Max_Order_By = {
+  created_at?: Maybe<Order_By>;
+  created_by?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+  tld?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Tld_Exclusions_Min_Fields = {
+  __typename?: 'tld_exclusions_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by?: Maybe<Scalars['uuid']>;
+  id?: Maybe<Scalars['Int']>;
+  tenant_id?: Maybe<Scalars['Int']>;
+  tld?: Maybe<Scalars['String']>;
+};
+
+/** order by min() on columns of table "tld_exclusions" */
+export type Tld_Exclusions_Min_Order_By = {
+  created_at?: Maybe<Order_By>;
+  created_by?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+  tld?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "tld_exclusions" */
+export type Tld_Exclusions_Mutation_Response = {
+  __typename?: 'tld_exclusions_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Tld_Exclusions>;
+};
+
+/** on_conflict condition type for table "tld_exclusions" */
+export type Tld_Exclusions_On_Conflict = {
+  constraint: Tld_Exclusions_Constraint;
+  update_columns?: Array<Tld_Exclusions_Update_Column>;
+  where?: Maybe<Tld_Exclusions_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "tld_exclusions". */
+export type Tld_Exclusions_Order_By = {
+  created_at?: Maybe<Order_By>;
+  created_by?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  tenant?: Maybe<Tenant_Order_By>;
+  tenant_id?: Maybe<Order_By>;
+  tld?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: tld_exclusions */
+export type Tld_Exclusions_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "tld_exclusions" */
+export enum Tld_Exclusions_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedBy = 'created_by',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  TenantId = 'tenant_id',
+  /** column name */
+  Tld = 'tld'
+}
+
+/** input type for updating data in table "tld_exclusions" */
+export type Tld_Exclusions_Set_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by?: Maybe<Scalars['uuid']>;
+  id?: Maybe<Scalars['Int']>;
+  tenant_id?: Maybe<Scalars['Int']>;
+  tld?: Maybe<Scalars['String']>;
+};
+
+/** aggregate stddev on columns */
+export type Tld_Exclusions_Stddev_Fields = {
+  __typename?: 'tld_exclusions_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+  tenant_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "tld_exclusions" */
+export type Tld_Exclusions_Stddev_Order_By = {
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Tld_Exclusions_Stddev_Pop_Fields = {
+  __typename?: 'tld_exclusions_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  tenant_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "tld_exclusions" */
+export type Tld_Exclusions_Stddev_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Tld_Exclusions_Stddev_Samp_Fields = {
+  __typename?: 'tld_exclusions_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  tenant_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "tld_exclusions" */
+export type Tld_Exclusions_Stddev_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+};
+
+/** Streaming cursor of the table "tld_exclusions" */
+export type Tld_Exclusions_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Tld_Exclusions_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Tld_Exclusions_Stream_Cursor_Value_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  created_by?: Maybe<Scalars['uuid']>;
+  id?: Maybe<Scalars['Int']>;
+  tenant_id?: Maybe<Scalars['Int']>;
+  tld?: Maybe<Scalars['String']>;
+};
+
+/** aggregate sum on columns */
+export type Tld_Exclusions_Sum_Fields = {
+  __typename?: 'tld_exclusions_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+  tenant_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "tld_exclusions" */
+export type Tld_Exclusions_Sum_Order_By = {
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+};
+
+/** update columns of table "tld_exclusions" */
+export enum Tld_Exclusions_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedBy = 'created_by',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  TenantId = 'tenant_id',
+  /** column name */
+  Tld = 'tld'
+}
+
+export type Tld_Exclusions_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: Maybe<Tld_Exclusions_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<Tld_Exclusions_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Tld_Exclusions_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Tld_Exclusions_Var_Pop_Fields = {
+  __typename?: 'tld_exclusions_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  tenant_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "tld_exclusions" */
+export type Tld_Exclusions_Var_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Tld_Exclusions_Var_Samp_Fields = {
+  __typename?: 'tld_exclusions_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  tenant_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "tld_exclusions" */
+export type Tld_Exclusions_Var_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Tld_Exclusions_Variance_Fields = {
+  __typename?: 'tld_exclusions_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+  tenant_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "tld_exclusions" */
+export type Tld_Exclusions_Variance_Order_By = {
+  id?: Maybe<Order_By>;
+  tenant_id?: Maybe<Order_By>;
+};
+
+/** columns and relationships of "underwriter_broker_agencies" */
+export type Underwriter_Broker_Agencies = {
+  __typename?: 'underwriter_broker_agencies';
+  /** An object relationship */
+  broker_agency: Broker_Agency;
+  broker_agency_id: Scalars['Int'];
+  /** An object relationship */
+  underwriter_organization: Underwriter_Organization;
+  underwriter_organization_id: Scalars['Int'];
+};
+
+/** aggregated selection of "underwriter_broker_agencies" */
+export type Underwriter_Broker_Agencies_Aggregate = {
+  __typename?: 'underwriter_broker_agencies_aggregate';
+  aggregate?: Maybe<Underwriter_Broker_Agencies_Aggregate_Fields>;
+  nodes: Array<Underwriter_Broker_Agencies>;
+};
+
+export type Underwriter_Broker_Agencies_Aggregate_Bool_Exp = {
+  count?: Maybe<Underwriter_Broker_Agencies_Aggregate_Bool_Exp_Count>;
+};
+
+export type Underwriter_Broker_Agencies_Aggregate_Bool_Exp_Count = {
+  arguments?: Maybe<Array<Underwriter_Broker_Agencies_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+  filter?: Maybe<Underwriter_Broker_Agencies_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "underwriter_broker_agencies" */
+export type Underwriter_Broker_Agencies_Aggregate_Fields = {
+  __typename?: 'underwriter_broker_agencies_aggregate_fields';
+  avg?: Maybe<Underwriter_Broker_Agencies_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Underwriter_Broker_Agencies_Max_Fields>;
+  min?: Maybe<Underwriter_Broker_Agencies_Min_Fields>;
+  stddev?: Maybe<Underwriter_Broker_Agencies_Stddev_Fields>;
+  stddev_pop?: Maybe<Underwriter_Broker_Agencies_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Underwriter_Broker_Agencies_Stddev_Samp_Fields>;
+  sum?: Maybe<Underwriter_Broker_Agencies_Sum_Fields>;
+  var_pop?: Maybe<Underwriter_Broker_Agencies_Var_Pop_Fields>;
+  var_samp?: Maybe<Underwriter_Broker_Agencies_Var_Samp_Fields>;
+  variance?: Maybe<Underwriter_Broker_Agencies_Variance_Fields>;
+};
+
+
+/** aggregate fields of "underwriter_broker_agencies" */
+export type Underwriter_Broker_Agencies_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Underwriter_Broker_Agencies_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "underwriter_broker_agencies" */
+export type Underwriter_Broker_Agencies_Aggregate_Order_By = {
+  avg?: Maybe<Underwriter_Broker_Agencies_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Underwriter_Broker_Agencies_Max_Order_By>;
+  min?: Maybe<Underwriter_Broker_Agencies_Min_Order_By>;
+  stddev?: Maybe<Underwriter_Broker_Agencies_Stddev_Order_By>;
+  stddev_pop?: Maybe<Underwriter_Broker_Agencies_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Underwriter_Broker_Agencies_Stddev_Samp_Order_By>;
+  sum?: Maybe<Underwriter_Broker_Agencies_Sum_Order_By>;
+  var_pop?: Maybe<Underwriter_Broker_Agencies_Var_Pop_Order_By>;
+  var_samp?: Maybe<Underwriter_Broker_Agencies_Var_Samp_Order_By>;
+  variance?: Maybe<Underwriter_Broker_Agencies_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "underwriter_broker_agencies" */
+export type Underwriter_Broker_Agencies_Arr_Rel_Insert_Input = {
+  data: Array<Underwriter_Broker_Agencies_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: Maybe<Underwriter_Broker_Agencies_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Underwriter_Broker_Agencies_Avg_Fields = {
+  __typename?: 'underwriter_broker_agencies_avg_fields';
+  broker_agency_id?: Maybe<Scalars['Float']>;
+  underwriter_organization_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "underwriter_broker_agencies" */
+export type Underwriter_Broker_Agencies_Avg_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  underwriter_organization_id?: Maybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "underwriter_broker_agencies". All fields are combined with a logical 'AND'. */
+export type Underwriter_Broker_Agencies_Bool_Exp = {
+  _and?: Maybe<Array<Underwriter_Broker_Agencies_Bool_Exp>>;
+  _not?: Maybe<Underwriter_Broker_Agencies_Bool_Exp>;
+  _or?: Maybe<Array<Underwriter_Broker_Agencies_Bool_Exp>>;
+  broker_agency?: Maybe<Broker_Agency_Bool_Exp>;
+  broker_agency_id?: Maybe<Int_Comparison_Exp>;
+  underwriter_organization?: Maybe<Underwriter_Organization_Bool_Exp>;
+  underwriter_organization_id?: Maybe<Int_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "underwriter_broker_agencies" */
+export enum Underwriter_Broker_Agencies_Constraint {
+  /** unique or primary key constraint on columns "underwriter_organization_id", "broker_agency_id" */
+  UnderwriterBrokerAgenciesPkey = 'underwriter_broker_agencies_pkey'
+}
+
+/** input type for incrementing numeric columns in table "underwriter_broker_agencies" */
+export type Underwriter_Broker_Agencies_Inc_Input = {
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  underwriter_organization_id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "underwriter_broker_agencies" */
+export type Underwriter_Broker_Agencies_Insert_Input = {
+  broker_agency?: Maybe<Broker_Agency_Obj_Rel_Insert_Input>;
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  underwriter_organization?: Maybe<Underwriter_Organization_Obj_Rel_Insert_Input>;
+  underwriter_organization_id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate max on columns */
+export type Underwriter_Broker_Agencies_Max_Fields = {
+  __typename?: 'underwriter_broker_agencies_max_fields';
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  underwriter_organization_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by max() on columns of table "underwriter_broker_agencies" */
+export type Underwriter_Broker_Agencies_Max_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  underwriter_organization_id?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Underwriter_Broker_Agencies_Min_Fields = {
+  __typename?: 'underwriter_broker_agencies_min_fields';
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  underwriter_organization_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by min() on columns of table "underwriter_broker_agencies" */
+export type Underwriter_Broker_Agencies_Min_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  underwriter_organization_id?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "underwriter_broker_agencies" */
+export type Underwriter_Broker_Agencies_Mutation_Response = {
+  __typename?: 'underwriter_broker_agencies_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Underwriter_Broker_Agencies>;
+};
+
+/** on_conflict condition type for table "underwriter_broker_agencies" */
+export type Underwriter_Broker_Agencies_On_Conflict = {
+  constraint: Underwriter_Broker_Agencies_Constraint;
+  update_columns?: Array<Underwriter_Broker_Agencies_Update_Column>;
+  where?: Maybe<Underwriter_Broker_Agencies_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "underwriter_broker_agencies". */
+export type Underwriter_Broker_Agencies_Order_By = {
+  broker_agency?: Maybe<Broker_Agency_Order_By>;
+  broker_agency_id?: Maybe<Order_By>;
+  underwriter_organization?: Maybe<Underwriter_Organization_Order_By>;
+  underwriter_organization_id?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: underwriter_broker_agencies */
+export type Underwriter_Broker_Agencies_Pk_Columns_Input = {
+  broker_agency_id: Scalars['Int'];
+  underwriter_organization_id: Scalars['Int'];
+};
+
+/** select columns of table "underwriter_broker_agencies" */
+export enum Underwriter_Broker_Agencies_Select_Column {
+  /** column name */
+  BrokerAgencyId = 'broker_agency_id',
+  /** column name */
+  UnderwriterOrganizationId = 'underwriter_organization_id'
+}
+
+/** input type for updating data in table "underwriter_broker_agencies" */
+export type Underwriter_Broker_Agencies_Set_Input = {
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  underwriter_organization_id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate stddev on columns */
+export type Underwriter_Broker_Agencies_Stddev_Fields = {
+  __typename?: 'underwriter_broker_agencies_stddev_fields';
+  broker_agency_id?: Maybe<Scalars['Float']>;
+  underwriter_organization_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "underwriter_broker_agencies" */
+export type Underwriter_Broker_Agencies_Stddev_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  underwriter_organization_id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Underwriter_Broker_Agencies_Stddev_Pop_Fields = {
+  __typename?: 'underwriter_broker_agencies_stddev_pop_fields';
+  broker_agency_id?: Maybe<Scalars['Float']>;
+  underwriter_organization_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "underwriter_broker_agencies" */
+export type Underwriter_Broker_Agencies_Stddev_Pop_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  underwriter_organization_id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Underwriter_Broker_Agencies_Stddev_Samp_Fields = {
+  __typename?: 'underwriter_broker_agencies_stddev_samp_fields';
+  broker_agency_id?: Maybe<Scalars['Float']>;
+  underwriter_organization_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "underwriter_broker_agencies" */
+export type Underwriter_Broker_Agencies_Stddev_Samp_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  underwriter_organization_id?: Maybe<Order_By>;
+};
+
+/** Streaming cursor of the table "underwriter_broker_agencies" */
+export type Underwriter_Broker_Agencies_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Underwriter_Broker_Agencies_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Underwriter_Broker_Agencies_Stream_Cursor_Value_Input = {
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  underwriter_organization_id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate sum on columns */
+export type Underwriter_Broker_Agencies_Sum_Fields = {
+  __typename?: 'underwriter_broker_agencies_sum_fields';
+  broker_agency_id?: Maybe<Scalars['Int']>;
+  underwriter_organization_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "underwriter_broker_agencies" */
+export type Underwriter_Broker_Agencies_Sum_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  underwriter_organization_id?: Maybe<Order_By>;
+};
+
+/** update columns of table "underwriter_broker_agencies" */
+export enum Underwriter_Broker_Agencies_Update_Column {
+  /** column name */
+  BrokerAgencyId = 'broker_agency_id',
+  /** column name */
+  UnderwriterOrganizationId = 'underwriter_organization_id'
+}
+
+export type Underwriter_Broker_Agencies_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: Maybe<Underwriter_Broker_Agencies_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<Underwriter_Broker_Agencies_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Underwriter_Broker_Agencies_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Underwriter_Broker_Agencies_Var_Pop_Fields = {
+  __typename?: 'underwriter_broker_agencies_var_pop_fields';
+  broker_agency_id?: Maybe<Scalars['Float']>;
+  underwriter_organization_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "underwriter_broker_agencies" */
+export type Underwriter_Broker_Agencies_Var_Pop_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  underwriter_organization_id?: Maybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Underwriter_Broker_Agencies_Var_Samp_Fields = {
+  __typename?: 'underwriter_broker_agencies_var_samp_fields';
+  broker_agency_id?: Maybe<Scalars['Float']>;
+  underwriter_organization_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "underwriter_broker_agencies" */
+export type Underwriter_Broker_Agencies_Var_Samp_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  underwriter_organization_id?: Maybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Underwriter_Broker_Agencies_Variance_Fields = {
+  __typename?: 'underwriter_broker_agencies_variance_fields';
+  broker_agency_id?: Maybe<Scalars['Float']>;
+  underwriter_organization_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "underwriter_broker_agencies" */
+export type Underwriter_Broker_Agencies_Variance_Order_By = {
+  broker_agency_id?: Maybe<Order_By>;
+  underwriter_organization_id?: Maybe<Order_By>;
+};
+
+/** columns and relationships of "underwriter_organization" */
+export type Underwriter_Organization = {
+  __typename?: 'underwriter_organization';
+  city?: Maybe<Scalars['String']>;
+  country?: Maybe<Scalars['String']>;
+  id: Scalars['Int'];
+  /** An array relationship */
+  insurance_quotes: Array<Insurance_Quote>;
+  /** An aggregate relationship */
+  insurance_quotes_aggregate: Insurance_Quote_Aggregate;
+  name: Scalars['String'];
+  state?: Maybe<Scalars['String']>;
+  /** An array relationship */
+  underwriter_broker_agencies: Array<Underwriter_Broker_Agencies>;
+  /** An aggregate relationship */
+  underwriter_broker_agencies_aggregate: Underwriter_Broker_Agencies_Aggregate;
+  /** An array relationship */
+  underwriter_users: Array<Underwriter_User>;
+  /** An aggregate relationship */
+  underwriter_users_aggregate: Underwriter_User_Aggregate;
+  zip?: Maybe<Scalars['String']>;
+};
+
+
+/** columns and relationships of "underwriter_organization" */
+export type Underwriter_OrganizationInsurance_QuotesArgs = {
+  distinct_on?: Maybe<Array<Insurance_Quote_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Quote_Order_By>>;
+  where?: Maybe<Insurance_Quote_Bool_Exp>;
+};
+
+
+/** columns and relationships of "underwriter_organization" */
+export type Underwriter_OrganizationInsurance_Quotes_AggregateArgs = {
+  distinct_on?: Maybe<Array<Insurance_Quote_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Quote_Order_By>>;
+  where?: Maybe<Insurance_Quote_Bool_Exp>;
+};
+
+
+/** columns and relationships of "underwriter_organization" */
+export type Underwriter_OrganizationUnderwriter_Broker_AgenciesArgs = {
+  distinct_on?: Maybe<Array<Underwriter_Broker_Agencies_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Underwriter_Broker_Agencies_Order_By>>;
+  where?: Maybe<Underwriter_Broker_Agencies_Bool_Exp>;
+};
+
+
+/** columns and relationships of "underwriter_organization" */
+export type Underwriter_OrganizationUnderwriter_Broker_Agencies_AggregateArgs = {
+  distinct_on?: Maybe<Array<Underwriter_Broker_Agencies_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Underwriter_Broker_Agencies_Order_By>>;
+  where?: Maybe<Underwriter_Broker_Agencies_Bool_Exp>;
+};
+
+
+/** columns and relationships of "underwriter_organization" */
+export type Underwriter_OrganizationUnderwriter_UsersArgs = {
+  distinct_on?: Maybe<Array<Underwriter_User_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Underwriter_User_Order_By>>;
+  where?: Maybe<Underwriter_User_Bool_Exp>;
+};
+
+
+/** columns and relationships of "underwriter_organization" */
+export type Underwriter_OrganizationUnderwriter_Users_AggregateArgs = {
+  distinct_on?: Maybe<Array<Underwriter_User_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Underwriter_User_Order_By>>;
+  where?: Maybe<Underwriter_User_Bool_Exp>;
+};
+
+/** aggregated selection of "underwriter_organization" */
+export type Underwriter_Organization_Aggregate = {
+  __typename?: 'underwriter_organization_aggregate';
+  aggregate?: Maybe<Underwriter_Organization_Aggregate_Fields>;
+  nodes: Array<Underwriter_Organization>;
+};
+
+/** aggregate fields of "underwriter_organization" */
+export type Underwriter_Organization_Aggregate_Fields = {
+  __typename?: 'underwriter_organization_aggregate_fields';
+  avg?: Maybe<Underwriter_Organization_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Underwriter_Organization_Max_Fields>;
+  min?: Maybe<Underwriter_Organization_Min_Fields>;
+  stddev?: Maybe<Underwriter_Organization_Stddev_Fields>;
+  stddev_pop?: Maybe<Underwriter_Organization_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Underwriter_Organization_Stddev_Samp_Fields>;
+  sum?: Maybe<Underwriter_Organization_Sum_Fields>;
+  var_pop?: Maybe<Underwriter_Organization_Var_Pop_Fields>;
+  var_samp?: Maybe<Underwriter_Organization_Var_Samp_Fields>;
+  variance?: Maybe<Underwriter_Organization_Variance_Fields>;
+};
+
+
+/** aggregate fields of "underwriter_organization" */
+export type Underwriter_Organization_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Underwriter_Organization_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Underwriter_Organization_Avg_Fields = {
+  __typename?: 'underwriter_organization_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "underwriter_organization". All fields are combined with a logical 'AND'. */
+export type Underwriter_Organization_Bool_Exp = {
+  _and?: Maybe<Array<Underwriter_Organization_Bool_Exp>>;
+  _not?: Maybe<Underwriter_Organization_Bool_Exp>;
+  _or?: Maybe<Array<Underwriter_Organization_Bool_Exp>>;
+  city?: Maybe<String_Comparison_Exp>;
+  country?: Maybe<String_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  insurance_quotes?: Maybe<Insurance_Quote_Bool_Exp>;
+  insurance_quotes_aggregate?: Maybe<Insurance_Quote_Aggregate_Bool_Exp>;
+  name?: Maybe<String_Comparison_Exp>;
+  state?: Maybe<String_Comparison_Exp>;
+  underwriter_broker_agencies?: Maybe<Underwriter_Broker_Agencies_Bool_Exp>;
+  underwriter_broker_agencies_aggregate?: Maybe<Underwriter_Broker_Agencies_Aggregate_Bool_Exp>;
+  underwriter_users?: Maybe<Underwriter_User_Bool_Exp>;
+  underwriter_users_aggregate?: Maybe<Underwriter_User_Aggregate_Bool_Exp>;
+  zip?: Maybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "underwriter_organization" */
+export enum Underwriter_Organization_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  UnderwriterOrganizationPkey = 'underwriter_organization_pkey'
+}
+
+/** input type for incrementing numeric columns in table "underwriter_organization" */
+export type Underwriter_Organization_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "underwriter_organization" */
+export type Underwriter_Organization_Insert_Input = {
+  city?: Maybe<Scalars['String']>;
+  country?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  insurance_quotes?: Maybe<Insurance_Quote_Arr_Rel_Insert_Input>;
+  name?: Maybe<Scalars['String']>;
+  state?: Maybe<Scalars['String']>;
+  underwriter_broker_agencies?: Maybe<Underwriter_Broker_Agencies_Arr_Rel_Insert_Input>;
+  underwriter_users?: Maybe<Underwriter_User_Arr_Rel_Insert_Input>;
+  zip?: Maybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Underwriter_Organization_Max_Fields = {
+  __typename?: 'underwriter_organization_max_fields';
+  city?: Maybe<Scalars['String']>;
+  country?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  state?: Maybe<Scalars['String']>;
+  zip?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type Underwriter_Organization_Min_Fields = {
+  __typename?: 'underwriter_organization_min_fields';
+  city?: Maybe<Scalars['String']>;
+  country?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  state?: Maybe<Scalars['String']>;
+  zip?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "underwriter_organization" */
+export type Underwriter_Organization_Mutation_Response = {
+  __typename?: 'underwriter_organization_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Underwriter_Organization>;
+};
+
+/** input type for inserting object relation for remote table "underwriter_organization" */
+export type Underwriter_Organization_Obj_Rel_Insert_Input = {
+  data: Underwriter_Organization_Insert_Input;
+  /** upsert condition */
+  on_conflict?: Maybe<Underwriter_Organization_On_Conflict>;
+};
+
+/** on_conflict condition type for table "underwriter_organization" */
+export type Underwriter_Organization_On_Conflict = {
+  constraint: Underwriter_Organization_Constraint;
+  update_columns?: Array<Underwriter_Organization_Update_Column>;
+  where?: Maybe<Underwriter_Organization_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "underwriter_organization". */
+export type Underwriter_Organization_Order_By = {
+  city?: Maybe<Order_By>;
+  country?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  insurance_quotes_aggregate?: Maybe<Insurance_Quote_Aggregate_Order_By>;
+  name?: Maybe<Order_By>;
+  state?: Maybe<Order_By>;
+  underwriter_broker_agencies_aggregate?: Maybe<Underwriter_Broker_Agencies_Aggregate_Order_By>;
+  underwriter_users_aggregate?: Maybe<Underwriter_User_Aggregate_Order_By>;
+  zip?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: underwriter_organization */
+export type Underwriter_Organization_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "underwriter_organization" */
+export enum Underwriter_Organization_Select_Column {
+  /** column name */
+  City = 'city',
+  /** column name */
+  Country = 'country',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  State = 'state',
+  /** column name */
+  Zip = 'zip'
+}
+
+/** input type for updating data in table "underwriter_organization" */
+export type Underwriter_Organization_Set_Input = {
+  city?: Maybe<Scalars['String']>;
+  country?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  state?: Maybe<Scalars['String']>;
+  zip?: Maybe<Scalars['String']>;
+};
+
+/** aggregate stddev on columns */
+export type Underwriter_Organization_Stddev_Fields = {
+  __typename?: 'underwriter_organization_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Underwriter_Organization_Stddev_Pop_Fields = {
+  __typename?: 'underwriter_organization_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Underwriter_Organization_Stddev_Samp_Fields = {
+  __typename?: 'underwriter_organization_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Streaming cursor of the table "underwriter_organization" */
+export type Underwriter_Organization_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Underwriter_Organization_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Underwriter_Organization_Stream_Cursor_Value_Input = {
+  city?: Maybe<Scalars['String']>;
+  country?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  state?: Maybe<Scalars['String']>;
+  zip?: Maybe<Scalars['String']>;
+};
+
+/** aggregate sum on columns */
+export type Underwriter_Organization_Sum_Fields = {
+  __typename?: 'underwriter_organization_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "underwriter_organization" */
+export enum Underwriter_Organization_Update_Column {
+  /** column name */
+  City = 'city',
+  /** column name */
+  Country = 'country',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  State = 'state',
+  /** column name */
+  Zip = 'zip'
+}
+
+export type Underwriter_Organization_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: Maybe<Underwriter_Organization_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<Underwriter_Organization_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Underwriter_Organization_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Underwriter_Organization_Var_Pop_Fields = {
+  __typename?: 'underwriter_organization_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Underwriter_Organization_Var_Samp_Fields = {
+  __typename?: 'underwriter_organization_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Underwriter_Organization_Variance_Fields = {
+  __typename?: 'underwriter_organization_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** columns and relationships of "underwriter_user" */
+export type Underwriter_User = {
+  __typename?: 'underwriter_user';
+  id: Scalars['Int'];
+  /** An object relationship */
+  underwriter_organization: Underwriter_Organization;
+  underwriter_organization_id: Scalars['Int'];
+  /** An object relationship */
+  user: User;
+  user_id: Scalars['Int'];
+};
+
+/** aggregated selection of "underwriter_user" */
+export type Underwriter_User_Aggregate = {
+  __typename?: 'underwriter_user_aggregate';
+  aggregate?: Maybe<Underwriter_User_Aggregate_Fields>;
+  nodes: Array<Underwriter_User>;
+};
+
+export type Underwriter_User_Aggregate_Bool_Exp = {
+  count?: Maybe<Underwriter_User_Aggregate_Bool_Exp_Count>;
+};
+
+export type Underwriter_User_Aggregate_Bool_Exp_Count = {
+  arguments?: Maybe<Array<Underwriter_User_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+  filter?: Maybe<Underwriter_User_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "underwriter_user" */
+export type Underwriter_User_Aggregate_Fields = {
+  __typename?: 'underwriter_user_aggregate_fields';
+  avg?: Maybe<Underwriter_User_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Underwriter_User_Max_Fields>;
+  min?: Maybe<Underwriter_User_Min_Fields>;
+  stddev?: Maybe<Underwriter_User_Stddev_Fields>;
+  stddev_pop?: Maybe<Underwriter_User_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Underwriter_User_Stddev_Samp_Fields>;
+  sum?: Maybe<Underwriter_User_Sum_Fields>;
+  var_pop?: Maybe<Underwriter_User_Var_Pop_Fields>;
+  var_samp?: Maybe<Underwriter_User_Var_Samp_Fields>;
+  variance?: Maybe<Underwriter_User_Variance_Fields>;
+};
+
+
+/** aggregate fields of "underwriter_user" */
+export type Underwriter_User_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Underwriter_User_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "underwriter_user" */
+export type Underwriter_User_Aggregate_Order_By = {
+  avg?: Maybe<Underwriter_User_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Underwriter_User_Max_Order_By>;
+  min?: Maybe<Underwriter_User_Min_Order_By>;
+  stddev?: Maybe<Underwriter_User_Stddev_Order_By>;
+  stddev_pop?: Maybe<Underwriter_User_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Underwriter_User_Stddev_Samp_Order_By>;
+  sum?: Maybe<Underwriter_User_Sum_Order_By>;
+  var_pop?: Maybe<Underwriter_User_Var_Pop_Order_By>;
+  var_samp?: Maybe<Underwriter_User_Var_Samp_Order_By>;
+  variance?: Maybe<Underwriter_User_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "underwriter_user" */
+export type Underwriter_User_Arr_Rel_Insert_Input = {
+  data: Array<Underwriter_User_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: Maybe<Underwriter_User_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Underwriter_User_Avg_Fields = {
+  __typename?: 'underwriter_user_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+  underwriter_organization_id?: Maybe<Scalars['Float']>;
+  user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "underwriter_user" */
+export type Underwriter_User_Avg_Order_By = {
+  id?: Maybe<Order_By>;
+  underwriter_organization_id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "underwriter_user". All fields are combined with a logical 'AND'. */
+export type Underwriter_User_Bool_Exp = {
+  _and?: Maybe<Array<Underwriter_User_Bool_Exp>>;
+  _not?: Maybe<Underwriter_User_Bool_Exp>;
+  _or?: Maybe<Array<Underwriter_User_Bool_Exp>>;
+  id?: Maybe<Int_Comparison_Exp>;
+  underwriter_organization?: Maybe<Underwriter_Organization_Bool_Exp>;
+  underwriter_organization_id?: Maybe<Int_Comparison_Exp>;
+  user?: Maybe<User_Bool_Exp>;
+  user_id?: Maybe<Int_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "underwriter_user" */
+export enum Underwriter_User_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  UnderwriterUserPkey = 'underwriter_user_pkey',
+  /** unique or primary key constraint on columns "user_id", "underwriter_organization_id" */
+  UnderwriterUserUserIdUnderwriterOrganizationIdKey = 'underwriter_user_user_id_underwriter_organization_id_key'
+}
+
+/** input type for incrementing numeric columns in table "underwriter_user" */
+export type Underwriter_User_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+  underwriter_organization_id?: Maybe<Scalars['Int']>;
+  user_id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "underwriter_user" */
+export type Underwriter_User_Insert_Input = {
+  id?: Maybe<Scalars['Int']>;
+  underwriter_organization?: Maybe<Underwriter_Organization_Obj_Rel_Insert_Input>;
+  underwriter_organization_id?: Maybe<Scalars['Int']>;
+  user?: Maybe<User_Obj_Rel_Insert_Input>;
+  user_id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate max on columns */
+export type Underwriter_User_Max_Fields = {
+  __typename?: 'underwriter_user_max_fields';
+  id?: Maybe<Scalars['Int']>;
+  underwriter_organization_id?: Maybe<Scalars['Int']>;
+  user_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by max() on columns of table "underwriter_user" */
+export type Underwriter_User_Max_Order_By = {
+  id?: Maybe<Order_By>;
+  underwriter_organization_id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Underwriter_User_Min_Fields = {
+  __typename?: 'underwriter_user_min_fields';
+  id?: Maybe<Scalars['Int']>;
+  underwriter_organization_id?: Maybe<Scalars['Int']>;
+  user_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by min() on columns of table "underwriter_user" */
+export type Underwriter_User_Min_Order_By = {
+  id?: Maybe<Order_By>;
+  underwriter_organization_id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "underwriter_user" */
+export type Underwriter_User_Mutation_Response = {
+  __typename?: 'underwriter_user_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Underwriter_User>;
+};
+
+/** on_conflict condition type for table "underwriter_user" */
+export type Underwriter_User_On_Conflict = {
+  constraint: Underwriter_User_Constraint;
+  update_columns?: Array<Underwriter_User_Update_Column>;
+  where?: Maybe<Underwriter_User_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "underwriter_user". */
+export type Underwriter_User_Order_By = {
+  id?: Maybe<Order_By>;
+  underwriter_organization?: Maybe<Underwriter_Organization_Order_By>;
+  underwriter_organization_id?: Maybe<Order_By>;
+  user?: Maybe<User_Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: underwriter_user */
+export type Underwriter_User_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "underwriter_user" */
+export enum Underwriter_User_Select_Column {
+  /** column name */
+  Id = 'id',
+  /** column name */
+  UnderwriterOrganizationId = 'underwriter_organization_id',
+  /** column name */
+  UserId = 'user_id'
+}
+
+/** input type for updating data in table "underwriter_user" */
+export type Underwriter_User_Set_Input = {
+  id?: Maybe<Scalars['Int']>;
+  underwriter_organization_id?: Maybe<Scalars['Int']>;
+  user_id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate stddev on columns */
+export type Underwriter_User_Stddev_Fields = {
+  __typename?: 'underwriter_user_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+  underwriter_organization_id?: Maybe<Scalars['Float']>;
+  user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "underwriter_user" */
+export type Underwriter_User_Stddev_Order_By = {
+  id?: Maybe<Order_By>;
+  underwriter_organization_id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Underwriter_User_Stddev_Pop_Fields = {
+  __typename?: 'underwriter_user_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  underwriter_organization_id?: Maybe<Scalars['Float']>;
+  user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "underwriter_user" */
+export type Underwriter_User_Stddev_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+  underwriter_organization_id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Underwriter_User_Stddev_Samp_Fields = {
+  __typename?: 'underwriter_user_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  underwriter_organization_id?: Maybe<Scalars['Float']>;
+  user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "underwriter_user" */
+export type Underwriter_User_Stddev_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+  underwriter_organization_id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** Streaming cursor of the table "underwriter_user" */
+export type Underwriter_User_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Underwriter_User_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Underwriter_User_Stream_Cursor_Value_Input = {
+  id?: Maybe<Scalars['Int']>;
+  underwriter_organization_id?: Maybe<Scalars['Int']>;
+  user_id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate sum on columns */
+export type Underwriter_User_Sum_Fields = {
+  __typename?: 'underwriter_user_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+  underwriter_organization_id?: Maybe<Scalars['Int']>;
+  user_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "underwriter_user" */
+export type Underwriter_User_Sum_Order_By = {
+  id?: Maybe<Order_By>;
+  underwriter_organization_id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** update columns of table "underwriter_user" */
+export enum Underwriter_User_Update_Column {
+  /** column name */
+  Id = 'id',
+  /** column name */
+  UnderwriterOrganizationId = 'underwriter_organization_id',
+  /** column name */
+  UserId = 'user_id'
+}
+
+export type Underwriter_User_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: Maybe<Underwriter_User_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<Underwriter_User_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Underwriter_User_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Underwriter_User_Var_Pop_Fields = {
+  __typename?: 'underwriter_user_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  underwriter_organization_id?: Maybe<Scalars['Float']>;
+  user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "underwriter_user" */
+export type Underwriter_User_Var_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+  underwriter_organization_id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Underwriter_User_Var_Samp_Fields = {
+  __typename?: 'underwriter_user_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  underwriter_organization_id?: Maybe<Scalars['Float']>;
+  user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "underwriter_user" */
+export type Underwriter_User_Var_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+  underwriter_organization_id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Underwriter_User_Variance_Fields = {
+  __typename?: 'underwriter_user_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+  underwriter_organization_id?: Maybe<Scalars['Float']>;
+  user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "underwriter_user" */
+export type Underwriter_User_Variance_Order_By = {
+  id?: Maybe<Order_By>;
+  underwriter_organization_id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** columns and relationships of "user" */
+export type User = {
+  __typename?: 'user';
+  auth0_id?: Maybe<Scalars['String']>;
+  /** An object relationship */
+  broker_agent?: Maybe<Broker_Producer>;
+  cognito_status: Scalars['String'];
+  created_at: Scalars['timestamptz'];
+  email?: Maybe<Scalars['String']>;
+  id: Scalars['Int'];
+  /** An array relationship */
+  insurance_applications: Array<Insurance_Application>;
+  /** An aggregate relationship */
+  insurance_applications_aggregate: Insurance_Application_Aggregate;
+  name: Scalars['String'];
+  /** An array relationship */
+  tenant_admins: Array<Tenant_Admin>;
+  /** An aggregate relationship */
+  tenant_admins_aggregate: Tenant_Admin_Aggregate;
+  /** An array relationship */
+  underwriter_users: Array<Underwriter_User>;
+  /** An aggregate relationship */
+  underwriter_users_aggregate: Underwriter_User_Aggregate;
+  updated_at: Scalars['timestamptz'];
+  /** An array relationship */
+  user_password_resets: Array<User_Password_Reset>;
+  /** An aggregate relationship */
+  user_password_resets_aggregate: User_Password_Reset_Aggregate;
+  /** An array relationship */
+  user_password_resets_by_admin: Array<User_Password_Reset>;
+  /** An aggregate relationship */
+  user_password_resets_by_admin_aggregate: User_Password_Reset_Aggregate;
+};
+
+
+/** columns and relationships of "user" */
+export type UserInsurance_ApplicationsArgs = {
+  distinct_on?: Maybe<Array<Insurance_Application_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Application_Order_By>>;
+  where?: Maybe<Insurance_Application_Bool_Exp>;
+};
+
+
+/** columns and relationships of "user" */
+export type UserInsurance_Applications_AggregateArgs = {
+  distinct_on?: Maybe<Array<Insurance_Application_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Insurance_Application_Order_By>>;
+  where?: Maybe<Insurance_Application_Bool_Exp>;
+};
+
+
+/** columns and relationships of "user" */
+export type UserTenant_AdminsArgs = {
+  distinct_on?: Maybe<Array<Tenant_Admin_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Tenant_Admin_Order_By>>;
+  where?: Maybe<Tenant_Admin_Bool_Exp>;
+};
+
+
+/** columns and relationships of "user" */
+export type UserTenant_Admins_AggregateArgs = {
+  distinct_on?: Maybe<Array<Tenant_Admin_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Tenant_Admin_Order_By>>;
+  where?: Maybe<Tenant_Admin_Bool_Exp>;
+};
+
+
+/** columns and relationships of "user" */
+export type UserUnderwriter_UsersArgs = {
+  distinct_on?: Maybe<Array<Underwriter_User_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Underwriter_User_Order_By>>;
+  where?: Maybe<Underwriter_User_Bool_Exp>;
+};
+
+
+/** columns and relationships of "user" */
+export type UserUnderwriter_Users_AggregateArgs = {
+  distinct_on?: Maybe<Array<Underwriter_User_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Underwriter_User_Order_By>>;
+  where?: Maybe<Underwriter_User_Bool_Exp>;
+};
+
+
+/** columns and relationships of "user" */
+export type UserUser_Password_ResetsArgs = {
+  distinct_on?: Maybe<Array<User_Password_Reset_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<User_Password_Reset_Order_By>>;
+  where?: Maybe<User_Password_Reset_Bool_Exp>;
+};
+
+
+/** columns and relationships of "user" */
+export type UserUser_Password_Resets_AggregateArgs = {
+  distinct_on?: Maybe<Array<User_Password_Reset_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<User_Password_Reset_Order_By>>;
+  where?: Maybe<User_Password_Reset_Bool_Exp>;
+};
+
+
+/** columns and relationships of "user" */
+export type UserUser_Password_Resets_By_AdminArgs = {
+  distinct_on?: Maybe<Array<User_Password_Reset_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<User_Password_Reset_Order_By>>;
+  where?: Maybe<User_Password_Reset_Bool_Exp>;
+};
+
+
+/** columns and relationships of "user" */
+export type UserUser_Password_Resets_By_Admin_AggregateArgs = {
+  distinct_on?: Maybe<Array<User_Password_Reset_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<User_Password_Reset_Order_By>>;
+  where?: Maybe<User_Password_Reset_Bool_Exp>;
+};
+
+/** aggregated selection of "user" */
+export type User_Aggregate = {
+  __typename?: 'user_aggregate';
+  aggregate?: Maybe<User_Aggregate_Fields>;
+  nodes: Array<User>;
+};
+
+/** aggregate fields of "user" */
+export type User_Aggregate_Fields = {
+  __typename?: 'user_aggregate_fields';
+  avg?: Maybe<User_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<User_Max_Fields>;
+  min?: Maybe<User_Min_Fields>;
+  stddev?: Maybe<User_Stddev_Fields>;
+  stddev_pop?: Maybe<User_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<User_Stddev_Samp_Fields>;
+  sum?: Maybe<User_Sum_Fields>;
+  var_pop?: Maybe<User_Var_Pop_Fields>;
+  var_samp?: Maybe<User_Var_Samp_Fields>;
+  variance?: Maybe<User_Variance_Fields>;
+};
+
+
+/** aggregate fields of "user" */
+export type User_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<User_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type User_Avg_Fields = {
+  __typename?: 'user_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "user". All fields are combined with a logical 'AND'. */
+export type User_Bool_Exp = {
+  _and?: Maybe<Array<User_Bool_Exp>>;
+  _not?: Maybe<User_Bool_Exp>;
+  _or?: Maybe<Array<User_Bool_Exp>>;
+  auth0_id?: Maybe<String_Comparison_Exp>;
+  broker_agent?: Maybe<Broker_Producer_Bool_Exp>;
+  cognito_status?: Maybe<String_Comparison_Exp>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  email?: Maybe<String_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  insurance_applications?: Maybe<Insurance_Application_Bool_Exp>;
+  insurance_applications_aggregate?: Maybe<Insurance_Application_Aggregate_Bool_Exp>;
+  name?: Maybe<String_Comparison_Exp>;
+  tenant_admins?: Maybe<Tenant_Admin_Bool_Exp>;
+  tenant_admins_aggregate?: Maybe<Tenant_Admin_Aggregate_Bool_Exp>;
+  underwriter_users?: Maybe<Underwriter_User_Bool_Exp>;
+  underwriter_users_aggregate?: Maybe<Underwriter_User_Aggregate_Bool_Exp>;
+  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+  user_password_resets?: Maybe<User_Password_Reset_Bool_Exp>;
+  user_password_resets_aggregate?: Maybe<User_Password_Reset_Aggregate_Bool_Exp>;
+  user_password_resets_by_admin?: Maybe<User_Password_Reset_Bool_Exp>;
+  user_password_resets_by_admin_aggregate?: Maybe<User_Password_Reset_Aggregate_Bool_Exp>;
+};
+
+/** unique or primary key constraints on table "user" */
+export enum User_Constraint {
+  /** unique or primary key constraint on columns "auth0_id" */
+  UserAuth0IdKey = 'user_auth0_id_key',
+  /** unique or primary key constraint on columns "id" */
+  UserPkey = 'user_pkey'
+}
+
+/** input type for incrementing numeric columns in table "user" */
+export type User_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "user" */
+export type User_Insert_Input = {
+  auth0_id?: Maybe<Scalars['String']>;
+  broker_agent?: Maybe<Broker_Producer_Obj_Rel_Insert_Input>;
+  cognito_status?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  insurance_applications?: Maybe<Insurance_Application_Arr_Rel_Insert_Input>;
+  name?: Maybe<Scalars['String']>;
+  tenant_admins?: Maybe<Tenant_Admin_Arr_Rel_Insert_Input>;
+  underwriter_users?: Maybe<Underwriter_User_Arr_Rel_Insert_Input>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  user_password_resets?: Maybe<User_Password_Reset_Arr_Rel_Insert_Input>;
+  user_password_resets_by_admin?: Maybe<User_Password_Reset_Arr_Rel_Insert_Input>;
+};
+
+/** aggregate max on columns */
+export type User_Max_Fields = {
+  __typename?: 'user_max_fields';
+  auth0_id?: Maybe<Scalars['String']>;
+  cognito_status?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate min on columns */
+export type User_Min_Fields = {
+  __typename?: 'user_min_fields';
+  auth0_id?: Maybe<Scalars['String']>;
+  cognito_status?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** response of any mutation on the table "user" */
+export type User_Mutation_Response = {
+  __typename?: 'user_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<User>;
+};
+
+/** input type for inserting object relation for remote table "user" */
+export type User_Obj_Rel_Insert_Input = {
+  data: User_Insert_Input;
+  /** upsert condition */
+  on_conflict?: Maybe<User_On_Conflict>;
+};
+
+/** on_conflict condition type for table "user" */
+export type User_On_Conflict = {
+  constraint: User_Constraint;
+  update_columns?: Array<User_Update_Column>;
+  where?: Maybe<User_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "user". */
+export type User_Order_By = {
+  auth0_id?: Maybe<Order_By>;
+  broker_agent?: Maybe<Broker_Producer_Order_By>;
+  cognito_status?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  email?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  insurance_applications_aggregate?: Maybe<Insurance_Application_Aggregate_Order_By>;
+  name?: Maybe<Order_By>;
+  tenant_admins_aggregate?: Maybe<Tenant_Admin_Aggregate_Order_By>;
+  underwriter_users_aggregate?: Maybe<Underwriter_User_Aggregate_Order_By>;
+  updated_at?: Maybe<Order_By>;
+  user_password_resets_aggregate?: Maybe<User_Password_Reset_Aggregate_Order_By>;
+  user_password_resets_by_admin_aggregate?: Maybe<User_Password_Reset_Aggregate_Order_By>;
+};
+
+/** columns and relationships of "user_password_reset" */
+export type User_Password_Reset = {
+  __typename?: 'user_password_reset';
+  created_at: Scalars['timestamptz'];
+  id: Scalars['Int'];
+  /** An object relationship */
+  requested_user?: Maybe<User>;
+  reset_by_user?: Maybe<Scalars['String']>;
+  /** An object relationship */
+  user: User;
+  user_auth_id: Scalars['String'];
+};
+
+/** aggregated selection of "user_password_reset" */
+export type User_Password_Reset_Aggregate = {
+  __typename?: 'user_password_reset_aggregate';
+  aggregate?: Maybe<User_Password_Reset_Aggregate_Fields>;
+  nodes: Array<User_Password_Reset>;
+};
+
+export type User_Password_Reset_Aggregate_Bool_Exp = {
+  count?: Maybe<User_Password_Reset_Aggregate_Bool_Exp_Count>;
+};
+
+export type User_Password_Reset_Aggregate_Bool_Exp_Count = {
+  arguments?: Maybe<Array<User_Password_Reset_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+  filter?: Maybe<User_Password_Reset_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "user_password_reset" */
+export type User_Password_Reset_Aggregate_Fields = {
+  __typename?: 'user_password_reset_aggregate_fields';
+  avg?: Maybe<User_Password_Reset_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<User_Password_Reset_Max_Fields>;
+  min?: Maybe<User_Password_Reset_Min_Fields>;
+  stddev?: Maybe<User_Password_Reset_Stddev_Fields>;
+  stddev_pop?: Maybe<User_Password_Reset_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<User_Password_Reset_Stddev_Samp_Fields>;
+  sum?: Maybe<User_Password_Reset_Sum_Fields>;
+  var_pop?: Maybe<User_Password_Reset_Var_Pop_Fields>;
+  var_samp?: Maybe<User_Password_Reset_Var_Samp_Fields>;
+  variance?: Maybe<User_Password_Reset_Variance_Fields>;
+};
+
+
+/** aggregate fields of "user_password_reset" */
+export type User_Password_Reset_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<User_Password_Reset_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "user_password_reset" */
+export type User_Password_Reset_Aggregate_Order_By = {
+  avg?: Maybe<User_Password_Reset_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<User_Password_Reset_Max_Order_By>;
+  min?: Maybe<User_Password_Reset_Min_Order_By>;
+  stddev?: Maybe<User_Password_Reset_Stddev_Order_By>;
+  stddev_pop?: Maybe<User_Password_Reset_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<User_Password_Reset_Stddev_Samp_Order_By>;
+  sum?: Maybe<User_Password_Reset_Sum_Order_By>;
+  var_pop?: Maybe<User_Password_Reset_Var_Pop_Order_By>;
+  var_samp?: Maybe<User_Password_Reset_Var_Samp_Order_By>;
+  variance?: Maybe<User_Password_Reset_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "user_password_reset" */
+export type User_Password_Reset_Arr_Rel_Insert_Input = {
+  data: Array<User_Password_Reset_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: Maybe<User_Password_Reset_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type User_Password_Reset_Avg_Fields = {
+  __typename?: 'user_password_reset_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "user_password_reset" */
+export type User_Password_Reset_Avg_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "user_password_reset". All fields are combined with a logical 'AND'. */
+export type User_Password_Reset_Bool_Exp = {
+  _and?: Maybe<Array<User_Password_Reset_Bool_Exp>>;
+  _not?: Maybe<User_Password_Reset_Bool_Exp>;
+  _or?: Maybe<Array<User_Password_Reset_Bool_Exp>>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  requested_user?: Maybe<User_Bool_Exp>;
+  reset_by_user?: Maybe<String_Comparison_Exp>;
+  user?: Maybe<User_Bool_Exp>;
+  user_auth_id?: Maybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "user_password_reset" */
+export enum User_Password_Reset_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  UserPasswordResetPkey = 'user_password_reset_pkey'
+}
+
+/** input type for incrementing numeric columns in table "user_password_reset" */
+export type User_Password_Reset_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "user_password_reset" */
+export type User_Password_Reset_Insert_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  requested_user?: Maybe<User_Obj_Rel_Insert_Input>;
+  reset_by_user?: Maybe<Scalars['String']>;
+  user?: Maybe<User_Obj_Rel_Insert_Input>;
+  user_auth_id?: Maybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type User_Password_Reset_Max_Fields = {
+  __typename?: 'user_password_reset_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  reset_by_user?: Maybe<Scalars['String']>;
+  user_auth_id?: Maybe<Scalars['String']>;
+};
+
+/** order by max() on columns of table "user_password_reset" */
+export type User_Password_Reset_Max_Order_By = {
+  created_at?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  reset_by_user?: Maybe<Order_By>;
+  user_auth_id?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type User_Password_Reset_Min_Fields = {
+  __typename?: 'user_password_reset_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  reset_by_user?: Maybe<Scalars['String']>;
+  user_auth_id?: Maybe<Scalars['String']>;
+};
+
+/** order by min() on columns of table "user_password_reset" */
+export type User_Password_Reset_Min_Order_By = {
+  created_at?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  reset_by_user?: Maybe<Order_By>;
+  user_auth_id?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "user_password_reset" */
+export type User_Password_Reset_Mutation_Response = {
+  __typename?: 'user_password_reset_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<User_Password_Reset>;
+};
+
+/** on_conflict condition type for table "user_password_reset" */
+export type User_Password_Reset_On_Conflict = {
+  constraint: User_Password_Reset_Constraint;
+  update_columns?: Array<User_Password_Reset_Update_Column>;
+  where?: Maybe<User_Password_Reset_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "user_password_reset". */
+export type User_Password_Reset_Order_By = {
+  created_at?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  requested_user?: Maybe<User_Order_By>;
+  reset_by_user?: Maybe<Order_By>;
+  user?: Maybe<User_Order_By>;
+  user_auth_id?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: user_password_reset */
+export type User_Password_Reset_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "user_password_reset" */
+export enum User_Password_Reset_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  ResetByUser = 'reset_by_user',
+  /** column name */
+  UserAuthId = 'user_auth_id'
+}
+
+/** input type for updating data in table "user_password_reset" */
+export type User_Password_Reset_Set_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  reset_by_user?: Maybe<Scalars['String']>;
+  user_auth_id?: Maybe<Scalars['String']>;
+};
+
+/** aggregate stddev on columns */
+export type User_Password_Reset_Stddev_Fields = {
+  __typename?: 'user_password_reset_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "user_password_reset" */
+export type User_Password_Reset_Stddev_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type User_Password_Reset_Stddev_Pop_Fields = {
+  __typename?: 'user_password_reset_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "user_password_reset" */
+export type User_Password_Reset_Stddev_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type User_Password_Reset_Stddev_Samp_Fields = {
+  __typename?: 'user_password_reset_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "user_password_reset" */
+export type User_Password_Reset_Stddev_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** Streaming cursor of the table "user_password_reset" */
+export type User_Password_Reset_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: User_Password_Reset_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type User_Password_Reset_Stream_Cursor_Value_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  reset_by_user?: Maybe<Scalars['String']>;
+  user_auth_id?: Maybe<Scalars['String']>;
+};
+
+/** aggregate sum on columns */
+export type User_Password_Reset_Sum_Fields = {
+  __typename?: 'user_password_reset_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "user_password_reset" */
+export type User_Password_Reset_Sum_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** update columns of table "user_password_reset" */
+export enum User_Password_Reset_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  ResetByUser = 'reset_by_user',
+  /** column name */
+  UserAuthId = 'user_auth_id'
+}
+
+export type User_Password_Reset_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: Maybe<User_Password_Reset_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<User_Password_Reset_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: User_Password_Reset_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type User_Password_Reset_Var_Pop_Fields = {
+  __typename?: 'user_password_reset_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "user_password_reset" */
+export type User_Password_Reset_Var_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type User_Password_Reset_Var_Samp_Fields = {
+  __typename?: 'user_password_reset_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "user_password_reset" */
+export type User_Password_Reset_Var_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type User_Password_Reset_Variance_Fields = {
+  __typename?: 'user_password_reset_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "user_password_reset" */
+export type User_Password_Reset_Variance_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: user */
+export type User_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "user" */
+export enum User_Select_Column {
+  /** column name */
+  Auth0Id = 'auth0_id',
+  /** column name */
+  CognitoStatus = 'cognito_status',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Email = 'email',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "user" */
+export type User_Set_Input = {
+  auth0_id?: Maybe<Scalars['String']>;
+  cognito_status?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+export enum User_Status_Enum {
+  Disabled = 'DISABLED',
+  Enabled = 'ENABLED',
+  ForceChangePassword = 'FORCE_CHANGE_PASSWORD'
+}
+
+/** aggregate stddev on columns */
+export type User_Stddev_Fields = {
+  __typename?: 'user_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type User_Stddev_Pop_Fields = {
+  __typename?: 'user_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type User_Stddev_Samp_Fields = {
+  __typename?: 'user_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Streaming cursor of the table "user" */
+export type User_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: User_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type User_Stream_Cursor_Value_Input = {
+  auth0_id?: Maybe<Scalars['String']>;
+  cognito_status?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate sum on columns */
+export type User_Sum_Fields = {
+  __typename?: 'user_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "user" */
+export enum User_Update_Column {
+  /** column name */
+  Auth0Id = 'auth0_id',
+  /** column name */
+  CognitoStatus = 'cognito_status',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Email = 'email',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+export type User_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: Maybe<User_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<User_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: User_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type User_Var_Pop_Fields = {
+  __typename?: 'user_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type User_Var_Samp_Fields = {
+  __typename?: 'user_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type User_Variance_Fields = {
+  __typename?: 'user_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'. */
+export type Uuid_Comparison_Exp = {
+  _eq?: Maybe<Scalars['uuid']>;
+  _gt?: Maybe<Scalars['uuid']>;
+  _gte?: Maybe<Scalars['uuid']>;
+  _in?: Maybe<Array<Scalars['uuid']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['uuid']>;
+  _lte?: Maybe<Scalars['uuid']>;
+  _neq?: Maybe<Scalars['uuid']>;
+  _nin?: Maybe<Array<Scalars['uuid']>>;
+};
+
+/** columns and relationships of "view_insurance_application_for_not_taken_up_45_days" */
+export type View_Insurance_Application_For_Not_Taken_Up_45_Days = {
+  __typename?: 'view_insurance_application_for_not_taken_up_45_days';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['uuid']>;
+  /** An object relationship */
+  insurance_application?: Maybe<Insurance_Application>;
+  stage?: Maybe<Scalars['String']>;
+};
+
+/** aggregated selection of "view_insurance_application_for_not_taken_up_45_days" */
+export type View_Insurance_Application_For_Not_Taken_Up_45_Days_Aggregate = {
+  __typename?: 'view_insurance_application_for_not_taken_up_45_days_aggregate';
+  aggregate?: Maybe<View_Insurance_Application_For_Not_Taken_Up_45_Days_Aggregate_Fields>;
+  nodes: Array<View_Insurance_Application_For_Not_Taken_Up_45_Days>;
+};
+
+/** aggregate fields of "view_insurance_application_for_not_taken_up_45_days" */
+export type View_Insurance_Application_For_Not_Taken_Up_45_Days_Aggregate_Fields = {
+  __typename?: 'view_insurance_application_for_not_taken_up_45_days_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<View_Insurance_Application_For_Not_Taken_Up_45_Days_Max_Fields>;
+  min?: Maybe<View_Insurance_Application_For_Not_Taken_Up_45_Days_Min_Fields>;
+};
+
+
+/** aggregate fields of "view_insurance_application_for_not_taken_up_45_days" */
+export type View_Insurance_Application_For_Not_Taken_Up_45_Days_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<View_Insurance_Application_For_Not_Taken_Up_45_Days_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "view_insurance_application_for_not_taken_up_45_days". All fields are combined with a logical 'AND'. */
+export type View_Insurance_Application_For_Not_Taken_Up_45_Days_Bool_Exp = {
+  _and?: Maybe<Array<View_Insurance_Application_For_Not_Taken_Up_45_Days_Bool_Exp>>;
+  _not?: Maybe<View_Insurance_Application_For_Not_Taken_Up_45_Days_Bool_Exp>;
+  _or?: Maybe<Array<View_Insurance_Application_For_Not_Taken_Up_45_Days_Bool_Exp>>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  id?: Maybe<Uuid_Comparison_Exp>;
+  insurance_application?: Maybe<Insurance_Application_Bool_Exp>;
+  stage?: Maybe<String_Comparison_Exp>;
+};
+
+/** input type for inserting data into table "view_insurance_application_for_not_taken_up_45_days" */
+export type View_Insurance_Application_For_Not_Taken_Up_45_Days_Insert_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['uuid']>;
+  insurance_application?: Maybe<Insurance_Application_Obj_Rel_Insert_Input>;
+  stage?: Maybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type View_Insurance_Application_For_Not_Taken_Up_45_Days_Max_Fields = {
+  __typename?: 'view_insurance_application_for_not_taken_up_45_days_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['uuid']>;
+  stage?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type View_Insurance_Application_For_Not_Taken_Up_45_Days_Min_Fields = {
+  __typename?: 'view_insurance_application_for_not_taken_up_45_days_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['uuid']>;
+  stage?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "view_insurance_application_for_not_taken_up_45_days" */
+export type View_Insurance_Application_For_Not_Taken_Up_45_Days_Mutation_Response = {
+  __typename?: 'view_insurance_application_for_not_taken_up_45_days_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<View_Insurance_Application_For_Not_Taken_Up_45_Days>;
+};
+
+/** Ordering options when selecting data from "view_insurance_application_for_not_taken_up_45_days". */
+export type View_Insurance_Application_For_Not_Taken_Up_45_Days_Order_By = {
+  created_at?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  insurance_application?: Maybe<Insurance_Application_Order_By>;
+  stage?: Maybe<Order_By>;
+};
+
+/** select columns of table "view_insurance_application_for_not_taken_up_45_days" */
+export enum View_Insurance_Application_For_Not_Taken_Up_45_Days_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Stage = 'stage'
+}
+
+/** input type for updating data in table "view_insurance_application_for_not_taken_up_45_days" */
+export type View_Insurance_Application_For_Not_Taken_Up_45_Days_Set_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['uuid']>;
+  stage?: Maybe<Scalars['String']>;
+};
+
+/** Streaming cursor of the table "view_insurance_application_for_not_taken_up_45_days" */
+export type View_Insurance_Application_For_Not_Taken_Up_45_Days_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: View_Insurance_Application_For_Not_Taken_Up_45_Days_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: Maybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type View_Insurance_Application_For_Not_Taken_Up_45_Days_Stream_Cursor_Value_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['uuid']>;
+  stage?: Maybe<Scalars['String']>;
+};
+
+export type View_Insurance_Application_For_Not_Taken_Up_45_Days_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: Maybe<View_Insurance_Application_For_Not_Taken_Up_45_Days_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: View_Insurance_Application_For_Not_Taken_Up_45_Days_Bool_Exp;
+};
+
+export type GetUserBrandingQueryVariables = Exact<{
+  email?: Maybe<Scalars['String']>;
+}>;
+
+
+export type GetUserBrandingQuery = { __typename?: 'query_root', tenant: Array<{ __typename?: 'tenant', primary_color: string, secondary_color: string }> };
+
+export type ForgotPasswordMutationVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type ForgotPasswordMutation = { __typename?: 'mutation_root', forgotPassword?: Maybe<{ __typename?: 'ResetPasswordOutput', message: string }> };
+
+export type GetBrokerListQueryVariables = Exact<{
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  tenant_id: Scalars['Int'];
+}>;
+
+
+export type GetBrokerListQuery = { __typename?: 'query_root', broker_agency: Array<{ __typename?: 'broker_agency', name: string, id: number }> };
+
+export type GetBrokerListCountQueryVariables = Exact<{
+  name?: Maybe<Scalars['String']>;
+  tenant_id: Scalars['Int'];
+}>;
+
+
+export type GetBrokerListCountQuery = { __typename?: 'query_root', broker_agency_aggregate: { __typename?: 'broker_agency_aggregate', aggregate?: Maybe<{ __typename?: 'broker_agency_aggregate_fields', count: number }> } };
+
+export type InsertBrokerAgencyMutationVariables = Exact<{
+  zip: Scalars['String'];
+  state: Scalars['String'];
+  name: Scalars['String'];
+  country: Scalars['String'];
+  city: Scalars['String'];
+  address: Scalars['String'];
+  tenant_id: Scalars['Int'];
+  id?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type InsertBrokerAgencyMutation = { __typename?: 'mutation_root', insert_broker_agency_one?: Maybe<{ __typename?: 'broker_agency', id: number }> };
+
+export type GetBrokerAgenciesQueryVariables = Exact<{
+  id: Scalars['Int'];
+  offset?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  order_by?: Maybe<Array<Broker_Agency_Order_By> | Broker_Agency_Order_By>;
+}>;
+
+
+export type GetBrokerAgenciesQuery = { __typename?: 'query_root', tenant_by_pk?: Maybe<{ __typename?: 'tenant', id: number, name: string, broker_agencies: Array<{ __typename?: 'broker_agency', id: number, name: string, address?: Maybe<string>, created_at: any, payment_option: string, broker_producers_aggregate: { __typename?: 'broker_producer_aggregate', aggregate?: Maybe<{ __typename?: 'broker_producer_aggregate_fields', count: number }> } }>, broker_agencies_aggregate: { __typename?: 'broker_agency_aggregate', aggregate?: Maybe<{ __typename?: 'broker_agency_aggregate_fields', count: number }> } }> };
+
+export type UpdateBrokerAgencyMutationMutationVariables = Exact<{
+  id: Scalars['Int'];
+  _set?: Maybe<Broker_Agency_Set_Input>;
+}>;
+
+
+export type UpdateBrokerAgencyMutationMutation = { __typename?: 'mutation_root', update_broker_agency_by_pk?: Maybe<{ __typename?: 'broker_agency', id: number }> };
+
+export type GetBrokerAgencyOneQueryVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type GetBrokerAgencyOneQuery = { __typename?: 'query_root', broker_agency: Array<{ __typename?: 'broker_agency', city?: Maybe<string>, country?: Maybe<string>, address?: Maybe<string>, state?: Maybe<string>, name: string, zip?: Maybe<string>, tenant_id?: Maybe<number>, broker_program_id?: Maybe<string>, payment_option: string, commission_rate?: Maybe<any>, quote_template_id?: Maybe<string>, calculate_fee?: Maybe<boolean>, calculate_tax?: Maybe<boolean> }> };
+
+export type CreateUpdateBrokerMutationVariables = Exact<{
+  objects?: Maybe<Broker_Agency_Insert_Input>;
+}>;
+
+
+export type CreateUpdateBrokerMutation = { __typename?: 'mutation_root', insert_broker_agency_one?: Maybe<{ __typename?: 'broker_agency', id: number, name: string }> };
+
+export type GetConnectedBrokerProducerListQueryVariables = Exact<{
+  broker_agency_id: Scalars['Int'];
+}>;
+
+
+export type GetConnectedBrokerProducerListQuery = { __typename?: 'query_root', broker_producer: Array<{ __typename?: 'broker_producer', user: { __typename?: 'user', id: number, email?: Maybe<string>, name: string, cognito_status: string } }>, broker_agency_by_pk?: Maybe<{ __typename?: 'broker_agency', id: number, name: string, tenant?: Maybe<{ __typename?: 'tenant', name: string }> }> };
+
+export type CreateBrokerProducerMutationVariables = Exact<{
+  input: Array<CreateBrokerUserInput> | CreateBrokerUserInput;
+}>;
+
+
+export type CreateBrokerProducerMutation = { __typename?: 'mutation_root', createBrokerUsers?: Maybe<Array<Maybe<{ __typename?: 'CreateBrokerUserOutput', id: any }>>> };
+
+export type BrokerProducerUpdateMutationVariables = Exact<{
+  id: Scalars['Int'];
+  name: Scalars['String'];
+  email: Scalars['String'];
+  commission_rate?: Maybe<Scalars['numeric']>;
+}>;
+
+
+export type BrokerProducerUpdateMutation = { __typename?: 'mutation_root', update_user?: Maybe<{ __typename?: 'user_mutation_response', affected_rows: number }>, update_broker_producer?: Maybe<{ __typename?: 'broker_producer_mutation_response', affected_rows: number }> };
+
+export type GetBrokerProducerQueryVariables = Exact<{
+  userId: Scalars['Int'];
+}>;
+
+
+export type GetBrokerProducerQuery = { __typename?: 'query_root', broker_producer: Array<{ __typename?: 'broker_producer', user_id: number, commission_rate?: Maybe<any>, user: { __typename?: 'user', email?: Maybe<string>, name: string, id: number } }> };
+
+export type GetBrokerProducerListQueryVariables = Exact<{
+  broker_agency_id: Scalars['Int'];
+  offset?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  name: Scalars['String'];
+  order_by?: Maybe<Array<Broker_Producer_Order_By> | Broker_Producer_Order_By>;
+}>;
+
+
+export type GetBrokerProducerListQuery = { __typename?: 'query_root', broker_producer: Array<{ __typename?: 'broker_producer', commission_rate?: Maybe<any>, user: { __typename?: 'user', id: number, auth0_id?: Maybe<string>, email?: Maybe<string>, name: string, created_at: any, cognito_status: string, user_password_resets: Array<{ __typename?: 'user_password_reset', created_at: any, requested_user?: Maybe<{ __typename?: 'user', name: string }> }> } }>, broker_producer_aggregate: { __typename?: 'broker_producer_aggregate', aggregate?: Maybe<{ __typename?: 'broker_producer_aggregate_fields', count: number }> }, broker_agency_by_pk?: Maybe<{ __typename?: 'broker_agency', id: number, name: string, tenant?: Maybe<{ __typename?: 'tenant', name: string }> }> };
+
+export type UpdateUserStatusMutationVariables = Exact<{
+  userAuthId: Scalars['String'];
+  status: User_Status_Enum;
+}>;
+
+
+export type UpdateUserStatusMutation = { __typename?: 'mutation_root', updateUserStatus?: Maybe<{ __typename?: 'UserStatusOutput', message: string }> };
+
+export type ResetPasswordMutationVariables = Exact<{
+  email: Scalars['String'];
+  userAuthId: Scalars['String'];
+}>;
+
+
+export type ResetPasswordMutation = { __typename?: 'mutation_root', adminResetPassword?: Maybe<{ __typename?: 'ResetPasswordOutput', message: string }> };
+
+export type ApplicationBaseFragment = { __typename?: 'insurance_application', id: any, stage?: Maybe<string>, insurance_quote_selection?: Maybe<{ __typename?: 'insurance_quote_selection', id: number, quote_id: number }> };
+
+export type ApplicationDetailsFragment = { __typename?: 'insurance_application', id: any, effective_date?: Maybe<any>, expiration_date?: Maybe<any>, insured_organization?: Maybe<{ __typename?: 'insured_organization', id: number, name?: Maybe<string>, state?: Maybe<string>, broker_agency?: Maybe<{ __typename?: 'broker_agency', id: number, name: string }> }>, insurance_quote_selection?: Maybe<{ __typename?: 'insurance_quote_selection', id: number, insurance_policy?: Maybe<{ __typename?: 'insurance_policy', id: number, waratah_report?: Maybe<string> }> }> };
+
+export type ExternalApplicationStageFragment = { __typename?: 'insurance_application', external_scans: Array<{ __typename?: 'external_scan', id: number, status: string }> };
+
+export type ApplicationStageQueryVariables = Exact<{
+  id: Scalars['uuid'];
+}>;
+
+
+export type ApplicationStageQuery = { __typename?: 'query_root', insurance_application_by_pk?: Maybe<{ __typename?: 'insurance_application', id: any, stage?: Maybe<string>, effective_date?: Maybe<any>, expiration_date?: Maybe<any>, insurance_quote_selection?: Maybe<{ __typename?: 'insurance_quote_selection', id: number, quote_id: number, insurance_policy?: Maybe<{ __typename?: 'insurance_policy', id: number, waratah_report?: Maybe<string> }> }>, insured_organization?: Maybe<{ __typename?: 'insured_organization', id: number, name?: Maybe<string>, state?: Maybe<string>, broker_agency?: Maybe<{ __typename?: 'broker_agency', id: number, name: string }> }>, external_scans: Array<{ __typename?: 'external_scan', id: number, status: string }> }> };
+
+export type ConnectedInsuaranceApplicationsQueryVariables = Exact<{
+  id?: Maybe<Scalars['uuid']>;
+}>;
+
+
+export type ConnectedInsuaranceApplicationsQuery = { __typename?: 'query_root', insurance_application: Array<{ __typename?: 'insurance_application', id: any, effective_date?: Maybe<any>, expiration_date?: Maybe<any> }> };
+
+export type GetScanStatusSubscriptionVariables = Exact<{
+  id: Scalars['uuid'];
+}>;
+
+
+export type GetScanStatusSubscription = { __typename?: 'subscription_root', external_scan: Array<{ __typename?: 'external_scan', id: number, risk_score?: Maybe<string>, scan_result?: Maybe<any>, status: string, external_id?: Maybe<string> }> };
+
+export type GetScanStatusQQueryVariables = Exact<{
+  id: Scalars['uuid'];
+}>;
+
+
+export type GetScanStatusQQuery = { __typename?: 'query_root', external_scan: Array<{ __typename?: 'external_scan', id: number, risk_score?: Maybe<string>, scan_result?: Maybe<any>, status: string, external_id?: Maybe<string> }> };
+
+export type GetIpfsStatusSubscriptionVariables = Exact<{
+  applicationId: Scalars['uuid'];
+}>;
+
+
+export type GetIpfsStatusSubscription = { __typename?: 'subscription_root', insurance_policy: Array<{ __typename?: 'insurance_policy', id: number, policy_number?: Maybe<string>, ipfs_report?: Maybe<string>, stage: string, electronic_signature_url?: Maybe<string>, ipfs_quote_data?: Maybe<any>, waratah_report?: Maybe<string> }> };
+
+export type GetIpfsStatusQQueryVariables = Exact<{
+  applicationId: Scalars['uuid'];
+}>;
+
+
+export type GetIpfsStatusQQuery = { __typename?: 'query_root', insurance_policy: Array<{ __typename?: 'insurance_policy', id: number, policy_number?: Maybe<string>, ipfs_report?: Maybe<string>, stage: string, electronic_signature_url?: Maybe<string>, ipfs_quote_data?: Maybe<any>, waratah_report?: Maybe<string> }> };
+
+export type SummaryInsuranceApplicationQueryVariables = Exact<{
+  id: Scalars['uuid'];
+}>;
+
+
+export type SummaryInsuranceApplicationQuery = { __typename?: 'query_root', insurance_application_by_pk?: Maybe<{ __typename?: 'insurance_application', id: any, domain?: Maybe<string>, effective_date?: Maybe<any>, expiration_date?: Maybe<any>, revenue?: Maybe<any>, industry: string, employees?: Maybe<number>, insured_organization?: Maybe<{ __typename?: 'insured_organization', id: number, address?: Maybe<string>, city?: Maybe<string>, state?: Maybe<string>, zip?: Maybe<string>, name?: Maybe<string> }>, insurance_quote_selection?: Maybe<{ __typename?: 'insurance_quote_selection', id: number, insurance_quote: { __typename?: 'insurance_quote', id: any, base_premium: any, commission_percentage?: Maybe<number>, deductible: any, other_deductibles?: Maybe<any>, premium?: Maybe<any>, policy_limit: any, tax_percentage?: Maybe<any>, total_premium?: Maybe<any>, fees?: Maybe<any>, taxes?: Maybe<any> }, insurance_policy?: Maybe<{ __typename?: 'insurance_policy', id: number, long_policy_number?: Maybe<string>, policy_number?: Maybe<string>, canary_token?: Maybe<string> }> }>, external_scans: Array<{ __typename?: 'external_scan', id: number, risk_score?: Maybe<string>, scan_result?: Maybe<any>, external_id?: Maybe<string> }>, broker_agency?: Maybe<{ __typename?: 'broker_agency', id: number, payment_option: string }> }> };
+
+export type WatchSummaryInsuranceApplicationSubscriptionVariables = Exact<{
+  id: Scalars['uuid'];
+}>;
+
+
+export type WatchSummaryInsuranceApplicationSubscription = { __typename?: 'subscription_root', insurance_application_by_pk?: Maybe<{ __typename?: 'insurance_application', id: any, domain?: Maybe<string>, effective_date?: Maybe<any>, expiration_date?: Maybe<any>, revenue?: Maybe<any>, industry: string, employees?: Maybe<number>, insured_organization?: Maybe<{ __typename?: 'insured_organization', id: number, address?: Maybe<string>, city?: Maybe<string>, state?: Maybe<string>, zip?: Maybe<string>, name?: Maybe<string> }>, insurance_quote_selection?: Maybe<{ __typename?: 'insurance_quote_selection', id: number, insurance_quote: { __typename?: 'insurance_quote', id: any, base_premium: any, commission_percentage?: Maybe<number>, deductible: any, other_deductibles?: Maybe<any>, premium?: Maybe<any>, policy_limit: any, tax_percentage?: Maybe<any>, total_premium?: Maybe<any>, fees?: Maybe<any>, taxes?: Maybe<any> }, insurance_policy?: Maybe<{ __typename?: 'insurance_policy', id: number, long_policy_number?: Maybe<string>, policy_number?: Maybe<string>, canary_token?: Maybe<string> }> }>, external_scans: Array<{ __typename?: 'external_scan', id: number, risk_score?: Maybe<string>, scan_result?: Maybe<any>, external_id?: Maybe<string> }>, broker_agency?: Maybe<{ __typename?: 'broker_agency', id: number, payment_option: string }> }> };
+
+export type BindApplicationMutationVariables = Exact<{
+  applicationId: Scalars['uuid'];
+  insuranceQuoteSelectionId: Scalars['Int'];
+  brokerEmail: Scalars['String'];
+  payer: Scalars['String'];
+}>;
+
+
+export type BindApplicationMutation = { __typename?: 'mutation_root', handleIpfsIntegration?: Maybe<{ __typename?: 'PolicyOutput', id: number }> };
+
+export type InsuranceArtifactSubscriptionVariables = Exact<{
+  applicationId: Scalars['uuid'];
+}>;
+
+
+export type InsuranceArtifactSubscription = { __typename?: 'subscription_root', insurance_application_artifact: Array<{ __typename?: 'latest_app_artifacts_quote_policy', application_id?: Maybe<any>, created_at?: Maybe<any>, file_type?: Maybe<string>, file_uri?: Maybe<string>, id?: Maybe<number>, updated_at?: Maybe<any> }> };
+
+export type GetIpfsFileQueryVariables = Exact<{
+  filename: Scalars['String'];
+}>;
+
+
+export type GetIpfsFileQuery = { __typename?: 'query_root', getIpfsFile?: Maybe<{ __typename?: 'IpfsFileOutput', filedata: string }> };
+
+export type GetApplicationPaymentDataQQueryVariables = Exact<{
+  id: Scalars['uuid'];
+}>;
+
+
+export type GetApplicationPaymentDataQQuery = { __typename?: 'query_root', insurance_policy: Array<{ __typename?: 'insurance_policy', id: number, agent_signed?: Maybe<boolean>, insured_signed?: Maybe<boolean>, payment_collected?: Maybe<boolean>, policy_number?: Maybe<string>, long_policy_number?: Maybe<string>, canary_token?: Maybe<string>, waratah_report?: Maybe<string>, insurance_quote_selection: { __typename?: 'insurance_quote_selection', insurance_application: { __typename?: 'insurance_application', id: any, stage?: Maybe<string> } } }> };
+
+export type GetApplicationPaymentDataSubscriptionVariables = Exact<{
+  id: Scalars['uuid'];
+}>;
+
+
+export type GetApplicationPaymentDataSubscription = { __typename?: 'subscription_root', insurance_policy: Array<{ __typename?: 'insurance_policy', id: number, agent_signed?: Maybe<boolean>, insured_signed?: Maybe<boolean>, payment_collected?: Maybe<boolean>, policy_number?: Maybe<string>, long_policy_number?: Maybe<string>, canary_token?: Maybe<string>, waratah_report?: Maybe<string>, insurance_quote_selection: { __typename?: 'insurance_quote_selection', id: number, insurance_application: { __typename?: 'insurance_application', id: any, stage?: Maybe<string> } } }> };
+
+export type AgentBindApplicationMutationVariables = Exact<{
+  applicationId: Scalars['uuid'];
+  insuranceQuoteSelectionId: Scalars['String'];
+}>;
+
+
+export type AgentBindApplicationMutation = { __typename?: 'mutation_root', handleAgentBind?: Maybe<{ __typename?: 'AgentBindPolicyOutput', id?: Maybe<number> }> };
+
+export type ProfileFieldsFragment = { __typename?: 'insurance_application', effective_date?: Maybe<any>, expiration_date?: Maybe<any>, organization_type?: Maybe<string>, domain?: Maybe<string>, employees?: Maybe<number>, industry: string, revenue?: Maybe<any>, naics_code?: Maybe<string>, rentals_data?: Maybe<any>, id: any, stage?: Maybe<string>, insured_organization?: Maybe<{ __typename?: 'insured_organization', id: number, name?: Maybe<string>, address?: Maybe<string>, city?: Maybe<string>, state?: Maybe<string>, zip?: Maybe<string>, insured_organization_contacts: Array<{ __typename?: 'insured_organization_contact', id: number, name: string, email?: Maybe<string>, type?: Maybe<string> }> }>, broker_agency?: Maybe<{ __typename?: 'broker_agency', id: number, name: string }>, insurance_quote_selection?: Maybe<{ __typename?: 'insurance_quote_selection', id: number, quote_id: number }> };
+
+export type ApplicationProfileQueryVariables = Exact<{
+  id: Scalars['uuid'];
+}>;
+
+
+export type ApplicationProfileQuery = { __typename?: 'query_root', insurance_application_by_pk?: Maybe<{ __typename?: 'insurance_application', effective_date?: Maybe<any>, expiration_date?: Maybe<any>, organization_type?: Maybe<string>, domain?: Maybe<string>, employees?: Maybe<number>, industry: string, revenue?: Maybe<any>, naics_code?: Maybe<string>, rentals_data?: Maybe<any>, id: any, stage?: Maybe<string>, insured_organization?: Maybe<{ __typename?: 'insured_organization', id: number, name?: Maybe<string>, address?: Maybe<string>, city?: Maybe<string>, state?: Maybe<string>, zip?: Maybe<string>, insured_organization_contacts: Array<{ __typename?: 'insured_organization_contact', id: number, name: string, email?: Maybe<string>, type?: Maybe<string> }> }>, broker_agency?: Maybe<{ __typename?: 'broker_agency', id: number, name: string }>, insurance_quote_selection?: Maybe<{ __typename?: 'insurance_quote_selection', id: number, quote_id: number }> }> };
+
+export type GetBrokerAgencyListQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetBrokerAgencyListQuery = { __typename?: 'query_root', broker_agency: Array<{ __typename?: 'broker_agency', id: number, name: string }> };
+
+export type CreateInsuredApplicationMutationVariables = Exact<{
+  object: UiInsuredApplicationInput;
+}>;
+
+
+export type CreateInsuredApplicationMutation = { __typename?: 'mutation_root', createInsuredApplicationFromUI?: Maybe<{ __typename?: 'UIInsuredOutput', id: number, created_organization?: Maybe<{ __typename?: 'insured_organization', insurance_applications: Array<{ __typename?: 'insurance_application', id: any }> }> }> };
+
+export type GetIndustryDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetIndustryDataQuery = { __typename?: 'query_root', organization_industry: Array<{ __typename?: 'organization_industry', id: number, industry: string, status: string, naics_codes: Array<{ __typename?: 'naics_code', id: number, naics: string }> }> };
+
+export type GetImsCompanyBusinessTypeDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetImsCompanyBusinessTypeDataQuery = { __typename?: 'query_root', ims_company_business_type: Array<{ __typename?: 'ims_company_business_type', dnb_id: string, dnb_desc: string, ims_desc: string, ims_id: string }> };
+
+export type OrganizationContactsListQueryVariables = Exact<{
+  orgId: Scalars['Int'];
+}>;
+
+
+export type OrganizationContactsListQuery = { __typename?: 'query_root', insured_organization_contact: Array<{ __typename?: 'insured_organization_contact', email?: Maybe<string>, id: number, name: string, insured_organization_id: number, type?: Maybe<string> }> };
+
+export type AddOrganizationContactMutationVariables = Exact<{
+  objects?: Maybe<Array<Insured_Organization_Contact_Insert_Input> | Insured_Organization_Contact_Insert_Input>;
+}>;
+
+
+export type AddOrganizationContactMutation = { __typename?: 'mutation_root', insert_insured_organization_contact?: Maybe<{ __typename?: 'insured_organization_contact_mutation_response', affected_rows: number }> };
+
+export type GetOrgDetailByDomainMutationVariables = Exact<{
+  domain: Scalars['String'];
+}>;
+
+
+export type GetOrgDetailByDomainMutation = { __typename?: 'mutation_root', searchDnB?: Maybe<{ __typename?: 'DnBOutput', address?: Maybe<string>, city?: Maybe<string>, naics?: Maybe<string>, employees?: Maybe<number>, industry?: Maybe<string>, insured_name?: Maybe<string>, revenue?: Maybe<number>, state?: Maybe<string>, zip?: Maybe<string>, dnbCode?: Maybe<number>, dnbDescription?: Maybe<string>, naics_icdb?: Maybe<{ __typename?: 'naics_code', naics: string, organization_industry: { __typename?: 'organization_industry', industry: string, icb: string } }> }> };
+
+export type DeleteInsuredOrgContactMutationMutationVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type DeleteInsuredOrgContactMutationMutation = { __typename?: 'mutation_root', delete_insured_organization_contact_by_pk?: Maybe<{ __typename?: 'insured_organization_contact', id: number }> };
+
+export type CreateInsuredOrganizationApplicationUiMutationVariables = Exact<{
+  insured_name: Scalars['String'];
+  city?: Maybe<Scalars['String']>;
+  state?: Maybe<Scalars['String']>;
+  zip?: Maybe<Scalars['String']>;
+  address?: Maybe<Scalars['String']>;
+  domain: Scalars['String'];
+  employees: Scalars['Int'];
+  industry: Scalars['String'];
+  revenue: Scalars['money'];
+  insured_contacts?: Maybe<Array<Insured_Organization_Contact_Insert_Input> | Insured_Organization_Contact_Insert_Input>;
+  stage?: Maybe<Scalars['String']>;
+  quotes?: Maybe<Array<Insurance_Quote_Insert_Input> | Insurance_Quote_Insert_Input>;
+  naics_code?: Maybe<Scalars['String']>;
+  organization_type?: Maybe<Scalars['String']>;
+  broker_agency_id: Scalars['Int'];
+  rentals_data?: Maybe<Scalars['jsonb']>;
+}>;
+
+
+export type CreateInsuredOrganizationApplicationUiMutation = { __typename?: 'mutation_root', insert_insured_organization_one?: Maybe<{ __typename?: 'insured_organization', id: number, insurance_applications: Array<{ __typename?: 'insurance_application', id: any }> }> };
+
+export type GenerateQuotesMutationVariables = Exact<{
+  revenue?: Maybe<Scalars['String']>;
+  industry?: Maybe<Scalars['String']>;
+  state?: Maybe<Scalars['String']>;
+  employees?: Maybe<Scalars['String']>;
+  paymentOption?: Maybe<Scalars['String']>;
+  calculateFee?: Maybe<Scalars['Boolean']>;
+  calculateTax?: Maybe<Scalars['Boolean']>;
+}>;
+
+
+export type GenerateQuotesMutation = { __typename?: 'mutation_root', generateQuotes?: Maybe<{ __typename?: 'QuotesOutput', quotes?: Maybe<any> }> };
+
+export type QuoteFieldsFragment = { __typename?: 'insurance_quote', id: any, deductible: any, commission_percentage?: Maybe<number>, base_premium: any, other_deductibles?: Maybe<any>, policy_limit: any, premium?: Maybe<any>, tax_percentage?: Maybe<any>, total_premium?: Maybe<any>, fees?: Maybe<any>, taxes?: Maybe<any>, sub_limits?: Maybe<any> };
+
+export type ApplicationQuoteFieldsFragment = { __typename?: 'insurance_application', id: any, stage?: Maybe<string>, effective_date?: Maybe<any>, expiration_date?: Maybe<any>, insurance_quotes: Array<{ __typename?: 'insurance_quote', id: any, deductible: any, commission_percentage?: Maybe<number>, base_premium: any, other_deductibles?: Maybe<any>, policy_limit: any, premium?: Maybe<any>, tax_percentage?: Maybe<any>, total_premium?: Maybe<any>, fees?: Maybe<any>, taxes?: Maybe<any>, sub_limits?: Maybe<any> }>, insurance_quote_selection?: Maybe<{ __typename?: 'insurance_quote_selection', id: number, quote_id: number, insurance_policy?: Maybe<{ __typename?: 'insurance_policy', id: number, waratah_report?: Maybe<string> }> }>, insured_organization?: Maybe<{ __typename?: 'insured_organization', id: number, name?: Maybe<string>, state?: Maybe<string>, broker_agency?: Maybe<{ __typename?: 'broker_agency', id: number, name: string }> }> };
+
+export type ApplicationQuoteQueryVariables = Exact<{
+  id: Scalars['uuid'];
+}>;
+
+
+export type ApplicationQuoteQuery = { __typename?: 'query_root', insurance_application_by_pk?: Maybe<{ __typename?: 'insurance_application', id: any, stage?: Maybe<string>, effective_date?: Maybe<any>, expiration_date?: Maybe<any>, insurance_quotes: Array<{ __typename?: 'insurance_quote', id: any, deductible: any, commission_percentage?: Maybe<number>, base_premium: any, other_deductibles?: Maybe<any>, policy_limit: any, premium?: Maybe<any>, tax_percentage?: Maybe<any>, total_premium?: Maybe<any>, fees?: Maybe<any>, taxes?: Maybe<any>, sub_limits?: Maybe<any> }>, insurance_quote_selection?: Maybe<{ __typename?: 'insurance_quote_selection', id: number, quote_id: number, insurance_policy?: Maybe<{ __typename?: 'insurance_policy', id: number, waratah_report?: Maybe<string> }> }>, insured_organization?: Maybe<{ __typename?: 'insured_organization', id: number, name?: Maybe<string>, state?: Maybe<string>, broker_agency?: Maybe<{ __typename?: 'broker_agency', id: number, name: string }> }> }> };
+
+export type UpdateInsuranceDatesMutationVariables = Exact<{
+  id: Scalars['uuid'];
+  expiration_date: Scalars['date'];
+  effective_date: Scalars['date'];
+  stage: Scalars['String'];
+  quote_id: Scalars['Int'];
+}>;
+
+
+export type UpdateInsuranceDatesMutation = { __typename?: 'mutation_root', update_insurance_application_by_pk?: Maybe<{ __typename?: 'insurance_application', id: any }>, insert_insurance_quote_selection_one?: Maybe<{ __typename?: 'insurance_quote_selection', application_id: any, id: number, quote_id: number }> };
+
+export type NewInsuranceQuoteMutationVariables = Exact<{
+  base_premium: Scalars['money'];
+  commission_percentage: Scalars['Int'];
+  deductible: Scalars['money'];
+  insurance_application_id: Scalars['uuid'];
+  other_deductibles: Scalars['money'];
+  policy_limit: Scalars['money'];
+  premium: Scalars['money'];
+  tax_percentage?: Maybe<Scalars['numeric']>;
+  total_premium: Scalars['money'];
+  stage?: Maybe<Scalars['String']>;
+}>;
+
+
+export type NewInsuranceQuoteMutation = { __typename?: 'mutation_root', insert_insurance_quote?: Maybe<{ __typename?: 'insurance_quote_mutation_response', affected_rows: number }>, update_insurance_application_by_pk?: Maybe<{ __typename?: 'insurance_application', id: any }> };
+
+export type UpdateInsuranceQuoteMutationVariables = Exact<{
+  id: Scalars['bigint'];
+  base_premium?: Maybe<Scalars['money']>;
+  commission_percentage?: Maybe<Scalars['Int']>;
+  deductible?: Maybe<Scalars['money']>;
+  insurance_application_id?: Maybe<Scalars['uuid']>;
+  other_deductibles?: Maybe<Scalars['money']>;
+  policy_limit?: Maybe<Scalars['money']>;
+  premium?: Maybe<Scalars['money']>;
+  tax_percentage?: Maybe<Scalars['numeric']>;
+  total_premium?: Maybe<Scalars['money']>;
+}>;
+
+
+export type UpdateInsuranceQuoteMutation = { __typename?: 'mutation_root', update_insurance_quote_by_pk?: Maybe<{ __typename?: 'insurance_quote', base_premium: any, commission_percentage?: Maybe<number>, deductible: any, id: any, policy_limit: any, premium?: Maybe<any>, tax_percentage?: Maybe<any>, total_premium?: Maybe<any>, other_deductibles?: Maybe<any> }> };
+
+export type DeleteInsuranceQuoteMutationVariables = Exact<{
+  id: Scalars['bigint'];
+}>;
+
+
+export type DeleteInsuranceQuoteMutation = { __typename?: 'mutation_root', delete_insurance_quote_by_pk?: Maybe<{ __typename?: 'insurance_quote', id: any }> };
+
+export type GetTenantSettingsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetTenantSettingsQuery = { __typename?: 'query_root', me: Array<{ __typename?: 'me', id?: Maybe<number>, broker_producer?: Maybe<{ __typename?: 'broker_producer', broker_agency: { __typename?: 'broker_agency', tenant?: Maybe<{ __typename?: 'tenant', scan_required?: Maybe<boolean> }> } }> }> };
+
+export type WatchScanResultSubscriptionVariables = Exact<{
+  applicationId: Scalars['uuid'];
+}>;
+
+
+export type WatchScanResultSubscription = { __typename?: 'subscription_root', external_scan: Array<{ __typename?: 'external_scan', scan_result?: Maybe<any>, status: string }> };
+
+export type ScanVerdictResultQueryVariables = Exact<{
+  external_id: Scalars['uuid'];
+}>;
+
+
+export type ScanVerdictResultQuery = { __typename?: 'query_root', getScanResult?: Maybe<{ __typename?: 'ScanOutput', domain?: Maybe<string>, status?: Maybe<string>, verdict?: Maybe<string>, connector_results?: Maybe<any> }> };
+
+export type SendQuotePdfEmailMutationVariables = Exact<{
+  object: EmailRecipientInput;
+}>;
+
+
+export type SendQuotePdfEmailMutation = { __typename?: 'mutation_root', sendQuotePDFEmailsFromUI?: Maybe<{ __typename?: 'EmailRecipientOutput', count: number }> };
+
+export type ResendQuotePdfEmailMutationVariables = Exact<{
+  object: ResendInput;
+}>;
+
+
+export type ResendQuotePdfEmailMutation = { __typename?: 'mutation_root', resendQuotePDFEmailFromUI?: Maybe<{ __typename?: 'ResendOutput', id: number }> };
+
+export type UpdatePremiumDataMutationVariables = Exact<{
+  object: UpdatePremiumInput;
+}>;
+
+
+export type UpdatePremiumDataMutation = { __typename?: 'mutation_root', updatePremium?: Maybe<{ __typename?: 'SendPremiumOutput', id: number }> };
+
+export type WatchQuotesSubscriptionVariables = Exact<{
+  applicationId: Scalars['uuid'];
+}>;
+
+
+export type WatchQuotesSubscription = { __typename?: 'subscription_root', insurance_quote: Array<{ __typename?: 'insurance_quote', id: any, deductible: any, commission_percentage?: Maybe<number>, base_premium: any, other_deductibles?: Maybe<any>, policy_limit: any, premium?: Maybe<any>, tax_percentage?: Maybe<any>, total_premium?: Maybe<any>, fees?: Maybe<any>, taxes?: Maybe<any>, sub_limits?: Maybe<any> }> };
+
+export type GetArtifactByAppIdAndQuoteNumberQueryVariables = Exact<{
+  applicationid_id: Scalars['uuid'];
+  quote_number: Scalars['String'];
+}>;
+
+
+export type GetArtifactByAppIdAndQuoteNumberQuery = { __typename?: 'query_root', insurance_application_artifact: Array<{ __typename?: 'insurance_application_artifact', file_type: string, file_uri: string, id: number }> };
+
+export type GetCustomPolicyLimitsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetCustomPolicyLimitsQuery = { __typename?: 'query_root', getCustomPolicies?: Maybe<{ __typename?: 'CustomPolicyOutput', customPolicyLimits?: Maybe<Array<Maybe<number>>> }> };
+
+export type GetUnusedRetentionsMutationVariables = Exact<{
+  object: UnusedRetentionsInput;
+}>;
+
+
+export type GetUnusedRetentionsMutation = { __typename?: 'mutation_root', getUnusedRetentions?: Maybe<{ __typename?: 'UnusedRetentionsOutput', notUsedDeductibles?: Maybe<Array<Maybe<number>>> }> };
+
+export type CreateCustomQuoteMutationVariables = Exact<{
+  object: CustomQuoteInput;
+}>;
+
+
+export type CreateCustomQuoteMutation = { __typename?: 'mutation_root', createCustomQuote?: Maybe<{ __typename?: 'CustomQuoteOutput', id: number }> };
+
+export type CreatePdfQuoteSelectionMutationVariables = Exact<{
+  input: CreateQuotePdfSelectionInput;
+}>;
+
+
+export type CreatePdfQuoteSelectionMutation = { __typename?: 'mutation_root', createPDFQuoteSelection?: Maybe<{ __typename?: 'CreateQuotePDFSelectionOutput', id: any }> };
+
+export type WatchLatestQuotePdfQuoteIdsByAppIdSubscriptionVariables = Exact<{
+  applicationId: Scalars['uuid'];
+}>;
+
+
+export type WatchLatestQuotePdfQuoteIdsByAppIdSubscription = { __typename?: 'subscription_root', insurance_application_artifact: Array<{ __typename?: 'insurance_application_artifact', insurance_quote_pdf_selection_artifacts: Array<{ __typename?: 'insurance_quote_pdf_selection_artifact', insurance_quote_pdf_selections: Array<{ __typename?: 'insurance_quote_pdf_selection', quote_id: number }> }> }> };
+
+export type ManualTriggerScanMutationVariables = Exact<{
+  applicationId: Scalars['uuid'];
+}>;
+
+
+export type ManualTriggerScanMutation = { __typename?: 'mutation_root', manualTriggerScan?: Maybe<{ __typename?: 'ManualTriggerScanOutput', id: any }> };
+
+export type CreateQuoteEmailContactMutationVariables = Exact<{
+  object: Insurance_Quote_Email_Insert_Input;
+}>;
+
+
+export type CreateQuoteEmailContactMutation = { __typename?: 'mutation_root', insert_insurance_quote_email_one?: Maybe<{ __typename?: 'insurance_quote_email', id: number }> };
+
+export type UpdateInsuranceQuoteEmailMutationVariables = Exact<{
+  id: Scalars['Int'];
+  email: Scalars['String'];
+  name: Scalars['String'];
+}>;
+
+
+export type UpdateInsuranceQuoteEmailMutation = { __typename?: 'mutation_root', update_insurance_quote_email?: Maybe<{ __typename?: 'insurance_quote_email_mutation_response', returning: Array<{ __typename?: 'insurance_quote_email', id: number }> }> };
+
+export type DeleteInsuranceQuoteEmailMutationVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type DeleteInsuranceQuoteEmailMutation = { __typename?: 'mutation_root', delete_insurance_quote_email?: Maybe<{ __typename?: 'insurance_quote_email_mutation_response', affected_rows: number, returning: Array<{ __typename?: 'insurance_quote_email', id: number }> }> };
+
+export type GetInsuranceQuoteEmailSubscriptionVariables = Exact<{
+  applicationid_id: Scalars['uuid'];
+}>;
+
+
+export type GetInsuranceQuoteEmailSubscription = { __typename?: 'subscription_root', insurance_quote_email: Array<{ __typename?: 'insurance_quote_email', application_id: any, created_at: any, created_by_user_id?: Maybe<string>, email: string, email_sent_at?: Maybe<any>, id: number, name: string, org_name?: Maybe<string>, quote_number?: Maybe<string>, updated_at: any, status?: Maybe<string> }> };
+
+export type OrganizationListQueryVariables = Exact<{
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orgWhere?: Maybe<Insured_Organization_Bool_Exp>;
+  applicationWhere?: Maybe<Insurance_Application_Bool_Exp>;
+  order_by?: Maybe<Order_By>;
+}>;
+
+
+export type OrganizationListQuery = { __typename?: 'query_root', insured_organization: Array<{ __typename?: 'insured_organization', id: number, name?: Maybe<string>, insurance_applications: Array<{ __typename?: 'insurance_application', id: any, stage?: Maybe<string>, effective_date?: Maybe<any>, expiration_date?: Maybe<any>, broker_agency?: Maybe<{ __typename?: 'broker_agency', name: string }>, insurance_quote_selection?: Maybe<{ __typename?: 'insurance_quote_selection', id: number, insurance_policy?: Maybe<{ __typename?: 'insurance_policy', id: number, insured_signed?: Maybe<boolean>, agent_signed?: Maybe<boolean>, payment_collected?: Maybe<boolean> }> }> }> }>, insured_organization_aggregate: { __typename?: 'insured_organization_aggregate', aggregate?: Maybe<{ __typename?: 'insured_organization_aggregate_fields', count: number }> } };
+
+export type LatestInsuranceApplicationsQueryVariables = Exact<{
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  applicationWhere?: Maybe<Latest_Insurance_Applications_Bool_Exp>;
+  order_by?: Maybe<Array<Latest_Insurance_Applications_Order_By> | Latest_Insurance_Applications_Order_By>;
+  where?: Maybe<Latest_Insurance_Applications_Bool_Exp>;
+}>;
+
+
+export type LatestInsuranceApplicationsQuery = { __typename?: 'query_root', latest_insurance_applications: Array<{ __typename?: 'latest_insurance_applications', effective_date?: Maybe<any>, expiration_date?: Maybe<any>, id?: Maybe<any>, stage?: Maybe<string>, insured_organization?: Maybe<{ __typename?: 'insured_organization', id: number, name?: Maybe<string> }>, insurance_quote_selection?: Maybe<{ __typename?: 'insurance_quote_selection', insurance_quote: { __typename?: 'insurance_quote', premium?: Maybe<any> }, insurance_policy?: Maybe<{ __typename?: 'insurance_policy', id: number, insured_signed?: Maybe<boolean>, agent_signed?: Maybe<boolean>, payment_collected?: Maybe<boolean> }> }> }>, latest_insurance_applications_aggregate: { __typename?: 'latest_insurance_applications_aggregate', aggregate?: Maybe<{ __typename?: 'latest_insurance_applications_aggregate_fields', count: number }> } };
+
+export type WatchUpdateApplicationsSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type WatchUpdateApplicationsSubscription = { __typename?: 'subscription_root', latest_insurance_applications: Array<{ __typename?: 'latest_insurance_applications', id?: Maybe<any>, stage?: Maybe<string>, updated_at?: Maybe<any>, insured_organization?: Maybe<{ __typename?: 'insured_organization', id: number, name?: Maybe<string> }> }> };
+
+export type SubscriptionLatestInsuranceApplicationsSubscriptionVariables = Exact<{
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  applicationWhere?: Maybe<Latest_Insurance_Applications_Bool_Exp>;
+  order_by?: Maybe<Array<Latest_Insurance_Applications_Order_By> | Latest_Insurance_Applications_Order_By>;
+  where?: Maybe<Latest_Insurance_Applications_Bool_Exp>;
+}>;
+
+
+export type SubscriptionLatestInsuranceApplicationsSubscription = { __typename?: 'subscription_root', latest_insurance_applications: Array<{ __typename?: 'latest_insurance_applications', effective_date?: Maybe<any>, expiration_date?: Maybe<any>, id?: Maybe<any>, stage?: Maybe<string>, insured_organization?: Maybe<{ __typename?: 'insured_organization', id: number, name?: Maybe<string> }>, insurance_quote_selection?: Maybe<{ __typename?: 'insurance_quote_selection', insurance_quote: { __typename?: 'insurance_quote', premium?: Maybe<any> }, insurance_policy?: Maybe<{ __typename?: 'insurance_policy', id: number, insured_signed?: Maybe<boolean>, agent_signed?: Maybe<boolean>, payment_collected?: Maybe<boolean> }> }> }> };
+
+export type BrokerAgencyNameQueryVariables = Exact<{
+  auth0Id: Scalars['String'];
+}>;
+
+
+export type BrokerAgencyNameQuery = { __typename?: 'query_root', user: Array<{ __typename?: 'user', broker_agent?: Maybe<{ __typename?: 'broker_producer', broker_agency: { __typename?: 'broker_agency', name: string } }> }> };
+
+export type MeQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MeQuery = { __typename?: 'query_root', me: Array<{ __typename?: 'me', auth0_id?: Maybe<string>, name?: Maybe<string>, email?: Maybe<string>, broker_producer?: Maybe<{ __typename?: 'broker_producer', commission_rate?: Maybe<any>, broker_agency: { __typename?: 'broker_agency', id: number, name: string, tenant_id?: Maybe<number>, payment_option: string, calculate_fee?: Maybe<boolean>, calculate_tax?: Maybe<boolean>, commission_rate?: Maybe<any>, tenant?: Maybe<{ __typename?: 'tenant', logo: string, primary_color: string, secondary_color: string }> } }>, tenant_admin?: Maybe<{ __typename?: 'tenant_admin', tenant_id: number }> }>, rqb_system: Array<{ __typename?: 'rqb_system', id: number, key: string, value: any }> };
+
+export type GetLogoLinkQueryVariables = Exact<{
+  key: Scalars['String'];
+}>;
+
+
+export type GetLogoLinkQuery = { __typename?: 'query_root', getLogo?: Maybe<{ __typename?: 'FileLink', filelink: string }> };
+
+export type ReleseVersionSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ReleseVersionSubscription = { __typename?: 'subscription_root', rqb_system: Array<{ __typename?: 'rqb_system', id: number, key: string, value: any }> };
+
+export type GetTenentQueryVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type GetTenentQuery = { __typename?: 'query_root', tenant_by_pk?: Maybe<{ __typename?: 'tenant', id: number, logo: string, name: string, primary_color: string, secondary_color: string, report_template_Id: string, scan_required?: Maybe<boolean>, class_of_business?: Maybe<string> }> };
+
+export type GetConnectedAganciesQueryVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type GetConnectedAganciesQuery = { __typename?: 'query_root', tenant_by_pk?: Maybe<{ __typename?: 'tenant', id: number, broker_agencies: Array<{ __typename?: 'broker_agency', id: number, name: string, address?: Maybe<string>, broker_producers_aggregate: { __typename?: 'broker_producer_aggregate', aggregate?: Maybe<{ __typename?: 'broker_producer_aggregate_fields', count: number }> } }> }> };
+
+export type UpdateTenantMutationVariables = Exact<{
+  id: Scalars['Int'];
+  logo: Scalars['String'];
+  name: Scalars['String'];
+  primary_color: Scalars['String'];
+  report_template_Id: Scalars['String'];
+  secondary_color: Scalars['String'];
+  scan_required?: Maybe<Scalars['Boolean']>;
+}>;
+
+
+export type UpdateTenantMutation = { __typename?: 'mutation_root', update_tenant_by_pk?: Maybe<{ __typename?: 'tenant', id: number }> };
+
+export type CreateTenantMutationVariables = Exact<{
+  logo: Scalars['String'];
+  name: Scalars['String'];
+  primary_color: Scalars['String'];
+  report_template_Id: Scalars['String'];
+  secondary_color: Scalars['String'];
+  scan_required?: Maybe<Scalars['Boolean']>;
+}>;
+
+
+export type CreateTenantMutation = { __typename?: 'mutation_root', insert_tenant_one?: Maybe<{ __typename?: 'tenant', id: number }> };
+
+export type UploadLogoMutationVariables = Exact<{
+  type: Scalars['String'];
+  base64str: Scalars['String'];
+  tenant_id: Scalars['String'];
+}>;
+
+
+export type UploadLogoMutation = { __typename?: 'mutation_root', logoUpload?: Maybe<{ __typename?: 'FileOutput', file_path: string }> };
+
+export type CreateUpdateTenantMutationVariables = Exact<{
+  object?: Maybe<Tenant_Insert_Input>;
+}>;
+
+
+export type CreateUpdateTenantMutation = { __typename?: 'mutation_root', insert_tenant_one?: Maybe<{ __typename?: 'tenant', id: number, name: string }> };
+
+export type CreateTenantAdminMutationVariables = Exact<{
+  input: Array<CreateTenantAdminInput> | CreateTenantAdminInput;
+}>;
+
+
+export type CreateTenantAdminMutation = { __typename?: 'mutation_root', createTenantAdmins?: Maybe<Array<Maybe<{ __typename?: 'CreateTenantAdminOutput', id: any }>>> };
+
+export type TenantAdminListQueryVariables = Exact<{
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Tenant_Admin_Order_By> | Tenant_Admin_Order_By>;
+  tenant_id: Scalars['Int'];
+  name?: Maybe<Scalars['String']>;
+}>;
+
+
+export type TenantAdminListQuery = { __typename?: 'query_root', tenant_admin: Array<{ __typename?: 'tenant_admin', user: { __typename?: 'user', name: string, id: number, created_at: any, email?: Maybe<string> } }>, tenant_admin_aggregate: { __typename?: 'tenant_admin_aggregate', aggregate?: Maybe<{ __typename?: 'tenant_admin_aggregate_fields', count: number }> } };
+
+export type GetTenantAdminDataQueryVariables = Exact<{
+  user_id: Scalars['Int'];
+}>;
+
+
+export type GetTenantAdminDataQuery = { __typename?: 'query_root', tenant_admin: Array<{ __typename?: 'tenant_admin', user: { __typename?: 'user', email?: Maybe<string>, id: number, name: string } }> };
+
+export type TenantUserUpdateMutationVariables = Exact<{
+  id: Scalars['Int'];
+  name: Scalars['String'];
+  email: Scalars['String'];
+}>;
+
+
+export type TenantUserUpdateMutation = { __typename?: 'mutation_root', update_user?: Maybe<{ __typename?: 'user_mutation_response', affected_rows: number }> };
+
+export type GetTenentListQueryVariables = Exact<{
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+}>;
+
+
+export type GetTenentListQuery = { __typename?: 'query_root', tenant: Array<{ __typename?: 'tenant', logo: string, id: number, name: string, broker_agencies_aggregate: { __typename?: 'broker_agency_aggregate', aggregate?: Maybe<{ __typename?: 'broker_agency_aggregate_fields', count: number }> } }>, tenant_aggregate: { __typename?: 'tenant_aggregate', aggregate?: Maybe<{ __typename?: 'tenant_aggregate_fields', count: number }> } };
+
+export type GetTenentListCountQueryVariables = Exact<{
+  name?: Maybe<Scalars['String']>;
+}>;
+
+
+export type GetTenentListCountQuery = { __typename?: 'query_root', tenant_aggregate: { __typename?: 'tenant_aggregate', aggregate?: Maybe<{ __typename?: 'tenant_aggregate_fields', count: number }> } };
+
+export type GetAllTenantsQueryVariables = Exact<{
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Tenant_Order_By> | Tenant_Order_By>;
+  where?: Maybe<Tenant_Bool_Exp>;
+}>;
+
+
+export type GetAllTenantsQuery = { __typename?: 'query_root', tenant: Array<{ __typename?: 'tenant', logo: string, id: number, name: string, broker_agencies_aggregate: { __typename?: 'broker_agency_aggregate', aggregate?: Maybe<{ __typename?: 'broker_agency_aggregate_fields', count: number }> } }>, tenant_aggregate: { __typename?: 'tenant_aggregate', aggregate?: Maybe<{ __typename?: 'tenant_aggregate_fields', count: number }> } };
+
+export type ResetPasswordAsAdminMutationVariables = Exact<{
+  email: Scalars['String'];
+  userAuthId: Scalars['String'];
+}>;
+
+
+export type ResetPasswordAsAdminMutation = { __typename?: 'mutation_root', adminResetPassword?: Maybe<{ __typename?: 'ResetPasswordOutput', message: string }> };
+
+export const ExternalApplicationStageFragmentDoc = gql`
+    fragment ExternalApplicationStage on insurance_application {
+  external_scans(limit: 1, order_by: {updated_at: desc}) {
+    id
+    status
+  }
+}
+    `;
+export const ApplicationBaseFragmentDoc = gql`
+    fragment ApplicationBase on insurance_application {
+  id
+  stage
+  insurance_quote_selection {
+    id
+    quote_id
+  }
+}
+    `;
+export const ProfileFieldsFragmentDoc = gql`
+    fragment ProfileFields on insurance_application {
+  ...ApplicationBase
+  effective_date
+  expiration_date
+  organization_type
+  insured_organization {
+    id
+    name
+    address
+    city
+    state
+    zip
+    insured_organization_contacts(limit: 10) {
+      id
+      name
+      email
+      type
+    }
+  }
+  broker_agency {
+    id
+    name
+  }
+  domain
+  employees
+  industry
+  revenue
+  naics_code
+  rentals_data
+}
+    ${ApplicationBaseFragmentDoc}`;
+export const ApplicationDetailsFragmentDoc = gql`
+    fragment ApplicationDetails on insurance_application {
+  id
+  effective_date
+  expiration_date
+  insured_organization {
+    id
+    name
+    state
+    broker_agency {
+      id
+      name
+    }
+  }
+  insurance_quote_selection {
+    id
+    insurance_policy {
+      id
+      waratah_report
+    }
+  }
+}
+    `;
+export const QuoteFieldsFragmentDoc = gql`
+    fragment QuoteFields on insurance_quote {
+  id
+  deductible
+  commission_percentage
+  base_premium
+  other_deductibles
+  policy_limit
+  premium
+  tax_percentage
+  total_premium
+  fees
+  taxes
+  sub_limits
+}
+    `;
+export const ApplicationQuoteFieldsFragmentDoc = gql`
+    fragment ApplicationQuoteFields on insurance_application {
+  ...ApplicationBase
+  ...ApplicationDetails
+  insurance_quotes(order_by: [{policy_limit: asc}, {deductible: desc}]) {
+    ...QuoteFields
+  }
+}
+    ${ApplicationBaseFragmentDoc}
+${ApplicationDetailsFragmentDoc}
+${QuoteFieldsFragmentDoc}`;
+export const GetUserBrandingDocument = gql`
+    query getUserBranding($email: String) {
+  tenant(
+    where: {broker_agencies: {broker_producers: {user: {email: {_eq: $email}}}}}
+  ) {
+    primary_color
+    secondary_color
+  }
+}
+    `;
+
+/**
+ * __useGetUserBrandingQuery__
+ *
+ * To run a query within a React component, call `useGetUserBrandingQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUserBrandingQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetUserBrandingQuery({
+ *   variables: {
+ *      email: // value for 'email'
+ *   },
+ * });
+ */
+export function useGetUserBrandingQuery(baseOptions?: Apollo.QueryHookOptions<GetUserBrandingQuery, GetUserBrandingQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetUserBrandingQuery, GetUserBrandingQueryVariables>(GetUserBrandingDocument, options);
+      }
+export function useGetUserBrandingLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetUserBrandingQuery, GetUserBrandingQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetUserBrandingQuery, GetUserBrandingQueryVariables>(GetUserBrandingDocument, options);
+        }
+export type GetUserBrandingQueryHookResult = ReturnType<typeof useGetUserBrandingQuery>;
+export type GetUserBrandingLazyQueryHookResult = ReturnType<typeof useGetUserBrandingLazyQuery>;
+export type GetUserBrandingQueryResult = Apollo.QueryResult<GetUserBrandingQuery, GetUserBrandingQueryVariables>;
+export const ForgotPasswordDocument = gql`
+    mutation ForgotPassword($email: String!) {
+  forgotPassword(input: {email: $email}) {
+    message
+  }
+}
+    `;
+export type ForgotPasswordMutationFn = Apollo.MutationFunction<ForgotPasswordMutation, ForgotPasswordMutationVariables>;
+
+/**
+ * __useForgotPasswordMutation__
+ *
+ * To run a mutation, you first call `useForgotPasswordMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useForgotPasswordMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [forgotPasswordMutation, { data, loading, error }] = useForgotPasswordMutation({
+ *   variables: {
+ *      email: // value for 'email'
+ *   },
+ * });
+ */
+export function useForgotPasswordMutation(baseOptions?: Apollo.MutationHookOptions<ForgotPasswordMutation, ForgotPasswordMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ForgotPasswordMutation, ForgotPasswordMutationVariables>(ForgotPasswordDocument, options);
+      }
+export type ForgotPasswordMutationHookResult = ReturnType<typeof useForgotPasswordMutation>;
+export type ForgotPasswordMutationResult = Apollo.MutationResult<ForgotPasswordMutation>;
+export type ForgotPasswordMutationOptions = Apollo.BaseMutationOptions<ForgotPasswordMutation, ForgotPasswordMutationVariables>;
+export const GetBrokerListDocument = gql`
+    query getBrokerList($limit: Int = 10, $offset: Int = 0, $name: String, $tenant_id: Int!) {
+  broker_agency(
+    limit: $limit
+    offset: $offset
+    order_by: {created_at: desc}
+    where: {name: {_ilike: $name}, tenant_id: {_eq: $tenant_id}}
+  ) {
+    name
+    id
+  }
+}
+    `;
+
+/**
+ * __useGetBrokerListQuery__
+ *
+ * To run a query within a React component, call `useGetBrokerListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetBrokerListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetBrokerListQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
+ *      name: // value for 'name'
+ *      tenant_id: // value for 'tenant_id'
+ *   },
+ * });
+ */
+export function useGetBrokerListQuery(baseOptions: Apollo.QueryHookOptions<GetBrokerListQuery, GetBrokerListQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetBrokerListQuery, GetBrokerListQueryVariables>(GetBrokerListDocument, options);
+      }
+export function useGetBrokerListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetBrokerListQuery, GetBrokerListQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetBrokerListQuery, GetBrokerListQueryVariables>(GetBrokerListDocument, options);
+        }
+export type GetBrokerListQueryHookResult = ReturnType<typeof useGetBrokerListQuery>;
+export type GetBrokerListLazyQueryHookResult = ReturnType<typeof useGetBrokerListLazyQuery>;
+export type GetBrokerListQueryResult = Apollo.QueryResult<GetBrokerListQuery, GetBrokerListQueryVariables>;
+export const GetBrokerListCountDocument = gql`
+    query getBrokerListCount($name: String, $tenant_id: Int!) {
+  broker_agency_aggregate(
+    where: {name: {_ilike: $name}, tenant_id: {_eq: $tenant_id}}
+  ) {
+    aggregate {
+      count
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetBrokerListCountQuery__
+ *
+ * To run a query within a React component, call `useGetBrokerListCountQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetBrokerListCountQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetBrokerListCountQuery({
+ *   variables: {
+ *      name: // value for 'name'
+ *      tenant_id: // value for 'tenant_id'
+ *   },
+ * });
+ */
+export function useGetBrokerListCountQuery(baseOptions: Apollo.QueryHookOptions<GetBrokerListCountQuery, GetBrokerListCountQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetBrokerListCountQuery, GetBrokerListCountQueryVariables>(GetBrokerListCountDocument, options);
+      }
+export function useGetBrokerListCountLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetBrokerListCountQuery, GetBrokerListCountQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetBrokerListCountQuery, GetBrokerListCountQueryVariables>(GetBrokerListCountDocument, options);
+        }
+export type GetBrokerListCountQueryHookResult = ReturnType<typeof useGetBrokerListCountQuery>;
+export type GetBrokerListCountLazyQueryHookResult = ReturnType<typeof useGetBrokerListCountLazyQuery>;
+export type GetBrokerListCountQueryResult = Apollo.QueryResult<GetBrokerListCountQuery, GetBrokerListCountQueryVariables>;
+export const InsertBrokerAgencyDocument = gql`
+    mutation insertBrokerAgency($zip: String!, $state: String!, $name: String!, $country: String!, $city: String!, $address: String!, $tenant_id: Int!, $id: Int) {
+  insert_broker_agency_one(
+    object: {address: $address, city: $city, country: $country, name: $name, state: $state, zip: $zip, tenant_id: $tenant_id, id: $id}
+    on_conflict: {constraint: broker_agency_tenant_id_name_key, update_columns: [zip, state, name, country, city, address]}
+  ) {
+    id
+  }
+}
+    `;
+export type InsertBrokerAgencyMutationFn = Apollo.MutationFunction<InsertBrokerAgencyMutation, InsertBrokerAgencyMutationVariables>;
+
+/**
+ * __useInsertBrokerAgencyMutation__
+ *
+ * To run a mutation, you first call `useInsertBrokerAgencyMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useInsertBrokerAgencyMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [insertBrokerAgencyMutation, { data, loading, error }] = useInsertBrokerAgencyMutation({
+ *   variables: {
+ *      zip: // value for 'zip'
+ *      state: // value for 'state'
+ *      name: // value for 'name'
+ *      country: // value for 'country'
+ *      city: // value for 'city'
+ *      address: // value for 'address'
+ *      tenant_id: // value for 'tenant_id'
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useInsertBrokerAgencyMutation(baseOptions?: Apollo.MutationHookOptions<InsertBrokerAgencyMutation, InsertBrokerAgencyMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<InsertBrokerAgencyMutation, InsertBrokerAgencyMutationVariables>(InsertBrokerAgencyDocument, options);
+      }
+export type InsertBrokerAgencyMutationHookResult = ReturnType<typeof useInsertBrokerAgencyMutation>;
+export type InsertBrokerAgencyMutationResult = Apollo.MutationResult<InsertBrokerAgencyMutation>;
+export type InsertBrokerAgencyMutationOptions = Apollo.BaseMutationOptions<InsertBrokerAgencyMutation, InsertBrokerAgencyMutationVariables>;
+export const GetBrokerAgenciesDocument = gql`
+    query getBrokerAgencies($id: Int!, $offset: Int = 0, $limit: Int = 10, $name: String, $order_by: [broker_agency_order_by!] = {}) {
+  tenant_by_pk(id: $id) {
+    id
+    name
+    broker_agencies(
+      offset: $offset
+      limit: $limit
+      order_by: $order_by
+      where: {name: {_ilike: $name}}
+    ) {
+      id
+      name
+      address
+      created_at
+      payment_option
+      broker_producers_aggregate {
+        aggregate {
+          count
+        }
+      }
+    }
+    broker_agencies_aggregate(where: {tenant_id: {_eq: $id}, name: {_ilike: $name}}) {
+      aggregate {
+        count
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetBrokerAgenciesQuery__
+ *
+ * To run a query within a React component, call `useGetBrokerAgenciesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetBrokerAgenciesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetBrokerAgenciesQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *      offset: // value for 'offset'
+ *      limit: // value for 'limit'
+ *      name: // value for 'name'
+ *      order_by: // value for 'order_by'
+ *   },
+ * });
+ */
+export function useGetBrokerAgenciesQuery(baseOptions: Apollo.QueryHookOptions<GetBrokerAgenciesQuery, GetBrokerAgenciesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetBrokerAgenciesQuery, GetBrokerAgenciesQueryVariables>(GetBrokerAgenciesDocument, options);
+      }
+export function useGetBrokerAgenciesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetBrokerAgenciesQuery, GetBrokerAgenciesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetBrokerAgenciesQuery, GetBrokerAgenciesQueryVariables>(GetBrokerAgenciesDocument, options);
+        }
+export type GetBrokerAgenciesQueryHookResult = ReturnType<typeof useGetBrokerAgenciesQuery>;
+export type GetBrokerAgenciesLazyQueryHookResult = ReturnType<typeof useGetBrokerAgenciesLazyQuery>;
+export type GetBrokerAgenciesQueryResult = Apollo.QueryResult<GetBrokerAgenciesQuery, GetBrokerAgenciesQueryVariables>;
+export const UpdateBrokerAgencyMutationDocument = gql`
+    mutation updateBrokerAgencyMutation($id: Int!, $_set: broker_agency_set_input = {}) {
+  update_broker_agency_by_pk(pk_columns: {id: $id}, _set: $_set) {
+    id
+  }
+}
+    `;
+export type UpdateBrokerAgencyMutationMutationFn = Apollo.MutationFunction<UpdateBrokerAgencyMutationMutation, UpdateBrokerAgencyMutationMutationVariables>;
+
+/**
+ * __useUpdateBrokerAgencyMutationMutation__
+ *
+ * To run a mutation, you first call `useUpdateBrokerAgencyMutationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateBrokerAgencyMutationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateBrokerAgencyMutationMutation, { data, loading, error }] = useUpdateBrokerAgencyMutationMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      _set: // value for '_set'
+ *   },
+ * });
+ */
+export function useUpdateBrokerAgencyMutationMutation(baseOptions?: Apollo.MutationHookOptions<UpdateBrokerAgencyMutationMutation, UpdateBrokerAgencyMutationMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateBrokerAgencyMutationMutation, UpdateBrokerAgencyMutationMutationVariables>(UpdateBrokerAgencyMutationDocument, options);
+      }
+export type UpdateBrokerAgencyMutationMutationHookResult = ReturnType<typeof useUpdateBrokerAgencyMutationMutation>;
+export type UpdateBrokerAgencyMutationMutationResult = Apollo.MutationResult<UpdateBrokerAgencyMutationMutation>;
+export type UpdateBrokerAgencyMutationMutationOptions = Apollo.BaseMutationOptions<UpdateBrokerAgencyMutationMutation, UpdateBrokerAgencyMutationMutationVariables>;
+export const GetBrokerAgencyOneDocument = gql`
+    query getBrokerAgencyOne($id: Int!) {
+  broker_agency(where: {id: {_eq: $id}}) {
+    city
+    country
+    address
+    state
+    name
+    zip
+    tenant_id
+    broker_program_id
+    payment_option
+    commission_rate
+    quote_template_id
+    calculate_fee
+    calculate_tax
+  }
+}
+    `;
+
+/**
+ * __useGetBrokerAgencyOneQuery__
+ *
+ * To run a query within a React component, call `useGetBrokerAgencyOneQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetBrokerAgencyOneQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetBrokerAgencyOneQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetBrokerAgencyOneQuery(baseOptions: Apollo.QueryHookOptions<GetBrokerAgencyOneQuery, GetBrokerAgencyOneQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetBrokerAgencyOneQuery, GetBrokerAgencyOneQueryVariables>(GetBrokerAgencyOneDocument, options);
+      }
+export function useGetBrokerAgencyOneLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetBrokerAgencyOneQuery, GetBrokerAgencyOneQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetBrokerAgencyOneQuery, GetBrokerAgencyOneQueryVariables>(GetBrokerAgencyOneDocument, options);
+        }
+export type GetBrokerAgencyOneQueryHookResult = ReturnType<typeof useGetBrokerAgencyOneQuery>;
+export type GetBrokerAgencyOneLazyQueryHookResult = ReturnType<typeof useGetBrokerAgencyOneLazyQuery>;
+export type GetBrokerAgencyOneQueryResult = Apollo.QueryResult<GetBrokerAgencyOneQuery, GetBrokerAgencyOneQueryVariables>;
+export const CreateUpdateBrokerDocument = gql`
+    mutation CreateUpdateBroker($objects: broker_agency_insert_input = {}) {
+  insert_broker_agency_one(
+    object: $objects
+    on_conflict: {constraint: broker_agency_pkey, update_columns: [zip, state, name, country, city, address, broker_program_id, payment_option, commission_rate, quote_template_id, calculate_fee, calculate_tax]}
+  ) {
+    id
+    name
+  }
+}
+    `;
+export type CreateUpdateBrokerMutationFn = Apollo.MutationFunction<CreateUpdateBrokerMutation, CreateUpdateBrokerMutationVariables>;
+
+/**
+ * __useCreateUpdateBrokerMutation__
+ *
+ * To run a mutation, you first call `useCreateUpdateBrokerMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateUpdateBrokerMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createUpdateBrokerMutation, { data, loading, error }] = useCreateUpdateBrokerMutation({
+ *   variables: {
+ *      objects: // value for 'objects'
+ *   },
+ * });
+ */
+export function useCreateUpdateBrokerMutation(baseOptions?: Apollo.MutationHookOptions<CreateUpdateBrokerMutation, CreateUpdateBrokerMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateUpdateBrokerMutation, CreateUpdateBrokerMutationVariables>(CreateUpdateBrokerDocument, options);
+      }
+export type CreateUpdateBrokerMutationHookResult = ReturnType<typeof useCreateUpdateBrokerMutation>;
+export type CreateUpdateBrokerMutationResult = Apollo.MutationResult<CreateUpdateBrokerMutation>;
+export type CreateUpdateBrokerMutationOptions = Apollo.BaseMutationOptions<CreateUpdateBrokerMutation, CreateUpdateBrokerMutationVariables>;
+export const GetConnectedBrokerProducerListDocument = gql`
+    query getConnectedBrokerProducerList($broker_agency_id: Int!) {
+  broker_producer(where: {broker_agency_id: {_eq: $broker_agency_id}}) {
+    user {
+      id
+      email
+      name
+      cognito_status
+    }
+  }
+  broker_agency_by_pk(id: $broker_agency_id) {
+    id
+    name
+    tenant {
+      name
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetConnectedBrokerProducerListQuery__
+ *
+ * To run a query within a React component, call `useGetConnectedBrokerProducerListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetConnectedBrokerProducerListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetConnectedBrokerProducerListQuery({
+ *   variables: {
+ *      broker_agency_id: // value for 'broker_agency_id'
+ *   },
+ * });
+ */
+export function useGetConnectedBrokerProducerListQuery(baseOptions: Apollo.QueryHookOptions<GetConnectedBrokerProducerListQuery, GetConnectedBrokerProducerListQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetConnectedBrokerProducerListQuery, GetConnectedBrokerProducerListQueryVariables>(GetConnectedBrokerProducerListDocument, options);
+      }
+export function useGetConnectedBrokerProducerListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetConnectedBrokerProducerListQuery, GetConnectedBrokerProducerListQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetConnectedBrokerProducerListQuery, GetConnectedBrokerProducerListQueryVariables>(GetConnectedBrokerProducerListDocument, options);
+        }
+export type GetConnectedBrokerProducerListQueryHookResult = ReturnType<typeof useGetConnectedBrokerProducerListQuery>;
+export type GetConnectedBrokerProducerListLazyQueryHookResult = ReturnType<typeof useGetConnectedBrokerProducerListLazyQuery>;
+export type GetConnectedBrokerProducerListQueryResult = Apollo.QueryResult<GetConnectedBrokerProducerListQuery, GetConnectedBrokerProducerListQueryVariables>;
+export const CreateBrokerProducerDocument = gql`
+    mutation createBrokerProducer($input: [CreateBrokerUserInput!]!) {
+  createBrokerUsers(input: $input) {
+    id
+  }
+}
+    `;
+export type CreateBrokerProducerMutationFn = Apollo.MutationFunction<CreateBrokerProducerMutation, CreateBrokerProducerMutationVariables>;
+
+/**
+ * __useCreateBrokerProducerMutation__
+ *
+ * To run a mutation, you first call `useCreateBrokerProducerMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateBrokerProducerMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createBrokerProducerMutation, { data, loading, error }] = useCreateBrokerProducerMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateBrokerProducerMutation(baseOptions?: Apollo.MutationHookOptions<CreateBrokerProducerMutation, CreateBrokerProducerMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateBrokerProducerMutation, CreateBrokerProducerMutationVariables>(CreateBrokerProducerDocument, options);
+      }
+export type CreateBrokerProducerMutationHookResult = ReturnType<typeof useCreateBrokerProducerMutation>;
+export type CreateBrokerProducerMutationResult = Apollo.MutationResult<CreateBrokerProducerMutation>;
+export type CreateBrokerProducerMutationOptions = Apollo.BaseMutationOptions<CreateBrokerProducerMutation, CreateBrokerProducerMutationVariables>;
+export const BrokerProducerUpdateDocument = gql`
+    mutation brokerProducerUpdate($id: Int!, $name: String!, $email: String!, $commission_rate: numeric) {
+  update_user(
+    where: {id: {_eq: $id}, _and: {email: {_eq: $email}}}
+    _set: {name: $name}
+  ) {
+    affected_rows
+  }
+  update_broker_producer(
+    where: {user_id: {_eq: $id}}
+    _set: {commission_rate: $commission_rate}
+  ) {
+    affected_rows
+  }
+}
+    `;
+export type BrokerProducerUpdateMutationFn = Apollo.MutationFunction<BrokerProducerUpdateMutation, BrokerProducerUpdateMutationVariables>;
+
+/**
+ * __useBrokerProducerUpdateMutation__
+ *
+ * To run a mutation, you first call `useBrokerProducerUpdateMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useBrokerProducerUpdateMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [brokerProducerUpdateMutation, { data, loading, error }] = useBrokerProducerUpdateMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      name: // value for 'name'
+ *      email: // value for 'email'
+ *      commission_rate: // value for 'commission_rate'
+ *   },
+ * });
+ */
+export function useBrokerProducerUpdateMutation(baseOptions?: Apollo.MutationHookOptions<BrokerProducerUpdateMutation, BrokerProducerUpdateMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<BrokerProducerUpdateMutation, BrokerProducerUpdateMutationVariables>(BrokerProducerUpdateDocument, options);
+      }
+export type BrokerProducerUpdateMutationHookResult = ReturnType<typeof useBrokerProducerUpdateMutation>;
+export type BrokerProducerUpdateMutationResult = Apollo.MutationResult<BrokerProducerUpdateMutation>;
+export type BrokerProducerUpdateMutationOptions = Apollo.BaseMutationOptions<BrokerProducerUpdateMutation, BrokerProducerUpdateMutationVariables>;
+export const GetBrokerProducerDocument = gql`
+    query getBrokerProducer($userId: Int!) {
+  broker_producer(where: {user_id: {_eq: $userId}}) {
+    user {
+      email
+      name
+      id
+    }
+    user_id
+    commission_rate
+  }
+}
+    `;
+
+/**
+ * __useGetBrokerProducerQuery__
+ *
+ * To run a query within a React component, call `useGetBrokerProducerQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetBrokerProducerQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetBrokerProducerQuery({
+ *   variables: {
+ *      userId: // value for 'userId'
+ *   },
+ * });
+ */
+export function useGetBrokerProducerQuery(baseOptions: Apollo.QueryHookOptions<GetBrokerProducerQuery, GetBrokerProducerQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetBrokerProducerQuery, GetBrokerProducerQueryVariables>(GetBrokerProducerDocument, options);
+      }
+export function useGetBrokerProducerLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetBrokerProducerQuery, GetBrokerProducerQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetBrokerProducerQuery, GetBrokerProducerQueryVariables>(GetBrokerProducerDocument, options);
+        }
+export type GetBrokerProducerQueryHookResult = ReturnType<typeof useGetBrokerProducerQuery>;
+export type GetBrokerProducerLazyQueryHookResult = ReturnType<typeof useGetBrokerProducerLazyQuery>;
+export type GetBrokerProducerQueryResult = Apollo.QueryResult<GetBrokerProducerQuery, GetBrokerProducerQueryVariables>;
+export const GetBrokerProducerListDocument = gql`
+    query getBrokerProducerList($broker_agency_id: Int!, $offset: Int = 0, $limit: Int = 10, $name: String!, $order_by: [broker_producer_order_by!] = {}) {
+  broker_producer(
+    where: {broker_agency_id: {_eq: $broker_agency_id}, _and: {user: {name: {_ilike: $name}}}}
+    offset: $offset
+    limit: $limit
+    order_by: $order_by
+  ) {
+    user {
+      id
+      auth0_id
+      email
+      name
+      created_at
+      cognito_status
+      user_password_resets(limit: 1, order_by: {id: desc}) {
+        created_at
+        requested_user {
+          name
+        }
+      }
+    }
+    commission_rate
+  }
+  broker_producer_aggregate(
+    where: {broker_agency_id: {_eq: $broker_agency_id}, _and: {user: {name: {_ilike: $name}}}}
+  ) {
+    aggregate {
+      count
+    }
+  }
+  broker_agency_by_pk(id: $broker_agency_id) {
+    id
+    name
+    tenant {
+      name
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetBrokerProducerListQuery__
+ *
+ * To run a query within a React component, call `useGetBrokerProducerListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetBrokerProducerListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetBrokerProducerListQuery({
+ *   variables: {
+ *      broker_agency_id: // value for 'broker_agency_id'
+ *      offset: // value for 'offset'
+ *      limit: // value for 'limit'
+ *      name: // value for 'name'
+ *      order_by: // value for 'order_by'
+ *   },
+ * });
+ */
+export function useGetBrokerProducerListQuery(baseOptions: Apollo.QueryHookOptions<GetBrokerProducerListQuery, GetBrokerProducerListQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetBrokerProducerListQuery, GetBrokerProducerListQueryVariables>(GetBrokerProducerListDocument, options);
+      }
+export function useGetBrokerProducerListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetBrokerProducerListQuery, GetBrokerProducerListQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetBrokerProducerListQuery, GetBrokerProducerListQueryVariables>(GetBrokerProducerListDocument, options);
+        }
+export type GetBrokerProducerListQueryHookResult = ReturnType<typeof useGetBrokerProducerListQuery>;
+export type GetBrokerProducerListLazyQueryHookResult = ReturnType<typeof useGetBrokerProducerListLazyQuery>;
+export type GetBrokerProducerListQueryResult = Apollo.QueryResult<GetBrokerProducerListQuery, GetBrokerProducerListQueryVariables>;
+export const UpdateUserStatusDocument = gql`
+    mutation updateUserStatus($userAuthId: String!, $status: user_status_enum!) {
+  updateUserStatus(input: {status: $status, userAuthId: $userAuthId}) {
+    message
+  }
+}
+    `;
+export type UpdateUserStatusMutationFn = Apollo.MutationFunction<UpdateUserStatusMutation, UpdateUserStatusMutationVariables>;
+
+/**
+ * __useUpdateUserStatusMutation__
+ *
+ * To run a mutation, you first call `useUpdateUserStatusMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateUserStatusMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateUserStatusMutation, { data, loading, error }] = useUpdateUserStatusMutation({
+ *   variables: {
+ *      userAuthId: // value for 'userAuthId'
+ *      status: // value for 'status'
+ *   },
+ * });
+ */
+export function useUpdateUserStatusMutation(baseOptions?: Apollo.MutationHookOptions<UpdateUserStatusMutation, UpdateUserStatusMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateUserStatusMutation, UpdateUserStatusMutationVariables>(UpdateUserStatusDocument, options);
+      }
+export type UpdateUserStatusMutationHookResult = ReturnType<typeof useUpdateUserStatusMutation>;
+export type UpdateUserStatusMutationResult = Apollo.MutationResult<UpdateUserStatusMutation>;
+export type UpdateUserStatusMutationOptions = Apollo.BaseMutationOptions<UpdateUserStatusMutation, UpdateUserStatusMutationVariables>;
+export const ResetPasswordDocument = gql`
+    mutation resetPassword($email: String!, $userAuthId: String!) {
+  adminResetPassword(input: {email: $email, userAuthId: $userAuthId}) {
+    message
+  }
+}
+    `;
+export type ResetPasswordMutationFn = Apollo.MutationFunction<ResetPasswordMutation, ResetPasswordMutationVariables>;
+
+/**
+ * __useResetPasswordMutation__
+ *
+ * To run a mutation, you first call `useResetPasswordMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useResetPasswordMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [resetPasswordMutation, { data, loading, error }] = useResetPasswordMutation({
+ *   variables: {
+ *      email: // value for 'email'
+ *      userAuthId: // value for 'userAuthId'
+ *   },
+ * });
+ */
+export function useResetPasswordMutation(baseOptions?: Apollo.MutationHookOptions<ResetPasswordMutation, ResetPasswordMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ResetPasswordMutation, ResetPasswordMutationVariables>(ResetPasswordDocument, options);
+      }
+export type ResetPasswordMutationHookResult = ReturnType<typeof useResetPasswordMutation>;
+export type ResetPasswordMutationResult = Apollo.MutationResult<ResetPasswordMutation>;
+export type ResetPasswordMutationOptions = Apollo.BaseMutationOptions<ResetPasswordMutation, ResetPasswordMutationVariables>;
+export const ApplicationStageDocument = gql`
+    query applicationStage($id: uuid!) {
+  insurance_application_by_pk(id: $id) {
+    ...ApplicationBase
+    ...ApplicationDetails
+    ...ExternalApplicationStage
+  }
+}
+    ${ApplicationBaseFragmentDoc}
+${ApplicationDetailsFragmentDoc}
+${ExternalApplicationStageFragmentDoc}`;
+
+/**
+ * __useApplicationStageQuery__
+ *
+ * To run a query within a React component, call `useApplicationStageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useApplicationStageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useApplicationStageQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useApplicationStageQuery(baseOptions: Apollo.QueryHookOptions<ApplicationStageQuery, ApplicationStageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ApplicationStageQuery, ApplicationStageQueryVariables>(ApplicationStageDocument, options);
+      }
+export function useApplicationStageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ApplicationStageQuery, ApplicationStageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ApplicationStageQuery, ApplicationStageQueryVariables>(ApplicationStageDocument, options);
+        }
+export type ApplicationStageQueryHookResult = ReturnType<typeof useApplicationStageQuery>;
+export type ApplicationStageLazyQueryHookResult = ReturnType<typeof useApplicationStageLazyQuery>;
+export type ApplicationStageQueryResult = Apollo.QueryResult<ApplicationStageQuery, ApplicationStageQueryVariables>;
+export const ConnectedInsuaranceApplicationsDocument = gql`
+    query connectedInsuaranceApplications($id: uuid) {
+  insurance_application(
+    where: {insured_organization: {insurance_applications: {id: {_eq: $id}}}}
+    order_by: {idx: desc}
+  ) {
+    id
+    effective_date
+    expiration_date
+  }
+}
+    `;
+
+/**
+ * __useConnectedInsuaranceApplicationsQuery__
+ *
+ * To run a query within a React component, call `useConnectedInsuaranceApplicationsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useConnectedInsuaranceApplicationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useConnectedInsuaranceApplicationsQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useConnectedInsuaranceApplicationsQuery(baseOptions?: Apollo.QueryHookOptions<ConnectedInsuaranceApplicationsQuery, ConnectedInsuaranceApplicationsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ConnectedInsuaranceApplicationsQuery, ConnectedInsuaranceApplicationsQueryVariables>(ConnectedInsuaranceApplicationsDocument, options);
+      }
+export function useConnectedInsuaranceApplicationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ConnectedInsuaranceApplicationsQuery, ConnectedInsuaranceApplicationsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ConnectedInsuaranceApplicationsQuery, ConnectedInsuaranceApplicationsQueryVariables>(ConnectedInsuaranceApplicationsDocument, options);
+        }
+export type ConnectedInsuaranceApplicationsQueryHookResult = ReturnType<typeof useConnectedInsuaranceApplicationsQuery>;
+export type ConnectedInsuaranceApplicationsLazyQueryHookResult = ReturnType<typeof useConnectedInsuaranceApplicationsLazyQuery>;
+export type ConnectedInsuaranceApplicationsQueryResult = Apollo.QueryResult<ConnectedInsuaranceApplicationsQuery, ConnectedInsuaranceApplicationsQueryVariables>;
+export const GetScanStatusDocument = gql`
+    subscription getScanStatus($id: uuid!) {
+  external_scan(
+    limit: 1
+    order_by: {updated_at: desc}
+    where: {application_id: {_eq: $id}}
+  ) {
+    id
+    risk_score
+    scan_result
+    status
+    external_id
+  }
+}
+    `;
+
+/**
+ * __useGetScanStatusSubscription__
+ *
+ * To run a query within a React component, call `useGetScanStatusSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useGetScanStatusSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetScanStatusSubscription({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetScanStatusSubscription(baseOptions: Apollo.SubscriptionHookOptions<GetScanStatusSubscription, GetScanStatusSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<GetScanStatusSubscription, GetScanStatusSubscriptionVariables>(GetScanStatusDocument, options);
+      }
+export type GetScanStatusSubscriptionHookResult = ReturnType<typeof useGetScanStatusSubscription>;
+export type GetScanStatusSubscriptionResult = Apollo.SubscriptionResult<GetScanStatusSubscription>;
+export const GetScanStatusQDocument = gql`
+    query getScanStatusQ($id: uuid!) {
+  external_scan(
+    limit: 1
+    order_by: {updated_at: desc}
+    where: {application_id: {_eq: $id}}
+  ) {
+    id
+    risk_score
+    scan_result
+    status
+    external_id
+  }
+}
+    `;
+
+/**
+ * __useGetScanStatusQQuery__
+ *
+ * To run a query within a React component, call `useGetScanStatusQQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetScanStatusQQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetScanStatusQQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetScanStatusQQuery(baseOptions: Apollo.QueryHookOptions<GetScanStatusQQuery, GetScanStatusQQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetScanStatusQQuery, GetScanStatusQQueryVariables>(GetScanStatusQDocument, options);
+      }
+export function useGetScanStatusQLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetScanStatusQQuery, GetScanStatusQQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetScanStatusQQuery, GetScanStatusQQueryVariables>(GetScanStatusQDocument, options);
+        }
+export type GetScanStatusQQueryHookResult = ReturnType<typeof useGetScanStatusQQuery>;
+export type GetScanStatusQLazyQueryHookResult = ReturnType<typeof useGetScanStatusQLazyQuery>;
+export type GetScanStatusQQueryResult = Apollo.QueryResult<GetScanStatusQQuery, GetScanStatusQQueryVariables>;
+export const GetIpfsStatusDocument = gql`
+    subscription getIpfsStatus($applicationId: uuid!) {
+  insurance_policy(
+    where: {insurance_quote_selection: {application_id: {_eq: $applicationId}}}
+  ) {
+    id
+    policy_number
+    ipfs_report
+    stage
+    electronic_signature_url
+    ipfs_quote_data
+    waratah_report
+  }
+}
+    `;
+
+/**
+ * __useGetIpfsStatusSubscription__
+ *
+ * To run a query within a React component, call `useGetIpfsStatusSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useGetIpfsStatusSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetIpfsStatusSubscription({
+ *   variables: {
+ *      applicationId: // value for 'applicationId'
+ *   },
+ * });
+ */
+export function useGetIpfsStatusSubscription(baseOptions: Apollo.SubscriptionHookOptions<GetIpfsStatusSubscription, GetIpfsStatusSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<GetIpfsStatusSubscription, GetIpfsStatusSubscriptionVariables>(GetIpfsStatusDocument, options);
+      }
+export type GetIpfsStatusSubscriptionHookResult = ReturnType<typeof useGetIpfsStatusSubscription>;
+export type GetIpfsStatusSubscriptionResult = Apollo.SubscriptionResult<GetIpfsStatusSubscription>;
+export const GetIpfsStatusQDocument = gql`
+    query getIpfsStatusQ($applicationId: uuid!) {
+  insurance_policy(
+    where: {insurance_quote_selection: {application_id: {_eq: $applicationId}}}
+  ) {
+    id
+    policy_number
+    ipfs_report
+    stage
+    electronic_signature_url
+    ipfs_quote_data
+    waratah_report
+  }
+}
+    `;
+
+/**
+ * __useGetIpfsStatusQQuery__
+ *
+ * To run a query within a React component, call `useGetIpfsStatusQQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetIpfsStatusQQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetIpfsStatusQQuery({
+ *   variables: {
+ *      applicationId: // value for 'applicationId'
+ *   },
+ * });
+ */
+export function useGetIpfsStatusQQuery(baseOptions: Apollo.QueryHookOptions<GetIpfsStatusQQuery, GetIpfsStatusQQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetIpfsStatusQQuery, GetIpfsStatusQQueryVariables>(GetIpfsStatusQDocument, options);
+      }
+export function useGetIpfsStatusQLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetIpfsStatusQQuery, GetIpfsStatusQQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetIpfsStatusQQuery, GetIpfsStatusQQueryVariables>(GetIpfsStatusQDocument, options);
+        }
+export type GetIpfsStatusQQueryHookResult = ReturnType<typeof useGetIpfsStatusQQuery>;
+export type GetIpfsStatusQLazyQueryHookResult = ReturnType<typeof useGetIpfsStatusQLazyQuery>;
+export type GetIpfsStatusQQueryResult = Apollo.QueryResult<GetIpfsStatusQQuery, GetIpfsStatusQQueryVariables>;
+export const SummaryInsuranceApplicationDocument = gql`
+    query summaryInsuranceApplication($id: uuid!) {
+  insurance_application_by_pk(id: $id) {
+    id
+    domain
+    effective_date
+    expiration_date
+    revenue
+    industry
+    insured_organization {
+      id
+      address
+      city
+      state
+      zip
+      name
+    }
+    insurance_quote_selection {
+      insurance_quote {
+        id
+        base_premium
+        commission_percentage
+        deductible
+        other_deductibles
+        premium
+        policy_limit
+        tax_percentage
+        total_premium
+        fees
+        taxes
+      }
+      insurance_policy {
+        id
+        long_policy_number
+        policy_number
+        canary_token
+      }
+      id
+    }
+    employees
+    external_scans(limit: 1, order_by: {updated_at: desc}) {
+      id
+      risk_score
+      scan_result
+      external_id
+    }
+    broker_agency {
+      id
+      payment_option
+    }
+  }
+}
+    `;
+
+/**
+ * __useSummaryInsuranceApplicationQuery__
+ *
+ * To run a query within a React component, call `useSummaryInsuranceApplicationQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSummaryInsuranceApplicationQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSummaryInsuranceApplicationQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useSummaryInsuranceApplicationQuery(baseOptions: Apollo.QueryHookOptions<SummaryInsuranceApplicationQuery, SummaryInsuranceApplicationQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SummaryInsuranceApplicationQuery, SummaryInsuranceApplicationQueryVariables>(SummaryInsuranceApplicationDocument, options);
+      }
+export function useSummaryInsuranceApplicationLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SummaryInsuranceApplicationQuery, SummaryInsuranceApplicationQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SummaryInsuranceApplicationQuery, SummaryInsuranceApplicationQueryVariables>(SummaryInsuranceApplicationDocument, options);
+        }
+export type SummaryInsuranceApplicationQueryHookResult = ReturnType<typeof useSummaryInsuranceApplicationQuery>;
+export type SummaryInsuranceApplicationLazyQueryHookResult = ReturnType<typeof useSummaryInsuranceApplicationLazyQuery>;
+export type SummaryInsuranceApplicationQueryResult = Apollo.QueryResult<SummaryInsuranceApplicationQuery, SummaryInsuranceApplicationQueryVariables>;
+export const WatchSummaryInsuranceApplicationDocument = gql`
+    subscription watchSummaryInsuranceApplication($id: uuid!) {
+  insurance_application_by_pk(id: $id) {
+    id
+    domain
+    effective_date
+    expiration_date
+    revenue
+    industry
+    insured_organization {
+      id
+      address
+      city
+      state
+      zip
+      name
+    }
+    insurance_quote_selection {
+      insurance_quote {
+        id
+        base_premium
+        commission_percentage
+        deductible
+        other_deductibles
+        premium
+        policy_limit
+        tax_percentage
+        total_premium
+        fees
+        taxes
+      }
+      insurance_policy {
+        id
+        long_policy_number
+        policy_number
+        canary_token
+      }
+      id
+    }
+    employees
+    external_scans(limit: 1, order_by: {updated_at: desc}) {
+      id
+      risk_score
+      scan_result
+      external_id
+    }
+    broker_agency {
+      id
+      payment_option
+    }
+  }
+}
+    `;
+
+/**
+ * __useWatchSummaryInsuranceApplicationSubscription__
+ *
+ * To run a query within a React component, call `useWatchSummaryInsuranceApplicationSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useWatchSummaryInsuranceApplicationSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useWatchSummaryInsuranceApplicationSubscription({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useWatchSummaryInsuranceApplicationSubscription(baseOptions: Apollo.SubscriptionHookOptions<WatchSummaryInsuranceApplicationSubscription, WatchSummaryInsuranceApplicationSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<WatchSummaryInsuranceApplicationSubscription, WatchSummaryInsuranceApplicationSubscriptionVariables>(WatchSummaryInsuranceApplicationDocument, options);
+      }
+export type WatchSummaryInsuranceApplicationSubscriptionHookResult = ReturnType<typeof useWatchSummaryInsuranceApplicationSubscription>;
+export type WatchSummaryInsuranceApplicationSubscriptionResult = Apollo.SubscriptionResult<WatchSummaryInsuranceApplicationSubscription>;
+export const BindApplicationDocument = gql`
+    mutation bindApplication($applicationId: uuid!, $insuranceQuoteSelectionId: Int!, $brokerEmail: String!, $payer: String!) {
+  handleIpfsIntegration(
+    applicationId: $applicationId
+    insuranceQuoteSelectionId: $insuranceQuoteSelectionId
+    brokerEmail: $brokerEmail
+    payer: $payer
+  ) {
+    id
+  }
+}
+    `;
+export type BindApplicationMutationFn = Apollo.MutationFunction<BindApplicationMutation, BindApplicationMutationVariables>;
+
+/**
+ * __useBindApplicationMutation__
+ *
+ * To run a mutation, you first call `useBindApplicationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useBindApplicationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [bindApplicationMutation, { data, loading, error }] = useBindApplicationMutation({
+ *   variables: {
+ *      applicationId: // value for 'applicationId'
+ *      insuranceQuoteSelectionId: // value for 'insuranceQuoteSelectionId'
+ *      brokerEmail: // value for 'brokerEmail'
+ *      payer: // value for 'payer'
+ *   },
+ * });
+ */
+export function useBindApplicationMutation(baseOptions?: Apollo.MutationHookOptions<BindApplicationMutation, BindApplicationMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<BindApplicationMutation, BindApplicationMutationVariables>(BindApplicationDocument, options);
+      }
+export type BindApplicationMutationHookResult = ReturnType<typeof useBindApplicationMutation>;
+export type BindApplicationMutationResult = Apollo.MutationResult<BindApplicationMutation>;
+export type BindApplicationMutationOptions = Apollo.BaseMutationOptions<BindApplicationMutation, BindApplicationMutationVariables>;
+export const InsuranceArtifactDocument = gql`
+    subscription insuranceArtifact($applicationId: uuid!) {
+  insurance_application_artifact: latest_app_artifacts_quote_policy(
+    where: {application_id: {_eq: $applicationId}}
+  ) {
+    application_id
+    created_at
+    file_type
+    file_uri
+    id
+    updated_at
+  }
+}
+    `;
+
+/**
+ * __useInsuranceArtifactSubscription__
+ *
+ * To run a query within a React component, call `useInsuranceArtifactSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useInsuranceArtifactSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useInsuranceArtifactSubscription({
+ *   variables: {
+ *      applicationId: // value for 'applicationId'
+ *   },
+ * });
+ */
+export function useInsuranceArtifactSubscription(baseOptions: Apollo.SubscriptionHookOptions<InsuranceArtifactSubscription, InsuranceArtifactSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<InsuranceArtifactSubscription, InsuranceArtifactSubscriptionVariables>(InsuranceArtifactDocument, options);
+      }
+export type InsuranceArtifactSubscriptionHookResult = ReturnType<typeof useInsuranceArtifactSubscription>;
+export type InsuranceArtifactSubscriptionResult = Apollo.SubscriptionResult<InsuranceArtifactSubscription>;
+export const GetIpfsFileDocument = gql`
+    query getIpfsFile($filename: String!) {
+  getIpfsFile(filename: $filename) {
+    filedata
+  }
+}
+    `;
+
+/**
+ * __useGetIpfsFileQuery__
+ *
+ * To run a query within a React component, call `useGetIpfsFileQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetIpfsFileQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetIpfsFileQuery({
+ *   variables: {
+ *      filename: // value for 'filename'
+ *   },
+ * });
+ */
+export function useGetIpfsFileQuery(baseOptions: Apollo.QueryHookOptions<GetIpfsFileQuery, GetIpfsFileQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetIpfsFileQuery, GetIpfsFileQueryVariables>(GetIpfsFileDocument, options);
+      }
+export function useGetIpfsFileLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetIpfsFileQuery, GetIpfsFileQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetIpfsFileQuery, GetIpfsFileQueryVariables>(GetIpfsFileDocument, options);
+        }
+export type GetIpfsFileQueryHookResult = ReturnType<typeof useGetIpfsFileQuery>;
+export type GetIpfsFileLazyQueryHookResult = ReturnType<typeof useGetIpfsFileLazyQuery>;
+export type GetIpfsFileQueryResult = Apollo.QueryResult<GetIpfsFileQuery, GetIpfsFileQueryVariables>;
+export const GetApplicationPaymentDataQDocument = gql`
+    query getApplicationPaymentDataQ($id: uuid!) {
+  insurance_policy(
+    where: {insurance_quote_selection: {application_id: {_eq: $id}}}
+  ) {
+    id
+    agent_signed
+    insured_signed
+    payment_collected
+    policy_number
+    long_policy_number
+    canary_token
+    insurance_quote_selection {
+      insurance_application {
+        id
+        stage
+      }
+    }
+    waratah_report
+  }
+}
+    `;
+
+/**
+ * __useGetApplicationPaymentDataQQuery__
+ *
+ * To run a query within a React component, call `useGetApplicationPaymentDataQQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetApplicationPaymentDataQQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetApplicationPaymentDataQQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetApplicationPaymentDataQQuery(baseOptions: Apollo.QueryHookOptions<GetApplicationPaymentDataQQuery, GetApplicationPaymentDataQQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetApplicationPaymentDataQQuery, GetApplicationPaymentDataQQueryVariables>(GetApplicationPaymentDataQDocument, options);
+      }
+export function useGetApplicationPaymentDataQLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetApplicationPaymentDataQQuery, GetApplicationPaymentDataQQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetApplicationPaymentDataQQuery, GetApplicationPaymentDataQQueryVariables>(GetApplicationPaymentDataQDocument, options);
+        }
+export type GetApplicationPaymentDataQQueryHookResult = ReturnType<typeof useGetApplicationPaymentDataQQuery>;
+export type GetApplicationPaymentDataQLazyQueryHookResult = ReturnType<typeof useGetApplicationPaymentDataQLazyQuery>;
+export type GetApplicationPaymentDataQQueryResult = Apollo.QueryResult<GetApplicationPaymentDataQQuery, GetApplicationPaymentDataQQueryVariables>;
+export const GetApplicationPaymentDataDocument = gql`
+    subscription getApplicationPaymentData($id: uuid!) {
+  insurance_policy(
+    where: {insurance_quote_selection: {application_id: {_eq: $id}}}
+  ) {
+    id
+    agent_signed
+    insured_signed
+    payment_collected
+    policy_number
+    long_policy_number
+    canary_token
+    insurance_quote_selection {
+      id
+      insurance_application {
+        id
+        stage
+      }
+    }
+    waratah_report
+  }
+}
+    `;
+
+/**
+ * __useGetApplicationPaymentDataSubscription__
+ *
+ * To run a query within a React component, call `useGetApplicationPaymentDataSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useGetApplicationPaymentDataSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetApplicationPaymentDataSubscription({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetApplicationPaymentDataSubscription(baseOptions: Apollo.SubscriptionHookOptions<GetApplicationPaymentDataSubscription, GetApplicationPaymentDataSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<GetApplicationPaymentDataSubscription, GetApplicationPaymentDataSubscriptionVariables>(GetApplicationPaymentDataDocument, options);
+      }
+export type GetApplicationPaymentDataSubscriptionHookResult = ReturnType<typeof useGetApplicationPaymentDataSubscription>;
+export type GetApplicationPaymentDataSubscriptionResult = Apollo.SubscriptionResult<GetApplicationPaymentDataSubscription>;
+export const AgentBindApplicationDocument = gql`
+    mutation agentBindApplication($applicationId: uuid!, $insuranceQuoteSelectionId: String!) {
+  handleAgentBind(
+    applicationId: $applicationId
+    insuranceQuoteSelectionId: $insuranceQuoteSelectionId
+  ) {
+    id
+  }
+}
+    `;
+export type AgentBindApplicationMutationFn = Apollo.MutationFunction<AgentBindApplicationMutation, AgentBindApplicationMutationVariables>;
+
+/**
+ * __useAgentBindApplicationMutation__
+ *
+ * To run a mutation, you first call `useAgentBindApplicationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAgentBindApplicationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [agentBindApplicationMutation, { data, loading, error }] = useAgentBindApplicationMutation({
+ *   variables: {
+ *      applicationId: // value for 'applicationId'
+ *      insuranceQuoteSelectionId: // value for 'insuranceQuoteSelectionId'
+ *   },
+ * });
+ */
+export function useAgentBindApplicationMutation(baseOptions?: Apollo.MutationHookOptions<AgentBindApplicationMutation, AgentBindApplicationMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AgentBindApplicationMutation, AgentBindApplicationMutationVariables>(AgentBindApplicationDocument, options);
+      }
+export type AgentBindApplicationMutationHookResult = ReturnType<typeof useAgentBindApplicationMutation>;
+export type AgentBindApplicationMutationResult = Apollo.MutationResult<AgentBindApplicationMutation>;
+export type AgentBindApplicationMutationOptions = Apollo.BaseMutationOptions<AgentBindApplicationMutation, AgentBindApplicationMutationVariables>;
+export const ApplicationProfileDocument = gql`
+    query applicationProfile($id: uuid!) {
+  insurance_application_by_pk(id: $id) {
+    ...ProfileFields
+  }
+}
+    ${ProfileFieldsFragmentDoc}`;
+
+/**
+ * __useApplicationProfileQuery__
+ *
+ * To run a query within a React component, call `useApplicationProfileQuery` and pass it any options that fit your needs.
+ * When your component renders, `useApplicationProfileQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useApplicationProfileQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useApplicationProfileQuery(baseOptions: Apollo.QueryHookOptions<ApplicationProfileQuery, ApplicationProfileQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ApplicationProfileQuery, ApplicationProfileQueryVariables>(ApplicationProfileDocument, options);
+      }
+export function useApplicationProfileLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ApplicationProfileQuery, ApplicationProfileQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ApplicationProfileQuery, ApplicationProfileQueryVariables>(ApplicationProfileDocument, options);
+        }
+export type ApplicationProfileQueryHookResult = ReturnType<typeof useApplicationProfileQuery>;
+export type ApplicationProfileLazyQueryHookResult = ReturnType<typeof useApplicationProfileLazyQuery>;
+export type ApplicationProfileQueryResult = Apollo.QueryResult<ApplicationProfileQuery, ApplicationProfileQueryVariables>;
+export const GetBrokerAgencyListDocument = gql`
+    query getBrokerAgencyList {
+  broker_agency {
+    id
+    name
+  }
+}
+    `;
+
+/**
+ * __useGetBrokerAgencyListQuery__
+ *
+ * To run a query within a React component, call `useGetBrokerAgencyListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetBrokerAgencyListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetBrokerAgencyListQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetBrokerAgencyListQuery(baseOptions?: Apollo.QueryHookOptions<GetBrokerAgencyListQuery, GetBrokerAgencyListQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetBrokerAgencyListQuery, GetBrokerAgencyListQueryVariables>(GetBrokerAgencyListDocument, options);
+      }
+export function useGetBrokerAgencyListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetBrokerAgencyListQuery, GetBrokerAgencyListQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetBrokerAgencyListQuery, GetBrokerAgencyListQueryVariables>(GetBrokerAgencyListDocument, options);
+        }
+export type GetBrokerAgencyListQueryHookResult = ReturnType<typeof useGetBrokerAgencyListQuery>;
+export type GetBrokerAgencyListLazyQueryHookResult = ReturnType<typeof useGetBrokerAgencyListLazyQuery>;
+export type GetBrokerAgencyListQueryResult = Apollo.QueryResult<GetBrokerAgencyListQuery, GetBrokerAgencyListQueryVariables>;
+export const CreateInsuredApplicationDocument = gql`
+    mutation createInsuredApplication($object: UIInsuredApplicationInput!) {
+  createInsuredApplicationFromUI(object: $object) {
+    id
+    created_organization {
+      insurance_applications(order_by: {idx: desc}, limit: 1) {
+        id
+      }
+    }
+  }
+}
+    `;
+export type CreateInsuredApplicationMutationFn = Apollo.MutationFunction<CreateInsuredApplicationMutation, CreateInsuredApplicationMutationVariables>;
+
+/**
+ * __useCreateInsuredApplicationMutation__
+ *
+ * To run a mutation, you first call `useCreateInsuredApplicationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateInsuredApplicationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createInsuredApplicationMutation, { data, loading, error }] = useCreateInsuredApplicationMutation({
+ *   variables: {
+ *      object: // value for 'object'
+ *   },
+ * });
+ */
+export function useCreateInsuredApplicationMutation(baseOptions?: Apollo.MutationHookOptions<CreateInsuredApplicationMutation, CreateInsuredApplicationMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateInsuredApplicationMutation, CreateInsuredApplicationMutationVariables>(CreateInsuredApplicationDocument, options);
+      }
+export type CreateInsuredApplicationMutationHookResult = ReturnType<typeof useCreateInsuredApplicationMutation>;
+export type CreateInsuredApplicationMutationResult = Apollo.MutationResult<CreateInsuredApplicationMutation>;
+export type CreateInsuredApplicationMutationOptions = Apollo.BaseMutationOptions<CreateInsuredApplicationMutation, CreateInsuredApplicationMutationVariables>;
+export const GetIndustryDataDocument = gql`
+    query getIndustryData {
+  organization_industry(distinct_on: industry, where: {status: {_eq: "enabled"}}) {
+    id
+    industry
+    naics_codes(limit: 1) {
+      id
+      naics
+    }
+    status
+  }
+}
+    `;
+
+/**
+ * __useGetIndustryDataQuery__
+ *
+ * To run a query within a React component, call `useGetIndustryDataQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetIndustryDataQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetIndustryDataQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetIndustryDataQuery(baseOptions?: Apollo.QueryHookOptions<GetIndustryDataQuery, GetIndustryDataQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetIndustryDataQuery, GetIndustryDataQueryVariables>(GetIndustryDataDocument, options);
+      }
+export function useGetIndustryDataLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetIndustryDataQuery, GetIndustryDataQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetIndustryDataQuery, GetIndustryDataQueryVariables>(GetIndustryDataDocument, options);
+        }
+export type GetIndustryDataQueryHookResult = ReturnType<typeof useGetIndustryDataQuery>;
+export type GetIndustryDataLazyQueryHookResult = ReturnType<typeof useGetIndustryDataLazyQuery>;
+export type GetIndustryDataQueryResult = Apollo.QueryResult<GetIndustryDataQuery, GetIndustryDataQueryVariables>;
+export const GetImsCompanyBusinessTypeDataDocument = gql`
+    query getImsCompanyBusinessTypeData {
+  ims_company_business_type(order_by: {dnb_desc: asc}) {
+    dnb_id
+    dnb_desc
+    ims_desc
+    ims_id
+  }
+}
+    `;
+
+/**
+ * __useGetImsCompanyBusinessTypeDataQuery__
+ *
+ * To run a query within a React component, call `useGetImsCompanyBusinessTypeDataQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetImsCompanyBusinessTypeDataQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetImsCompanyBusinessTypeDataQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetImsCompanyBusinessTypeDataQuery(baseOptions?: Apollo.QueryHookOptions<GetImsCompanyBusinessTypeDataQuery, GetImsCompanyBusinessTypeDataQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetImsCompanyBusinessTypeDataQuery, GetImsCompanyBusinessTypeDataQueryVariables>(GetImsCompanyBusinessTypeDataDocument, options);
+      }
+export function useGetImsCompanyBusinessTypeDataLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetImsCompanyBusinessTypeDataQuery, GetImsCompanyBusinessTypeDataQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetImsCompanyBusinessTypeDataQuery, GetImsCompanyBusinessTypeDataQueryVariables>(GetImsCompanyBusinessTypeDataDocument, options);
+        }
+export type GetImsCompanyBusinessTypeDataQueryHookResult = ReturnType<typeof useGetImsCompanyBusinessTypeDataQuery>;
+export type GetImsCompanyBusinessTypeDataLazyQueryHookResult = ReturnType<typeof useGetImsCompanyBusinessTypeDataLazyQuery>;
+export type GetImsCompanyBusinessTypeDataQueryResult = Apollo.QueryResult<GetImsCompanyBusinessTypeDataQuery, GetImsCompanyBusinessTypeDataQueryVariables>;
+export const OrganizationContactsListDocument = gql`
+    query organizationContactsList($orgId: Int!) {
+  insured_organization_contact(where: {insured_organization_id: {_eq: $orgId}}) {
+    email
+    id
+    name
+    insured_organization_id
+    type
+  }
+}
+    `;
+
+/**
+ * __useOrganizationContactsListQuery__
+ *
+ * To run a query within a React component, call `useOrganizationContactsListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useOrganizationContactsListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useOrganizationContactsListQuery({
+ *   variables: {
+ *      orgId: // value for 'orgId'
+ *   },
+ * });
+ */
+export function useOrganizationContactsListQuery(baseOptions: Apollo.QueryHookOptions<OrganizationContactsListQuery, OrganizationContactsListQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<OrganizationContactsListQuery, OrganizationContactsListQueryVariables>(OrganizationContactsListDocument, options);
+      }
+export function useOrganizationContactsListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<OrganizationContactsListQuery, OrganizationContactsListQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<OrganizationContactsListQuery, OrganizationContactsListQueryVariables>(OrganizationContactsListDocument, options);
+        }
+export type OrganizationContactsListQueryHookResult = ReturnType<typeof useOrganizationContactsListQuery>;
+export type OrganizationContactsListLazyQueryHookResult = ReturnType<typeof useOrganizationContactsListLazyQuery>;
+export type OrganizationContactsListQueryResult = Apollo.QueryResult<OrganizationContactsListQuery, OrganizationContactsListQueryVariables>;
+export const AddOrganizationContactDocument = gql`
+    mutation addOrganizationContact($objects: [insured_organization_contact_insert_input!] = {}) {
+  insert_insured_organization_contact(objects: $objects) {
+    affected_rows
+  }
+}
+    `;
+export type AddOrganizationContactMutationFn = Apollo.MutationFunction<AddOrganizationContactMutation, AddOrganizationContactMutationVariables>;
+
+/**
+ * __useAddOrganizationContactMutation__
+ *
+ * To run a mutation, you first call `useAddOrganizationContactMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddOrganizationContactMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addOrganizationContactMutation, { data, loading, error }] = useAddOrganizationContactMutation({
+ *   variables: {
+ *      objects: // value for 'objects'
+ *   },
+ * });
+ */
+export function useAddOrganizationContactMutation(baseOptions?: Apollo.MutationHookOptions<AddOrganizationContactMutation, AddOrganizationContactMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AddOrganizationContactMutation, AddOrganizationContactMutationVariables>(AddOrganizationContactDocument, options);
+      }
+export type AddOrganizationContactMutationHookResult = ReturnType<typeof useAddOrganizationContactMutation>;
+export type AddOrganizationContactMutationResult = Apollo.MutationResult<AddOrganizationContactMutation>;
+export type AddOrganizationContactMutationOptions = Apollo.BaseMutationOptions<AddOrganizationContactMutation, AddOrganizationContactMutationVariables>;
+export const GetOrgDetailByDomainDocument = gql`
+    mutation getOrgDetailByDomain($domain: String!) {
+  searchDnB(domain: $domain) {
+    address
+    city
+    naics
+    employees
+    industry
+    insured_name
+    revenue
+    state
+    zip
+    dnbCode
+    dnbDescription
+    naics_icdb {
+      naics
+      organization_industry {
+        industry
+        icb
+      }
+    }
+  }
+}
+    `;
+export type GetOrgDetailByDomainMutationFn = Apollo.MutationFunction<GetOrgDetailByDomainMutation, GetOrgDetailByDomainMutationVariables>;
+
+/**
+ * __useGetOrgDetailByDomainMutation__
+ *
+ * To run a mutation, you first call `useGetOrgDetailByDomainMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useGetOrgDetailByDomainMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [getOrgDetailByDomainMutation, { data, loading, error }] = useGetOrgDetailByDomainMutation({
+ *   variables: {
+ *      domain: // value for 'domain'
+ *   },
+ * });
+ */
+export function useGetOrgDetailByDomainMutation(baseOptions?: Apollo.MutationHookOptions<GetOrgDetailByDomainMutation, GetOrgDetailByDomainMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<GetOrgDetailByDomainMutation, GetOrgDetailByDomainMutationVariables>(GetOrgDetailByDomainDocument, options);
+      }
+export type GetOrgDetailByDomainMutationHookResult = ReturnType<typeof useGetOrgDetailByDomainMutation>;
+export type GetOrgDetailByDomainMutationResult = Apollo.MutationResult<GetOrgDetailByDomainMutation>;
+export type GetOrgDetailByDomainMutationOptions = Apollo.BaseMutationOptions<GetOrgDetailByDomainMutation, GetOrgDetailByDomainMutationVariables>;
+export const DeleteInsuredOrgContactMutationDocument = gql`
+    mutation deleteInsuredOrgContactMutation($id: Int!) {
+  delete_insured_organization_contact_by_pk(id: $id) {
+    id
+  }
+}
+    `;
+export type DeleteInsuredOrgContactMutationMutationFn = Apollo.MutationFunction<DeleteInsuredOrgContactMutationMutation, DeleteInsuredOrgContactMutationMutationVariables>;
+
+/**
+ * __useDeleteInsuredOrgContactMutationMutation__
+ *
+ * To run a mutation, you first call `useDeleteInsuredOrgContactMutationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteInsuredOrgContactMutationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteInsuredOrgContactMutationMutation, { data, loading, error }] = useDeleteInsuredOrgContactMutationMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteInsuredOrgContactMutationMutation(baseOptions?: Apollo.MutationHookOptions<DeleteInsuredOrgContactMutationMutation, DeleteInsuredOrgContactMutationMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteInsuredOrgContactMutationMutation, DeleteInsuredOrgContactMutationMutationVariables>(DeleteInsuredOrgContactMutationDocument, options);
+      }
+export type DeleteInsuredOrgContactMutationMutationHookResult = ReturnType<typeof useDeleteInsuredOrgContactMutationMutation>;
+export type DeleteInsuredOrgContactMutationMutationResult = Apollo.MutationResult<DeleteInsuredOrgContactMutationMutation>;
+export type DeleteInsuredOrgContactMutationMutationOptions = Apollo.BaseMutationOptions<DeleteInsuredOrgContactMutationMutation, DeleteInsuredOrgContactMutationMutationVariables>;
+export const CreateInsuredOrganizationApplicationUiDocument = gql`
+    mutation createInsuredOrganizationApplicationUI($insured_name: String!, $city: String, $state: String, $zip: String, $address: String, $domain: String!, $employees: Int!, $industry: String!, $revenue: money!, $insured_contacts: [insured_organization_contact_insert_input!] = [], $stage: String, $quotes: [insurance_quote_insert_input!] = [], $naics_code: String, $organization_type: String, $broker_agency_id: Int!, $rentals_data: jsonb) {
+  insert_insured_organization_one(
+    object: {name: $insured_name, city: $city, state: $state, zip: $zip, address: $address, insurance_applications: {data: {domain: $domain, employees: $employees, stage: $stage, industry: $industry, revenue: $revenue, organization_type: $organization_type, insurance_quotes: {data: $quotes}, rentals_data: $rentals_data, broker_agency_id: $broker_agency_id, naics_code: $naics_code}, on_conflict: {constraint: insurance_application_insured_organization_id_effective_date_ex, update_columns: [domain, revenue, employees, industry, naics_code, stage, updated_at]}}, insured_organization_contacts: {data: $insured_contacts, on_conflict: {constraint: insured_organization_contact_insured_organization_id_email_type, update_columns: [name, email, phone, type]}}, broker_agency_id: $broker_agency_id}
+    on_conflict: {constraint: insured_organization_name_broker_agency_id_key, update_columns: [updated_at, name, city, state, zip, address]}
+  ) {
+    id
+    insurance_applications(order_by: {idx: desc}, limit: 1) {
+      id
+    }
+  }
+}
+    `;
+export type CreateInsuredOrganizationApplicationUiMutationFn = Apollo.MutationFunction<CreateInsuredOrganizationApplicationUiMutation, CreateInsuredOrganizationApplicationUiMutationVariables>;
+
+/**
+ * __useCreateInsuredOrganizationApplicationUiMutation__
+ *
+ * To run a mutation, you first call `useCreateInsuredOrganizationApplicationUiMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateInsuredOrganizationApplicationUiMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createInsuredOrganizationApplicationUiMutation, { data, loading, error }] = useCreateInsuredOrganizationApplicationUiMutation({
+ *   variables: {
+ *      insured_name: // value for 'insured_name'
+ *      city: // value for 'city'
+ *      state: // value for 'state'
+ *      zip: // value for 'zip'
+ *      address: // value for 'address'
+ *      domain: // value for 'domain'
+ *      employees: // value for 'employees'
+ *      industry: // value for 'industry'
+ *      revenue: // value for 'revenue'
+ *      insured_contacts: // value for 'insured_contacts'
+ *      stage: // value for 'stage'
+ *      quotes: // value for 'quotes'
+ *      naics_code: // value for 'naics_code'
+ *      organization_type: // value for 'organization_type'
+ *      broker_agency_id: // value for 'broker_agency_id'
+ *      rentals_data: // value for 'rentals_data'
+ *   },
+ * });
+ */
+export function useCreateInsuredOrganizationApplicationUiMutation(baseOptions?: Apollo.MutationHookOptions<CreateInsuredOrganizationApplicationUiMutation, CreateInsuredOrganizationApplicationUiMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateInsuredOrganizationApplicationUiMutation, CreateInsuredOrganizationApplicationUiMutationVariables>(CreateInsuredOrganizationApplicationUiDocument, options);
+      }
+export type CreateInsuredOrganizationApplicationUiMutationHookResult = ReturnType<typeof useCreateInsuredOrganizationApplicationUiMutation>;
+export type CreateInsuredOrganizationApplicationUiMutationResult = Apollo.MutationResult<CreateInsuredOrganizationApplicationUiMutation>;
+export type CreateInsuredOrganizationApplicationUiMutationOptions = Apollo.BaseMutationOptions<CreateInsuredOrganizationApplicationUiMutation, CreateInsuredOrganizationApplicationUiMutationVariables>;
+export const GenerateQuotesDocument = gql`
+    mutation generateQuotes($revenue: String, $industry: String, $state: String, $employees: String, $paymentOption: String, $calculateFee: Boolean, $calculateTax: Boolean) {
+  generateQuotes(
+    revenue: $revenue
+    industry: $industry
+    state: $state
+    employees: $employees
+    paymentOption: $paymentOption
+    calculateFee: $calculateFee
+    calculateTax: $calculateTax
+  ) {
+    quotes
+  }
+}
+    `;
+export type GenerateQuotesMutationFn = Apollo.MutationFunction<GenerateQuotesMutation, GenerateQuotesMutationVariables>;
+
+/**
+ * __useGenerateQuotesMutation__
+ *
+ * To run a mutation, you first call `useGenerateQuotesMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useGenerateQuotesMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [generateQuotesMutation, { data, loading, error }] = useGenerateQuotesMutation({
+ *   variables: {
+ *      revenue: // value for 'revenue'
+ *      industry: // value for 'industry'
+ *      state: // value for 'state'
+ *      employees: // value for 'employees'
+ *      paymentOption: // value for 'paymentOption'
+ *      calculateFee: // value for 'calculateFee'
+ *      calculateTax: // value for 'calculateTax'
+ *   },
+ * });
+ */
+export function useGenerateQuotesMutation(baseOptions?: Apollo.MutationHookOptions<GenerateQuotesMutation, GenerateQuotesMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<GenerateQuotesMutation, GenerateQuotesMutationVariables>(GenerateQuotesDocument, options);
+      }
+export type GenerateQuotesMutationHookResult = ReturnType<typeof useGenerateQuotesMutation>;
+export type GenerateQuotesMutationResult = Apollo.MutationResult<GenerateQuotesMutation>;
+export type GenerateQuotesMutationOptions = Apollo.BaseMutationOptions<GenerateQuotesMutation, GenerateQuotesMutationVariables>;
+export const ApplicationQuoteDocument = gql`
+    query applicationQuote($id: uuid!) {
+  insurance_application_by_pk(id: $id) {
+    ...ApplicationQuoteFields
+  }
+}
+    ${ApplicationQuoteFieldsFragmentDoc}`;
+
+/**
+ * __useApplicationQuoteQuery__
+ *
+ * To run a query within a React component, call `useApplicationQuoteQuery` and pass it any options that fit your needs.
+ * When your component renders, `useApplicationQuoteQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useApplicationQuoteQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useApplicationQuoteQuery(baseOptions: Apollo.QueryHookOptions<ApplicationQuoteQuery, ApplicationQuoteQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ApplicationQuoteQuery, ApplicationQuoteQueryVariables>(ApplicationQuoteDocument, options);
+      }
+export function useApplicationQuoteLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ApplicationQuoteQuery, ApplicationQuoteQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ApplicationQuoteQuery, ApplicationQuoteQueryVariables>(ApplicationQuoteDocument, options);
+        }
+export type ApplicationQuoteQueryHookResult = ReturnType<typeof useApplicationQuoteQuery>;
+export type ApplicationQuoteLazyQueryHookResult = ReturnType<typeof useApplicationQuoteLazyQuery>;
+export type ApplicationQuoteQueryResult = Apollo.QueryResult<ApplicationQuoteQuery, ApplicationQuoteQueryVariables>;
+export const UpdateInsuranceDatesDocument = gql`
+    mutation updateInsuranceDates($id: uuid!, $expiration_date: date!, $effective_date: date!, $stage: String!, $quote_id: Int!) {
+  update_insurance_application_by_pk(
+    pk_columns: {id: $id}
+    _set: {expiration_date: $expiration_date, effective_date: $effective_date, stage: $stage}
+  ) {
+    id
+  }
+  insert_insurance_quote_selection_one(
+    object: {application_id: $id, quote_id: $quote_id}
+    on_conflict: {constraint: insurance_quote_selection_application_id_key, update_columns: quote_id}
+  ) {
+    application_id
+    id
+    quote_id
+  }
+}
+    `;
+export type UpdateInsuranceDatesMutationFn = Apollo.MutationFunction<UpdateInsuranceDatesMutation, UpdateInsuranceDatesMutationVariables>;
+
+/**
+ * __useUpdateInsuranceDatesMutation__
+ *
+ * To run a mutation, you first call `useUpdateInsuranceDatesMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateInsuranceDatesMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateInsuranceDatesMutation, { data, loading, error }] = useUpdateInsuranceDatesMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      expiration_date: // value for 'expiration_date'
+ *      effective_date: // value for 'effective_date'
+ *      stage: // value for 'stage'
+ *      quote_id: // value for 'quote_id'
+ *   },
+ * });
+ */
+export function useUpdateInsuranceDatesMutation(baseOptions?: Apollo.MutationHookOptions<UpdateInsuranceDatesMutation, UpdateInsuranceDatesMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateInsuranceDatesMutation, UpdateInsuranceDatesMutationVariables>(UpdateInsuranceDatesDocument, options);
+      }
+export type UpdateInsuranceDatesMutationHookResult = ReturnType<typeof useUpdateInsuranceDatesMutation>;
+export type UpdateInsuranceDatesMutationResult = Apollo.MutationResult<UpdateInsuranceDatesMutation>;
+export type UpdateInsuranceDatesMutationOptions = Apollo.BaseMutationOptions<UpdateInsuranceDatesMutation, UpdateInsuranceDatesMutationVariables>;
+export const NewInsuranceQuoteDocument = gql`
+    mutation newInsuranceQuote($base_premium: money!, $commission_percentage: Int!, $deductible: money!, $insurance_application_id: uuid!, $other_deductibles: money!, $policy_limit: money!, $premium: money!, $tax_percentage: numeric = 0, $total_premium: money!, $stage: String = "quote") {
+  insert_insurance_quote(
+    objects: {base_premium: $base_premium, commission_percentage: $commission_percentage, deductible: $deductible, insurance_application_id: $insurance_application_id, other_deductibles: $other_deductibles, policy_limit: $policy_limit, premium: $premium, tax_percentage: $tax_percentage, total_premium: $total_premium}
+  ) {
+    affected_rows
+  }
+  update_insurance_application_by_pk(
+    pk_columns: {id: $insurance_application_id}
+    _set: {stage: $stage}
+  ) {
+    id
+  }
+}
+    `;
+export type NewInsuranceQuoteMutationFn = Apollo.MutationFunction<NewInsuranceQuoteMutation, NewInsuranceQuoteMutationVariables>;
+
+/**
+ * __useNewInsuranceQuoteMutation__
+ *
+ * To run a mutation, you first call `useNewInsuranceQuoteMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useNewInsuranceQuoteMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [newInsuranceQuoteMutation, { data, loading, error }] = useNewInsuranceQuoteMutation({
+ *   variables: {
+ *      base_premium: // value for 'base_premium'
+ *      commission_percentage: // value for 'commission_percentage'
+ *      deductible: // value for 'deductible'
+ *      insurance_application_id: // value for 'insurance_application_id'
+ *      other_deductibles: // value for 'other_deductibles'
+ *      policy_limit: // value for 'policy_limit'
+ *      premium: // value for 'premium'
+ *      tax_percentage: // value for 'tax_percentage'
+ *      total_premium: // value for 'total_premium'
+ *      stage: // value for 'stage'
+ *   },
+ * });
+ */
+export function useNewInsuranceQuoteMutation(baseOptions?: Apollo.MutationHookOptions<NewInsuranceQuoteMutation, NewInsuranceQuoteMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<NewInsuranceQuoteMutation, NewInsuranceQuoteMutationVariables>(NewInsuranceQuoteDocument, options);
+      }
+export type NewInsuranceQuoteMutationHookResult = ReturnType<typeof useNewInsuranceQuoteMutation>;
+export type NewInsuranceQuoteMutationResult = Apollo.MutationResult<NewInsuranceQuoteMutation>;
+export type NewInsuranceQuoteMutationOptions = Apollo.BaseMutationOptions<NewInsuranceQuoteMutation, NewInsuranceQuoteMutationVariables>;
+export const UpdateInsuranceQuoteDocument = gql`
+    mutation updateInsuranceQuote($id: bigint!, $base_premium: money, $commission_percentage: Int, $deductible: money, $insurance_application_id: uuid, $other_deductibles: money, $policy_limit: money, $premium: money, $tax_percentage: numeric, $total_premium: money) {
+  update_insurance_quote_by_pk(
+    pk_columns: {id: $id}
+    _set: {base_premium: $base_premium, commission_percentage: $commission_percentage, deductible: $deductible, other_deductibles: $other_deductibles, policy_limit: $policy_limit, premium: $premium, tax_percentage: $tax_percentage, total_premium: $total_premium}
+  ) {
+    base_premium
+    commission_percentage
+    deductible
+    id
+    policy_limit
+    premium
+    tax_percentage
+    total_premium
+    other_deductibles
+  }
+}
+    `;
+export type UpdateInsuranceQuoteMutationFn = Apollo.MutationFunction<UpdateInsuranceQuoteMutation, UpdateInsuranceQuoteMutationVariables>;
+
+/**
+ * __useUpdateInsuranceQuoteMutation__
+ *
+ * To run a mutation, you first call `useUpdateInsuranceQuoteMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateInsuranceQuoteMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateInsuranceQuoteMutation, { data, loading, error }] = useUpdateInsuranceQuoteMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      base_premium: // value for 'base_premium'
+ *      commission_percentage: // value for 'commission_percentage'
+ *      deductible: // value for 'deductible'
+ *      insurance_application_id: // value for 'insurance_application_id'
+ *      other_deductibles: // value for 'other_deductibles'
+ *      policy_limit: // value for 'policy_limit'
+ *      premium: // value for 'premium'
+ *      tax_percentage: // value for 'tax_percentage'
+ *      total_premium: // value for 'total_premium'
+ *   },
+ * });
+ */
+export function useUpdateInsuranceQuoteMutation(baseOptions?: Apollo.MutationHookOptions<UpdateInsuranceQuoteMutation, UpdateInsuranceQuoteMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateInsuranceQuoteMutation, UpdateInsuranceQuoteMutationVariables>(UpdateInsuranceQuoteDocument, options);
+      }
+export type UpdateInsuranceQuoteMutationHookResult = ReturnType<typeof useUpdateInsuranceQuoteMutation>;
+export type UpdateInsuranceQuoteMutationResult = Apollo.MutationResult<UpdateInsuranceQuoteMutation>;
+export type UpdateInsuranceQuoteMutationOptions = Apollo.BaseMutationOptions<UpdateInsuranceQuoteMutation, UpdateInsuranceQuoteMutationVariables>;
+export const DeleteInsuranceQuoteDocument = gql`
+    mutation deleteInsuranceQuote($id: bigint!) {
+  delete_insurance_quote_by_pk(id: $id) {
+    id
+  }
+}
+    `;
+export type DeleteInsuranceQuoteMutationFn = Apollo.MutationFunction<DeleteInsuranceQuoteMutation, DeleteInsuranceQuoteMutationVariables>;
+
+/**
+ * __useDeleteInsuranceQuoteMutation__
+ *
+ * To run a mutation, you first call `useDeleteInsuranceQuoteMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteInsuranceQuoteMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteInsuranceQuoteMutation, { data, loading, error }] = useDeleteInsuranceQuoteMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteInsuranceQuoteMutation(baseOptions?: Apollo.MutationHookOptions<DeleteInsuranceQuoteMutation, DeleteInsuranceQuoteMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteInsuranceQuoteMutation, DeleteInsuranceQuoteMutationVariables>(DeleteInsuranceQuoteDocument, options);
+      }
+export type DeleteInsuranceQuoteMutationHookResult = ReturnType<typeof useDeleteInsuranceQuoteMutation>;
+export type DeleteInsuranceQuoteMutationResult = Apollo.MutationResult<DeleteInsuranceQuoteMutation>;
+export type DeleteInsuranceQuoteMutationOptions = Apollo.BaseMutationOptions<DeleteInsuranceQuoteMutation, DeleteInsuranceQuoteMutationVariables>;
+export const GetTenantSettingsDocument = gql`
+    query getTenantSettings {
+  me {
+    broker_producer {
+      broker_agency {
+        tenant {
+          scan_required
+        }
+      }
+    }
+    id
+  }
+}
+    `;
+
+/**
+ * __useGetTenantSettingsQuery__
+ *
+ * To run a query within a React component, call `useGetTenantSettingsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTenantSettingsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTenantSettingsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetTenantSettingsQuery(baseOptions?: Apollo.QueryHookOptions<GetTenantSettingsQuery, GetTenantSettingsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetTenantSettingsQuery, GetTenantSettingsQueryVariables>(GetTenantSettingsDocument, options);
+      }
+export function useGetTenantSettingsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTenantSettingsQuery, GetTenantSettingsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetTenantSettingsQuery, GetTenantSettingsQueryVariables>(GetTenantSettingsDocument, options);
+        }
+export type GetTenantSettingsQueryHookResult = ReturnType<typeof useGetTenantSettingsQuery>;
+export type GetTenantSettingsLazyQueryHookResult = ReturnType<typeof useGetTenantSettingsLazyQuery>;
+export type GetTenantSettingsQueryResult = Apollo.QueryResult<GetTenantSettingsQuery, GetTenantSettingsQueryVariables>;
+export const WatchScanResultDocument = gql`
+    subscription WatchScanResult($applicationId: uuid!) {
+  external_scan(
+    where: {application_id: {_eq: $applicationId}}
+    order_by: {id: desc}
+  ) {
+    scan_result
+    status
+  }
+}
+    `;
+
+/**
+ * __useWatchScanResultSubscription__
+ *
+ * To run a query within a React component, call `useWatchScanResultSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useWatchScanResultSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useWatchScanResultSubscription({
+ *   variables: {
+ *      applicationId: // value for 'applicationId'
+ *   },
+ * });
+ */
+export function useWatchScanResultSubscription(baseOptions: Apollo.SubscriptionHookOptions<WatchScanResultSubscription, WatchScanResultSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<WatchScanResultSubscription, WatchScanResultSubscriptionVariables>(WatchScanResultDocument, options);
+      }
+export type WatchScanResultSubscriptionHookResult = ReturnType<typeof useWatchScanResultSubscription>;
+export type WatchScanResultSubscriptionResult = Apollo.SubscriptionResult<WatchScanResultSubscription>;
+export const ScanVerdictResultDocument = gql`
+    query ScanVerdictResult($external_id: uuid!) {
+  getScanResult(external_id: $external_id) {
+    domain
+    status
+    verdict
+    connector_results
+  }
+}
+    `;
+
+/**
+ * __useScanVerdictResultQuery__
+ *
+ * To run a query within a React component, call `useScanVerdictResultQuery` and pass it any options that fit your needs.
+ * When your component renders, `useScanVerdictResultQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useScanVerdictResultQuery({
+ *   variables: {
+ *      external_id: // value for 'external_id'
+ *   },
+ * });
+ */
+export function useScanVerdictResultQuery(baseOptions: Apollo.QueryHookOptions<ScanVerdictResultQuery, ScanVerdictResultQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ScanVerdictResultQuery, ScanVerdictResultQueryVariables>(ScanVerdictResultDocument, options);
+      }
+export function useScanVerdictResultLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ScanVerdictResultQuery, ScanVerdictResultQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ScanVerdictResultQuery, ScanVerdictResultQueryVariables>(ScanVerdictResultDocument, options);
+        }
+export type ScanVerdictResultQueryHookResult = ReturnType<typeof useScanVerdictResultQuery>;
+export type ScanVerdictResultLazyQueryHookResult = ReturnType<typeof useScanVerdictResultLazyQuery>;
+export type ScanVerdictResultQueryResult = Apollo.QueryResult<ScanVerdictResultQuery, ScanVerdictResultQueryVariables>;
+export const SendQuotePdfEmailDocument = gql`
+    mutation sendQuotePdfEmail($object: EmailRecipientInput!) {
+  sendQuotePDFEmailsFromUI(object: $object) {
+    count
+  }
+}
+    `;
+export type SendQuotePdfEmailMutationFn = Apollo.MutationFunction<SendQuotePdfEmailMutation, SendQuotePdfEmailMutationVariables>;
+
+/**
+ * __useSendQuotePdfEmailMutation__
+ *
+ * To run a mutation, you first call `useSendQuotePdfEmailMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSendQuotePdfEmailMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [sendQuotePdfEmailMutation, { data, loading, error }] = useSendQuotePdfEmailMutation({
+ *   variables: {
+ *      object: // value for 'object'
+ *   },
+ * });
+ */
+export function useSendQuotePdfEmailMutation(baseOptions?: Apollo.MutationHookOptions<SendQuotePdfEmailMutation, SendQuotePdfEmailMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<SendQuotePdfEmailMutation, SendQuotePdfEmailMutationVariables>(SendQuotePdfEmailDocument, options);
+      }
+export type SendQuotePdfEmailMutationHookResult = ReturnType<typeof useSendQuotePdfEmailMutation>;
+export type SendQuotePdfEmailMutationResult = Apollo.MutationResult<SendQuotePdfEmailMutation>;
+export type SendQuotePdfEmailMutationOptions = Apollo.BaseMutationOptions<SendQuotePdfEmailMutation, SendQuotePdfEmailMutationVariables>;
+export const ResendQuotePdfEmailDocument = gql`
+    mutation resendQuotePdfEmail($object: ResendInput!) {
+  resendQuotePDFEmailFromUI(object: $object) {
+    id
+  }
+}
+    `;
+export type ResendQuotePdfEmailMutationFn = Apollo.MutationFunction<ResendQuotePdfEmailMutation, ResendQuotePdfEmailMutationVariables>;
+
+/**
+ * __useResendQuotePdfEmailMutation__
+ *
+ * To run a mutation, you first call `useResendQuotePdfEmailMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useResendQuotePdfEmailMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [resendQuotePdfEmailMutation, { data, loading, error }] = useResendQuotePdfEmailMutation({
+ *   variables: {
+ *      object: // value for 'object'
+ *   },
+ * });
+ */
+export function useResendQuotePdfEmailMutation(baseOptions?: Apollo.MutationHookOptions<ResendQuotePdfEmailMutation, ResendQuotePdfEmailMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ResendQuotePdfEmailMutation, ResendQuotePdfEmailMutationVariables>(ResendQuotePdfEmailDocument, options);
+      }
+export type ResendQuotePdfEmailMutationHookResult = ReturnType<typeof useResendQuotePdfEmailMutation>;
+export type ResendQuotePdfEmailMutationResult = Apollo.MutationResult<ResendQuotePdfEmailMutation>;
+export type ResendQuotePdfEmailMutationOptions = Apollo.BaseMutationOptions<ResendQuotePdfEmailMutation, ResendQuotePdfEmailMutationVariables>;
+export const UpdatePremiumDataDocument = gql`
+    mutation updatePremiumData($object: UpdatePremiumInput!) {
+  updatePremium(object: $object) {
+    id
+  }
+}
+    `;
+export type UpdatePremiumDataMutationFn = Apollo.MutationFunction<UpdatePremiumDataMutation, UpdatePremiumDataMutationVariables>;
+
+/**
+ * __useUpdatePremiumDataMutation__
+ *
+ * To run a mutation, you first call `useUpdatePremiumDataMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdatePremiumDataMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updatePremiumDataMutation, { data, loading, error }] = useUpdatePremiumDataMutation({
+ *   variables: {
+ *      object: // value for 'object'
+ *   },
+ * });
+ */
+export function useUpdatePremiumDataMutation(baseOptions?: Apollo.MutationHookOptions<UpdatePremiumDataMutation, UpdatePremiumDataMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdatePremiumDataMutation, UpdatePremiumDataMutationVariables>(UpdatePremiumDataDocument, options);
+      }
+export type UpdatePremiumDataMutationHookResult = ReturnType<typeof useUpdatePremiumDataMutation>;
+export type UpdatePremiumDataMutationResult = Apollo.MutationResult<UpdatePremiumDataMutation>;
+export type UpdatePremiumDataMutationOptions = Apollo.BaseMutationOptions<UpdatePremiumDataMutation, UpdatePremiumDataMutationVariables>;
+export const WatchQuotesDocument = gql`
+    subscription WatchQuotes($applicationId: uuid!) {
+  insurance_quote(
+    where: {insurance_application_id: {_eq: $applicationId}}
+    order_by: [{policy_limit: asc}, {deductible: desc}]
+  ) {
+    ...QuoteFields
+  }
+}
+    ${QuoteFieldsFragmentDoc}`;
+
+/**
+ * __useWatchQuotesSubscription__
+ *
+ * To run a query within a React component, call `useWatchQuotesSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useWatchQuotesSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useWatchQuotesSubscription({
+ *   variables: {
+ *      applicationId: // value for 'applicationId'
+ *   },
+ * });
+ */
+export function useWatchQuotesSubscription(baseOptions: Apollo.SubscriptionHookOptions<WatchQuotesSubscription, WatchQuotesSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<WatchQuotesSubscription, WatchQuotesSubscriptionVariables>(WatchQuotesDocument, options);
+      }
+export type WatchQuotesSubscriptionHookResult = ReturnType<typeof useWatchQuotesSubscription>;
+export type WatchQuotesSubscriptionResult = Apollo.SubscriptionResult<WatchQuotesSubscription>;
+export const GetArtifactByAppIdAndQuoteNumberDocument = gql`
+    query GetArtifactByAppIdAndQuoteNumber($applicationid_id: uuid!, $quote_number: String!) {
+  insurance_application_artifact(
+    where: {_and: {application_id: {_eq: $applicationid_id}, file_uri: {_like: $quote_number}}}
+  ) {
+    file_type
+    file_uri
+    id
+  }
+}
+    `;
+
+/**
+ * __useGetArtifactByAppIdAndQuoteNumberQuery__
+ *
+ * To run a query within a React component, call `useGetArtifactByAppIdAndQuoteNumberQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetArtifactByAppIdAndQuoteNumberQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetArtifactByAppIdAndQuoteNumberQuery({
+ *   variables: {
+ *      applicationid_id: // value for 'applicationid_id'
+ *      quote_number: // value for 'quote_number'
+ *   },
+ * });
+ */
+export function useGetArtifactByAppIdAndQuoteNumberQuery(baseOptions: Apollo.QueryHookOptions<GetArtifactByAppIdAndQuoteNumberQuery, GetArtifactByAppIdAndQuoteNumberQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetArtifactByAppIdAndQuoteNumberQuery, GetArtifactByAppIdAndQuoteNumberQueryVariables>(GetArtifactByAppIdAndQuoteNumberDocument, options);
+      }
+export function useGetArtifactByAppIdAndQuoteNumberLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetArtifactByAppIdAndQuoteNumberQuery, GetArtifactByAppIdAndQuoteNumberQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetArtifactByAppIdAndQuoteNumberQuery, GetArtifactByAppIdAndQuoteNumberQueryVariables>(GetArtifactByAppIdAndQuoteNumberDocument, options);
+        }
+export type GetArtifactByAppIdAndQuoteNumberQueryHookResult = ReturnType<typeof useGetArtifactByAppIdAndQuoteNumberQuery>;
+export type GetArtifactByAppIdAndQuoteNumberLazyQueryHookResult = ReturnType<typeof useGetArtifactByAppIdAndQuoteNumberLazyQuery>;
+export type GetArtifactByAppIdAndQuoteNumberQueryResult = Apollo.QueryResult<GetArtifactByAppIdAndQuoteNumberQuery, GetArtifactByAppIdAndQuoteNumberQueryVariables>;
+export const GetCustomPolicyLimitsDocument = gql`
+    query GetCustomPolicyLimits {
+  getCustomPolicies {
+    customPolicyLimits
+  }
+}
+    `;
+
+/**
+ * __useGetCustomPolicyLimitsQuery__
+ *
+ * To run a query within a React component, call `useGetCustomPolicyLimitsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetCustomPolicyLimitsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetCustomPolicyLimitsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetCustomPolicyLimitsQuery(baseOptions?: Apollo.QueryHookOptions<GetCustomPolicyLimitsQuery, GetCustomPolicyLimitsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetCustomPolicyLimitsQuery, GetCustomPolicyLimitsQueryVariables>(GetCustomPolicyLimitsDocument, options);
+      }
+export function useGetCustomPolicyLimitsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetCustomPolicyLimitsQuery, GetCustomPolicyLimitsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetCustomPolicyLimitsQuery, GetCustomPolicyLimitsQueryVariables>(GetCustomPolicyLimitsDocument, options);
+        }
+export type GetCustomPolicyLimitsQueryHookResult = ReturnType<typeof useGetCustomPolicyLimitsQuery>;
+export type GetCustomPolicyLimitsLazyQueryHookResult = ReturnType<typeof useGetCustomPolicyLimitsLazyQuery>;
+export type GetCustomPolicyLimitsQueryResult = Apollo.QueryResult<GetCustomPolicyLimitsQuery, GetCustomPolicyLimitsQueryVariables>;
+export const GetUnusedRetentionsDocument = gql`
+    mutation GetUnusedRetentions($object: UnusedRetentionsInput!) {
+  getUnusedRetentions(object: $object) {
+    notUsedDeductibles
+  }
+}
+    `;
+export type GetUnusedRetentionsMutationFn = Apollo.MutationFunction<GetUnusedRetentionsMutation, GetUnusedRetentionsMutationVariables>;
+
+/**
+ * __useGetUnusedRetentionsMutation__
+ *
+ * To run a mutation, you first call `useGetUnusedRetentionsMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useGetUnusedRetentionsMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [getUnusedRetentionsMutation, { data, loading, error }] = useGetUnusedRetentionsMutation({
+ *   variables: {
+ *      object: // value for 'object'
+ *   },
+ * });
+ */
+export function useGetUnusedRetentionsMutation(baseOptions?: Apollo.MutationHookOptions<GetUnusedRetentionsMutation, GetUnusedRetentionsMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<GetUnusedRetentionsMutation, GetUnusedRetentionsMutationVariables>(GetUnusedRetentionsDocument, options);
+      }
+export type GetUnusedRetentionsMutationHookResult = ReturnType<typeof useGetUnusedRetentionsMutation>;
+export type GetUnusedRetentionsMutationResult = Apollo.MutationResult<GetUnusedRetentionsMutation>;
+export type GetUnusedRetentionsMutationOptions = Apollo.BaseMutationOptions<GetUnusedRetentionsMutation, GetUnusedRetentionsMutationVariables>;
+export const CreateCustomQuoteDocument = gql`
+    mutation CreateCustomQuote($object: CustomQuoteInput!) {
+  createCustomQuote(object: $object) {
+    id
+  }
+}
+    `;
+export type CreateCustomQuoteMutationFn = Apollo.MutationFunction<CreateCustomQuoteMutation, CreateCustomQuoteMutationVariables>;
+
+/**
+ * __useCreateCustomQuoteMutation__
+ *
+ * To run a mutation, you first call `useCreateCustomQuoteMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateCustomQuoteMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createCustomQuoteMutation, { data, loading, error }] = useCreateCustomQuoteMutation({
+ *   variables: {
+ *      object: // value for 'object'
+ *   },
+ * });
+ */
+export function useCreateCustomQuoteMutation(baseOptions?: Apollo.MutationHookOptions<CreateCustomQuoteMutation, CreateCustomQuoteMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateCustomQuoteMutation, CreateCustomQuoteMutationVariables>(CreateCustomQuoteDocument, options);
+      }
+export type CreateCustomQuoteMutationHookResult = ReturnType<typeof useCreateCustomQuoteMutation>;
+export type CreateCustomQuoteMutationResult = Apollo.MutationResult<CreateCustomQuoteMutation>;
+export type CreateCustomQuoteMutationOptions = Apollo.BaseMutationOptions<CreateCustomQuoteMutation, CreateCustomQuoteMutationVariables>;
+export const CreatePdfQuoteSelectionDocument = gql`
+    mutation CreatePDFQuoteSelection($input: CreateQuotePDFSelectionInput!) {
+  createPDFQuoteSelection(object: $input) {
+    id
+  }
+}
+    `;
+export type CreatePdfQuoteSelectionMutationFn = Apollo.MutationFunction<CreatePdfQuoteSelectionMutation, CreatePdfQuoteSelectionMutationVariables>;
+
+/**
+ * __useCreatePdfQuoteSelectionMutation__
+ *
+ * To run a mutation, you first call `useCreatePdfQuoteSelectionMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreatePdfQuoteSelectionMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createPdfQuoteSelectionMutation, { data, loading, error }] = useCreatePdfQuoteSelectionMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreatePdfQuoteSelectionMutation(baseOptions?: Apollo.MutationHookOptions<CreatePdfQuoteSelectionMutation, CreatePdfQuoteSelectionMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreatePdfQuoteSelectionMutation, CreatePdfQuoteSelectionMutationVariables>(CreatePdfQuoteSelectionDocument, options);
+      }
+export type CreatePdfQuoteSelectionMutationHookResult = ReturnType<typeof useCreatePdfQuoteSelectionMutation>;
+export type CreatePdfQuoteSelectionMutationResult = Apollo.MutationResult<CreatePdfQuoteSelectionMutation>;
+export type CreatePdfQuoteSelectionMutationOptions = Apollo.BaseMutationOptions<CreatePdfQuoteSelectionMutation, CreatePdfQuoteSelectionMutationVariables>;
+export const WatchLatestQuotePdfQuoteIdsByAppIdDocument = gql`
+    subscription WatchLatestQuotePDFQuoteIdsByAppId($applicationId: uuid!) {
+  insurance_application_artifact(
+    order_by: {updated_at: desc}
+    where: {file_type: {_eq: "quote"}, application_id: {_eq: $applicationId}}
+    limit: 1
+  ) {
+    insurance_quote_pdf_selection_artifacts {
+      insurance_quote_pdf_selections {
+        quote_id
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useWatchLatestQuotePdfQuoteIdsByAppIdSubscription__
+ *
+ * To run a query within a React component, call `useWatchLatestQuotePdfQuoteIdsByAppIdSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useWatchLatestQuotePdfQuoteIdsByAppIdSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useWatchLatestQuotePdfQuoteIdsByAppIdSubscription({
+ *   variables: {
+ *      applicationId: // value for 'applicationId'
+ *   },
+ * });
+ */
+export function useWatchLatestQuotePdfQuoteIdsByAppIdSubscription(baseOptions: Apollo.SubscriptionHookOptions<WatchLatestQuotePdfQuoteIdsByAppIdSubscription, WatchLatestQuotePdfQuoteIdsByAppIdSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<WatchLatestQuotePdfQuoteIdsByAppIdSubscription, WatchLatestQuotePdfQuoteIdsByAppIdSubscriptionVariables>(WatchLatestQuotePdfQuoteIdsByAppIdDocument, options);
+      }
+export type WatchLatestQuotePdfQuoteIdsByAppIdSubscriptionHookResult = ReturnType<typeof useWatchLatestQuotePdfQuoteIdsByAppIdSubscription>;
+export type WatchLatestQuotePdfQuoteIdsByAppIdSubscriptionResult = Apollo.SubscriptionResult<WatchLatestQuotePdfQuoteIdsByAppIdSubscription>;
+export const ManualTriggerScanDocument = gql`
+    mutation manualTriggerScan($applicationId: uuid!) {
+  manualTriggerScan(applicationId: $applicationId) {
+    id
+  }
+}
+    `;
+export type ManualTriggerScanMutationFn = Apollo.MutationFunction<ManualTriggerScanMutation, ManualTriggerScanMutationVariables>;
+
+/**
+ * __useManualTriggerScanMutation__
+ *
+ * To run a mutation, you first call `useManualTriggerScanMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useManualTriggerScanMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [manualTriggerScanMutation, { data, loading, error }] = useManualTriggerScanMutation({
+ *   variables: {
+ *      applicationId: // value for 'applicationId'
+ *   },
+ * });
+ */
+export function useManualTriggerScanMutation(baseOptions?: Apollo.MutationHookOptions<ManualTriggerScanMutation, ManualTriggerScanMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ManualTriggerScanMutation, ManualTriggerScanMutationVariables>(ManualTriggerScanDocument, options);
+      }
+export type ManualTriggerScanMutationHookResult = ReturnType<typeof useManualTriggerScanMutation>;
+export type ManualTriggerScanMutationResult = Apollo.MutationResult<ManualTriggerScanMutation>;
+export type ManualTriggerScanMutationOptions = Apollo.BaseMutationOptions<ManualTriggerScanMutation, ManualTriggerScanMutationVariables>;
+export const CreateQuoteEmailContactDocument = gql`
+    mutation CreateQuoteEmailContact($object: insurance_quote_email_insert_input!) {
+  insert_insurance_quote_email_one(object: $object) {
+    id
+  }
+}
+    `;
+export type CreateQuoteEmailContactMutationFn = Apollo.MutationFunction<CreateQuoteEmailContactMutation, CreateQuoteEmailContactMutationVariables>;
+
+/**
+ * __useCreateQuoteEmailContactMutation__
+ *
+ * To run a mutation, you first call `useCreateQuoteEmailContactMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateQuoteEmailContactMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createQuoteEmailContactMutation, { data, loading, error }] = useCreateQuoteEmailContactMutation({
+ *   variables: {
+ *      object: // value for 'object'
+ *   },
+ * });
+ */
+export function useCreateQuoteEmailContactMutation(baseOptions?: Apollo.MutationHookOptions<CreateQuoteEmailContactMutation, CreateQuoteEmailContactMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateQuoteEmailContactMutation, CreateQuoteEmailContactMutationVariables>(CreateQuoteEmailContactDocument, options);
+      }
+export type CreateQuoteEmailContactMutationHookResult = ReturnType<typeof useCreateQuoteEmailContactMutation>;
+export type CreateQuoteEmailContactMutationResult = Apollo.MutationResult<CreateQuoteEmailContactMutation>;
+export type CreateQuoteEmailContactMutationOptions = Apollo.BaseMutationOptions<CreateQuoteEmailContactMutation, CreateQuoteEmailContactMutationVariables>;
+export const UpdateInsuranceQuoteEmailDocument = gql`
+    mutation updateInsuranceQuoteEmail($id: Int!, $email: String!, $name: String!) {
+  update_insurance_quote_email(
+    where: {id: {_eq: $id}}
+    _set: {email: $email, name: $name}
+  ) {
+    returning {
+      id
+    }
+  }
+}
+    `;
+export type UpdateInsuranceQuoteEmailMutationFn = Apollo.MutationFunction<UpdateInsuranceQuoteEmailMutation, UpdateInsuranceQuoteEmailMutationVariables>;
+
+/**
+ * __useUpdateInsuranceQuoteEmailMutation__
+ *
+ * To run a mutation, you first call `useUpdateInsuranceQuoteEmailMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateInsuranceQuoteEmailMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateInsuranceQuoteEmailMutation, { data, loading, error }] = useUpdateInsuranceQuoteEmailMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      email: // value for 'email'
+ *      name: // value for 'name'
+ *   },
+ * });
+ */
+export function useUpdateInsuranceQuoteEmailMutation(baseOptions?: Apollo.MutationHookOptions<UpdateInsuranceQuoteEmailMutation, UpdateInsuranceQuoteEmailMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateInsuranceQuoteEmailMutation, UpdateInsuranceQuoteEmailMutationVariables>(UpdateInsuranceQuoteEmailDocument, options);
+      }
+export type UpdateInsuranceQuoteEmailMutationHookResult = ReturnType<typeof useUpdateInsuranceQuoteEmailMutation>;
+export type UpdateInsuranceQuoteEmailMutationResult = Apollo.MutationResult<UpdateInsuranceQuoteEmailMutation>;
+export type UpdateInsuranceQuoteEmailMutationOptions = Apollo.BaseMutationOptions<UpdateInsuranceQuoteEmailMutation, UpdateInsuranceQuoteEmailMutationVariables>;
+export const DeleteInsuranceQuoteEmailDocument = gql`
+    mutation deleteInsuranceQuoteEmail($id: Int!) {
+  delete_insurance_quote_email(where: {id: {_eq: $id}}) {
+    returning {
+      id
+    }
+    affected_rows
+  }
+}
+    `;
+export type DeleteInsuranceQuoteEmailMutationFn = Apollo.MutationFunction<DeleteInsuranceQuoteEmailMutation, DeleteInsuranceQuoteEmailMutationVariables>;
+
+/**
+ * __useDeleteInsuranceQuoteEmailMutation__
+ *
+ * To run a mutation, you first call `useDeleteInsuranceQuoteEmailMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteInsuranceQuoteEmailMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteInsuranceQuoteEmailMutation, { data, loading, error }] = useDeleteInsuranceQuoteEmailMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteInsuranceQuoteEmailMutation(baseOptions?: Apollo.MutationHookOptions<DeleteInsuranceQuoteEmailMutation, DeleteInsuranceQuoteEmailMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteInsuranceQuoteEmailMutation, DeleteInsuranceQuoteEmailMutationVariables>(DeleteInsuranceQuoteEmailDocument, options);
+      }
+export type DeleteInsuranceQuoteEmailMutationHookResult = ReturnType<typeof useDeleteInsuranceQuoteEmailMutation>;
+export type DeleteInsuranceQuoteEmailMutationResult = Apollo.MutationResult<DeleteInsuranceQuoteEmailMutation>;
+export type DeleteInsuranceQuoteEmailMutationOptions = Apollo.BaseMutationOptions<DeleteInsuranceQuoteEmailMutation, DeleteInsuranceQuoteEmailMutationVariables>;
+export const GetInsuranceQuoteEmailDocument = gql`
+    subscription getInsuranceQuoteEmail($applicationid_id: uuid!) {
+  insurance_quote_email(
+    where: {application_id: {_eq: $applicationid_id}}
+    order_by: {id: asc}
+    limit: 100
+  ) {
+    application_id
+    created_at
+    created_by_user_id
+    email
+    email_sent_at
+    id
+    name
+    org_name
+    quote_number
+    updated_at
+    status
+  }
+}
+    `;
+
+/**
+ * __useGetInsuranceQuoteEmailSubscription__
+ *
+ * To run a query within a React component, call `useGetInsuranceQuoteEmailSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useGetInsuranceQuoteEmailSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetInsuranceQuoteEmailSubscription({
+ *   variables: {
+ *      applicationid_id: // value for 'applicationid_id'
+ *   },
+ * });
+ */
+export function useGetInsuranceQuoteEmailSubscription(baseOptions: Apollo.SubscriptionHookOptions<GetInsuranceQuoteEmailSubscription, GetInsuranceQuoteEmailSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<GetInsuranceQuoteEmailSubscription, GetInsuranceQuoteEmailSubscriptionVariables>(GetInsuranceQuoteEmailDocument, options);
+      }
+export type GetInsuranceQuoteEmailSubscriptionHookResult = ReturnType<typeof useGetInsuranceQuoteEmailSubscription>;
+export type GetInsuranceQuoteEmailSubscriptionResult = Apollo.SubscriptionResult<GetInsuranceQuoteEmailSubscription>;
+export const OrganizationListDocument = gql`
+    query organizationList($limit: Int = 10, $offset: Int = 0, $orgWhere: insured_organization_bool_exp = {}, $applicationWhere: insurance_application_bool_exp = {}, $order_by: order_by) {
+  insured_organization(
+    limit: $limit
+    offset: $offset
+    order_by: {insurance_applications_aggregate: {max: {idx: $order_by}}}
+    where: $orgWhere
+  ) {
+    id
+    name
+    insurance_applications(
+      order_by: {idx: desc}
+      limit: 1
+      where: $applicationWhere
+    ) {
+      id
+      stage
+      effective_date
+      expiration_date
+      broker_agency {
+        name
+      }
+      insurance_quote_selection {
+        id
+        insurance_policy {
+          id
+          insured_signed
+          agent_signed
+          payment_collected
+        }
+      }
+    }
+  }
+  insured_organization_aggregate(where: $orgWhere) {
+    aggregate {
+      count
+    }
+  }
+}
+    `;
+
+/**
+ * __useOrganizationListQuery__
+ *
+ * To run a query within a React component, call `useOrganizationListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useOrganizationListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useOrganizationListQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
+ *      orgWhere: // value for 'orgWhere'
+ *      applicationWhere: // value for 'applicationWhere'
+ *      order_by: // value for 'order_by'
+ *   },
+ * });
+ */
+export function useOrganizationListQuery(baseOptions?: Apollo.QueryHookOptions<OrganizationListQuery, OrganizationListQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<OrganizationListQuery, OrganizationListQueryVariables>(OrganizationListDocument, options);
+      }
+export function useOrganizationListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<OrganizationListQuery, OrganizationListQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<OrganizationListQuery, OrganizationListQueryVariables>(OrganizationListDocument, options);
+        }
+export type OrganizationListQueryHookResult = ReturnType<typeof useOrganizationListQuery>;
+export type OrganizationListLazyQueryHookResult = ReturnType<typeof useOrganizationListLazyQuery>;
+export type OrganizationListQueryResult = Apollo.QueryResult<OrganizationListQuery, OrganizationListQueryVariables>;
+export const LatestInsuranceApplicationsDocument = gql`
+    query latestInsuranceApplications($limit: Int, $offset: Int = 0, $applicationWhere: latest_insurance_applications_bool_exp = {}, $order_by: [latest_insurance_applications_order_by!] = {}, $where: latest_insurance_applications_bool_exp = {}) {
+  latest_insurance_applications(
+    limit: $limit
+    offset: $offset
+    order_by: $order_by
+    where: $applicationWhere
+  ) {
+    insured_organization {
+      id
+      name
+    }
+    insurance_quote_selection {
+      insurance_quote {
+        premium
+      }
+      insurance_policy {
+        id
+        insured_signed
+        agent_signed
+        payment_collected
+      }
+    }
+    effective_date
+    expiration_date
+    id
+    stage
+  }
+  latest_insurance_applications_aggregate(where: $applicationWhere) {
+    aggregate {
+      count
+    }
+  }
+}
+    `;
+
+/**
+ * __useLatestInsuranceApplicationsQuery__
+ *
+ * To run a query within a React component, call `useLatestInsuranceApplicationsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLatestInsuranceApplicationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLatestInsuranceApplicationsQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
+ *      applicationWhere: // value for 'applicationWhere'
+ *      order_by: // value for 'order_by'
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useLatestInsuranceApplicationsQuery(baseOptions?: Apollo.QueryHookOptions<LatestInsuranceApplicationsQuery, LatestInsuranceApplicationsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<LatestInsuranceApplicationsQuery, LatestInsuranceApplicationsQueryVariables>(LatestInsuranceApplicationsDocument, options);
+      }
+export function useLatestInsuranceApplicationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<LatestInsuranceApplicationsQuery, LatestInsuranceApplicationsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<LatestInsuranceApplicationsQuery, LatestInsuranceApplicationsQueryVariables>(LatestInsuranceApplicationsDocument, options);
+        }
+export type LatestInsuranceApplicationsQueryHookResult = ReturnType<typeof useLatestInsuranceApplicationsQuery>;
+export type LatestInsuranceApplicationsLazyQueryHookResult = ReturnType<typeof useLatestInsuranceApplicationsLazyQuery>;
+export type LatestInsuranceApplicationsQueryResult = Apollo.QueryResult<LatestInsuranceApplicationsQuery, LatestInsuranceApplicationsQueryVariables>;
+export const WatchUpdateApplicationsDocument = gql`
+    subscription watchUpdateApplications {
+  latest_insurance_applications(order_by: {updated_at: desc_nulls_last}, limit: 1) {
+    id
+    stage
+    updated_at
+    insured_organization {
+      id
+      name
+    }
+  }
+}
+    `;
+
+/**
+ * __useWatchUpdateApplicationsSubscription__
+ *
+ * To run a query within a React component, call `useWatchUpdateApplicationsSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useWatchUpdateApplicationsSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useWatchUpdateApplicationsSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useWatchUpdateApplicationsSubscription(baseOptions?: Apollo.SubscriptionHookOptions<WatchUpdateApplicationsSubscription, WatchUpdateApplicationsSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<WatchUpdateApplicationsSubscription, WatchUpdateApplicationsSubscriptionVariables>(WatchUpdateApplicationsDocument, options);
+      }
+export type WatchUpdateApplicationsSubscriptionHookResult = ReturnType<typeof useWatchUpdateApplicationsSubscription>;
+export type WatchUpdateApplicationsSubscriptionResult = Apollo.SubscriptionResult<WatchUpdateApplicationsSubscription>;
+export const SubscriptionLatestInsuranceApplicationsDocument = gql`
+    subscription subscriptionLatestInsuranceApplications($limit: Int, $offset: Int = 0, $applicationWhere: latest_insurance_applications_bool_exp = {}, $order_by: [latest_insurance_applications_order_by!] = {}, $where: latest_insurance_applications_bool_exp = {}) {
+  latest_insurance_applications(
+    limit: $limit
+    offset: $offset
+    order_by: $order_by
+    where: $applicationWhere
+  ) {
+    insured_organization {
+      id
+      name
+    }
+    insurance_quote_selection {
+      insurance_quote {
+        premium
+      }
+      insurance_policy {
+        id
+        insured_signed
+        agent_signed
+        payment_collected
+      }
+    }
+    effective_date
+    expiration_date
+    id
+    stage
+  }
+}
+    `;
+
+/**
+ * __useSubscriptionLatestInsuranceApplicationsSubscription__
+ *
+ * To run a query within a React component, call `useSubscriptionLatestInsuranceApplicationsSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useSubscriptionLatestInsuranceApplicationsSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSubscriptionLatestInsuranceApplicationsSubscription({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
+ *      applicationWhere: // value for 'applicationWhere'
+ *      order_by: // value for 'order_by'
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useSubscriptionLatestInsuranceApplicationsSubscription(baseOptions?: Apollo.SubscriptionHookOptions<SubscriptionLatestInsuranceApplicationsSubscription, SubscriptionLatestInsuranceApplicationsSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<SubscriptionLatestInsuranceApplicationsSubscription, SubscriptionLatestInsuranceApplicationsSubscriptionVariables>(SubscriptionLatestInsuranceApplicationsDocument, options);
+      }
+export type SubscriptionLatestInsuranceApplicationsSubscriptionHookResult = ReturnType<typeof useSubscriptionLatestInsuranceApplicationsSubscription>;
+export type SubscriptionLatestInsuranceApplicationsSubscriptionResult = Apollo.SubscriptionResult<SubscriptionLatestInsuranceApplicationsSubscription>;
+export const BrokerAgencyNameDocument = gql`
+    query brokerAgencyName($auth0Id: String!) {
+  user(where: {auth0_id: {_eq: $auth0Id}}) {
+    broker_agent {
+      broker_agency {
+        name
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useBrokerAgencyNameQuery__
+ *
+ * To run a query within a React component, call `useBrokerAgencyNameQuery` and pass it any options that fit your needs.
+ * When your component renders, `useBrokerAgencyNameQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useBrokerAgencyNameQuery({
+ *   variables: {
+ *      auth0Id: // value for 'auth0Id'
+ *   },
+ * });
+ */
+export function useBrokerAgencyNameQuery(baseOptions: Apollo.QueryHookOptions<BrokerAgencyNameQuery, BrokerAgencyNameQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<BrokerAgencyNameQuery, BrokerAgencyNameQueryVariables>(BrokerAgencyNameDocument, options);
+      }
+export function useBrokerAgencyNameLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<BrokerAgencyNameQuery, BrokerAgencyNameQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<BrokerAgencyNameQuery, BrokerAgencyNameQueryVariables>(BrokerAgencyNameDocument, options);
+        }
+export type BrokerAgencyNameQueryHookResult = ReturnType<typeof useBrokerAgencyNameQuery>;
+export type BrokerAgencyNameLazyQueryHookResult = ReturnType<typeof useBrokerAgencyNameLazyQuery>;
+export type BrokerAgencyNameQueryResult = Apollo.QueryResult<BrokerAgencyNameQuery, BrokerAgencyNameQueryVariables>;
+export const MeDocument = gql`
+    query me @cached {
+  me {
+    auth0_id
+    name
+    email
+    broker_producer {
+      broker_agency {
+        id
+        name
+        tenant_id
+        payment_option
+        calculate_fee
+        calculate_tax
+        tenant {
+          logo
+          primary_color
+          secondary_color
+        }
+        commission_rate
+      }
+      commission_rate
+    }
+    tenant_admin {
+      tenant_id
+    }
+  }
+  rqb_system(where: {key: {_eq: "release_version"}}, limit: 1) {
+    id
+    key
+    value
+  }
+}
+    `;
+
+/**
+ * __useMeQuery__
+ *
+ * To run a query within a React component, call `useMeQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMeQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMeQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useMeQuery(baseOptions?: Apollo.QueryHookOptions<MeQuery, MeQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MeQuery, MeQueryVariables>(MeDocument, options);
+      }
+export function useMeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MeQuery, MeQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MeQuery, MeQueryVariables>(MeDocument, options);
+        }
+export type MeQueryHookResult = ReturnType<typeof useMeQuery>;
+export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>;
+export type MeQueryResult = Apollo.QueryResult<MeQuery, MeQueryVariables>;
+export const GetLogoLinkDocument = gql`
+    query getLogoLink($key: String!) {
+  getLogo(key: $key) {
+    filelink
+  }
+}
+    `;
+
+/**
+ * __useGetLogoLinkQuery__
+ *
+ * To run a query within a React component, call `useGetLogoLinkQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetLogoLinkQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetLogoLinkQuery({
+ *   variables: {
+ *      key: // value for 'key'
+ *   },
+ * });
+ */
+export function useGetLogoLinkQuery(baseOptions: Apollo.QueryHookOptions<GetLogoLinkQuery, GetLogoLinkQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetLogoLinkQuery, GetLogoLinkQueryVariables>(GetLogoLinkDocument, options);
+      }
+export function useGetLogoLinkLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetLogoLinkQuery, GetLogoLinkQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetLogoLinkQuery, GetLogoLinkQueryVariables>(GetLogoLinkDocument, options);
+        }
+export type GetLogoLinkQueryHookResult = ReturnType<typeof useGetLogoLinkQuery>;
+export type GetLogoLinkLazyQueryHookResult = ReturnType<typeof useGetLogoLinkLazyQuery>;
+export type GetLogoLinkQueryResult = Apollo.QueryResult<GetLogoLinkQuery, GetLogoLinkQueryVariables>;
+export const ReleseVersionDocument = gql`
+    subscription ReleseVersion {
+  rqb_system(where: {key: {_eq: "release_version"}}, limit: 1) {
+    id
+    key
+    value
+  }
+}
+    `;
+
+/**
+ * __useReleseVersionSubscription__
+ *
+ * To run a query within a React component, call `useReleseVersionSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useReleseVersionSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useReleseVersionSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useReleseVersionSubscription(baseOptions?: Apollo.SubscriptionHookOptions<ReleseVersionSubscription, ReleseVersionSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<ReleseVersionSubscription, ReleseVersionSubscriptionVariables>(ReleseVersionDocument, options);
+      }
+export type ReleseVersionSubscriptionHookResult = ReturnType<typeof useReleseVersionSubscription>;
+export type ReleseVersionSubscriptionResult = Apollo.SubscriptionResult<ReleseVersionSubscription>;
+export const GetTenentDocument = gql`
+    query GetTenent($id: Int!) {
+  tenant_by_pk(id: $id) {
+    id
+    logo
+    name
+    primary_color
+    secondary_color
+    report_template_Id
+    scan_required
+    class_of_business
+  }
+}
+    `;
+
+/**
+ * __useGetTenentQuery__
+ *
+ * To run a query within a React component, call `useGetTenentQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTenentQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTenentQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetTenentQuery(baseOptions: Apollo.QueryHookOptions<GetTenentQuery, GetTenentQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetTenentQuery, GetTenentQueryVariables>(GetTenentDocument, options);
+      }
+export function useGetTenentLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTenentQuery, GetTenentQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetTenentQuery, GetTenentQueryVariables>(GetTenentDocument, options);
+        }
+export type GetTenentQueryHookResult = ReturnType<typeof useGetTenentQuery>;
+export type GetTenentLazyQueryHookResult = ReturnType<typeof useGetTenentLazyQuery>;
+export type GetTenentQueryResult = Apollo.QueryResult<GetTenentQuery, GetTenentQueryVariables>;
+export const GetConnectedAganciesDocument = gql`
+    query getConnectedAgancies($id: Int!) {
+  tenant_by_pk(id: $id) {
+    id
+    broker_agencies {
+      id
+      name
+      address
+      broker_producers_aggregate {
+        aggregate {
+          count
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetConnectedAganciesQuery__
+ *
+ * To run a query within a React component, call `useGetConnectedAganciesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetConnectedAganciesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetConnectedAganciesQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetConnectedAganciesQuery(baseOptions: Apollo.QueryHookOptions<GetConnectedAganciesQuery, GetConnectedAganciesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetConnectedAganciesQuery, GetConnectedAganciesQueryVariables>(GetConnectedAganciesDocument, options);
+      }
+export function useGetConnectedAganciesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetConnectedAganciesQuery, GetConnectedAganciesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetConnectedAganciesQuery, GetConnectedAganciesQueryVariables>(GetConnectedAganciesDocument, options);
+        }
+export type GetConnectedAganciesQueryHookResult = ReturnType<typeof useGetConnectedAganciesQuery>;
+export type GetConnectedAganciesLazyQueryHookResult = ReturnType<typeof useGetConnectedAganciesLazyQuery>;
+export type GetConnectedAganciesQueryResult = Apollo.QueryResult<GetConnectedAganciesQuery, GetConnectedAganciesQueryVariables>;
+export const UpdateTenantDocument = gql`
+    mutation UpdateTenant($id: Int!, $logo: String!, $name: String!, $primary_color: String!, $report_template_Id: String!, $secondary_color: String!, $scan_required: Boolean = false) {
+  update_tenant_by_pk(
+    pk_columns: {id: $id}
+    _set: {logo: $logo, name: $name, primary_color: $primary_color, report_template_Id: $report_template_Id, secondary_color: $secondary_color, scan_required: $scan_required}
+  ) {
+    id
+  }
+}
+    `;
+export type UpdateTenantMutationFn = Apollo.MutationFunction<UpdateTenantMutation, UpdateTenantMutationVariables>;
+
+/**
+ * __useUpdateTenantMutation__
+ *
+ * To run a mutation, you first call `useUpdateTenantMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateTenantMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateTenantMutation, { data, loading, error }] = useUpdateTenantMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      logo: // value for 'logo'
+ *      name: // value for 'name'
+ *      primary_color: // value for 'primary_color'
+ *      report_template_Id: // value for 'report_template_Id'
+ *      secondary_color: // value for 'secondary_color'
+ *      scan_required: // value for 'scan_required'
+ *   },
+ * });
+ */
+export function useUpdateTenantMutation(baseOptions?: Apollo.MutationHookOptions<UpdateTenantMutation, UpdateTenantMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateTenantMutation, UpdateTenantMutationVariables>(UpdateTenantDocument, options);
+      }
+export type UpdateTenantMutationHookResult = ReturnType<typeof useUpdateTenantMutation>;
+export type UpdateTenantMutationResult = Apollo.MutationResult<UpdateTenantMutation>;
+export type UpdateTenantMutationOptions = Apollo.BaseMutationOptions<UpdateTenantMutation, UpdateTenantMutationVariables>;
+export const CreateTenantDocument = gql`
+    mutation createTenant($logo: String!, $name: String!, $primary_color: String!, $report_template_Id: String!, $secondary_color: String!, $scan_required: Boolean = false) {
+  insert_tenant_one(
+    object: {logo: $logo, name: $name, primary_color: $primary_color, report_template_Id: $report_template_Id, secondary_color: $secondary_color, scan_required: $scan_required}
+  ) {
+    id
+  }
+}
+    `;
+export type CreateTenantMutationFn = Apollo.MutationFunction<CreateTenantMutation, CreateTenantMutationVariables>;
+
+/**
+ * __useCreateTenantMutation__
+ *
+ * To run a mutation, you first call `useCreateTenantMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateTenantMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createTenantMutation, { data, loading, error }] = useCreateTenantMutation({
+ *   variables: {
+ *      logo: // value for 'logo'
+ *      name: // value for 'name'
+ *      primary_color: // value for 'primary_color'
+ *      report_template_Id: // value for 'report_template_Id'
+ *      secondary_color: // value for 'secondary_color'
+ *      scan_required: // value for 'scan_required'
+ *   },
+ * });
+ */
+export function useCreateTenantMutation(baseOptions?: Apollo.MutationHookOptions<CreateTenantMutation, CreateTenantMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateTenantMutation, CreateTenantMutationVariables>(CreateTenantDocument, options);
+      }
+export type CreateTenantMutationHookResult = ReturnType<typeof useCreateTenantMutation>;
+export type CreateTenantMutationResult = Apollo.MutationResult<CreateTenantMutation>;
+export type CreateTenantMutationOptions = Apollo.BaseMutationOptions<CreateTenantMutation, CreateTenantMutationVariables>;
+export const UploadLogoDocument = gql`
+    mutation uploadLogo($type: String!, $base64str: String!, $tenant_id: String!) {
+  logoUpload(base64str: $base64str, tenant_id: $tenant_id, type: $type) {
+    file_path
+  }
+}
+    `;
+export type UploadLogoMutationFn = Apollo.MutationFunction<UploadLogoMutation, UploadLogoMutationVariables>;
+
+/**
+ * __useUploadLogoMutation__
+ *
+ * To run a mutation, you first call `useUploadLogoMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUploadLogoMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [uploadLogoMutation, { data, loading, error }] = useUploadLogoMutation({
+ *   variables: {
+ *      type: // value for 'type'
+ *      base64str: // value for 'base64str'
+ *      tenant_id: // value for 'tenant_id'
+ *   },
+ * });
+ */
+export function useUploadLogoMutation(baseOptions?: Apollo.MutationHookOptions<UploadLogoMutation, UploadLogoMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UploadLogoMutation, UploadLogoMutationVariables>(UploadLogoDocument, options);
+      }
+export type UploadLogoMutationHookResult = ReturnType<typeof useUploadLogoMutation>;
+export type UploadLogoMutationResult = Apollo.MutationResult<UploadLogoMutation>;
+export type UploadLogoMutationOptions = Apollo.BaseMutationOptions<UploadLogoMutation, UploadLogoMutationVariables>;
+export const CreateUpdateTenantDocument = gql`
+    mutation CreateUpdateTenant($object: tenant_insert_input = {}) {
+  insert_tenant_one(
+    object: $object
+    on_conflict: {constraint: Tenent_pkey, update_columns: [logo, name, primary_color, scan_required, secondary_color, report_template_Id, class_of_business]}
+  ) {
+    id
+    name
+  }
+}
+    `;
+export type CreateUpdateTenantMutationFn = Apollo.MutationFunction<CreateUpdateTenantMutation, CreateUpdateTenantMutationVariables>;
+
+/**
+ * __useCreateUpdateTenantMutation__
+ *
+ * To run a mutation, you first call `useCreateUpdateTenantMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateUpdateTenantMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createUpdateTenantMutation, { data, loading, error }] = useCreateUpdateTenantMutation({
+ *   variables: {
+ *      object: // value for 'object'
+ *   },
+ * });
+ */
+export function useCreateUpdateTenantMutation(baseOptions?: Apollo.MutationHookOptions<CreateUpdateTenantMutation, CreateUpdateTenantMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateUpdateTenantMutation, CreateUpdateTenantMutationVariables>(CreateUpdateTenantDocument, options);
+      }
+export type CreateUpdateTenantMutationHookResult = ReturnType<typeof useCreateUpdateTenantMutation>;
+export type CreateUpdateTenantMutationResult = Apollo.MutationResult<CreateUpdateTenantMutation>;
+export type CreateUpdateTenantMutationOptions = Apollo.BaseMutationOptions<CreateUpdateTenantMutation, CreateUpdateTenantMutationVariables>;
+export const CreateTenantAdminDocument = gql`
+    mutation CreateTenantAdmin($input: [CreateTenantAdminInput!]!) {
+  createTenantAdmins(input: $input) {
+    id
+  }
+}
+    `;
+export type CreateTenantAdminMutationFn = Apollo.MutationFunction<CreateTenantAdminMutation, CreateTenantAdminMutationVariables>;
+
+/**
+ * __useCreateTenantAdminMutation__
+ *
+ * To run a mutation, you first call `useCreateTenantAdminMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateTenantAdminMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createTenantAdminMutation, { data, loading, error }] = useCreateTenantAdminMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateTenantAdminMutation(baseOptions?: Apollo.MutationHookOptions<CreateTenantAdminMutation, CreateTenantAdminMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateTenantAdminMutation, CreateTenantAdminMutationVariables>(CreateTenantAdminDocument, options);
+      }
+export type CreateTenantAdminMutationHookResult = ReturnType<typeof useCreateTenantAdminMutation>;
+export type CreateTenantAdminMutationResult = Apollo.MutationResult<CreateTenantAdminMutation>;
+export type CreateTenantAdminMutationOptions = Apollo.BaseMutationOptions<CreateTenantAdminMutation, CreateTenantAdminMutationVariables>;
+export const TenantAdminListDocument = gql`
+    query TenantAdminList($limit: Int = 10, $offset: Int = 0, $order_by: [tenant_admin_order_by!] = {}, $tenant_id: Int!, $name: String) {
+  tenant_admin(
+    limit: $limit
+    offset: $offset
+    order_by: $order_by
+    where: {tenant_id: {_eq: $tenant_id}, user: {name: {_ilike: $name}}}
+  ) {
+    user {
+      name
+      id
+      created_at
+      email
+    }
+  }
+  tenant_admin_aggregate(
+    where: {tenant_id: {_eq: $tenant_id}, user: {name: {_ilike: $name}}}
+  ) {
+    aggregate {
+      count
+    }
+  }
+}
+    `;
+
+/**
+ * __useTenantAdminListQuery__
+ *
+ * To run a query within a React component, call `useTenantAdminListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTenantAdminListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTenantAdminListQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
+ *      order_by: // value for 'order_by'
+ *      tenant_id: // value for 'tenant_id'
+ *      name: // value for 'name'
+ *   },
+ * });
+ */
+export function useTenantAdminListQuery(baseOptions: Apollo.QueryHookOptions<TenantAdminListQuery, TenantAdminListQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TenantAdminListQuery, TenantAdminListQueryVariables>(TenantAdminListDocument, options);
+      }
+export function useTenantAdminListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TenantAdminListQuery, TenantAdminListQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TenantAdminListQuery, TenantAdminListQueryVariables>(TenantAdminListDocument, options);
+        }
+export type TenantAdminListQueryHookResult = ReturnType<typeof useTenantAdminListQuery>;
+export type TenantAdminListLazyQueryHookResult = ReturnType<typeof useTenantAdminListLazyQuery>;
+export type TenantAdminListQueryResult = Apollo.QueryResult<TenantAdminListQuery, TenantAdminListQueryVariables>;
+export const GetTenantAdminDataDocument = gql`
+    query GetTenantAdminData($user_id: Int!) {
+  tenant_admin(where: {user_id: {_eq: $user_id}}) {
+    user {
+      email
+      id
+      name
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetTenantAdminDataQuery__
+ *
+ * To run a query within a React component, call `useGetTenantAdminDataQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTenantAdminDataQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTenantAdminDataQuery({
+ *   variables: {
+ *      user_id: // value for 'user_id'
+ *   },
+ * });
+ */
+export function useGetTenantAdminDataQuery(baseOptions: Apollo.QueryHookOptions<GetTenantAdminDataQuery, GetTenantAdminDataQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetTenantAdminDataQuery, GetTenantAdminDataQueryVariables>(GetTenantAdminDataDocument, options);
+      }
+export function useGetTenantAdminDataLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTenantAdminDataQuery, GetTenantAdminDataQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetTenantAdminDataQuery, GetTenantAdminDataQueryVariables>(GetTenantAdminDataDocument, options);
+        }
+export type GetTenantAdminDataQueryHookResult = ReturnType<typeof useGetTenantAdminDataQuery>;
+export type GetTenantAdminDataLazyQueryHookResult = ReturnType<typeof useGetTenantAdminDataLazyQuery>;
+export type GetTenantAdminDataQueryResult = Apollo.QueryResult<GetTenantAdminDataQuery, GetTenantAdminDataQueryVariables>;
+export const TenantUserUpdateDocument = gql`
+    mutation tenantUserUpdate($id: Int!, $name: String!, $email: String!) {
+  update_user(
+    where: {id: {_eq: $id}, _and: {email: {_eq: $email}}}
+    _set: {name: $name}
+  ) {
+    affected_rows
+  }
+}
+    `;
+export type TenantUserUpdateMutationFn = Apollo.MutationFunction<TenantUserUpdateMutation, TenantUserUpdateMutationVariables>;
+
+/**
+ * __useTenantUserUpdateMutation__
+ *
+ * To run a mutation, you first call `useTenantUserUpdateMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useTenantUserUpdateMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [tenantUserUpdateMutation, { data, loading, error }] = useTenantUserUpdateMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      name: // value for 'name'
+ *      email: // value for 'email'
+ *   },
+ * });
+ */
+export function useTenantUserUpdateMutation(baseOptions?: Apollo.MutationHookOptions<TenantUserUpdateMutation, TenantUserUpdateMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<TenantUserUpdateMutation, TenantUserUpdateMutationVariables>(TenantUserUpdateDocument, options);
+      }
+export type TenantUserUpdateMutationHookResult = ReturnType<typeof useTenantUserUpdateMutation>;
+export type TenantUserUpdateMutationResult = Apollo.MutationResult<TenantUserUpdateMutation>;
+export type TenantUserUpdateMutationOptions = Apollo.BaseMutationOptions<TenantUserUpdateMutation, TenantUserUpdateMutationVariables>;
+export const GetTenentListDocument = gql`
+    query getTenentList($limit: Int = 10, $offset: Int = 0, $name: String) {
+  tenant(offset: $offset, limit: $limit, where: {name: {_ilike: $name}}) {
+    logo
+    id
+    name
+    broker_agencies_aggregate {
+      aggregate {
+        count
+      }
+    }
+  }
+  tenant_aggregate(where: {name: {_ilike: $name}}) {
+    aggregate {
+      count
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetTenentListQuery__
+ *
+ * To run a query within a React component, call `useGetTenentListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTenentListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTenentListQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
+ *      name: // value for 'name'
+ *   },
+ * });
+ */
+export function useGetTenentListQuery(baseOptions?: Apollo.QueryHookOptions<GetTenentListQuery, GetTenentListQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetTenentListQuery, GetTenentListQueryVariables>(GetTenentListDocument, options);
+      }
+export function useGetTenentListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTenentListQuery, GetTenentListQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetTenentListQuery, GetTenentListQueryVariables>(GetTenentListDocument, options);
+        }
+export type GetTenentListQueryHookResult = ReturnType<typeof useGetTenentListQuery>;
+export type GetTenentListLazyQueryHookResult = ReturnType<typeof useGetTenentListLazyQuery>;
+export type GetTenentListQueryResult = Apollo.QueryResult<GetTenentListQuery, GetTenentListQueryVariables>;
+export const GetTenentListCountDocument = gql`
+    query getTenentListCount($name: String) {
+  tenant_aggregate(where: {name: {_ilike: $name}}) {
+    aggregate {
+      count
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetTenentListCountQuery__
+ *
+ * To run a query within a React component, call `useGetTenentListCountQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTenentListCountQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTenentListCountQuery({
+ *   variables: {
+ *      name: // value for 'name'
+ *   },
+ * });
+ */
+export function useGetTenentListCountQuery(baseOptions?: Apollo.QueryHookOptions<GetTenentListCountQuery, GetTenentListCountQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetTenentListCountQuery, GetTenentListCountQueryVariables>(GetTenentListCountDocument, options);
+      }
+export function useGetTenentListCountLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTenentListCountQuery, GetTenentListCountQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetTenentListCountQuery, GetTenentListCountQueryVariables>(GetTenentListCountDocument, options);
+        }
+export type GetTenentListCountQueryHookResult = ReturnType<typeof useGetTenentListCountQuery>;
+export type GetTenentListCountLazyQueryHookResult = ReturnType<typeof useGetTenentListCountLazyQuery>;
+export type GetTenentListCountQueryResult = Apollo.QueryResult<GetTenentListCountQuery, GetTenentListCountQueryVariables>;
+export const GetAllTenantsDocument = gql`
+    query getAllTenants($limit: Int = 10, $offset: Int = 0, $order_by: [tenant_order_by!] = {}, $where: tenant_bool_exp = {}) {
+  tenant(offset: $offset, limit: $limit, order_by: $order_by, where: $where) {
+    logo
+    id
+    name
+    broker_agencies_aggregate {
+      aggregate {
+        count
+      }
+    }
+  }
+  tenant_aggregate(where: $where) {
+    aggregate {
+      count
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetAllTenantsQuery__
+ *
+ * To run a query within a React component, call `useGetAllTenantsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllTenantsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllTenantsQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
+ *      order_by: // value for 'order_by'
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useGetAllTenantsQuery(baseOptions?: Apollo.QueryHookOptions<GetAllTenantsQuery, GetAllTenantsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllTenantsQuery, GetAllTenantsQueryVariables>(GetAllTenantsDocument, options);
+      }
+export function useGetAllTenantsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllTenantsQuery, GetAllTenantsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllTenantsQuery, GetAllTenantsQueryVariables>(GetAllTenantsDocument, options);
+        }
+export type GetAllTenantsQueryHookResult = ReturnType<typeof useGetAllTenantsQuery>;
+export type GetAllTenantsLazyQueryHookResult = ReturnType<typeof useGetAllTenantsLazyQuery>;
+export type GetAllTenantsQueryResult = Apollo.QueryResult<GetAllTenantsQuery, GetAllTenantsQueryVariables>;
+export const ResetPasswordAsAdminDocument = gql`
+    mutation resetPasswordAsAdmin($email: String!, $userAuthId: String!) {
+  adminResetPassword(input: {email: $email, userAuthId: $userAuthId}) {
+    message
+  }
+}
+    `;
+export type ResetPasswordAsAdminMutationFn = Apollo.MutationFunction<ResetPasswordAsAdminMutation, ResetPasswordAsAdminMutationVariables>;
+
+/**
+ * __useResetPasswordAsAdminMutation__
+ *
+ * To run a mutation, you first call `useResetPasswordAsAdminMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useResetPasswordAsAdminMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [resetPasswordAsAdminMutation, { data, loading, error }] = useResetPasswordAsAdminMutation({
+ *   variables: {
+ *      email: // value for 'email'
+ *      userAuthId: // value for 'userAuthId'
+ *   },
+ * });
+ */
+export function useResetPasswordAsAdminMutation(baseOptions?: Apollo.MutationHookOptions<ResetPasswordAsAdminMutation, ResetPasswordAsAdminMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ResetPasswordAsAdminMutation, ResetPasswordAsAdminMutationVariables>(ResetPasswordAsAdminDocument, options);
+      }
+export type ResetPasswordAsAdminMutationHookResult = ReturnType<typeof useResetPasswordAsAdminMutation>;
+export type ResetPasswordAsAdminMutationResult = Apollo.MutationResult<ResetPasswordAsAdminMutation>;
+export type ResetPasswordAsAdminMutationOptions = Apollo.BaseMutationOptions<ResetPasswordAsAdminMutation, ResetPasswordAsAdminMutationVariables>;

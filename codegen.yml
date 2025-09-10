@@ -1,0 +1,17 @@
+overwrite: true
+schema:
+  - "https://visionx-demo.hasura.app/v1/graphql":
+      headers:
+        x-hasura-admin-secret: DT42f2AGrZ9DELq90UQg1l8D6dHy7mhZjLeBiq1bchfWLFzlY0R0ealqy8TXi0G7
+documents: "src/**/*.graphql"
+generates:
+  ./src/generated/graphql.tsx:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo
+    config:
+      withResultType: true
+  ./graphql.schema.json:
+    plugins:
+      - "introspection"
