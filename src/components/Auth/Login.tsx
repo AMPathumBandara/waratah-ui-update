@@ -1,5 +1,7 @@
 import React, { useContext, useEffect } from "react";
-import { createStyles, Theme, makeStyles } from "@mui/material/styles";
+import { createStyles } from "@mui/material/styles";
+import { Theme } from "@mui/material/styles";
+import { makeStyles } from "@mui/styles";
 import Button from "@mui/material/Button";
 import { FormProvider, useForm } from "react-hook-form";
 import InputField from "../From/InputField";
@@ -7,12 +9,12 @@ import Alert from "@mui/material/Alert";
 //@ts-ignore
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AuthLayout from "./AuthLayout";
 import { useSignIn, useUser } from "./CognitoHooks";
 
 const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
+  ({
     formWrapper: {
       maxWidth: 320,
       width: "100%",
@@ -57,7 +59,7 @@ const SignInschema = yup.object().shape({
 });
 
 export default function Login() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const classes = useStyles();
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<error>({});
@@ -74,10 +76,10 @@ export default function Login() {
     const userRole = user?.signInUserSession?.idToken?.payload?.["cognito:groups"][0];
     //  route to root when an active user available
     if (userRole === "tenant_admin" || userRole === "super_admin") {
-      history.push("/tenants");
+      navigate("/tenants");
     } else {
       console.log("pushing to root");
-      history.push("/");
+      navigate("/");
     }
   }
 
@@ -96,13 +98,13 @@ export default function Login() {
               user?.challengeName === "NEW_PASSWORD_REQUIRED"
             ) {
               // newUser.setnewUser(user);
-              history.push("/new-password");
+              navigate("/new-password");
             } else if (user) {
               const userRole = user?.signInUserSession?.idToken?.payload?.["cognito:groups"][0];
               if (userRole === "tenant_admin" || userRole === "super_admin") {
-                history.push("/tenants");
+                navigate("/tenants");
               } else {
-                history.push("/");
+                navigate("/");
               }
             } else {
               setLoading(false);

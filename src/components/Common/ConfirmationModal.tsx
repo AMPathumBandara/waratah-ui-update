@@ -48,7 +48,7 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
         <Button onClick={onConfirm} className="confirm-btn danger">
           {confirmButtonText}
         </Button>
-        <Button autoFocus onClick={onClose} color="default">
+        <Button autoFocus onClick={onClose} sx={{ color: 'text.primary' }}>
           {cancelButtonText}
         </Button>
       </DialogActions>

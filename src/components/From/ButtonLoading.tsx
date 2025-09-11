@@ -1,9 +1,11 @@
 import CircularProgress from "@mui/material/CircularProgress";
-import { makeStyles, Theme, createStyles } from "@mui/material/styles";
+import { createStyles } from "@mui/material/styles";
 import classNames from "classnames";
+import { Theme } from "@mui/material/styles";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
+  ({
     colorPrimary: {
       color: theme.palette.primary.main,
     },

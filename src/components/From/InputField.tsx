@@ -63,14 +63,13 @@ export function InputFormItem(props: InputProps) {
 
   const {
     register,
-    errors,
-    formState: { touched, isSubmitted },
+    formState: { errors, touchedFields, isSubmitted },
   } = useFormContext();
 
   const errorMessage = FormErrors.errorMessage(
     name,
     errors,
-    touched,
+    touchedFields,
     isSubmitted,
     externalErrorMessage
   );
@@ -81,11 +80,12 @@ export function InputFormItem(props: InputProps) {
   return (
     <TextField
       id={name}
-      name={name}
+      //name={name}
       type={type}
       label={label}
       required={required}
-      inputRef={register({ required })}
+      //inputRef={register({ required })}
+      {...register(name, { required })}
       onChange={event => {
         props.onChange && props.onChange(event.target.value);
       }}
@@ -103,8 +103,8 @@ export function InputFormItem(props: InputProps) {
       InputLabelProps={
         shrink
           ? {
-              shrink: true,
-            }
+            shrink: true,
+          }
           : undefined
       }
       error={Boolean(errorMessage) || error}

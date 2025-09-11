@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { createStyles, Theme, makeStyles } from "@mui/material/styles";
+import { createStyles } from "@mui/material/styles";
+import { Theme } from "@mui/material/styles";
+import { makeStyles } from "@mui/styles";
 import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import { FormProvider, useForm } from "react-hook-form";
@@ -10,11 +12,11 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Auth } from "aws-amplify";
 import AuthLayout from "./AuthLayout";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForgotPasswordMutation } from "generated/graphql";
 
 const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
+  ({
     formWrapper: {
       maxWidth: 320,
       width: "100%",
@@ -69,7 +71,7 @@ const CountdownTimer = ({ initialSeconds = 0 }) => {
 };
 
 export default function ForgotPassword() {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [
     ForgotPassword,
@@ -83,7 +85,7 @@ export default function ForgotPassword() {
     Auth.currentSession()
       .then(res => {
         if (res) {
-          history.push("/");
+          navigate("/");
         }
       })
       .catch(e => {
@@ -114,7 +116,7 @@ export default function ForgotPassword() {
         }
   
         setTimeout(() => {
-          history.push("/login");
+          navigate("/login");
         }, 10000);
       } catch (error: any) {
         console.log({error});

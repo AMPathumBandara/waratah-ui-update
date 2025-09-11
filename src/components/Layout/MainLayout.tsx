@@ -129,11 +129,10 @@ export default function PermanentDrawerLeft() {
             <Route path="/logout" element={<Logout />} />
 
             {protectedLinks.map(link => (
-              <ProtectedRoute
-                exact={link.exact}
+              <Route
                 key={link.path}
                 path={`${link.path}`}
-                component={link.component}
+                element={<ProtectedRoute component={link.component} path={link.path} />}
               />
             ))}
           </Routes>

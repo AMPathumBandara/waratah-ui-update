@@ -25,7 +25,8 @@
       "utils/*": ["utils/*"],
       "pages/*": ["pages/*"],
       "theme/*": ["theme/*"],
-      "icons/*": ["icons/*"]
+      "icons/*": ["icons/*"],
+      "generated/*": ["generated/*"],
     },
     "noFallthroughCasesInSwitch": true
   },

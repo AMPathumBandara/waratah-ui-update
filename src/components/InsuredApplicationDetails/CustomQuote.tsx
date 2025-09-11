@@ -1,9 +1,12 @@
-import { Box, Button, Card, Collapse, FormControl, Grid, IconButton, makeStyles, NativeSelect, Theme, Tooltip } from "@mui/material";
-import { Add, AddCircle, Close, PlusOneRounded, Save } from "@material-ui/icons";
+import { Box, Button, Card, Collapse, FormControl, Grid, IconButton, NativeSelect, Tooltip } from "@mui/material";
+import { Add, AddCircle, Close, PlusOneRounded, Save } from "@mui/icons-material";
 import { useCreateCustomQuoteMutation, useGetCustomPolicyLimitsQuery, useGetUnusedRetentionsMutation } from "generated/graphql";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ApplicationParams } from ".";
+import { Theme } from "@mui/material/styles";
+import { makeStyles } from "@mui/styles";
+import GridItem from "components/Layout/GridItem";
 
 const useStyles = makeStyles((theme: Theme) => ({
     quoteAddCard: {
@@ -190,8 +193,9 @@ const CustomQuote: React.FC<CustomQuoteProps> = ({
     return (
         <>
             {formOpen &&
-                <Grid item xs={12} md={4}>
-                    {/* {!formOpen &&
+                <Grid sx={{ xs: 12, md: 4 }}>
+                    <GridItem>
+                        {/* {!formOpen &&
                         <div className={classes.quoteActionsAdd}>
                             <Tooltip
                                 title="Add Quote"
@@ -209,183 +213,184 @@ const CustomQuote: React.FC<CustomQuoteProps> = ({
                             </Tooltip>
                         </div>
                     } */}
-                    <Collapse in={delayedOpen}>
-                        <Card className={classes.quoteAddCard}>
-                            {
-                                formOpen && (
-                                    <div className={classes.quoteActionsClose}>
-                                        <Tooltip
-                                            title="Close"
-                                            aria-label="Close"
-                                        >
-                                            <IconButton
+                        <Collapse in={delayedOpen}>
+                            <Card className={classes.quoteAddCard}>
+                                {
+                                    formOpen && (
+                                        <div className={classes.quoteActionsClose}>
+                                            <Tooltip
+                                                title="Close"
                                                 aria-label="Close"
-                                                onClick={() => setFormOpen(false)}
-                                                size="small"
                                             >
-                                                <Close />
-                                            </IconButton>
-                                        </Tooltip>
-                                    </div>
-                                )
-                            }
-                            <div className={classes.collapseContainer}>
-                                <table className={classes.quotesTable}>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <span className={classes.textGrey}>Limit</span>
-                                                <span className={classes.textGrey}>
-                                                    <FormControl className={classes.formControl}>
-                                                        <NativeSelect
-                                                            className={classes.miniSelect}
-                                                            name="limit"
-                                                            inputProps={{ 'aria-label': 'limit' }}
-                                                            onChange={(e) => setSelectedLimit(Number(e.target.value))}
-                                                            value={selectedLimit}
-                                                        >
-                                                            <option value={-1}>
-                                                                Please select
-                                                            </option>
-                                                            {
-                                                                customPolicies?.getCustomPolicies?.customPolicyLimits?.map((p, index) => {
-                                                                    return <option key={index} value={p as number}>{p}</option>
-                                                                })
-                                                            }
-                                                        </NativeSelect>
-                                                    </FormControl>
-                                                </span>
-                                            </td>
-                                            <td>
-                                                <span
-                                                    className={classes.textBlack}
-                                                    style={{ fontSize: "18px" }}
+                                                <IconButton
+                                                    aria-label="Close"
+                                                    onClick={() => setFormOpen(false)}
+                                                    size="small"
                                                 >
-                                                    $xx,xx.xx
-                                                </span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <span className={classes.textGrey}>Sub Limit</span>
-                                            </td>
-                                            <td>
-                                                <span className={classes.textGrey}>Deductible</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <span className={classes.textBlack} style={{ position: "relative", top: "-8px" }}>
-                                                    $xxx,xxx
-                                                </span>
-                                            </td>
-                                            <td>
-                                                <span className={classes.textBlack}>
-                                                    <FormControl className={classes.formControl}>
-                                                        <NativeSelect
-                                                            className={classes.miniSelect}
-                                                            name="deductible"
-                                                            inputProps={{ 'aria-label': 'deductible' }}
-                                                            onChange={(e) => setSelectedDeductible(Number(e.target.value))}
-                                                        >
-                                                            {
-                                                                (!selectedLimit || !unUsedDeductibles || unUsedDeductibles.length == 0) &&
+                                                    <Close />
+                                                </IconButton>
+                                            </Tooltip>
+                                        </div>
+                                    )
+                                }
+                                <div className={classes.collapseContainer}>
+                                    <table className={classes.quotesTable}>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <span className={classes.textGrey}>Limit</span>
+                                                    <span className={classes.textGrey}>
+                                                        <FormControl className={classes.formControl}>
+                                                            <NativeSelect
+                                                                className={classes.miniSelect}
+                                                                name="limit"
+                                                                inputProps={{ 'aria-label': 'limit' }}
+                                                                onChange={(e) => setSelectedLimit(Number(e.target.value))}
+                                                                value={selectedLimit}
+                                                            >
                                                                 <option value={-1}>
-                                                                    Select Limit
+                                                                    Please select
                                                                 </option>
-                                                            }
-                                                            {
-                                                                selectedLimit && deductibleLoading &&
-                                                                <option value={-1}>
-                                                                    Loading...
-                                                                </option>
-                                                            }
-                                                            {
-                                                                selectedLimit && !deductibleLoading && !deductibleError
-                                                                && unUsedDeductibles && unUsedDeductibles.length > 0 &&
-                                                                <>
+                                                                {
+                                                                    customPolicies?.getCustomPolicies?.customPolicyLimits?.map((p, index) => {
+                                                                        return <option key={index} value={p as number}>{p}</option>
+                                                                    })
+                                                                }
+                                                            </NativeSelect>
+                                                        </FormControl>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span
+                                                        className={classes.textBlack}
+                                                        style={{ fontSize: "18px" }}
+                                                    >
+                                                        $xx,xx.xx
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span className={classes.textGrey}>Sub Limit</span>
+                                                </td>
+                                                <td>
+                                                    <span className={classes.textGrey}>Deductible</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span className={classes.textBlack} style={{ position: "relative", top: "-8px" }}>
+                                                        $xxx,xxx
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span className={classes.textBlack}>
+                                                        <FormControl className={classes.formControl}>
+                                                            <NativeSelect
+                                                                className={classes.miniSelect}
+                                                                name="deductible"
+                                                                inputProps={{ 'aria-label': 'deductible' }}
+                                                                onChange={(e) => setSelectedDeductible(Number(e.target.value))}
+                                                            >
+                                                                {
+                                                                    (!selectedLimit || !unUsedDeductibles || unUsedDeductibles.length == 0) &&
                                                                     <option value={-1}>
-                                                                        Please select
+                                                                        Select Limit
                                                                     </option>
-                                                                    {
-                                                                        unUsedDeductibles?.map((p, index) => {
-                                                                            return <option key={index} value={p as number}>{p}</option>
-                                                                        })
-                                                                    }
-                                                                </>
-                                                            }
-                                                        </NativeSelect>
-                                                    </FormControl>
-                                                </span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <hr className={classes.styledHR} />
-                                <table className={classes.quotesTable}>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <span className={classes.textGrey}>Premium</span>
-                                            </td>
-                                            <td>
-                                                <span className={classes.textGrey}>
-                                                    $xx,xxx.xx
-                                                </span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <span className={classes.textGrey}>Policy Fees</span>
-                                            </td>
-                                            <td>
-                                                <span className={classes.textGrey}>
-                                                    $xxx.xx
-                                                </span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <span className={classes.textGrey}>Tax</span>
-                                            </td>
-                                            <td>
-                                                <span className={classes.textGrey}>
-                                                    $xx.xx
-                                                </span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <span className={classes.textBlack}>Total</span>
-                                            </td>
-                                            <td>
-                                                <span className={classes.textBlack}>$xx,xx.xx</span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <Box display="flex" justifyContent="flex-end" style={{ marginTop: "11px" }}>
-                                    <Tooltip
-                                        title="Create Quote"
-                                        aria-label="Create Quote"
-                                    >
-                                        <Button
-                                            variant="contained"
-                                            color="primary"
-                                            startIcon={<Save />}
-                                            size="small"
-                                            disabled={deductibleLoading || createCustomQuoteLoading || !selectedLimit || !selectedDeductible}
-                                            onClick={() => createCustomQuote()}
+                                                                }
+                                                                {
+                                                                    selectedLimit && deductibleLoading &&
+                                                                    <option value={-1}>
+                                                                        Loading...
+                                                                    </option>
+                                                                }
+                                                                {
+                                                                    selectedLimit && !deductibleLoading && !deductibleError
+                                                                    && unUsedDeductibles && unUsedDeductibles.length > 0 &&
+                                                                    <>
+                                                                        <option value={-1}>
+                                                                            Please select
+                                                                        </option>
+                                                                        {
+                                                                            unUsedDeductibles?.map((p, index) => {
+                                                                                return <option key={index} value={p as number}>{String(p)}</option>
+                                                                            })
+                                                                        }
+                                                                    </>
+                                                                }
+                                                            </NativeSelect>
+                                                        </FormControl>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <hr className={classes.styledHR} />
+                                    <table className={classes.quotesTable}>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <span className={classes.textGrey}>Premium</span>
+                                                </td>
+                                                <td>
+                                                    <span className={classes.textGrey}>
+                                                        $xx,xxx.xx
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span className={classes.textGrey}>Policy Fees</span>
+                                                </td>
+                                                <td>
+                                                    <span className={classes.textGrey}>
+                                                        $xxx.xx
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span className={classes.textGrey}>Tax</span>
+                                                </td>
+                                                <td>
+                                                    <span className={classes.textGrey}>
+                                                        $xx.xx
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span className={classes.textBlack}>Total</span>
+                                                </td>
+                                                <td>
+                                                    <span className={classes.textBlack}>$xx,xx.xx</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <Box display="flex" justifyContent="flex-end" style={{ marginTop: "11px" }}>
+                                        <Tooltip
+                                            title="Create Quote"
+                                            aria-label="Create Quote"
                                         >
-                                            {
-                                                createCustomQuoteLoading ? "Creating..." : "Create"
-                                            }
-                                        </Button>
-                                    </Tooltip>
-                                </Box>
-                            </div>
-                        </Card>
-                    </Collapse>
+                                            <Button
+                                                variant="contained"
+                                                color="primary"
+                                                startIcon={<Save />}
+                                                size="small"
+                                                disabled={deductibleLoading || createCustomQuoteLoading || !selectedLimit || !selectedDeductible}
+                                                onClick={() => createCustomQuote()}
+                                            >
+                                                {
+                                                    createCustomQuoteLoading ? "Creating..." : "Create"
+                                                }
+                                            </Button>
+                                        </Tooltip>
+                                    </Box>
+                                </div>
+                            </Card>
+                        </Collapse>
+                    </GridItem>
                 </Grid>
             }
         </>

@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 // Material UI
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import { lighten, makeStyles, Theme } from "@mui/material/styles";
+import { lighten } from "@mui/material/styles";
 import Divider from "@mui/material/Divider";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -45,6 +45,10 @@ import ScanVerdictDetailModal from "./ScanVerdictDetail";
 import { useUser } from "components/Auth/CognitoHooks";
 import IconButton from "@mui/material/IconButton/IconButton";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
+import { Theme } from "@mui/material/styles";
+import { makeStyles } from "@mui/styles";
+import GridItem from "components/Layout/GridItem";
+
 // Styles
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -209,18 +213,22 @@ const GridRow: React.FC<GridRowProps> = ({ name, value }) => {
   const classes = useStyles();
   return (
     <>
-      <Grid item sm={6} xs={12}>
-        <Typography
-          variant="body2"
-          className={`${classes.fontLight} ${classes.gridRow}`}
-        >
-          {name}
-        </Typography>
+      <Grid sx={{ sm: 6, xs: 12 }}>
+        <GridItem>
+          <Typography
+            variant="body2"
+            className={`${classes.fontLight} ${classes.gridRow}`}
+          >
+            {name}
+          </Typography>
+        </GridItem>
       </Grid>
-      <Grid item sm={6} xs={12}>
-        <Typography variant="body2" align="right" className={classes.gridRow}>
-          {value}
-        </Typography>
+      <Grid sx={{ sm: 6, xs: 12 }}>
+        <GridItem>
+          <Typography variant="body2" align="right" className={classes.gridRow}>
+            {value}
+          </Typography>
+        </GridItem>
       </Grid>
     </>
   );
@@ -423,471 +431,497 @@ const Bind: React.FC<BindProps> = ({
         )}
 
         <Grid container spacing={2}>
-          <Grid item md={6} xs={12} style={{ marginTop: "2rem" }}>
-            {bindStageLoading ? (
-              <LoadingBindTableInfor />
-            ) : (
-              <div className="application-summary-card">
-                <Card
-                  shadow={false}
-                  legendTitle="Company Information"
-                  fullHeight={true}
-                >
-                  <Grid container style={{ padding: "1rem 0rem" }}>
-                    <GridRow
-                      name={"Organization Name"}
-                      value={
-                        summaryData?.insurance_application_by_pk
-                          ?.insured_organization?.name
-                      }
-                    />
-                    <GridRow
-                      name={"Address"}
-                      value={`${summaryData?.insurance_application_by_pk?.insured_organization?.address}, ${summaryData?.insurance_application_by_pk?.insured_organization?.city}, ${summaryData?.insurance_application_by_pk?.insured_organization?.state} ${summaryData?.insurance_application_by_pk?.insured_organization?.zip}`}
-                    />
-                    <GridRow
-                      name={"Domain"}
-                      value={summaryData?.insurance_application_by_pk?.domain}
-                    />
-                    <GridRow
-                      name={"Industry"}
-                      value={summaryData?.insurance_application_by_pk?.industry}
-                    />
-                    <GridRow
-                      name={"Revenue"}
-                      value={currencyFormatter(summaryData?.insurance_application_by_pk?.revenue)}
-                    />
-                    <GridRow
-                      name={"Number of Employees"}
-                      value={
-                        summaryData?.insurance_application_by_pk?.employees
-                      }
-                    />
-                    <Grid item sm={6} xs={12}>
-                      <Typography
-                        variant="body2"
-                        className={`${classes.fontLight} ${classes.gridRow}`}
-                      >
-                        Scan Verdict
-                      </Typography>
-                    </Grid>
-                    <Grid item sm={6} xs={12}>
-                      <Typography
-                        variant="body2"
-                        align="right"
-                        className={classes.gridRow}
-                      >
-                        <IconButton
-                          size="small"
-                          title="View Details"
-                          style={{
-                            position: "relative",
-                            top: -1,
-                            marginRight: 5,
-                          }}
-                          onClick={() => setShowScanVerdict(true)}
-                        >
-                          <DescriptionOutlinedIcon
-                            fontSize="small"
-                            color="action"
-                          />
-                        </IconButton>
-                        {scanVirdict(
+          <Grid sx={{ md: 6, xs: 12, marginTop: "2rem" }}>
+            <GridItem>
+              {bindStageLoading ? (
+                <LoadingBindTableInfor />
+              ) : (
+                <div className="application-summary-card">
+                  <Card
+                    shadow={false}
+                    legendTitle="Company Information"
+                    fullHeight={true}
+                  >
+                    <Grid container style={{ padding: "1rem 0rem" }}>
+                      <GridRow
+                        name={"Organization Name"}
+                        value={
                           summaryData?.insurance_application_by_pk
-                            ?.external_scans[0]?.scan_result?.verdict
-                        )}
-                      </Typography>
-                    </Grid>
-
-                    <Grid item sm={6} xs={12}>
-                      <Typography
-                        variant="body2"
-                        className={`${classes.fontLight} ${classes.gridRow}`}
-                      >
-                        Claims URL
-                      </Typography>
-                    </Grid>
-                    <Grid item sm={6} xs={12}>
-                      <Typography
-                        variant="body2"
-                        align="right"
-                        className={classes.gridRow}
-                      >
-                        {summaryData?.insurance_application_by_pk
-                          ?.insurance_quote_selection?.insurance_policy
-                          ?.canary_token ? (
-                          <Tooltip title="Go to Claim URL">
-                            <a
-                              href={`${summaryData?.insurance_application_by_pk?.insurance_quote_selection?.insurance_policy?.canary_token}`}
-                              target="_blank"
-                              className="claim-url"
+                            ?.insured_organization?.name
+                        }
+                      />
+                      <GridRow
+                        name={"Address"}
+                        value={`${summaryData?.insurance_application_by_pk?.insured_organization?.address}, ${summaryData?.insurance_application_by_pk?.insured_organization?.city}, ${summaryData?.insurance_application_by_pk?.insured_organization?.state} ${summaryData?.insurance_application_by_pk?.insured_organization?.zip}`}
+                      />
+                      <GridRow
+                        name={"Domain"}
+                        value={summaryData?.insurance_application_by_pk?.domain}
+                      />
+                      <GridRow
+                        name={"Industry"}
+                        value={summaryData?.insurance_application_by_pk?.industry}
+                      />
+                      <GridRow
+                        name={"Revenue"}
+                        value={currencyFormatter(summaryData?.insurance_application_by_pk?.revenue)}
+                      />
+                      <GridRow
+                        name={"Number of Employees"}
+                        value={
+                          summaryData?.insurance_application_by_pk?.employees
+                        }
+                      />
+                      <Grid sx={{ sm: 6, xs: 12 }}>
+                        <GridItem>
+                          <Typography
+                            variant="body2"
+                            className={`${classes.fontLight} ${classes.gridRow}`}
+                          >
+                            Scan Verdict
+                          </Typography>
+                        </GridItem>
+                      </Grid>
+                      <Grid sx={{ sm: 6, xs: 12 }}>
+                        <GridItem>
+                          <Typography
+                            variant="body2"
+                            align="right"
+                            className={classes.gridRow}
+                          >
+                            <IconButton
+                              size="small"
+                              title="View Details"
+                              style={{
+                                position: "relative",
+                                top: -1,
+                                marginRight: 5,
+                              }}
+                              onClick={() => setShowScanVerdict(true)}
                             >
-                              <LaunchOutlinedIcon fontSize="small" />
-                            </a>
-                          </Tooltip>
-                        ) : (
-                          "N/A"
-                        )}
-                      </Typography>
+                              <DescriptionOutlinedIcon
+                                fontSize="small"
+                                color="action"
+                              />
+                            </IconButton>
+                            {scanVirdict(
+                              summaryData?.insurance_application_by_pk
+                                ?.external_scans[0]?.scan_result?.verdict
+                            )}
+                          </Typography>
+                        </GridItem>
+                      </Grid>
+
+                      <Grid sx={{ sm: 6, xs: 12 }}>
+                        <GridItem>
+                          <Typography
+                            variant="body2"
+                            className={`${classes.fontLight} ${classes.gridRow}`}
+                          >
+                            Claims URL
+                          </Typography>
+                        </GridItem>
+                      </Grid>
+                      <Grid sx={{ sm: 6, xs: 12 }}>
+                        <GridItem>
+                          <Typography
+                            variant="body2"
+                            align="right"
+                            className={classes.gridRow}
+                          >
+                            {summaryData?.insurance_application_by_pk
+                              ?.insurance_quote_selection?.insurance_policy
+                              ?.canary_token ? (
+                              <Tooltip title="Go to Claim URL">
+                                <a
+                                  href={`${summaryData?.insurance_application_by_pk?.insurance_quote_selection?.insurance_policy?.canary_token}`}
+                                  target="_blank"
+                                  className="claim-url"
+                                >
+                                  <LaunchOutlinedIcon fontSize="small" />
+                                </a>
+                              </Tooltip>
+                            ) : (
+                              "N/A"
+                            )}
+                          </Typography>
+                        </GridItem>
+                      </Grid>
                     </Grid>
-                  </Grid>
-                </Card>
-              </div>
-            )}
+                  </Card>
+                </div>
+              )}
+            </GridItem>
           </Grid>
 
-          <Grid item md={6} xs={12} style={{ marginTop: "2rem" }}>
-            {bindStageLoading ? (
-              <LoadingBindTableInfor />
-            ) : (
-              <div className="application-summary-card">
-                <Card
-                  shadow={false}
-                  legendTitle="Coverage Summary"
-                  fullHeight={true}
-                >
-                  <Grid container style={{ padding: "1rem 0rem" }}>
-                    <Grid item sm={6} xs={12}>
-                      <Typography
-                        variant="body2"
-                        className={`${classes.fontLight} ${classes.gridRow}`}
-                      >
-                        Policy Number
-                      </Typography>
-                    </Grid>
-                    <Grid item sm={6} xs={12}>
-                      <div className="flex justify-flex-end custom-space">
-                        <div>
-                          {summaryData?.insurance_application_by_pk
-                            ?.insurance_quote_selection?.insurance_policy
-                            ?.long_policy_number ? (
-                            <Tooltip title="Copy long policy number">
-                              <div
-                                className="copy-policy-number"
-                                onClick={() =>
-                                  CopytoClipBoard(
-                                    `${summaryData?.insurance_application_by_pk?.insurance_quote_selection?.insurance_policy?.long_policy_number}`
-                                  )
-                                }
-                              >
-                                <img src={CopyIcon} />
-                              </div>
-                            </Tooltip>
-                          ) : (
-                            ""
-                          )}
-                        </div>
-                        <div>
-                          {summaryData?.insurance_application_by_pk
-                            ?.insurance_quote_selection?.insurance_policy
-                            ?.policy_number
-                            ? summaryData?.insurance_application_by_pk
-                              ?.insurance_quote_selection?.insurance_policy
-                              ?.policy_number
-                            : "N/A"}
-                        </div>
-                      </div>
-                    </Grid>
-                    <GridRow
-                      name={"Effective Date"}
-                      value={
-                        summaryData?.insurance_application_by_pk?.effective_date
-                      }
-                    />
-                    <GridRow
-                      name={"Expiration Date"}
-                      value={
-                        summaryData?.insurance_application_by_pk
-                          ?.expiration_date
-                      }
-                    />
-                    <GridRow
-                      name={"Policy Limit"}
-                      value={currencyFormatter(
+          <Grid sx={{ md: 6, xs: 12, marginTop: "2rem" }}>
+            <GridItem>
+              {bindStageLoading ? (
+                <LoadingBindTableInfor />
+              ) : (
+                <div className="application-summary-card">
+                  <Card
+                    shadow={false}
+                    legendTitle="Coverage Summary"
+                    fullHeight={true}
+                  >
+                    <Grid container style={{ padding: "1rem 0rem" }}>
+                      <Grid sx={{ sm: 6, xs: 12 }}>
+                        <GridItem>
+                          <Typography
+                            variant="body2"
+                            className={`${classes.fontLight} ${classes.gridRow}`}
+                          >
+                            Policy Number
+                          </Typography>
+                        </GridItem>
+                      </Grid>
+                      <Grid sx={{ sm: 6, xs: 12 }}>
+                        <GridItem>
+                          <div className="flex justify-flex-end custom-space">
+                            <div>
+                              {summaryData?.insurance_application_by_pk
+                                ?.insurance_quote_selection?.insurance_policy
+                                ?.long_policy_number ? (
+                                <Tooltip title="Copy long policy number">
+                                  <div
+                                    className="copy-policy-number"
+                                    onClick={() =>
+                                      CopytoClipBoard(
+                                        `${summaryData?.insurance_application_by_pk?.insurance_quote_selection?.insurance_policy?.long_policy_number}`
+                                      )
+                                    }
+                                  >
+                                    <img src={CopyIcon} />
+                                  </div>
+                                </Tooltip>
+                              ) : (
+                                ""
+                              )}
+                            </div>
+                            <div>
+                              {summaryData?.insurance_application_by_pk
+                                ?.insurance_quote_selection?.insurance_policy
+                                ?.policy_number
+                                ? summaryData?.insurance_application_by_pk
+                                  ?.insurance_quote_selection?.insurance_policy
+                                  ?.policy_number
+                                : "N/A"}
+                            </div>
+                          </div>
+                        </GridItem>
+                      </Grid>
+                      <GridRow
+                        name={"Effective Date"}
+                        value={
+                          summaryData?.insurance_application_by_pk?.effective_date
+                        }
+                      />
+                      <GridRow
+                        name={"Expiration Date"}
+                        value={
+                          summaryData?.insurance_application_by_pk
+                            ?.expiration_date
+                        }
+                      />
+                      <GridRow
+                        name={"Policy Limit"}
+                        value={currencyFormatter(
                           summaryData?.insurance_application_by_pk
                             ?.insurance_quote_selection?.insurance_quote
                             ?.policy_limit
                         )
-                      }
-                    />
-
-                    <GridRow
-                      name={"Deductible"}
-                      value={
-                        currencyFormatter(
-                        summaryData?.insurance_application_by_pk
-                          ?.insurance_quote_selection?.insurance_quote
-                          ?.deductible)
-                      }
-                    />
-
-                    {quoteFees?.map((fee: any) => (
-                      <React.Fragment key={fee.id}>
-                        <GridRow
-                          name={
-                            fee.rate
-                              ? `${fee.name} (${getPercentage(fee.rate)})`
-                              : fee.name
-                          }
-                          value={`$${fee.amount !== undefined &&
-                            //Number(fee.amount).toFixed(2)
-                            currencyFormatterWithCents(String(fee.amount))
-                            }`}
-                        />
-                      </React.Fragment>
-                    ))}
-                    {taxes ? (
-                      <GridRow
-                        name={`${taxLabel} (${getPercentage(taxes.rate)})`}
-                        value={`$${taxes.amount !== undefined &&
-                          //Number(taxes.amount).toFixed(2)
-                          currencyFormatterWithCents(taxes.amount)
-                          }`}
+                        }
                       />
-                    ) : (
-                      <GridRow name={"Tax (0%)"} value={"$0.00"} />
-                    )}
 
-                    <GridRow
-                      name={"Premium"}
-                      value={
-                        currencyFormatterWithCents(
-                          summaryData?.insurance_application_by_pk
-                            ?.insurance_quote_selection?.insurance_quote?.premium
-                        )
-                      }
-                    />
-                    <Grid item xs={12} className={classes.gridRow}>
-                      <Divider />
-                    </Grid>
-
-                    <Grid item sm={6} xs={12}>
-                      <Typography
-                        variant="body2"
-                        className={`${classes.gridRow}`}
-                      >
-                        Total Due
-                      </Typography>
-                    </Grid>
-                    <Grid item sm={6} xs={12}>
-                      <Typography
-                        variant="body2"
-                        align="right"
-                        className={classes.gridRow}
-                      >
-                        {
-                          currencyFormatterWithCents(
+                      <GridRow
+                        name={"Deductible"}
+                        value={
+                          currencyFormatter(
                             summaryData?.insurance_application_by_pk
                               ?.insurance_quote_selection?.insurance_quote
-                              ?.total_premium
+                              ?.deductible)
+                        }
+                      />
+
+                      {quoteFees?.map((fee: any) => (
+                        <React.Fragment key={fee.id}>
+                          <GridRow
+                            name={
+                              fee.rate
+                                ? `${fee.name} (${getPercentage(fee.rate)})`
+                                : fee.name
+                            }
+                            value={`$${fee.amount !== undefined &&
+                              //Number(fee.amount).toFixed(2)
+                              currencyFormatterWithCents(String(fee.amount))
+                              }`}
+                          />
+                        </React.Fragment>
+                      ))}
+                      {taxes ? (
+                        <GridRow
+                          name={`${taxLabel} (${getPercentage(taxes.rate)})`}
+                          value={`$${taxes.amount !== undefined &&
+                            //Number(taxes.amount).toFixed(2)
+                            currencyFormatterWithCents(taxes.amount)
+                            }`}
+                        />
+                      ) : (
+                        <GridRow name={"Tax (0%)"} value={"$0.00"} />
+                      )}
+
+                      <GridRow
+                        name={"Premium"}
+                        value={
+                          currencyFormatterWithCents(
+                            summaryData?.insurance_application_by_pk
+                              ?.insurance_quote_selection?.insurance_quote?.premium
                           )
                         }
-                      </Typography>
-                    </Grid>
+                      />
+                      <Grid sx={{ xs: 12 }}>
+                        <GridItem className={classes.gridRow}>
+                          <Divider />
+                        </GridItem>
+                      </Grid>
 
-                    <Grid item xs={12} className={classes.gridRow}>
-                      <Divider style={{ marginBottom: "3px" }} />
-                      <Divider />
+                      <Grid sx={{ sm: 6, xs: 12 }}>
+                        <GridItem>
+                          <Typography
+                            variant="body2"
+                            className={`${classes.gridRow}`}
+                          >
+                            Total Due
+                          </Typography>
+                        </GridItem>
+                      </Grid>
+                      <Grid sx={{ sm: 6, xs: 12 }}>
+                        <GridItem>
+                          <Typography
+                            variant="body2"
+                            align="right"
+                            className={classes.gridRow}
+                          >
+                            {
+                              currencyFormatterWithCents(
+                                summaryData?.insurance_application_by_pk
+                                  ?.insurance_quote_selection?.insurance_quote
+                                  ?.total_premium
+                              )
+                            }
+                          </Typography>
+                        </GridItem>
+                      </Grid>
+
+                      <Grid sx={{ xs: 12 }}>
+                        <GridItem className={classes.gridRow}>
+                          <Divider style={{ marginBottom: "3px" }} />
+                          <Divider />
+                        </GridItem>
+                      </Grid>
                     </Grid>
-                  </Grid>
-                </Card>
-              </div>
-            )}
+                  </Card>
+                </div>
+              )}
+            </GridItem>
           </Grid>
         </Grid>
         <Grid container spacing={2} style={{ marginTop: "2rem" }}>
-          <Grid item xs={12}>
-            {bindStageLoading ? (
-              <LoadingBindStatus />
-            ) : (
-              <div className="paymentBtnBlock">
-                <Card shadow={false} legendTitle="Bind">
-                  <Grid
-                    container
-                    alignItems="center"
-                    justifyContent="center"
-                    style={{ paddingTop: "1rem" }}
-                  >
-                    {
-                      summaryData?.insurance_application_by_pk?.broker_agency?.payment_option === "insured_paid" &&
-                      <>
-                        {!(
-                          policyData &&
-                          policyData.ipfs_quote_data &&
-                          policyData.ipfs_quote_data.ESignResult
-                        ) && (
-                            <Grid item xs={6} className={classes.paymentContainer}>
-                              <FeatureFlag
-                                roles={["admin", "broker"]}
-                                fallbackRender={() => (
-                                  <>
+          <Grid sx={{ xs: 12 }}>
+            <GridItem>
+              {bindStageLoading ? (
+                <LoadingBindStatus />
+              ) : (
+                <div className="paymentBtnBlock">
+                  <Card shadow={false} legendTitle="Bind">
+                    <Grid
+                      container
+                      alignItems="center"
+                      justifyContent="center"
+                      style={{ paddingTop: "1rem" }}
+                    >
+                      {
+                        summaryData?.insurance_application_by_pk?.broker_agency?.payment_option === "insured_paid" &&
+                        <>
+                          {!(
+                            policyData &&
+                            policyData.ipfs_quote_data &&
+                            policyData.ipfs_quote_data.ESignResult
+                          ) && (
+                              <Grid sx={{ xs: 6 }}>
+                                <GridItem className={classes.paymentContainer}>
+                                  <FeatureFlag
+                                    roles={["admin", "broker"]}
+                                    fallbackRender={() => (
+                                      <>
+                                        <Button
+                                          className={`${classes.button} ${classes.paymentButton}`}
+                                          color="primary"
+                                          size="small"
+                                          variant="contained"
+                                          disabled={true}
+                                          fullWidth
+                                        >
+                                          Bind & Send Payment Info to Insured
+                                        </Button>
+                                      </>
+                                    )}
+                                  >
+                                    <Button
+                                      id="Insured"
+                                      className={`${classes.button} ${classes.paymentButton}`}
+                                      color="primary"
+                                      size="small"
+                                      variant="contained"
+                                      fullWidth
+                                      onClick={handleBindOnClick}
+                                      disabled={
+                                        bindLoading || agentSinged || premiumAmount
+                                      }
+                                    >
+                                      {bindLoading ? (
+                                        <CircularProgress size={30} />
+                                      ) : (
+                                        "Bind & Send Payment Info to Insured"
+                                      )}
+                                    </Button>
+                                  </FeatureFlag>
+                                </GridItem>
+                              </Grid>
+                            )}
+                          {policyData &&
+                            policyData.ipfs_quote_data &&
+                            policyData.ipfs_quote_data.ESignResult && (
+                              <>
+                                <PaymentDialog
+                                  open={bindDialog}
+                                  handleClose={handleDialogClose}
+                                  agentUrl={
+                                    policyData.ipfs_quote_data!.ESignResult.AgentURL
+                                      ?.$
+                                  }
+                                  insuredUrl={
+                                    policyData.ipfs_quote_data!.ESignResult.InsuredURL
+                                      ?.$
+                                  }
+                                />
+                                <Grid sx={{ xs: 12 }}>
+                                  <GridItem className={classes.paymentContainer}>
                                     <Button
                                       className={`${classes.button} ${classes.paymentButton}`}
                                       color="primary"
                                       size="small"
                                       variant="contained"
-                                      disabled={true}
                                       fullWidth
+                                      // onClick={handleDownloadOnClick}
+                                      disabled={
+                                        getSignatures?.payment_collected === true ||
+                                        agentSinged ||
+                                        premiumAmount
+                                      }
                                     >
                                       Bind & Send Payment Info to Insured
                                     </Button>
-                                  </>
-                                )}
-                              >
-                                <Button
-                                  id="Insured"
-                                  className={`${classes.button} ${classes.paymentButton}`}
-                                  color="primary"
-                                  size="small"
-                                  variant="contained"
-                                  fullWidth
-                                  onClick={handleBindOnClick}
-                                  disabled={
-                                    bindLoading || agentSinged || premiumAmount
-                                  }
-                                >
-                                  {bindLoading ? (
-                                    <CircularProgress size={30} />
-                                  ) : (
-                                    "Bind & Send Payment Info to Insured"
-                                  )}
-                                </Button>
-                              </FeatureFlag>
-                            </Grid>
-                          )}
-                        {policyData &&
-                          policyData.ipfs_quote_data &&
-                          policyData.ipfs_quote_data.ESignResult && (
-                            <>
-                              <PaymentDialog
-                                open={bindDialog}
-                                handleClose={handleDialogClose}
-                                agentUrl={
-                                  policyData.ipfs_quote_data!.ESignResult.AgentURL
-                                    ?.$
-                                }
-                                insuredUrl={
-                                  policyData.ipfs_quote_data!.ESignResult.InsuredURL
-                                    ?.$
-                                }
-                              />
-                              <Grid
-                                item
-                                xs={12}
-                                className={classes.paymentContainer}
-                              >
-                                <Button
-                                  className={`${classes.button} ${classes.paymentButton}`}
-                                  color="primary"
-                                  size="small"
-                                  variant="contained"
-                                  fullWidth
-                                  // onClick={handleDownloadOnClick}
-                                  disabled={
-                                    getSignatures?.payment_collected === true ||
-                                    agentSinged ||
-                                    premiumAmount
-                                  }
-                                >
-                                  Bind & Send Payment Info to Insured
-                                </Button>
+                                  </GridItem>
+                                </Grid>
+                              </>
+                            )}
+                        </>
+                      }
+                      {
+                        summaryData?.insurance_application_by_pk?.broker_agency?.payment_option === "agent_paid" &&
+                        <>
+                          {!(
+                            policyData &&
+                            policyData.ipfs_quote_data &&
+                            policyData.ipfs_quote_data.ESignResult
+                          ) && (
+                              <Grid sx={{ xs: 6 }}>
+                                <GridItem className={classes.paymentContainer}>
+                                  <FeatureFlag
+                                    roles={["admin", "broker"]}
+                                    fallbackRender={() => (
+                                      <>
+                                        <Button
+                                          className={`${classes.button} ${classes.paymentButton}`}
+                                          color="primary"
+                                          size="small"
+                                          variant="contained"
+                                          disabled={true}
+                                          fullWidth
+                                        >
+                                          Bind & Issue Policy
+                                        </Button>
+                                      </>
+                                    )}
+                                  >
+                                    <Button
+                                      id="Insured"
+                                      className={`${classes.button} ${classes.paymentButton}`}
+                                      color="primary"
+                                      size="small"
+                                      variant="contained"
+                                      fullWidth
+                                      onClick={handleAgentBindOnClick}
+                                      disabled={
+                                        agentBindLoading || agentSinged || premiumAmount
+                                      }
+                                    >
+                                      {agentBindLoading ? (
+                                        <CircularProgress size={30} />
+                                      ) : (
+                                        "Bind & Issue Policy"
+                                      )}
+                                    </Button>
+                                  </FeatureFlag>
+                                </GridItem>
                               </Grid>
-                            </>
-                          )}
-                      </>
-                    }
-                    {
-                      summaryData?.insurance_application_by_pk?.broker_agency?.payment_option === "agent_paid" &&
-                      <>
-                        {!(
-                          policyData &&
-                          policyData.ipfs_quote_data &&
-                          policyData.ipfs_quote_data.ESignResult
-                        ) && (
-                            <Grid item xs={6} className={classes.paymentContainer}>
-                              <FeatureFlag
-                                roles={["admin", "broker"]}
-                                fallbackRender={() => (
-                                  <>
+                            )}
+                          {policyData &&
+                            policyData.ipfs_quote_data &&
+                            policyData.ipfs_quote_data.ESignResult && (
+                              <>
+                                <PaymentDialog
+                                  open={bindDialog}
+                                  handleClose={handleDialogClose}
+                                  agentUrl={
+                                    policyData.ipfs_quote_data!.ESignResult.AgentURL
+                                      ?.$
+                                  }
+                                  insuredUrl={
+                                    policyData.ipfs_quote_data!.ESignResult.InsuredURL
+                                      ?.$
+                                  }
+                                />
+                                <Grid sx={{ xs: 12 }}>
+                                  <GridItem className={classes.paymentContainer}>
                                     <Button
                                       className={`${classes.button} ${classes.paymentButton}`}
                                       color="primary"
                                       size="small"
                                       variant="contained"
-                                      disabled={true}
                                       fullWidth
+                                      // onClick={handleAgentBindOnClick}
+                                      disabled={
+                                        getSignatures?.payment_collected === true ||
+                                        agentSinged ||
+                                        premiumAmount
+                                      }
                                     >
                                       Bind & Issue Policy
                                     </Button>
-                                  </>
-                                )}
-                              >
-                                <Button
-                                  id="Insured"
-                                  className={`${classes.button} ${classes.paymentButton}`}
-                                  color="primary"
-                                  size="small"
-                                  variant="contained"
-                                  fullWidth
-                                  onClick={handleAgentBindOnClick}
-                                  disabled={
-                                    agentBindLoading || agentSinged || premiumAmount
-                                  }
-                                >
-                                  {agentBindLoading ? (
-                                    <CircularProgress size={30} />
-                                  ) : (
-                                    "Bind & Issue Policy"
-                                  )}
-                                </Button>
-                              </FeatureFlag>
-                            </Grid>
-                          )}
-                        {policyData &&
-                          policyData.ipfs_quote_data &&
-                          policyData.ipfs_quote_data.ESignResult && (
-                            <>
-                              <PaymentDialog
-                                open={bindDialog}
-                                handleClose={handleDialogClose}
-                                agentUrl={
-                                  policyData.ipfs_quote_data!.ESignResult.AgentURL
-                                    ?.$
-                                }
-                                insuredUrl={
-                                  policyData.ipfs_quote_data!.ESignResult.InsuredURL
-                                    ?.$
-                                }
-                              />
-                              <Grid
-                                item
-                                xs={12}
-                                className={classes.paymentContainer}
-                              >
-                                <Button
-                                  className={`${classes.button} ${classes.paymentButton}`}
-                                  color="primary"
-                                  size="small"
-                                  variant="contained"
-                                  fullWidth
-                                  // onClick={handleAgentBindOnClick}
-                                  disabled={
-                                    getSignatures?.payment_collected === true ||
-                                    agentSinged ||
-                                    premiumAmount
-                                  }
-                                >
-                                  Bind & Issue Policy
-                                </Button>
-                              </Grid>
-                            </>
-                          )}
-                      </>
-                    }
-                  </Grid>
-                </Card>
-              </div>
-            )}
+                                  </GridItem>
+                                </Grid>
+                              </>
+                            )}
+                        </>
+                      }
+                    </Grid>
+                  </Card>
+                </div>
+              )}
+            </GridItem>
           </Grid>
         </Grid>
 

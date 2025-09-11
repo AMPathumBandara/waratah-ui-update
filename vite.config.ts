@@ -5,6 +5,9 @@ import path from 'path'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  define: {
+    global: "globalThis",
+  },
   server: {
     port: 3000,
     open: true
@@ -13,7 +16,7 @@ export default defineConfig({
     outDir: 'dist'
   },
   optimizeDeps: {
-    include: ['react-router-dom']
+    include: ["buffer", "process", "util", "react-router-dom"]
   },
   resolve: {
     alias: {
@@ -22,7 +25,11 @@ export default defineConfig({
       utils: path.resolve(__dirname, "src/utils"),
       pages: path.resolve(__dirname, "src/pages"),
       theme: path.resolve(__dirname, "src/theme"),
-      icons: path.resolve(__dirname, "src/icons")
+      icons: path.resolve(__dirname, "src/icons"),
+      generated: path.resolve(__dirname, "src/generated"),
+      process: "process/browser",
+      buffer: "buffer",
+      util: "util",
     }
   }
 })

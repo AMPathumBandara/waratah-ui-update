@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Badge, Button, Grid } from "@mui/material";
-import { makeStyles, withStyles } from "@mui/material/styles";
 import { alpha } from "@mui/material/styles";
 import Tooltip from '@mui/material/Tooltip';
 import AddIcon from "@mui/icons-material/Add";
@@ -9,6 +8,8 @@ import InputField from "components/From/InputField";
 import EditIcon from "@mui/icons-material/Edit";
 import LockResetIcon from '@mui/icons-material/LockOpen';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { Theme } from "@mui/material/styles";
+import { makeStyles, withStyles } from "@mui/styles";
 import {
   Order_By,
   GetBrokerAgencyOneQuery,
@@ -31,7 +32,7 @@ import * as yup from "yup";
 import ButtonsContainer from "components/Layout/ButtonsContainer";
 import ButtonLoading from "components/From/ButtonLoading";
 import ToastMessage from "components/Toast/ToastMessage";
-import { useHistory, useLocation, useParams } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import MaterialTable, { Query } from "material-table";
 import { DateTime } from "luxon";
 import ModalWindow from "components/ModalWindow";
@@ -41,6 +42,7 @@ import ErrorToast from "components/Toast/ErrorToast";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { direction } from "utils";
 import Skeleton from "react-loading-skeleton";
+import GridItem from "components/Layout/GridItem";
 
 const useStyles = makeStyles((theme: Theme) => ({
   searchBtn: {
@@ -116,10 +118,10 @@ const DEFAULT_PAGE_SIZE = 5;
 const BrokerProducersList: React.FunctionComponent<any> = props => {
   const classes = useStyles();
 
-  const params = useParams<number>();
+  const params = useParams<string>();
   const { pathname } = useLocation();
-  const history = useHistory();
-  const tableRef = React.useRef();
+  const navigate = useNavigate();
+  const tableRef = React.useRef(null);
   const [showStatusUpdateConfirmModal, setShowStatusUpdateConfirmModal] = useState<
     string | boolean | null
   >(false);
@@ -133,7 +135,7 @@ const BrokerProducersList: React.FunctionComponent<any> = props => {
   const brokerAgencyId: number = params.producer_id;
 
   if (brokerAgencyId === undefined) {
-    history.push("/tenants/");
+    navigate("/tenants/");
   }
 
   const [showProducerModal, setShowProducerModal] = useState<
@@ -188,7 +190,7 @@ const BrokerProducersList: React.FunctionComponent<any> = props => {
 
     const tableReftchResult = tableRefetchData.data?.broker_producer.map(
       (f: any) => {
-        return {...f.user, "commission_rate" : f.commission_rate}
+        return { ...f.user, "commission_rate": f.commission_rate }
       }
     );
 
@@ -279,29 +281,33 @@ const BrokerProducersList: React.FunctionComponent<any> = props => {
         {status} user named <b>"{name}"</b> with the email address <b>"{email}"</b> ?`
 
         <ButtonsContainer justifyContent="flex-end">
-          <Grid item>
-            <Button
-              color="primary"
-              variant="contained"
-              disabled={loading}
-              style={{ marginRight: '5px' }}
-              onClick={() => handleStatusUpdate()}
-            >
-              Yes
-            </Button>
+          <Grid>
+            <GridItem>
+              <Button
+                color="primary"
+                variant="contained"
+                disabled={loading}
+                style={{ marginRight: '5px' }}
+                onClick={() => handleStatusUpdate()}
+              >
+                Yes
+              </Button>
+            </GridItem>
           </Grid>
-          <Grid item>
-            <Button
-              color="secondary"
-              variant="contained"
-              disabled={loading}
-              onClick={() => {
-                setBrokerProducer(null);
-                setShowStatusUpdateConfirmModal(false);
-              }}
-            >
-              No
-            </Button>
+          <Grid>
+            <GridItem>
+              <Button
+                color="secondary"
+                variant="contained"
+                disabled={loading}
+                onClick={() => {
+                  setBrokerProducer(null);
+                  setShowStatusUpdateConfirmModal(false);
+                }}
+              >
+                No
+              </Button>
+            </GridItem>
           </Grid>
         </ButtonsContainer>
       </>
@@ -369,7 +375,7 @@ const BrokerProducersList: React.FunctionComponent<any> = props => {
           <b>
             <small>
               <br />
-              Last password rest was 
+              Last password rest was
               {
                 brokerProducer?.user_password_resets?.[0]?.created_at && (
                   " on " + DateTime.fromISO(brokerProducer?.user_password_resets?.[0]?.created_at).toFormat("dd LLL yy")
@@ -385,29 +391,33 @@ const BrokerProducersList: React.FunctionComponent<any> = props => {
           </b>
         )}
         <ButtonsContainer justifyContent="flex-end">
-          <Grid item>
-            <Button
-              color="primary"
-              variant="contained"
-              disabled={loading}
-              style={{ marginRight: '5px' }}
-              onClick={() => handleResetPassword()}
-            >
-              Proceed
-            </Button>
+          <Grid>
+            <GridItem>
+              <Button
+                color="primary"
+                variant="contained"
+                disabled={loading}
+                style={{ marginRight: '5px' }}
+                onClick={() => handleResetPassword()}
+              >
+                Proceed
+              </Button>
+            </GridItem>
           </Grid>
-          <Grid item>
-            <Button
-              color="secondary"
-              variant="contained"
-              disabled={loading}
-              onClick={() => {
-                setBrokerProducer(null);
-                setShowResetPasswordConfirmModal(false);
-              }}
-            >
-              Cancel
-            </Button>
+          <Grid>
+            <GridItem>
+              <Button
+                color="secondary"
+                variant="contained"
+                disabled={loading}
+                onClick={() => {
+                  setBrokerProducer(null);
+                  setShowResetPasswordConfirmModal(false);
+                }}
+              >
+                Cancel
+              </Button>
+            </GridItem>
           </Grid>
         </ButtonsContainer>
       </>
@@ -775,52 +785,58 @@ const BrokerProducerForm: React.FunctionComponent<BrokerProducerFormProps> = ({
       <FormProvider {...form}>
         <form onSubmit={handleSubmit(handleFormSubmit)}>
           <Grid container spacing={3}>
-            <Grid item={true} xs={12}>
-              {loading ? (
-                <Skeleton height={40} />
-              ) : (
-                <InputField name="name" label="Name" />
-              )}
+            <Grid size={{ xs: 12 }}>
+              <GridItem>
+                {loading ? (
+                  <Skeleton height={40} />
+                ) : (
+                  <InputField name="name" label="Name" />
+                )}
+              </GridItem>
             </Grid>
-            <Grid item={true} xs={12}>
-              {loading ? (
-                <Skeleton height={40} />
-              ) : (
-                <>
-                  <InputField
-                    name="email"
-                    label="Email"
-                    className={`${brokerProducerId !== true ? "input-disabled" : ""
-                      }`}
-                    inputProps={{ readOnly: brokerProducerId !== true }}
-                  />
-
-                  {/* <span style={{ display: "none" }}>
+            <Grid size={{ xs: 12 }}>
+              <GridItem>
+                {loading ? (
+                  <Skeleton height={40} />
+                ) : (
+                  <>
                     <InputField
-                      name="edit_form"
-                      label="edit_form"
-                      defaultValue={data?.broker_producer[0]?.user.email}
+                      name="email"
+                      label="Email"
+                      className={`${brokerProducerId !== true ? "input-disabled" : ""
+                        }`}
+                      inputProps={{ readOnly: brokerProducerId !== true }}
                     />
-                  </span> */}
-                </>
-              )}
+
+                    {/* <span style={{ display: "none" }}>
+                    <InputField
+                    name="edit_form"
+                    label="edit_form"
+                    defaultValue={data?.broker_producer[0]?.user.email}
+                    />
+                    </span> */}
+                  </>
+                )}
+              </GridItem>
             </Grid>
-            <Grid item={true} xs={12}>
-              {loading ? (
-                <Skeleton height={40} />
-              ) : (
-                <InputField
-                  name="commission_rate"
-                  label="Commission Rate (%)"
-                  type="number"
-                  defaultValue={"0"}
-                  inputProps={{
-                    step: 0.01
-                  }}
-                  min={0.0}
-                  max={100.0}
-                />
-              )}
+            <Grid size={{ xs: 12 }}>
+              <GridItem>
+                {loading ? (
+                  <Skeleton height={40} />
+                ) : (
+                  <InputField
+                    name="commission_rate"
+                    label="Commission Rate (%)"
+                    type="number"
+                    defaultValue={"0"}
+                    inputProps={{
+                      step: 0.01
+                    }}
+                    min={0.0}
+                    max={100.0}
+                  />
+                )}
+              </GridItem>
             </Grid>
           </Grid>
           <ButtonsContainer justifyContent="flex-end">

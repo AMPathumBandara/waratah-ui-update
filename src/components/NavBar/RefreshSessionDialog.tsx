@@ -1,5 +1,7 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, makeStyles, Theme } from "@mui/material";
-import { Refresh } from "@material-ui/icons";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
+import { Theme } from "@mui/material/styles";
+import { makeStyles } from "@mui/styles";
+import { Refresh } from "@mui/icons-material";
 import React from "react";
 
 // Style

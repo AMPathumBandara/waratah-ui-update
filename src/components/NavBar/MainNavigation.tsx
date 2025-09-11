@@ -7,7 +7,7 @@ import { useMeQuery, useReleseVersionSubscription } from "generated/graphql";
 import DefaultLogo from "../../visionxlogo.jpg";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import FeatureFlag from "utils/FeatureFlag";
 import ErrorToast from "components/Toast/ErrorToast";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -16,8 +16,9 @@ import { NavigationAccess } from "utils";
 import { useUser } from "components/Auth/CognitoHooks";
 import LogoutButton from "./LogoutButton";
 import RefreshSessionDialog from "./RefreshSessionDialog";
+import theme from "theme/theme";
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     background: "#FFFFFF",
     color: theme.palette.primary.main,
@@ -69,7 +70,7 @@ const MainNavigation = React.memo(() => {
   const classes = useStyles();
   const [toggleMenu, settoggleMenu] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
-  const history = useHistory();
+  const navigate = useNavigate();
   const [commitHash, setCommitHash] = useState<string | null>(null);
   const [showRefreshModal, setShowRefreshModal] = useState<boolean>(false);
 
@@ -114,7 +115,7 @@ const MainNavigation = React.memo(() => {
   };
 
   const logoutWithRedirect = React.useCallback(() => {
-    history.push("/logout");
+    navigate("/logout");
   }, [history]);
 
   const toggleMenuFn = React.useCallback(() => {
@@ -158,14 +159,14 @@ const MainNavigation = React.memo(() => {
                 roles={["super_admin"]}
                 fallbackRender={() => (
                   <img
-                    onClick={() => history.push("/")}
+                    onClick={() => navigate("/")}
                     src={logo}
                     alt="logo"
                   />
                 )}
               >
                 <img
-                  onClick={() => history.push("/")}
+                  onClick={() => navigate("/")}
                   src={DefaultLogo}
                   alt="logo"
                 />

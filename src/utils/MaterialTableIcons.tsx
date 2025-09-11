@@ -14,8 +14,10 @@ import Remove from "@mui/icons-material/Remove";
 import SaveAlt from "@mui/icons-material/SaveAlt";
 import Search from "@mui/icons-material/Search";
 import ViewColumn from "@mui/icons-material/ViewColumn";
-import { ArrowUpward } from "@material-ui/icons";
-import { Button, makeStyles, SvgIconProps } from "@mui/material";
+import { ArrowUpward } from "@mui/icons-material";
+import { Button, SvgIconProps } from "@mui/material";
+import { Theme } from "@mui/material/styles";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
   noHover: {

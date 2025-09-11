@@ -1,38 +1,46 @@
 import React, { useEffect } from "react";
-import { Route, useHistory } from "react-router-dom";
+import { Route, useNavigate } from "react-router-dom";
 import { NavigationAccess } from "utils";
 import { useUser } from "components/Auth/CognitoHooks";
 
-export default function ProtectedRoute(props: any) {
-  const history = useHistory();
+interface ProtectedRouteProps {
+  component: React.ComponentType<any>;
+  path: string;
+}
 
+export default function ProtectedRoute({ component: Component, path }: ProtectedRouteProps) {
+  const navigate = useNavigate();
   const loggedUser = useUser();
 
   if (!loggedUser) {
-    history.push("/login");
+    navigate("/login");
+    return null;
   }
 
   const authUser =
     loggedUser?.signInUserSession?.idToken?.payload?.["cognito:groups"][0];
 
-  const Component = props.component;
+  //const Component = props.component;
 
-  const allowUsersPath = NavigationAccess.filter(f => f.path === props.path);
+  const allowUsersPath = NavigationAccess.filter(f => f.path === path);
 
   if (
-    props.path !== "*" &&
+    path !== "*" &&
     authUser &&
     !allowUsersPath[0]?.allowUsers?.includes(`${authUser}`)
   ) {
-    history.push("/access-denied");
+    navigate("/access-denied");
+    return null;
   }
-  return (
-    <>
-      <Route
-        exact={props.exact}
-        path={props.path}
-        render={() => <Component />}
-      />
-    </>
-  );
+
+  // return (
+  //   <>
+  //     <Route
+  //       //exact={props.exact}
+  //       path={props.path}
+  //       element={<Component />}
+  //     />
+  //   </>
+  // );
+  return <Component />
 }

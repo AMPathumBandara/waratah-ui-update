@@ -24,7 +24,7 @@ import * as yup from "yup";
 import ButtonsContainer from "components/Layout/ButtonsContainer";
 import ButtonLoading from "components/From/ButtonLoading";
 import ToastMessage from "components/Toast/ToastMessage";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import MaterialTable, { Query } from "material-table";
 import { DateTime } from "luxon";
 import ModalWindow from "components/ModalWindow";
@@ -34,6 +34,7 @@ import { direction } from "utils";
 import { tableIcons } from "utils/MaterialTableIcons";
 import ErrorToast from "components/Toast/ErrorToast";
 import Skeleton from "react-loading-skeleton";
+import GridItem from "components/Layout/GridItem";
 
 const useStyles = makeStyles((theme: Theme) => ({
   searchBtn: {
@@ -96,11 +97,11 @@ const DEFAULT_PAGE_SIZE = 5;
 
 const BrokersList: React.FunctionComponent<any> = props => {
   const classes = useStyles();
-  const params = useParams<number>();
-  const history = useHistory();
+  const params = useParams<string>();
+  const navigate = useNavigate();
   const tableRef = React.createRef();
   //@ts-ignore
-  const getTenantId: number = params.tenant_id;
+  const getTenantId: number = Number(params.tenant_id);
   const [showAgencyModal, setShowAgencyModal] = useState<
     string | boolean | null
   >(null);
@@ -110,7 +111,7 @@ const BrokersList: React.FunctionComponent<any> = props => {
     React.useState<number>(DEFAULT_PAGE_SIZE);
 
   if (getTenantId === undefined) {
-    history.push("/tenants/");
+    navigate("/tenants/");
   }
 
   const { data, loading, error, refetch } = useGetBrokerAgenciesQuery({
@@ -251,7 +252,7 @@ const BrokersList: React.FunctionComponent<any> = props => {
                   tooltip: "View Producers",
                   onClick: (event, rowData) => {
                     //@ts-ignore
-                    history.push(
+                    navigate(
                       `/tenants/${getTenantId}/brokers/${getTenantId}/broker-producers/${rowData.id}`
                     );
                   },
@@ -330,6 +331,8 @@ const brokerAgencyFormSchema = yup.object().shape({
     .string()
     .required("Broker program ID is required")
     .matches(/^[0-9]{3}[-][A-z]{2}$/g, "Invalid broker program ID"),
+  calculate_tax: yup.boolean().default(false),
+  calculate_fee: yup.boolean().default(false),
 });
 
 interface BrokerAgencyFormProps {
@@ -434,172 +437,196 @@ const BrokerAgencyForm: React.FunctionComponent<BrokerAgencyFormProps> = ({
       <FormProvider {...form}>
         <form onSubmit={handleSubmit(handleFormSubmit)}>
           <Grid container spacing={3}>
-            <Grid item={true} xs={12} sm={6}>
-              {loading ? (
-                <Skeleton height={40} />
-              ) : (
-                <InputField name="name" label="Agency Name" />
-              )}
+            <Grid size={{ xs: 12, sm: 6 }}>
+              <GridItem>
+                {loading ? (
+                  <Skeleton height={40} />
+                ) : (
+                  <InputField name="name" label="Agency Name" />
+                )}
+              </GridItem>
             </Grid>
-            <Grid item={true} xs={12} sm={6}>
-              {loading ? (
-                <Skeleton height={40} />
-              ) : (
-                <InputField name="address" label="Address" />
-              )}
+            <Grid size={{ xs: 12, sm: 6 }}>
+              <GridItem>
+                {loading ? (
+                  <Skeleton height={40} />
+                ) : (
+                  <InputField name="address" label="Address" />
+                )}
+              </GridItem>
             </Grid>
-            <Grid item={true} xs={12} sm={6}>
-              {loading ? (
-                <Skeleton height={40} />
-              ) : (
-                <InputField name="city" label="City" />
-              )}
+            <Grid size={{ xs: 12, sm: 6 }}>
+              <GridItem>
+                {loading ? (
+                  <Skeleton height={40} />
+                ) : (
+                  <InputField name="city" label="City" />
+                )}
+              </GridItem>
             </Grid>
-            <Grid item={true} xs={12} sm={6}>
-              {loading ? (
-                <Skeleton height={40} />
-              ) : (
-                <SelectForm
-                  name="country"
-                  label="Country"
-                  options={
-                    Contries.map(ctry => ({
-                      value: ctry,
-                      label: ctry,
-                    })).sort() || []
-                  }
-                />
-              )}
+            <Grid size={{ xs: 12, sm: 6 }}>
+              <GridItem>
+                {loading ? (
+                  <Skeleton height={40} />
+                ) : (
+                  <SelectForm
+                    name="country"
+                    label="Country"
+                    options={
+                      Contries.map(ctry => ({
+                        value: ctry,
+                        label: ctry,
+                      })).sort() || []
+                    }
+                  />
+                )}
+              </GridItem>
             </Grid>
-            <Grid item={true} xs={12} sm={6}>
-              {loading ? (
-                <Skeleton height={40} />
-              ) : (
-                <SelectForm
-                  name="state"
-                  label="State"
-                  options={
-                    States.map(st => ({ value: st, label: st })).sort() || []
-                  }
-                />
-              )}
-            </Grid>
-
-            <Grid item={true} xs={12} sm={6}>
-              {loading ? (
-                <Skeleton height={40} />
-              ) : (
-                <InputField name="zip" label="Zip" />
-              )}
-            </Grid>
-
-            <Grid item={true} xs={12} sm={6}>
-              {loading ? (
-                <Skeleton height={40} />
-              ) : (
-                <InputField
-                  name="broker_program_id"
-                  label="Broker Program ID"
-                />
-              )}
+            <Grid size={{ xs: 12, sm: 6 }}>
+              <GridItem>
+                {loading ? (
+                  <Skeleton height={40} />
+                ) : (
+                  <SelectForm
+                    name="state"
+                    label="State"
+                    options={
+                      States.map(st => ({ value: st, label: st })).sort() || []
+                    }
+                  />
+                )}
+              </GridItem>
             </Grid>
 
-            <Grid item={true} xs={12} sm={6}>
-              {loading ? (
-                <Skeleton height={40} />
-              ) : (
-                <SelectForm
-                  name="payment_option"
-                  label="Payment Option"
-                  options={
-                    PaymentOptions.map(opt => ({
-                      value: opt.value,
-                      label: opt.label,
-                    })).sort() || []
-                  }
-                />
-              )}
+            <Grid size={{ xs: 12, sm: 6 }}>
+              <GridItem>
+                {loading ? (
+                  <Skeleton height={40} />
+                ) : (
+                  <InputField name="zip" label="Zip" />
+                )}
+              </GridItem>
             </Grid>
 
-            <Grid item={true} xs={12} sm={6}>
-              {loading ? (
-                <Skeleton height={40} />
-              ) : (
-                <InputField
-                  name="quote_template_id"
-                  label="Quote Template URL"
-                />
-              )}
+            <Grid size={{ xs: 12, sm: 6 }}>
+              <GridItem>
+                {loading ? (
+                  <Skeleton height={40} />
+                ) : (
+                  <InputField
+                    name="broker_program_id"
+                    label="Broker Program ID"
+                  />
+                )}
+              </GridItem>
             </Grid>
 
-            <Grid item={true} xs={12} sm={6}>
-              {loading ? (
-                <Skeleton height={40} />
-              ) : (
-                <InputField
-                  name="commission_rate"
-                  label="Commission Rate"
-                  type="number"
-                  defaultValue={"0"}
-                  inputProps={{
-                    step: 0.01
-                  }}
-                  min={0.0}
-                  max={100.0}
-                />
-              )}
+            <Grid size={{ xs: 12, sm: 6 }}>
+              <GridItem>
+                {loading ? (
+                  <Skeleton height={40} />
+                ) : (
+                  <SelectForm
+                    name="payment_option"
+                    label="Payment Option"
+                    options={
+                      PaymentOptions.map(opt => ({
+                        value: opt.value,
+                        label: opt.label,
+                      })).sort() || []
+                    }
+                  />
+                )}
+              </GridItem>
             </Grid>
 
-            <Grid item={true} xs={12} sm={6}>
-              {loading ? (
-                <Skeleton height={40} />
-              ) : (
-                <FormControlLabel
-                  control={
-                    <>
-                      <SwitchBtn
-                        name="calculate_fee"
-                        checked={
-                          form.watch("calculate_fee") === undefined
+            <Grid size={{ xs: 12, sm: 6 }}>
+              <GridItem>
+                {loading ? (
+                  <Skeleton height={40} />
+                ) : (
+                  <InputField
+                    name="quote_template_id"
+                    label="Quote Template URL"
+                  />
+                )}
+              </GridItem>
+            </Grid>
+
+            <Grid size={{ xs: 12, sm: 6 }}>
+              <GridItem>
+                {loading ? (
+                  <Skeleton height={40} />
+                ) : (
+                  <InputField
+                    name="commission_rate"
+                    label="Commission Rate"
+                    type="number"
+                    defaultValue={"0"}
+                    inputProps={{
+                      step: 0.01
+                    }}
+                    min={0.0}
+                    max={100.0}
+                  />
+                )}
+              </GridItem>
+            </Grid>
+
+            <Grid size={{ xs: 12, sm: 6 }}>
+              <GridItem>
+                {loading ? (
+                  <Skeleton height={40} />
+                ) : (
+                  <FormControlLabel
+                    control={
+                      <>
+                        <SwitchBtn
+                          onChange={v => {
+                            form.setValue("calculate_fee", v.target.checked);
+                          }}
+                          checked={
+                            form.watch("calculate_fee") === undefined
                             ? Boolean(form.setValue("calculate_fee", true))
                             : Boolean(form.watch("calculate_fee"))
-                        }
-                        onChange={v => {
-                          form.setValue("calculate_fee", v.target.checked);
-                        }}
-                        {...form.register("calculate_fee")}
-                      />
-                    </>
-                  }
-                  label="Calculate Fees"
-                />
-              )}
+                          }
+                          {...form.register("calculate_fee")}
+                          name="calculate_fee"
+                        />
+                      </>
+                    }
+                    label="Calculate Fees"
+                  />
+                )}
+              </GridItem>
             </Grid>
 
-            <Grid item={true} xs={12} sm={6}>
-              {loading ? (
-                <Skeleton height={40} />
-              ) : (
-                <FormControlLabel
-                  control={
-                    <>
-                      <SwitchBtn
-                        name="calculate_tax"
-                        checked={
-                          form.watch("calculate_tax") === undefined
+            <Grid size={{ xs: 12, sm: 6 }}>
+              <GridItem>
+                {loading ? (
+                  <Skeleton height={40} />
+                ) : (
+                  <FormControlLabel
+                    control={
+                      <>
+                        <SwitchBtn
+                          checked={
+                            form.watch("calculate_tax") === undefined
                             ? Boolean(form.setValue("calculate_tax", false))
                             : Boolean(form.watch("calculate_tax"))
-                        }
-                        onChange={v => {
-                          form.setValue("calculate_tax", v.target.checked);
-                        }}
-                        {...form.register("calculate_tax")}
-                      />
-                    </>
-                  }
-                  label="Calculate Taxes"
-                />
-              )}
+                          }
+                          onChange={v => {
+                            form.setValue("calculate_tax", v.target.checked);
+                          }}
+                          {...form.register("calculate_tax")}
+                          name="calculate_tax"
+                        />
+                      </>
+                    }
+                    label="Calculate Taxes"
+                  />
+                )}
+              </GridItem>
             </Grid>
 
           </Grid>
@@ -656,7 +683,7 @@ const BrokersTable: React.FunctionComponent<BrokersTableProps> = ({
   tenantId,
   tableRef,
 }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [showAgencyModal, setShowAgencyModal] = useState<number | boolean>(
     false
   );
@@ -752,7 +779,7 @@ const BrokersTable: React.FunctionComponent<BrokersTableProps> = ({
               tooltip: "View Producers",
               onClick: (event, rowData) => {
                 //@ts-ignore
-                history.push(
+                navigate(
                   `/tenants/${tenantId}/brokers/${tenantId}/broker-producers/${rowData.id}`
                 );
               },

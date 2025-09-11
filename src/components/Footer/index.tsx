@@ -1,5 +1,6 @@
 import { colors } from "@mui/material";
-import { makeStyles, Theme } from "@mui/material/styles";
+import { Theme } from "@mui/material/styles";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme: Theme) => ({
   footerTheme: {

@@ -1,3 +1,4 @@
+// theme.ts
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 
 const theme = createTheme({
@@ -28,50 +29,30 @@ const theme = createTheme({
     },
     contrastThreshold: 1.8,
   },
-  shadows: [
-    "none",
-    "none",
-    "none",
-    "none",
-    "none",
-    "none",
-    "none",
-    "none",
-    "none",
-    "none",
-    "none",
-    "none",
-    "none",
-    "none",
-    "none",
-    "none",
-    "none",
-    "none",
-    "none",
-    "none",
-    "none",
-    "none",
-    "none",
-    "none",
-    "none",
-  ],
-  overrides: {
+  shadows: Array(25).fill("none"),
+  components: {
     MuiInputBase: {
-      input: {
-        fontFamily: "'Open Sans', sans-serif",
-        fontSize: "16px",
+      styleOverrides: {
+        input: {
+          fontFamily: "'Open Sans', sans-serif",
+          fontSize: "16px",
+        },
       },
     },
     MuiInputLabel: {
-      root: {
-        textTransform: "none",
-        fontWeight: 600,
-        color: "#333333",
+      styleOverrides: {
+        root: {
+          textTransform: "none",
+          fontWeight: 600,
+          color: "#333333",
+        },
       },
     },
     MuiButton: {
-      root: {
-        textTransform: "none",
+      styleOverrides: {
+        root: {
+          textTransform: "none",
+        },
       },
     },
   },

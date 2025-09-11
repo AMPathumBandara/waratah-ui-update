@@ -1,5 +1,7 @@
 import React from "react";
-import { createStyles, Theme, makeStyles } from "@mui/material/styles";
+import { createStyles } from "@mui/material/styles";
+import { Theme } from "@mui/material/styles";
+import { makeStyles } from "@mui/styles";
 import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import { FormProvider, useForm } from "react-hook-form";
@@ -9,12 +11,12 @@ import Alert from "@mui/material/Alert";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { CognitoUser } from "@aws-amplify/auth";
-import { useHistory, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import AuthLayout from "./AuthLayout";
 import { useCompleteNewPassword, useUser } from "./CognitoHooks";
 
 const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
+  ({
     formWrapper: {
       maxWidth: 320,
       width: "100%",
@@ -63,7 +65,7 @@ export default function SetNewPassword(props: any) {
   const classes = useStyles();
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<error>({});
-  const history = useHistory();
+  const navigate = useNavigate();
   const completeNewPassword = useCompleteNewPassword();
   const user = useUser();
   const form = useForm({
@@ -82,12 +84,12 @@ export default function SetNewPassword(props: any) {
           user: user,
           password: new_password,
         });
-        history.push("/login");
+        navigate("/login");
       } catch (error: any) {
         setError(error);
       }
     } else {
-      history.push("/login");
+      navigate("/login");
     }
   };
 

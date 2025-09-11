@@ -1,6 +1,7 @@
 import "react-loading-skeleton/dist/skeleton.css";
 import Skeleton from "react-loading-skeleton";
 import { Grid } from "@mui/material";
+import GridItem from "components/Layout/GridItem";
 
 export const LoadingApplicationItem = (props: any) => (
   <div className="application-item">
@@ -118,24 +119,34 @@ export const LoadingScanVirdict = (props: any) => (
 );
 export const LoadingQuoteCard = (props: any) => (
   <>
-    <Grid item sm={12} md={6}>
-      <Skeleton height={100} borderRadius={5} />
+    <Grid sx={{ sm: 12, md: 6 }}>
+      <GridItem>
+        <Skeleton height={100} borderRadius={5} />
+      </GridItem>
     </Grid>
-    <Grid item sm={12} md={6}>
-      <Skeleton height={100} borderRadius={5} />
+    <Grid sx={{ sm: 12, md: 6 }}>
+      <GridItem>
+        <Skeleton height={100} borderRadius={5} />
+      </GridItem>
     </Grid>
   </>
 );
 export const LoadingQuoteSelectionsCard = (props: any) => (
   <>
-    <Grid item sm={12} md={4}>
-      <Skeleton height={100} borderRadius={5} />
+    <Grid sx={{ sm: 12, md: 4 }}>
+      <GridItem>
+        <Skeleton height={100} borderRadius={5} />
+      </GridItem>
     </Grid>
-    <Grid item sm={12} md={4}>
-      <Skeleton height={100} borderRadius={5} />
+    <Grid sx={{ sm: 12, md: 4 }}>
+      <GridItem>
+        <Skeleton height={100} borderRadius={5} />
+      </GridItem>
     </Grid>
-    <Grid item sm={12} md={4}>
-      <Skeleton height={100} borderRadius={5} />
+    <Grid sx={{ sm: 12, md: 4 }}>
+      <GridItem>
+        <Skeleton height={100} borderRadius={5} />
+      </GridItem>
     </Grid>
   </>
 );

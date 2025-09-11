@@ -4,16 +4,16 @@ import clsx from "clsx";
 import { useMachine } from "@xstate/react";
 import {
   useParams,
-  useHistory,
+  useNavigate,
   useLocation,
-  useRouteMatch,
+  useMatch,
 } from "react-router-dom";
-import { makeStyles, Theme, withStyles } from "@mui/material/styles";
+import { Theme } from "@mui/material/styles";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import StepConnector from "@mui/material/StepConnector";
-import Alert, { AlertProps } from "@material-ui/lab/Alert";
+import Alert, { AlertProps } from "@mui/material/Alert";
 import IconButton from "@mui/material/IconButton";
 import { StepIconProps } from "@mui/material/StepIcon";
 import Check from "@mui/icons-material/Check";
@@ -46,9 +46,11 @@ import { LoadingApplicationSteps } from "components/ContentLoaders";
 import ErrorToast from "components/Toast/ErrorToast";
 import CircularProgress from "@mui/material/CircularProgress";
 import { dowloadInsuredArtifact } from "./downloads";
-import { AppBar, Avatar, Box, Chip, Dialog, Divider, List, ListItem, ListItemAvatar, ListItemText, Slide, TextField, Toolbar, Typography } from "@mui/material";
-import { Chat, Close, Send } from "@material-ui/icons";
+import { AppBar, Avatar, Box, Chip, Dialog, Divider, List, ListItem, ListItemAvatar, ListItemText, TextField, Toolbar, Typography } from "@mui/material";
+import Slide, { SlideProps } from "@mui/material/Slide";
+import { Chat, Close, Send } from "@mui/icons-material";
 import { TransitionProps } from "@mui/material/transitions/transition";
+import { withStyles, makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -367,7 +369,7 @@ const InsuredDetailsComponent: React.FC<InsuredDetailsProps> = ({
   applicationList,
 }) => {
   const classes = useStyles();
-  const history = useHistory();
+  const navigate = useNavigate();
   const params = useParams<ApplicationParams>();
   const [quoteDownloadLoading, setQuoteDownloadLoading] = useState(false);
 
@@ -375,11 +377,11 @@ const InsuredDetailsComponent: React.FC<InsuredDetailsProps> = ({
     applicationData?.insurance_application_by_pk?.stage || "profile"
   );
 
-  const location = useLocation<{}>();
-  let { path } = useRouteMatch();
+  const location = useLocation();
+  //let { path } = useRouteMatch();
 
   if (applicationData?.insurance_application_by_pk === null) {
-    history.push("/page-not-found");
+    navigate("/page-not-found");
   }
   const domainData = location ? { ...location.state } : {};
 
@@ -487,7 +489,7 @@ const InsuredDetailsComponent: React.FC<InsuredDetailsProps> = ({
     applicationPaymentData?.insurance_policy[0]?.waratah_report || undefined;
 
   const applicationStageMachine = applicationStateMachine(currentStage);
-  const machine = useMachine(applicationStageMachine);
+  const machine = useMachine(applicationStageMachine, {});
 
   const currentStepData = applicationStageMachine.states[currentStage]?.meta;
   const CurrentComponent = currentStepData?.component || React.Fragment;
@@ -529,7 +531,7 @@ const InsuredDetailsComponent: React.FC<InsuredDetailsProps> = ({
   };
 
   const changeApplication = (id: any) => {
-    history.push(`/applications/${id}`);
+    navigate(`/applications/${id}`);
   };
   const disableRelatedQuote =
     applicationList?.insurance_application === undefined ||
@@ -548,7 +550,7 @@ const InsuredDetailsComponent: React.FC<InsuredDetailsProps> = ({
       "invalid input syntax for type uuid"
     )
   ) {
-    history.push("/page-not-found");
+    navigate("/page-not-found");
   }
   return (
     <>
@@ -895,9 +897,9 @@ interface chatWindowOptions {
 }
 
 // Slide transition from bottom
-const Transition = React.forwardRef(function Transition(
-  props: TransitionProps & { children?: React.ReactElement<any, any> },
-  ref: React.Ref<unknown>
+const Transition = React.forwardRef<HTMLDivElement, SlideProps>(function Transition(
+  props,
+  ref
 ) {
   return <Slide direction="left" ref={ref} {...props} />;
 });
