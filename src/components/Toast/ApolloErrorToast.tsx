@@ -1,7 +1,7 @@
 import React from "react";
 import { ApolloError } from "@apollo/client";
 import Snackbar from "@mui/material/Snackbar";
-import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
 
 interface ErrorToastProps {
   error?: ApolloError;

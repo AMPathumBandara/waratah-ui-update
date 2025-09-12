@@ -22,6 +22,7 @@ import {
 // Local Imports
 import ApolloErrorToast from "components/Toast/ApolloErrorToast";
 import { ApplicationParams } from "./index";
+import GridItem from "components/Layout/GridItem";
 
 // Classes
 const useStyles = makeStyles((theme: Theme) => ({
@@ -168,162 +169,186 @@ const NewQuote: React.FC<Props> = ({ handleSubmitCallback, quote }) => {
       >
         <ApolloErrorToast error={insertError} />
         <Grid container spacing={3} className={classes.container}>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              name="policy_limit"
-              label="Policy Limit"
-              type="number"
-              required
-              fullWidth
-              inputRef={register}
-              inputProps={{
-                step: 0.01,
-                min: 0,
-                max: 10000000,
-              }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">$</InputAdornment>
-                ),
-              }}
-            />
+          <Grid sx={{ xs: 12, sm: 6 }}>
+            <GridItem>
+              <TextField
+                //name="policy_limit"
+                label="Policy Limit"
+                type="number"
+                required
+                fullWidth
+                //inputRef={register}
+                {...register("policy_limit")}
+                inputProps={{
+                  step: 0.01,
+                  min: 0,
+                  max: 10000000,
+                }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">$</InputAdornment>
+                  ),
+                }}
+              />
+            </GridItem>
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              name="base_premium"
-              label="Base Premium"
-              type="number"
-              required
-              fullWidth
-              inputRef={register}
-              inputProps={{
-                step: 0.01,
-                min: 0,
-              }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">$</InputAdornment>
-                ),
-              }}
-            />
+          <Grid sx={{ xs: 12, sm: 6 }}>
+            <GridItem>
+              <TextField
+                //name="base_premium"
+                label="Base Premium"
+                type="number"
+                required
+                fullWidth
+                //inputRef={register}
+                {...register("base_premium")}
+                inputProps={{
+                  step: 0.01,
+                  min: 0,
+                }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">$</InputAdornment>
+                  ),
+                }}
+              />
+            </GridItem>
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              name="deductible"
-              label="Deductible"
-              type="number"
-              required
-              defaultValue="0.00"
-              fullWidth
-              inputRef={register}
-              inputProps={{
-                step: 0.01,
-                min: 0,
-              }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">$</InputAdornment>
-                ),
-              }}
-            />
+          <Grid sx={{ xs: 12, sm: 6 }}>
+            <GridItem>
+              <TextField
+                //name="deductible"
+                label="Deductible"
+                type="number"
+                required
+                defaultValue="0.00"
+                fullWidth
+                //inputRef={register}
+                {...register("deductible")}
+                inputProps={{
+                  step: 0.01,
+                  min: 0,
+                }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">$</InputAdornment>
+                  ),
+                }}
+              />
+            </GridItem>
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              name="other_deductibles"
-              label="Other Deductibles"
-              type="number"
-              defaultValue="0.00"
-              fullWidth
-              inputRef={register}
-              inputProps={{
-                step: 0.01,
-                min: 0,
-              }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">$</InputAdornment>
-                ),
-              }}
-            />
+          <Grid sx={{ xs: 12, sm: 6 }}>
+            <GridItem>
+              <TextField
+                //name="other_deductibles"
+                label="Other Deductibles"
+                type="number"
+                defaultValue="0.00"
+                fullWidth
+                //inputRef={register}
+                {...register("other_deductibles")}
+                inputProps={{
+                  step: 0.01,
+                  min: 0,
+                }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">$</InputAdornment>
+                  ),
+                }}
+              />
+            </GridItem>
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              name="commission_percentage"
-              label="Commission Percentage"
-              type="number"
-              defaultValue="0"
-              required
-              fullWidth
-              inputRef={register}
-              inputProps={{
-                // step: 0.01,
-                min: 0,
-                max: 100,
-              }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">%</InputAdornment>
-                ),
-              }}
-            />
+          <Grid sx={{ xs: 12, sm: 6 }}>
+            <GridItem>
+              <TextField
+                //name="commission_percentage"
+                label="Commission Percentage"
+                type="number"
+                defaultValue="0"
+                required
+                fullWidth
+                //inputRef={register}
+                {...register("commission_percentage")}
+                inputProps={{
+                  // step: 0.01,
+                  min: 0,
+                  max: 100,
+                }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">%</InputAdornment>
+                  ),
+                }}
+              />
+            </GridItem>
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              name="tax_percentage"
-              label="Tax Percentage"
-              type="number"
-              defaultValue="0"
-              fullWidth
-              inputRef={register}
-              inputProps={{
-                // step: 0.01,
-                min: 0,
-                max: 100,
-              }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">%</InputAdornment>
-                ),
-              }}
-            />
+          <Grid sx={{ xs: 12, sm: 6 }}>
+            <GridItem>
+              <TextField
+                //name="tax_percentage"
+                label="Tax Percentage"
+                type="number"
+                defaultValue="0"
+                fullWidth
+                //inputRef={register}
+                {...register("tax_percentage")}
+                inputProps={{
+                  // step: 0.01,
+                  min: 0,
+                  max: 100,
+                }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">%</InputAdornment>
+                  ),
+                }}
+              />
+            </GridItem>
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              name="premium"
-              label="Premium"
-              type="number"
-              required
-              fullWidth
-              inputRef={register}
-              inputProps={{
-                step: 0.01,
-                min: 0,
-              }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">$</InputAdornment>
-                ),
-              }}
-            />
+          <Grid sx={{ xs: 12, sm: 6 }}>
+            <GridItem>
+              <TextField
+                //name="premium"
+                label="Premium"
+                type="number"
+                required
+                fullWidth
+                //inputRef={register}
+                {...register("premium")}
+                inputProps={{
+                  step: 0.01,
+                  min: 0,
+                }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">$</InputAdornment>
+                  ),
+                }}
+              />
+            </GridItem>
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              name="total_premium"
-              label="Total Premium"
-              type="number"
-              required
-              fullWidth
-              inputRef={register}
-              inputProps={{
-                step: 0.01,
-                min: 0,
-              }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">$</InputAdornment>
-                ),
-              }}
-            />
+          <Grid sx={{ xs: 12, sm: 6 }}>
+            <GridItem>
+              <TextField
+                //name="total_premium"
+                label="Total Premium"
+                type="number"
+                required
+                fullWidth
+                //inputRef={register}
+                {...register("total_premium")}
+                inputProps={{
+                  step: 0.01,
+                  min: 0,
+                }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">$</InputAdornment>
+                  ),
+                }}
+              />
+            </GridItem>
           </Grid>
         </Grid>
 

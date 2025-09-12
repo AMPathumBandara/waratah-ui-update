@@ -5,12 +5,15 @@ import { EmailRecipientInput, GetInsuranceQuoteEmailSubscription, Maybe, Recipie
 import { ApplicationParams } from 'components/Application/ApplicationModal';
 import { useParams } from 'react-router';
 import { DateTime } from 'luxon';
-import { AccessTime, ArrowForwardIosOutlined, Cancel, Check, CheckCircle, Close, CloudDownload, DoneAll, Edit, Email, FontDownload, GetApp, NextWeek, Refresh, Send, Watch } from '@material-ui/icons';
-import { Avatar, Badge, Box, Button, Chip, CircularProgress, Link, makeStyles, Tooltip } from '@mui/material';
+import { AccessTime, ArrowForwardIosOutlined, Cancel, Check, CheckCircle, Close, CloudDownload, DoneAll, Edit, Email, FontDownload, GetApp, NextWeek, Refresh, Send, Watch } from '@mui/icons-material';
+import { Avatar, Badge, Box, Button, Chip, CircularProgress, Link, Tooltip } from '@mui/material';
 import ToastMessage from 'components/Toast/ToastMessage';
 import ButtonLoading from 'components/From/ButtonLoading';
 import { dowloadInsuredArtifact } from './downloads';
 import { getFileName } from '.';
+import { Theme } from "@mui/material/styles";
+import { makeStyles } from "@mui/styles";
+import theme from 'theme/theme';
 
 // Utility type to extract the type of array elements
 type ArrayElement<ArrayType extends readonly unknown[]> = ArrayType extends readonly (infer ElementType)[] ? ElementType : never;
@@ -25,7 +28,7 @@ interface ContactDetailProps {
   artifactDataSubscription: any;
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   textPrimary: {
     color: theme.palette.primary.main
   },

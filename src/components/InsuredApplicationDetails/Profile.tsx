@@ -39,7 +39,7 @@ import { States } from "./Consts";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import InputField from "../From/InputField";
-import { useParams, useHistory, useRouteMatch } from "react-router-dom";
+import { useParams, useNavigate, useMatch } from "react-router-dom";
 import ToastMessage from "components/Toast/ToastMessage";
 import SelectForm from "../From/Select";
 import ApolloErrorToast from "components/Toast/ApolloErrorToast";
@@ -55,6 +55,7 @@ import _ from "lodash";
 import ConfirmationModal from "components/Common/ConfirmationModal";
 import { ApolloError } from "@apollo/client";
 import { useUser } from "components/Auth/CognitoHooks";
+import GridItem from "components/Layout/GridItem";
 
 const schema = yup.object().shape({
   // insured_name: yup.string().when("edit_form", {
@@ -261,7 +262,7 @@ const ProfilePageComponent: React.FC<ProfileProps> = ({
   applicationStage,
 }) => {
   const params = useParams<ApplicationParams>();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const { data: meData, loading: meLoading } = useMeQuery();
 
@@ -274,7 +275,7 @@ const ProfilePageComponent: React.FC<ProfileProps> = ({
   const calculateTax = me?.broker_producer?.broker_agency?.calculate_tax;
   const userId = me?.auth0_id;
 
-  let { path, url } = useRouteMatch();
+  //let { path, url } = useRouteMatch();
   const [invalidIndustryError, setInvalidIndustryError] = useState(false);
   const [appId, setAppId] = useState<string | null>(null);
 
@@ -500,14 +501,16 @@ const ProfilePageComponent: React.FC<ProfileProps> = ({
 
       if (createdData?.errors === undefined) {
         if (
-          path === "/applications-list/" ||
-          path === "/applications-list/:id"
+          //path === "/applications-list/" ||
+          //path === "/applications-list/:id"
+          useMatch("/applications-list/") ||
+          useMatch("/applications-list/:id")
         ) {
-          history.push(
+          navigate(
             `/applications-list/${createdData.data?.insert_insured_organization_one?.insurance_applications[0].id}`
           );
         } else {
-          history.push(
+          navigate(
             `/applications/${createdData.data?.insert_insured_organization_one?.insurance_applications[0].id}`
           );
         }
@@ -539,7 +542,7 @@ const ProfilePageComponent: React.FC<ProfileProps> = ({
 
   const gotoApplication = async (applicationId: string | null) => {
     if (applicationId) {
-      history.push(
+      navigate(
         `/applications/${applicationId}`
       );
     } else {
@@ -728,151 +731,169 @@ const ProfilePageComponent: React.FC<ProfileProps> = ({
         <FormProvider {...form}>
           <form onSubmit={handleSubmit(handleFormSubmit)} onKeyDown={(e) => checkKeyDown(e)}>
             <Grid container spacing={3}>
-              <Grid item={true} xs={12} sm={12}>
-                {loading ? (
-                  <LoadingInput />
-                ) : (
-                  <InputField
-                    name="rentals_data[full_name]"
-                    label="Full Name"
-                    defaultValue={loadedApplicationData?.rentals_data?.full_name}
-                  />
-                )}
-              </Grid>
-              <Grid item={true} xs={12} sm={6}>
-                {formLoading ? (
-                  <LoadingInput />
-                ) : (
-                  <>
+              <Grid sx={{ xs: 12, sm: 12 }}>
+                <GridItem>
+                  {loading ? (
+                    <LoadingInput />
+                  ) : (
                     <InputField
-                      name="rentals_data[ssn]"
-                      label="SSN"
-                      className={`${applicationStage === "bound" ? "input-disabled" : ""
-                        }`}
-                      inputProps={{ readOnly: applicationStage === "bound" }}
-                      defaultValue={loadedApplicationData?.rentals_data?.ssn}
+                      name="rentals_data[full_name]"
+                      label="Full Name"
+                      defaultValue={loadedApplicationData?.rentals_data?.full_name}
                     />
-                    <span style={{ display: "none" }}>
+                  )}
+                </GridItem>
+              </Grid>
+              <Grid sx={{ xs: 12, sm: 6 }}>
+                <GridItem>
+                  {formLoading ? (
+                    <LoadingInput />
+                  ) : (
+                    <>
                       <InputField
-                        name="edit_form"
-                        label="edit_form"
-                        defaultValue={loadedApplicationData?.insured_name}
+                        name="rentals_data[ssn]"
+                        label="SSN"
+                        className={`${applicationStage === "bound" ? "input-disabled" : ""
+                          }`}
+                        inputProps={{ readOnly: applicationStage === "bound" }}
+                        defaultValue={loadedApplicationData?.rentals_data?.ssn}
                       />
-                    </span>
-                  </>
-                )}
+                      <span style={{ display: "none" }}>
+                        <InputField
+                          name="edit_form"
+                          label="edit_form"
+                          defaultValue={loadedApplicationData?.insured_name}
+                        />
+                      </span>
+                    </>
+                  )}
+                </GridItem>
               </Grid>
-              <Grid item md={6} xs={12}>
-                <InputField
-                  name="rentals_data[date_of_birth]"
-                  label="Date of Birth"
-                  type="date"
-                  value={loadedApplicationData?.rentals_data?.date_of_birth}
-                />
+              <Grid sx={{ xs: 12, md: 6 }}>
+                <GridItem>
+                  <InputField
+                    name="rentals_data[date_of_birth]"
+                    label="Date of Birth"
+                    type="date"
+                    value={loadedApplicationData?.rentals_data?.date_of_birth}
+                  />
+                </GridItem>
               </Grid>
-              <Grid item={true} xs={12}>
-                {formLoading ? (
-                  <LoadingInput />
-                ) : (
-                  <>
-                    <InputField
-                      name="address"
-                      label="Address"
-                      defaultValue={loadedApplicationData?.insured_organization?.address}
-                    //onBlur={() => handleBlur("address", "verifyAddress")}
-                    />
-                    {/* <div className="data-verify-checkbox">
+              <Grid sx={{ xs: 12 }}>
+                <GridItem>
+                  {formLoading ? (
+                    <LoadingInput />
+                  ) : (
+                    <>
+                      <InputField
+                        name="address"
+                        label="Address"
+                        defaultValue={loadedApplicationData?.insured_organization?.address}
+                      //onBlur={() => handleBlur("address", "verifyAddress")}
+                      />
+                      {/* <div className="data-verify-checkbox">
                       <Checkbox
-                        name="verifyAddress"
-                        checked={state["verifyAddress"]}
-                        disabled={!form.getValues("address")}
-                        style={{ padding: 0, marginRight: "5px" }}
-                        onChange={handleChange}
+                      name="verifyAddress"
+                      checked={state["verifyAddress"]}
+                      disabled={!form.getValues("address")}
+                      style={{ padding: 0, marginRight: "5px" }}
+                      onChange={handleChange}
                       />
                       <label>Verify Address</label>
-                    </div> */}
-                  </>
-                )}
+                      </div> */}
+                    </>
+                  )}
+                </GridItem>
               </Grid>
-              <Grid item={true} xs={12} sm={4}>
-                {formLoading ? (
-                  <LoadingInput />
-                ) : (
-                  <InputField
-                    name="city"
-                    label="City"
-                    defaultValue={loadedApplicationData?.insured_organization?.city}
-                  />
-                )}
+              <Grid sx={{ xs: 12, sm: 4 }}>
+                <GridItem>
+                  {formLoading ? (
+                    <LoadingInput />
+                  ) : (
+                    <InputField
+                      name="city"
+                      label="City"
+                      defaultValue={loadedApplicationData?.insured_organization?.city}
+                    />
+                  )}
+                </GridItem>
               </Grid>
-              <Grid item={true} xs={12} sm={4}>
-                {formLoading ? (
-                  <LoadingInput />
-                ) : (
-                  <SelectForm
-                    name="state"
-                    label="State"
-                    trimForSingleValue={true}
-                    options={
-                      States.map((st) => ({ value: st, label: st })).sort() ||
-                      []
-                    }
-                    defaultValue={loadedApplicationData?.insured_organization?.state}
-                  />
-                )}
+              <Grid sx={{ xs: 12, sm: 4 }}>
+                <GridItem>
+                  {formLoading ? (
+                    <LoadingInput />
+                  ) : (
+                    <SelectForm
+                      name="state"
+                      label="State"
+                      trimForSingleValue={true}
+                      options={
+                        States.map((st) => ({ value: st, label: st })).sort() ||
+                        []
+                      }
+                      defaultValue={loadedApplicationData?.insured_organization?.state}
+                    />
+                  )}
+                </GridItem>
               </Grid>
-              <Grid item={true} xs={12} sm={4}>
-                {formLoading ? (
-                  <LoadingInput />
-                ) : (
-                  <InputField
-                    name="zip"
-                    label="Zip"
-                    defaultValue={loadedApplicationData?.insured_organization?.zip}
-                  />
-                )}
+              <Grid sx={{ xs: 12, sm: 4 }}>
+                <GridItem>
+                  {formLoading ? (
+                    <LoadingInput />
+                  ) : (
+                    <InputField
+                      name="zip"
+                      label="Zip"
+                      defaultValue={loadedApplicationData?.insured_organization?.zip}
+                    />
+                  )}
+                </GridItem>
               </Grid>
               <div className="contact-group-label">
                 <span>Occupation Details</span>
               </div>
-              <Grid item={true} xs={12} sm={6}>
-                {formLoading ? (
-                  <LoadingInput />
-                ) : (
-                  <>
-                    <InputField
-                      name="rentals_data[occupation_name]"
-                      label="Occupation Name"
-                      className={`${applicationStage === "bound" ? "input-disabled" : ""
-                        }`}
-                      inputProps={{ readOnly: applicationStage === "bound" }}
-                      value={loadedApplicationData?.rentals_data?.occupation_name}
-                    />
-                    <span style={{ display: "none" }}>
-                      <InputField
-                        name="edit_form"
-                        label="edit_form"
-                        defaultValue={loadedApplicationData?.insured_name}
-                      />
-                    </span>
-                  </>
-                )}
-              </Grid>
-              <Grid item={true} xs={12} sm={6}>
-                {formLoading ? (
-                  <LoadingInput />
-                ) : (
-                  <>
-                    <InputField
-                      name="rentals_data[income]"
-                      label="Income"
-                      startAdornment="$"
-                      type="number"
-                      min={0}
-                      value={loadedApplicationData?.rentals_data?.income}
-                    //onBlur={() => handleBlur("income", "verifyIncome")}
-                    />
-                    {/* <div className="data-verify-checkbox">
+              <Grid>
+                <Grid sx={{ xs: 12, sm: 6 }}>
+                  <GridItem>
+                    {formLoading ? (
+                      <LoadingInput />
+                    ) : (
+                      <>
+                        <InputField
+                          name="rentals_data[occupation_name]"
+                          label="Occupation Name"
+                          className={`${applicationStage === "bound" ? "input-disabled" : ""
+                            }`}
+                          inputProps={{ readOnly: applicationStage === "bound" }}
+                          value={loadedApplicationData?.rentals_data?.occupation_name}
+                        />
+                        <span style={{ display: "none" }}>
+                          <InputField
+                            name="edit_form"
+                            label="edit_form"
+                            defaultValue={loadedApplicationData?.insured_name}
+                          />
+                        </span>
+                      </>
+                    )}
+                  </GridItem>
+                </Grid>
+                <Grid sx={{ xs: 12, sm: 6 }}>
+                  <GridItem>
+                    {formLoading ? (
+                      <LoadingInput />
+                    ) : (
+                      <>
+                        <InputField
+                          name="rentals_data[income]"
+                          label="Income"
+                          startAdornment="$"
+                          type="number"
+                          min={0}
+                          value={loadedApplicationData?.rentals_data?.income}
+                        //onBlur={() => handleBlur("income", "verifyIncome")}
+                        />
+                        {/* <div className="data-verify-checkbox">
                       <Checkbox
                         name="verifyIncome"
                         checked={state["verifyIncome"]}
@@ -882,112 +903,125 @@ const ProfilePageComponent: React.FC<ProfileProps> = ({
                       />
                       <label>Verify Income</label>
                     </div> */}
-                  </>
-                )}
-              </Grid>
-              <div className="contact-group-label">
-                <span>Porperty Details</span>
-              </div>
-              <Grid item={true} xs={12} sm={4}>
-                {formLoading ? (
-                  <LoadingInput />
-                ) : (
-                  <>
-                    <SelectForm
-                      name="rentals_data[propertyInfo][dwelling_type]"
-                      label="Type of dwelling"
-                      isClearable={false}
-                      options={["Apartment", "Condo", "Single-family rental", "Other"]
-                        .map((item) => ({
-                          value: item,
-                          label: item,
-                        }))
-                        .sort()}
-                      defaultValue={loadedApplicationData?.rentals_data?.propertyInfo?.dwelling_type}
+                      </>
+                    )}
+                  </GridItem>
+                </Grid>
+                <div className="contact-group-label">
+                  <span>Porperty Details</span>
+                </div>
+                <Grid sx={{ xs: 12, sm: 4 }}>
+                  <GridItem>
+                    {formLoading ? (
+                      <LoadingInput />
+                    ) : (
+                      <>
+                        <SelectForm
+                          name="rentals_data[propertyInfo][dwelling_type]"
+                          label="Type of dwelling"
+                          isClearable={false}
+                          options={["Apartment", "Condo", "Single-family rental", "Other"]
+                            .map((item) => ({
+                              value: item,
+                              label: item,
+                            }))
+                            .sort()}
+                          defaultValue={loadedApplicationData?.rentals_data?.propertyInfo?.dwelling_type}
+                        />
+                      </>
+                    )}
+                  </GridItem>
+                </Grid>
+                <Grid sx={{ xs: 12, sm: 4 }}>
+                  <GridItem>
+                    {formLoading ? (
+                      <LoadingInput />
+                    ) : (
+                      <>
+                        <SelectForm
+                          name="rentals_data[propertyInfo][construction_type]"
+                          label="Construction Type"
+                          isClearable={false}
+                          options={["Brick", "Wood frame", "Other"]
+                            .map((item) => ({
+                              value: item,
+                              label: item,
+                            }))
+                            .sort()}
+                        />
+                      </>
+                    )}
+                  </GridItem>
+                </Grid>
+                <Grid sx={{ xs: 12, sm: 4 }}>
+                  <GridItem>
+                    <InputField
+                      name="rentals_data[propertyInfo][year_built]"
+                      label="Year built"
+                      type="number"
                     />
-                  </>
-                )}
-              </Grid>
-              <Grid item={true} xs={12} sm={4}>
-                {formLoading ? (
-                  <LoadingInput />
-                ) : (
-                  <>
-                    <SelectForm
-                      name="rentals_data[propertyInfo][construction_type]"
-                      label="Construction Type"
-                      isClearable={false}
-                      options={["Brick", "Wood frame", "Other"]
-                        .map((item) => ({
-                          value: item,
-                          label: item,
-                        }))
-                        .sort()}
-                    />
-                  </>
-                )}
-              </Grid>
-              <Grid item sm={4} xs={12}>
-                <InputField
-                  name="rentals_data[propertyInfo][year_built]"
-                  label="Year built"
-                  type="number"
-                />
-              </Grid>
-              <div className="contact-group-label">
-                <span>Safety Features</span>
-              </div>
-              <Grid item={true} xs={12} sm={4}>
-                {formLoading ? (
-                  <LoadingInput />
-                ) : (
-                  <>
-                    <Checkbox
-                      name="rentals_data[propertyInfo][safety_smoke_detector]"
-                      // checked={state["verifySafetySmokeDetector"]}
-                      // disabled={!form.getValues("safetySmokeDetector")}
-                      style={{ padding: 0, marginRight: "5px" }}
-                      onChange={handleChange}
-                    />
-                    <label>Smoke detectors</label>
-                  </>
-                )}
-              </Grid>
-              <Grid item={true} xs={12} sm={4}>
-                {formLoading ? (
-                  <LoadingInput />
-                ) : (
-                  <>
-                    <Checkbox
-                      name="rentals_data[propertyInfo][safety_sprinkler]"
-                      // checked={state["verifySafetySprinkler"]}
-                      // disabled={!form.getValues("safetySprinkler")}
-                      style={{ padding: 0, marginRight: "5px" }}
-                      onChange={handleChange}
-                    />
-                    <label>Sprinkler systems</label>
-                  </>
-                )}
-              </Grid>
-              <Grid item={true} xs={12} sm={4}>
-                {formLoading ? (
-                  <LoadingInput />
-                ) : (
-                  <>
-                    <Checkbox
-                      name="rentals_data[propertyInfo][safety_deadbolt]"
-                      // checked={state["verifySafetyDeadbolt"]}
-                      // disabled={!form.getValues("safetyDeadbolt")}
-                      style={{ padding: 0, marginRight: "5px" }}
-                      onChange={handleChange}
-                    />
-                    <label>Deadbolts</label>
-                  </>
-                )}
-              </Grid>
+                  </GridItem>
+                </Grid>
+                <div className="contact-group-label">
+                  <span>Safety Features</span>
+                </div>
+                <Grid sx={{ xs: 12, sm: 4 }}>
+                  <GridItem>
+                    {formLoading ? (
+                      <LoadingInput />
+                    ) : (
+                      <>
+                        <Checkbox
+                          name="rentals_data[propertyInfo][safety_smoke_detector]"
+                          // checked={state["verifySafetySmokeDetector"]}
+                          // disabled={!form.getValues("safetySmokeDetector")}
+                          style={{ padding: 0, marginRight: "5px" }}
+                          onChange={handleChange}
+                        />
+                        <label>Smoke detectors</label>
+                      </>
+                    )}
+                  </GridItem>
+                </Grid>
+                <Grid sx={{ xs: 12, sm: 4 }}>
+                  <GridItem>
+                    {formLoading ? (
+                      <LoadingInput />
+                    ) : (
+                      <>
+                        <Checkbox
+                          name="rentals_data[propertyInfo][safety_sprinkler]"
+                          // checked={state["verifySafetySprinkler"]}
+                          // disabled={!form.getValues("safetySprinkler")}
+                          style={{ padding: 0, marginRight: "5px" }}
+                          onChange={handleChange}
+                        />
+                        <label>Sprinkler systems</label>
+                      </>
+                    )}
+                  </GridItem>
+                </Grid>
+                <Grid sx={{ xs: 12, sm: 4 }}>
+                  <GridItem>
+                    {formLoading ? (
+                      <LoadingInput />
+                    ) : (
+                      <>
+                        <Checkbox
+                          name="rentals_data[propertyInfo][safety_deadbolt]"
+                          // checked={state["verifySafetyDeadbolt"]}
+                          // disabled={!form.getValues("safetyDeadbolt")}
+                          style={{ padding: 0, marginRight: "5px" }}
+                          onChange={handleChange}
+                        />
+                        <label>Deadbolts</label>
+                      </>
+                    )}
+                  </GridItem>
+                </Grid>
 
 
-              {/* <div className="contact-group-label">
+                {/* <div className="contact-group-label">
                 <span>Insurance Contact Details</span>
               </div>
               {insuranceContacts?.map((field, index) => (
@@ -1015,7 +1049,7 @@ const ProfilePageComponent: React.FC<ProfileProps> = ({
                 Add New Insurance contact
               </Button> */}
 
-              {/* <div className="contact-group-label">
+                {/* <div className="contact-group-label">
                 <span>Security Contact Details</span>
               </div>
               {securityContacts?.map((field, index) => (
@@ -1047,83 +1081,86 @@ const ProfilePageComponent: React.FC<ProfileProps> = ({
                 Add New Security contact
               </Button> */}
 
-              <Grid item={true} xs={12} sm={12}>
-                {/* {!allVerified && (
+                <Grid sx={{ xs: 12, sm: 12 }}>
+                  <GridItem>
+                    {/* {!allVerified && (
                   <Alert severity="warning" className="tnc-alert-warning">
                     To enable Terms & Conditions you must be Address
                   </Alert>
                 )} */}
 
-                <span style={{ display: "none" }}>
-                  <InputField
-                    name="disclaimer"
-                    label="disclaimer"
-                    value={disclaimerCheck}
-                  />
-                </span>
-                <div className="profile-tnc-wrapper">
-                  <Checkbox
-                    name="disclaimercheckbox"
-                    disabled={!allVerified}
-                    checked={disclaimerCheck}
-                    style={{ padding: 0, marginRight: "5px" }}
-                    onChange={handleDisclaimerChange}
-                  />
-
-                  <div className="profile-tnc-content">
-                    <p className="tnc-text">
-                      I DECLARE that, the above statements, information, and
-                      particulars provided are true, and I have not suppressed
-                      or misstated any material fact, and that I agree that this
-                      information provided shall be the basis of the contract
-                      with the underwriters.
-                    </p>
-                    <p>
-                      <span>Signature of Broker : </span>
-                      {form.watch("insurance_contacts")[0]?.name}
-                    </p>
-                    <p>
-                      <span>
-                        Name/title of person authorized to sign on behalf of
-                        applicant :
-                      </span>{" "}
-                      {brokerName}
-                    </p>
-                    <p>
-                      <span>Date : </span>
-                      {DateTime.now().toLocaleString(DateTime.DATE_MED)}
-                    </p>
-                  </div>
-
-                  {!disclaimerCheck ? (
-                    <span
-                      style={{
-                        display: "block",
-                        color: "red",
-                        fontWeight: 500,
-                        marginLeft: "32px",
-                        fontSize: "14px",
-                      }}
-                    >
-                      {form.errors["disclaimer"]?.message}
+                    <span style={{ display: "none" }}>
+                      <InputField
+                        name="disclaimer"
+                        label="disclaimer"
+                        value={disclaimerCheck}
+                      />
                     </span>
-                  ) : (
-                    <></>
-                  )}
-                </div>
+                    <div className="profile-tnc-wrapper">
+                      <Checkbox
+                        name="disclaimercheckbox"
+                        disabled={!allVerified}
+                        checked={disclaimerCheck}
+                        style={{ padding: 0, marginRight: "5px" }}
+                        onChange={handleDisclaimerChange}
+                      />
+
+                      <div className="profile-tnc-content">
+                        <p className="tnc-text">
+                          I DECLARE that, the above statements, information, and
+                          particulars provided are true, and I have not suppressed
+                          or misstated any material fact, and that I agree that this
+                          information provided shall be the basis of the contract
+                          with the underwriters.
+                        </p>
+                        <p>
+                          <span>Signature of Broker : </span>
+                          {form.watch("insurance_contacts")[0]?.name}
+                        </p>
+                        <p>
+                          <span>
+                            Name/title of person authorized to sign on behalf of
+                            applicant :
+                          </span>{" "}
+                          {brokerName}
+                        </p>
+                        <p>
+                          <span>Date : </span>
+                          {DateTime.now().toLocaleString(DateTime.DATE_MED)}
+                        </p>
+                      </div>
+
+                      {!disclaimerCheck ? (
+                        <span
+                          style={{
+                            display: "block",
+                            color: "red",
+                            fontWeight: 500,
+                            marginLeft: "32px",
+                            fontSize: "14px",
+                          }}
+                        >
+                          {form.formState.errors["disclaimer"]?.message as string}
+                        </span>
+                      ) : (
+                        <></>
+                      )}
+                    </div>
+                  </GridItem>
+                </Grid>
               </Grid>
+              <ButtonsContainer justifyContent="flex-end">
+                <Button
+                  type="submit"
+                  color="primary"
+                  variant="contained"
+                  disabled={insertLoading || formLoading}
+                  endIcon={<ButtonLoading loading={insertLoading} />}
+                >
+                  Next
+                </Button>
+              </ButtonsContainer>
             </Grid>
-            <ButtonsContainer justifyContent="flex-end">
-              <Button
-                type="submit"
-                color="primary"
-                variant="contained"
-                disabled={insertLoading || formLoading}
-                endIcon={<ButtonLoading loading={insertLoading} />}
-              >
-                Next
-              </Button>
-            </ButtonsContainer>
           </form>
         </FormProvider>
       </Card>
@@ -1226,24 +1263,28 @@ const InsuranceContactDetails = (props: any) => {
 
   return (
     <div className="profile-contact-details-row">
-      <Grid item={true} xs={12} sm={6}>
-        <InputField
-          defaultValue={field.name}
-          name={`insurance_contacts[${index}].name`}
-          label="Contact name"
-          error={contactValidate(error[index], "name")}
-        />
-        <ContactValidateMessage error={error[index]} fieldName="name" />
+      <Grid sx={{ xs: 12, sm: 6 }}>
+        <GridItem>
+          <InputField
+            defaultValue={field.name}
+            name={`insurance_contacts[${index}].name`}
+            label="Contact name"
+            error={contactValidate(error[index], "name")}
+          />
+          <ContactValidateMessage error={error[index]} fieldName="name" />
+        </GridItem>
       </Grid>
 
-      <Grid item={true} xs={12} sm={6}>
-        <InputField
-          defaultValue={field.email}
-          name={`insurance_contacts[${index}].email`}
-          label="Contact Email"
-          error={contactValidate(error[index], "email")}
-        />
-        <ContactValidateMessage error={error[index]} fieldName="email" />
+      <Grid sx={{ xs: 12, sm: 6 }}>
+        <GridItem>
+          <InputField
+            defaultValue={field.email}
+            name={`insurance_contacts[${index}].email`}
+            label="Contact Email"
+            error={contactValidate(error[index], "email")}
+          />
+          <ContactValidateMessage error={error[index]} fieldName="email" />
+        </GridItem>
       </Grid>
       <InputField
         defaultValue={`insurance`}
@@ -1267,24 +1308,28 @@ const SecurityContactDetails = (props: any) => {
   const error = errors?.security_contacts || [];
   return (
     <div className="profile-contact-details-row">
-      <Grid item={true} xs={12} sm={6}>
-        <InputField
-          defaultValue={field.name}
-          name={`security_contacts[${index}].name`}
-          label="Contact name"
-          error={contactValidate(error[index], "name")}
-        />
-        <ContactValidateMessage error={error[index]} fieldName="name" />
+      <Grid sx={{ xs: 12, sm: 6 }}>
+        <GridItem>
+          <InputField
+            defaultValue={field.name}
+            name={`security_contacts[${index}].name`}
+            label="Contact name"
+            error={contactValidate(error[index], "name")}
+          />
+          <ContactValidateMessage error={error[index]} fieldName="name" />
+        </GridItem>
       </Grid>
 
-      <Grid item={true} xs={12} sm={6}>
-        <InputField
-          defaultValue={field.email}
-          name={`security_contacts[${index}].email`}
-          label="Contact Email"
-          error={contactValidate(error[index], "email")}
-        />
-        <ContactValidateMessage error={error[index]} fieldName="email" />
+      <Grid sx={{ xs: 12, sm: 6 }}>
+        <GridItem>
+          <InputField
+            defaultValue={field.email}
+            name={`security_contacts[${index}].email`}
+            label="Contact Email"
+            error={contactValidate(error[index], "email")}
+          />
+          <ContactValidateMessage error={error[index]} fieldName="email" />
+        </GridItem>
       </Grid>
       <InputField
         defaultValue="security"

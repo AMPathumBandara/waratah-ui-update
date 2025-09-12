@@ -2,12 +2,13 @@ import { Grid, IconButton } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { CallMissedSharp } from "@material-ui/icons";
+import { CallMissedSharp } from "@mui/icons-material";
 import { Theme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import React, { useState } from "react";
 import theme from "theme/theme";
 import CloseIcon from "@mui/icons-material/Close";
+import GridItem from "components/Layout/GridItem";
 
 const useStyles = makeStyles((theme: Theme) => ({
   modalHeader: {
@@ -97,20 +98,24 @@ const ApplicationModalHeader: React.FC<ApplicationModalHeaderProps> = props => {
         className={classes.modalHeader}
         wrap="nowrap"
       >
-        <Grid item>
-          <h4 className="modal-title">{props.title}</h4>
+        <Grid>
+          <GridItem>
+            <h4 className="modal-title">{props.title}</h4>
+          </GridItem>
         </Grid>
-        <Grid item>
-          {props.headerClose && (
-            <IconButton
-              aria-label="close"
-              size="medium"
-              className={classes.modalClose}
-              onClick={() => props.setClose(true)}
-            >
-              <CloseIcon fontSize="medium" />
-            </IconButton>
-          )}
+        <Grid>
+          <GridItem>
+            {props.headerClose && (
+              <IconButton
+                aria-label="close"
+                size="medium"
+                className={classes.modalClose}
+                onClick={() => props.setClose(true)}
+              >
+                <CloseIcon fontSize="medium" />
+              </IconButton>
+            )}
+          </GridItem>
         </Grid>
       </Grid>
     </>

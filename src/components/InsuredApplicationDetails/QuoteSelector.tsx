@@ -1,11 +1,14 @@
-import { Button, Card, Grid, makeStyles, Theme } from "@mui/material";
-import { Close, Save } from "@material-ui/icons";
+import { Button, Card, Grid } from "@mui/material";
+import { Close, Save } from "@mui/icons-material";
 import { maximumQuoteCount } from "./Quote";
 import { useCreatePdfQuoteSelectionMutation } from "generated/graphql";
 import { useParams } from "react-router-dom";
 import { ApplicationParams } from ".";
 import ToastMessage from "components/Toast/ToastMessage";
 import { useState } from "react";
+import { Theme } from "@mui/material/styles";
+import { makeStyles } from "@mui/styles";
+import GridItem from "components/Layout/GridItem";
 
 // Styles
 const useStyles = makeStyles((theme: Theme) => ({
@@ -103,35 +106,39 @@ const QuoteSelector: React.FC<QuoteSelectorProps> = ({
                     <>
                         <Card className={classes.selectionWrapper}>
                             <Grid container justifyContent="flex-end">
-                                <Grid item xs={8}>
-                                    <span
-                                        className={classes.textBlack}
-                                    >
-                                        Remaining selections for quote PDF : <b>{remainingCount}</b>
-                                    </span>
+                                <Grid size={{ xs: 8 }}>
+                                    <GridItem>
+                                        <span
+                                            className={classes.textBlack}
+                                        >
+                                            Remaining selections for quote PDF : <b>{remainingCount}</b>
+                                        </span>
+                                    </GridItem>
                                 </Grid>
-                                <Grid item xs={4} style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                                    <Button
-                                        variant="contained"
-                                        color="primary"
-                                        size="small"
-                                        startIcon={<Save />}
-                                        disabled={createLoading ||remainingCount > 0}
-                                        onClick={() => saveSelection()}
-                                    >
-                                        {createLoading ? 'Generating...' : 'Generate'}
-                                    </Button>
-                                    &nbsp;
-                                    <Button
-                                        variant="contained"
-                                        color="secondary"
-                                        size="small"
-                                        startIcon={<Close />}
-                                        onClick={() => setEnabled(false)}
-                                        disabled={createLoading}
-                                    >
-                                        Cancel
-                                    </Button>
+                                <Grid size={{ xs: 4 }}>
+                                    <GridItem sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                                        <Button
+                                            variant="contained"
+                                            color="primary"
+                                            size="small"
+                                            startIcon={<Save />}
+                                            disabled={createLoading || remainingCount > 0}
+                                            onClick={() => saveSelection()}
+                                        >
+                                            {createLoading ? 'Generating...' : 'Generate'}
+                                        </Button>
+                                        &nbsp;
+                                        <Button
+                                            variant="contained"
+                                            color="secondary"
+                                            size="small"
+                                            startIcon={<Close />}
+                                            onClick={() => setEnabled(false)}
+                                            disabled={createLoading}
+                                        >
+                                            Cancel
+                                        </Button>
+                                    </GridItem>
                                 </Grid>
                             </Grid>
                             <br />

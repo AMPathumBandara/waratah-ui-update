@@ -1,5 +1,7 @@
 import React from "react";
-import { createStyles, Theme, makeStyles } from "@mui/material/styles";
+import { createStyles } from "@mui/material/styles";
+import { Theme } from "@mui/material/styles";
+import { makeStyles } from "@mui/styles";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
@@ -18,7 +20,7 @@ import ClearRoundedIcon from "@mui/icons-material/ClearRounded";
 
 const useStyles = makeStyles((theme: Theme) =>
   //@ts-ignore
-  createStyles({
+  ({
     searchWrapper: {
       padding: "5px",
     },

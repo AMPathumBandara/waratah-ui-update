@@ -1,10 +1,10 @@
-import { Machine } from "xstate";
+import { createMachine } from "xstate";
 import Profile from "./Profile";
 import Quote from "./Quote";
 import Bind from "./Bind";
 
 export const applicationStateMachine = (initialState: string) =>
-  Machine({
+  createMachine({
     id: "application",
     initial: initialState,
     context: {

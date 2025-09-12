@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import Grid from "@mui/material/Grid";
-import { makeStyles, Theme } from "@mui/material/styles";
+import { Theme } from "@mui/material/styles";
+import { makeStyles } from "@mui/styles";
 import Button from "@mui/material/Button";
 import {
   useApplicationQuoteQuery,
@@ -48,10 +49,11 @@ import ContactDetail from "./QuoteContacts";
 import FeatureFlag from "utils/FeatureFlag";
 import { useUser } from "components/Auth/CognitoHooks";
 import { Checkbox, IconButton, TextField, Tooltip } from "@mui/material";
-import { AttachmentOutlined, AttachmentRounded, Check, Close, Edit, Error, PinDrop } from "@material-ui/icons";
+import { AttachmentOutlined, AttachmentRounded, Check, Close, Edit, Error, PinDrop } from "@mui/icons-material";
 import ToastMessage from "components/Toast/ToastMessage";
 import CustomQuote from "./CustomQuote";
 import QuoteSelector from "./QuoteSelector";
+import GridItem from "components/Layout/GridItem";
 
 // Styles
 const useStyles = makeStyles((theme: Theme) => ({
@@ -368,24 +370,24 @@ const Quote: React.FC<QuoteProps> = ({
         applicationId: params.id
       }
     });
-    
-    let pdfQuoteIdsArr: Array<number> = [];
-    
-    const pdfQuoteIds = pdfQuoteIdsData?.insurance_application_artifact[0]
+
+  let pdfQuoteIdsArr: Array<number> = [];
+
+  const pdfQuoteIds = pdfQuoteIdsData?.insurance_application_artifact[0]
     ?.insurance_quote_pdf_selection_artifacts[0]
     ?.insurance_quote_pdf_selections || [];
 
-    if (pdfQuoteIds.length > 0) {
+  if (pdfQuoteIds.length > 0) {
     pdfQuoteIds.map((i) => {
       pdfQuoteIdsArr.push(i.quote_id);
     });
 
-  // const pdfQuoteIds = watchQuotes?.insurance_quote || [];
+    // const pdfQuoteIds = watchQuotes?.insurance_quote || [];
 
-  // if (pdfQuoteIds.length > 0) {
-  //   pdfQuoteIds.map((i) => {
-  //     pdfQuoteIdsArr.push(i.id);
-  //   });
+    // if (pdfQuoteIds.length > 0) {
+    //   pdfQuoteIds.map((i) => {
+    //     pdfQuoteIdsArr.push(i.id);
+    //   });
 
     // //if new selection does not contain previously selected quoteId, removed it
     // !(pdfQuoteIdsArr.includes(selectQuote)) {
@@ -465,72 +467,76 @@ const Quote: React.FC<QuoteProps> = ({
             <ApolloErrorToast error={updateError} />
             <form onSubmit={handleSubmit(handleFormSubmit)}>
               <Grid container spacing={4}>
-                <Grid item md={6} xs={12}>
-                  <div
-                    className={`date-fields-wrapper ${classes.dateFieldsWrapper}`}
-                  >
-                    {quoteLoading ? (
-                      <LoadingInput />
-                    ) : (
-                      <InputField
-                        name="effective_date"
-                        label="Effective Date"
-                        type="date"
-                        defaultValue={
-                          data?.insurance_application_by_pk?.effective_date
-                        }
-                        onChange={() =>
-                          setValue(
-                            "expiration_date",
-                            getExpirationDate(form.getValues("effective_date"))
-                          )
-                        }
-                      />
-                    )}
+                <Grid sx={{ xs: 12, md: 6 }}>
+                  <GridItem>
+                    <div
+                      className={`date-fields-wrapper ${classes.dateFieldsWrapper}`}
+                    >
+                      {quoteLoading ? (
+                        <LoadingInput />
+                      ) : (
+                        <InputField
+                          name="effective_date"
+                          label="Effective Date"
+                          type="date"
+                          defaultValue={
+                            data?.insurance_application_by_pk?.effective_date
+                          }
+                          onChange={() =>
+                            setValue(
+                              "expiration_date",
+                              getExpirationDate(form.getValues("effective_date"))
+                            )
+                          }
+                        />
+                      )}
 
-                    {quoteLoading ? (
-                      <LoadingInput />
-                    ) : (
-                      <InputField
-                        name="expiration_date"
-                        label="Expiration Date"
-                        type="date"
-                        defaultValue={
-                          data?.insurance_application_by_pk?.expiration_date
-                            ? data?.insurance_application_by_pk?.expiration_date
-                            : data?.insurance_application_by_pk?.effective_date
-                              ? getExpirationDate(
-                                data?.insurance_application_by_pk
-                                  ?.effective_date
-                              )
-                              : ""
-                        }
-                      />
-                    )}
-                  </div>
-                </Grid>
-                <Grid item md={6} xs={12}>
-                  {quoteLoading ? (
-                    <LoadingScanVirdict />
-                  ) : (
-                    <div className="scan-verdict-wrapper">
-                      <Card shadow={false} legendTitle="External Risk Factors">
-                        <div className="scan-alert">
-                          {watchLoading || scanLoading ? (
-                            <LoadingScanStatus />
-                          ) : (
-                            <>
-                              <ScanStatus
-                                scanData={scanData}
-                                retriggerScan={retriggerScan}
-                                manualTriggerLoading={manualTriggerScanLoading}
-                              />
-                            </>
-                          )}
-                        </div>
-                      </Card>
+                      {quoteLoading ? (
+                        <LoadingInput />
+                      ) : (
+                        <InputField
+                          name="expiration_date"
+                          label="Expiration Date"
+                          type="date"
+                          defaultValue={
+                            data?.insurance_application_by_pk?.expiration_date
+                              ? data?.insurance_application_by_pk?.expiration_date
+                              : data?.insurance_application_by_pk?.effective_date
+                                ? getExpirationDate(
+                                  data?.insurance_application_by_pk
+                                    ?.effective_date
+                                )
+                                : ""
+                          }
+                        />
+                      )}
                     </div>
-                  )}
+                  </GridItem>
+                </Grid>
+                <Grid sx={{ xs: 12, md: 6 }}>
+                  <GridItem>
+                    {quoteLoading ? (
+                      <LoadingScanVirdict />
+                    ) : (
+                      <div className="scan-verdict-wrapper">
+                        <Card shadow={false} legendTitle="External Risk Factors">
+                          <div className="scan-alert">
+                            {watchLoading || scanLoading ? (
+                              <LoadingScanStatus />
+                            ) : (
+                              <>
+                                <ScanStatus
+                                  scanData={scanData}
+                                  retriggerScan={retriggerScan}
+                                  manualTriggerLoading={manualTriggerScanLoading}
+                                />
+                              </>
+                            )}
+                          </div>
+                        </Card>
+                      </div>
+                    )}
+                  </GridItem>
                 </Grid>
 
               </Grid>
@@ -538,118 +544,70 @@ const Quote: React.FC<QuoteProps> = ({
               <br />
 
               <Grid container spacing={4}>
-                <Grid item md={6} xs={12}>
-                  <div className="scan-verdict-wrapper">
-                    <Card shadow={false} legendTitle="Quote PDF">
-                      <div className="scan-alert">
-                        {
-                          applicationStage !== "declined" && (artifactDataSubscription?.loading || !artifactDataSubscription?.data?.insurance_application_artifact?.length || quoteUpdateLoading)
-                            ? <>Preparing Quote PDF....</>
-                            : (
-                              <Alert severity="info">
-                                Quote PDF Generated: {' '}
-                                <Button
-                                  className="btn-verdict"
-                                  disabled={quoteSelectionMode || applicationStage === "declined" 
-                                    //|| (!scan_result || (scan_result === 'pending' || scan_result === 'failed' || scan_result === 'reject')) 
-                                    ? true : quoteDownload}
-                                  onClick={() => {
-                                    setQuoteDownload(true);
-                                    dowloadInsuredArtifact(
-                                      fileRefetch,
-                                      latestQuoteUri || '',
-                                      getFileName(latestQuoteUri as string, latestQuoteUri?.replace(".pdf", "") as string) || "Quote",
-                                      () => setQuoteDownload(false)
-                                    );
-                                  }}
-                                >
-                                  {
-                                    ( false
-                                      //applicationStage !== "declined" 
-                                      //&& (!scan_result || scan_result === 'pending')
-                                    )
-                                      ? (<>Waiting for scan data....</>)
-                                      : (quoteDownload ? <CircularProgress style={{ marginLeft: 5 }} size={18} /> : 'Download')
-                                  }
-                                </Button>
+                <Grid sx={{ xs: 12, md: 6 }}>
+                  <GridItem>
+                    <div className="scan-verdict-wrapper">
+                      <Card shadow={false} legendTitle="Quote PDF">
+                        <div className="scan-alert">
+                          {
+                            applicationStage !== "declined" && (artifactDataSubscription?.loading || !artifactDataSubscription?.data?.insurance_application_artifact?.length || quoteUpdateLoading)
+                              ? <>Preparing Quote PDF....</>
+                              : (
+                                <Alert severity="info">
+                                  Quote PDF Generated: {' '}
+                                  <Button
+                                    className="btn-verdict"
+                                    disabled={quoteSelectionMode || applicationStage === "declined"
+                                      //|| (!scan_result || (scan_result === 'pending' || scan_result === 'failed' || scan_result === 'reject')) 
+                                      ? true : quoteDownload}
+                                    onClick={() => {
+                                      setQuoteDownload(true);
+                                      dowloadInsuredArtifact(
+                                        fileRefetch,
+                                        latestQuoteUri || '',
+                                        getFileName(latestQuoteUri as string, latestQuoteUri?.replace(".pdf", "") as string) || "Quote",
+                                        () => setQuoteDownload(false)
+                                      );
+                                    }}
+                                  >
+                                    {
+                                      (false
+                                        //applicationStage !== "declined" 
+                                        //&& (!scan_result || scan_result === 'pending')
+                                      )
+                                        ? (<>Waiting for scan data....</>)
+                                        : (quoteDownload ? <CircularProgress style={{ marginLeft: 5 }} size={18} /> : 'Download')
+                                    }
+                                  </Button>
 
-                              </Alert>
-                            )
-                        }
-                      </div>
-                    </Card>
-                  </div>
+                                </Alert>
+                              )
+                          }
+                        </div>
+                      </Card>
+                    </div>
+                  </GridItem>
                 </Grid>
 
-                <Grid item md={6} xs={12}>
-                  <div className="scan-verdict-wrapper">
-                    <FeatureFlag
-                      roles={["broker_power"]}
-                      fallbackRender={() =>
-                        // start fallback renderer
-                        <Card shadow={false} legendTitle="E-mail Quotes">
-                          <div className="scan-alert">
+                <Grid sx={{ xs: 12, md: 6 }}>
+                  <GridItem>
+                    <div className="scan-verdict-wrapper">
+                      <FeatureFlag
+                        roles={["broker_power"]}
+                        fallbackRender={() =>
+                          // start fallback renderer
+                          <Card shadow={false} legendTitle="E-mail Quotes">
+                            <div className="scan-alert">
 
-                            <Alert severity="info">
-                              E-Mail Quotes {' '} <Button
-                                className="btn-verdict"
-                                onClick={() => setShowQuoteEmailModal(true)}
-                                disabled={applicationStage === "declined" 
-                                  // || (!scan_result || scan_result === 'failed' || scan_result === 'reject') 
-                                  ? true : false}
-                              >
-                                Send Quotes
-                              </Button>
-                            </Alert>
-                            {
-                              showQuoteEmailModal && (
-                                <ModalWindow
-                                  showModal={showQuoteEmailModal}
-                                  size="md"
-                                  title="Send Quote Details"
-                                  setShowModal={() => setShowQuoteEmailModal(false)}
-                                >
-                                  <ContactDetail
-                                    fileRefetch={fileRefetch}
-                                    artifactDataSubscription={artifactDataSubscription}
-                                    disableSend={(
-                                      quoteUpdateLoading 
-                                      // || !scan_result || scan_result === 'pending'
-                                    )}
-                                    disableButtonText={
-                                      quoteUpdateLoading ? "Waiting for quote update..." : "Waiting for scan data..."
-                                    }
-                                  />
-                                </ModalWindow>
-                              )}
-                          </div>
-                        </Card>}
-                    // end fallback renderer
-                    >
-                      <Card shadow={false} legendTitle="Quotes">
-                        <Grid container spacing={1}>
-                          <Grid item xs={12} md={6}>
-                            <div className="scan-alert">
-                              <Alert severity="info">
-                                Edit Quote {' '} <Button
-                                  className="btn-verdict"
-                                  onClick={() => setcustomQuoteFormOpen(true)}
-                                  disabled={quoteSelectionMode || customQuoteFormOpen || applicationStage === "declined" || (!scan_result || scan_result === 'failed' || scan_result === 'reject') ? true : false}
-                                >
-                                  Create
-                                </Button>
-                              </Alert>
-                            </div>
-                          </Grid>
-                          <Grid item xs={12} md={6}>
-                            <div className="scan-alert">
                               <Alert severity="info">
                                 E-Mail Quotes {' '} <Button
                                   className="btn-verdict"
                                   onClick={() => setShowQuoteEmailModal(true)}
-                                  disabled={quoteSelectionMode || applicationStage === "declined" || (!scan_result || scan_result === 'failed' || scan_result === 'reject') ? true : false}
+                                  disabled={applicationStage === "declined"
+                                    // || (!scan_result || scan_result === 'failed' || scan_result === 'reject') 
+                                    ? true : false}
                                 >
-                                  Send
+                                  Send Quotes
                                 </Button>
                               </Alert>
                               {
@@ -663,9 +621,10 @@ const Quote: React.FC<QuoteProps> = ({
                                     <ContactDetail
                                       fileRefetch={fileRefetch}
                                       artifactDataSubscription={artifactDataSubscription}
-                                      disableSend={(quoteUpdateLoading 
-                                        //|| !scan_result || scan_result === 'pending'
-                                        )}
+                                      disableSend={(
+                                        quoteUpdateLoading
+                                        // || !scan_result || scan_result === 'pending'
+                                      )}
                                       disableButtonText={
                                         quoteUpdateLoading ? "Waiting for quote update..." : "Waiting for scan data..."
                                       }
@@ -673,32 +632,90 @@ const Quote: React.FC<QuoteProps> = ({
                                   </ModalWindow>
                                 )}
                             </div>
+                          </Card>}
+                      // end fallback renderer
+                      >
+                        <Card shadow={false} legendTitle="Quotes">
+                          <Grid container spacing={1}>
+                            <Grid sx={{ xs: 12, md: 6 }}>
+                              <GridItem>
+                                <div className="scan-alert">
+                                  <Alert severity="info">
+                                    Edit Quote {' '} <Button
+                                      className="btn-verdict"
+                                      onClick={() => setcustomQuoteFormOpen(true)}
+                                      disabled={quoteSelectionMode || customQuoteFormOpen || applicationStage === "declined" || (!scan_result || scan_result === 'failed' || scan_result === 'reject') ? true : false}
+                                    >
+                                      Create
+                                    </Button>
+                                  </Alert>
+                                </div>
+                              </GridItem>
+                            </Grid>
+                            <Grid sx={{ xs: 12, md: 6 }}>
+                              <GridItem>
+                                <div className="scan-alert">
+                                  <Alert severity="info">
+                                    E-Mail Quotes {' '} <Button
+                                      className="btn-verdict"
+                                      onClick={() => setShowQuoteEmailModal(true)}
+                                      disabled={quoteSelectionMode || applicationStage === "declined" || (!scan_result || scan_result === 'failed' || scan_result === 'reject') ? true : false}
+                                    >
+                                      Send
+                                    </Button>
+                                  </Alert>
+                                  {
+                                    showQuoteEmailModal && (
+                                      <ModalWindow
+                                        showModal={showQuoteEmailModal}
+                                        size="md"
+                                        title="Send Quote Details"
+                                        setShowModal={() => setShowQuoteEmailModal(false)}
+                                      >
+                                        <ContactDetail
+                                          fileRefetch={fileRefetch}
+                                          artifactDataSubscription={artifactDataSubscription}
+                                          disableSend={(quoteUpdateLoading
+                                            //|| !scan_result || scan_result === 'pending'
+                                          )}
+                                          disableButtonText={
+                                            quoteUpdateLoading ? "Waiting for quote update..." : "Waiting for scan data..."
+                                          }
+                                        />
+                                      </ModalWindow>
+                                    )}
+                                </div>
+                              </GridItem>
+                            </Grid>
                           </Grid>
-                        </Grid>
 
-                      </Card>
-                    </FeatureFlag>
-                  </div>
+                        </Card>
+                      </FeatureFlag>
+                    </div>
+                  </GridItem>
                 </Grid>
 
-                <Grid item xs={12}>
-                  {
-                    (quoteCount > maximumQuoteCount) &&
-                    <Alert severity="warning">
-                      <Grid container spacing={2} alignItems="center">
-                        <Grid item xs={12}>
-                          More than <b>{maximumQuoteCount} quotes</b> found for this application. Quotes that are already in the <b>PDF</b> version are marked with <span style={{ position: "relative", top: "6px" }}><AttachmentOutlined fontSize="small" color="primary" /></span>
-                          <br />
-                          <span>To change the selection and generate a new PDF
-                            <Button
-                              onClick={() => setQuoteSelectionMode(true)}
-                              disabled={quoteSelectionMode || customQuoteFormOpen}
-                              color="primary">
-                              <b>Click here</b>
-                            </Button>
-                          </span>
-                        </Grid>
-                        {/* <Grid item xs={3}>
+                <Grid sx={{ xs: 12 }}>
+                  <GridItem>
+                    {
+                      (quoteCount > maximumQuoteCount) &&
+                      <Alert severity="warning">
+                        <Grid container spacing={2} alignItems="center">
+                          <Grid sx={{ xs: 12 }}>
+                            <GridItem>
+                              More than <b>{maximumQuoteCount} quotes</b> found for this application. Quotes that are already in the <b>PDF</b> version are marked with <span style={{ position: "relative", top: "6px" }}><AttachmentOutlined fontSize="small" color="primary" /></span>
+                              <br />
+                              <span>To change the selection and generate a new PDF
+                                <Button
+                                  onClick={() => setQuoteSelectionMode(true)}
+                                  disabled={quoteSelectionMode || customQuoteFormOpen}
+                                  color="primary">
+                                  <b>Click here</b>
+                                </Button>
+                              </span>
+                            </GridItem>
+                          </Grid>
+                          {/* <Grid item xs={3}>
                           <Button
                             className="btn-verdict"
                             onClick={() => setQuoteSelectionMode(true)}
@@ -707,10 +724,11 @@ const Quote: React.FC<QuoteProps> = ({
                             Select Now
                           </Button>
                         </Grid> */}
-                      </Grid>
+                        </Grid>
 
-                    </Alert>
-                  }
+                      </Alert>
+                    }
+                  </GridItem>
                 </Grid>
 
               </Grid>
@@ -950,268 +968,269 @@ const QuoteList: React.FC<QuoteListDataProps> = ({
   return (
     <>
       {toastMessageComponent}
-      <Grid item xs={12} md={4} key={item.id}>
-        <Card shadow={false}>
-          {
-            selectMode &&
-            <div className={classes.quoteSelectCheckBoxWrapper}>
-              <Tooltip
-                title={tooltipTitle}
-                aria-label={tooltipTitle}
-              >
-                <span>
-                  <Checkbox
-                    defaultChecked={quoteSelected}
-                    color="primary"
-                    onChange={(e) => updateSelection(e.target.checked)}
-                    disabled={!quoteSelected && disableAdd}
-                  />
-                </span>
-              </Tooltip>
-            </div>
-          }
-          {
-            inPDF && !selectMode &&
-            <div className={classes.quoteInPDFWrapper}>
-              <Tooltip
-                title="In Quote PDF"
-                aria-label="In Quote PDF"
-              >
-                <span>
-                  <AttachmentOutlined fontSize="small" color="primary" />
-                </span>
-              </Tooltip>
-            </div>
-          }
-          <div>
-            <table className={classes.quotesTable}>
-              <tbody>
-                <tr>
-                  <td>
-                    <span className={classes.textGrey}>Limit</span>
-                    <span className={classes.textBlack}>
-                      {currencyFormatter(item.policy_limit)}
-                    </span>
-                  </td>
-                  <td>
-                    {/* <span className={classes.textGrey}>Premium</span> */}
-                    <span
-                      className={classes.textBlack}
-                      style={{ fontSize: "18px" }}
-                    >
-                      {currencyFormatterWithCents(item.total_premium)}
-                    </span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <span className={classes.textGrey}>Sub Limit</span>
-                    <span className={classes.textBlack}>
-                      {item.sub_limits?.map((a: any) => currencyFormatter(a.amount))}
-                    </span>
-                  </td>
-                  <td>
-                    <span className={classes.textGrey}>Deductible</span>
-                    <span className={classes.textBlack}>
-                      {currencyFormatter(item.deductible)}
-                    </span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div
-            className={`${classes.showMore} ${quoteExpand === item.id ? "active" : ""
-              }`}
-            onClick={() => {
-              quoteExpand === item.id
-                ? setQuoteExpand(null)
-                : setQuoteExpand(item.id);
-            }}
-          >
-            <span>
-              <KeyboardArrowDownIcon />
-            </span>
-            <hr />
-          </div>
-          {quoteExpand === item.id ? (
+      <Grid sx={{ xs: 12, md: 4 }} key={item.id}>
+        <GridItem>
+          <Card shadow={false}>
+            {
+              selectMode &&
+              <div className={classes.quoteSelectCheckBoxWrapper}>
+                <Tooltip
+                  title={tooltipTitle}
+                  aria-label={tooltipTitle}
+                >
+                  <span>
+                    <Checkbox
+                      defaultChecked={quoteSelected}
+                      color="primary"
+                      onChange={(e) => updateSelection(e.target.checked)}
+                      disabled={!quoteSelected && disableAdd}
+                    />
+                  </span>
+                </Tooltip>
+              </div>
+            }
+            {
+              inPDF && !selectMode &&
+              <div className={classes.quoteInPDFWrapper}>
+                <Tooltip
+                  title="In Quote PDF"
+                  aria-label="In Quote PDF"
+                >
+                  <span>
+                    <AttachmentOutlined fontSize="small" color="primary" />
+                  </span>
+                </Tooltip>
+              </div>
+            }
             <div>
               <table className={classes.quotesTable}>
                 <tbody>
                   <tr>
                     <td>
-                      <span className={classes.textGrey}>Premium</span>
+                      <span className={classes.textGrey}>Limit</span>
+                      <span className={classes.textBlack}>
+                        {currencyFormatter(item.policy_limit)}
+                      </span>
                     </td>
                     <td>
-                      <span className={classes.textGrey}>
-                        {
-                          showEditPremium
-                            ? (
-                              <>
-                                <TextField
-                                  className={classes.editPremiumInput}
-                                  id="premium-edit-value"
-                                  variant="standard"
-                                  size="small"
-                                  type="number"
-                                  value={newPremium}
-                                  onChange={(e) => setNewPremium(Number(e.target.value))}
-                                  error={premiumError}
-                                  onKeyDown={(e) => {
-                                    if (e.key === "Enter") {
-                                      savePremium();
-                                    }
-                                  }}
-                                />
-                              </>
-                            ) : (
-                              currencyFormatterWithCents(item.premium)
-                            )
-                        }
-                        {
-                          <FeatureFlag
-                            roles={["broker_power"]}
-                            fallbackRender={() => <></>}
-                          >
-                            <span className={classes.editPremiumToolbar}>
-                              {
-                                showEditPremium
-                                  ? (
-                                    <>
-                                      <Tooltip
-                                        title="Save"
-                                        aria-label="Save"
-                                      >
-                                        <IconButton
-                                          color="primary"
-                                          className={classes.editPremiumBtn}
-                                          onClick={savePremium}
-                                          disabled={updatePremiumLoading}
-                                        >
-                                          <Check className={classes.editPremiumBtnIcon} />
-                                        </IconButton>
-                                      </Tooltip>
-
-                                      <Tooltip
-                                        title="Close"
-                                        aria-label="Close"
-                                      >
-                                        <IconButton
-                                          color="secondary"
-                                          className={classes.editPremiumBtn}
-                                          onClick={() => setShowEditPremium(false)}
-                                          disabled={updatePremiumLoading}
-                                        >
-                                          <Close className={classes.editPremiumBtnIcon} />
-                                        </IconButton>
-                                      </Tooltip>
-                                    </>
-                                  )
-                                  : (
-                                    !quoteSelectionMode && <Tooltip
-                                      title="Edit Premium"
-                                      aria-label="Edit Premium"
-                                    >
-                                      <IconButton
-                                        color="primary"
-                                        className={classes.editPremiumBtn}
-                                        onClick={() => setShowEditPremium(true)}
-                                        disabled={artifactLoading}
-                                      >
-                                        {
-                                          updatePremiumLoading ? (
-                                            <CircularProgress className={classes.editPremiumBtnIcon} style={{ marginLeft: 5 }} size={18} />
-                                          ) : (
-                                            <Edit className={classes.editPremiumBtnIcon} />
-                                          )
-                                        }
-                                      </IconButton>
-                                    </Tooltip>
-                                  )
-                              }
-                            </span>
-                          </FeatureFlag>
-                        }
+                      {/* <span className={classes.textGrey}>Premium</span> */}
+                      <span
+                        className={classes.textBlack}
+                        style={{ fontSize: "18px" }}
+                      >
+                        {currencyFormatterWithCents(item.total_premium)}
                       </span>
                     </td>
                   </tr>
-
-                  {item?.fees?.items?.map((fee: any) => (
-                    <tr key={`${item.id}-${fee.name}`}>
-                      <td>
-                        <span className={classes.textGrey}>
-                          {fee.name}{" "}
-                          {fee.rate && `(${getPercentage(fee.rate)})`}
-                        </span>
-                      </td>
-                      <td>
-                        <span className={classes.textGrey}>
-                          $
-                          {fee.amount !== undefined &&
-                            currencyFormatterWithCents(fee.amount)
-                          }
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                  {item.taxes?.label !== undefined && (
-                    <tr>
-                      <td>
-                        <span className={classes.textGrey}>
-                          {item.taxes?.label || "Tax"} (
-                          {getPercentage(item.taxes?.rate)})
-                        </span>
-                      </td>
-                      <td>
-                        <span className={classes.textGrey}>
-                          $
-                          {item.taxes?.amount !== undefined &&
-                            //Number(item.taxes?.amount).toFixed(2)
-                            currencyFormatterWithCents(item.taxes?.amount)
-                          }
-                        </span>
-                      </td>
-                    </tr>
-                  )}
-
                   <tr>
                     <td>
-                      <span className={classes.textBlack}>Total</span>
+                      <span className={classes.textGrey}>Sub Limit</span>
+                      <span className={classes.textBlack}>
+                        {item.sub_limits?.map((a: any) => currencyFormatter(a.amount))}
+                      </span>
                     </td>
                     <td>
-                      <span className={classes.textBlack}>{currencyFormatterWithCents(item.total_premium)}</span>
+                      <span className={classes.textGrey}>Deductible</span>
+                      <span className={classes.textBlack}>
+                        {currencyFormatter(item.deductible)}
+                      </span>
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
-          ) : (
-            <></>
-          )}
 
-          {
-            (!quoteSelectionMode
-              //&& inPDF
-            ) && <div
+            <div
+              className={`${classes.showMore} ${quoteExpand === item.id ? "active" : ""
+                }`}
               onClick={() => {
-                //setSelectedQuote(item.id);
-                activeQuoteId(item.id);
+                quoteExpand === item.id
+                  ? setQuoteExpand(null)
+                  : setQuoteExpand(item.id);
               }}
-              className={classes.selectQuoteBtn}
             >
-              <Tooltip
-                title={`${selectedQuoteId === item.id ? "Selected quote" : "Select quote"}`}
-              >
-                <CheckCircleIcon
-                  fontSize="large"
-                  htmlColor={`${selectedQuoteId === item.id ? "#00CF5F" : "#C4C4C4"
-                    }`}
-                />
-              </Tooltip>
+              <span>
+                <KeyboardArrowDownIcon />
+              </span>
+              <hr />
             </div>
-          }
-          {/* {
+            {quoteExpand === item.id ? (
+              <div>
+                <table className={classes.quotesTable}>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <span className={classes.textGrey}>Premium</span>
+                      </td>
+                      <td>
+                        <span className={classes.textGrey}>
+                          {
+                            showEditPremium
+                              ? (
+                                <>
+                                  <TextField
+                                    className={classes.editPremiumInput}
+                                    id="premium-edit-value"
+                                    variant="standard"
+                                    size="small"
+                                    type="number"
+                                    value={newPremium}
+                                    onChange={(e) => setNewPremium(Number(e.target.value))}
+                                    error={premiumError}
+                                    onKeyDown={(e) => {
+                                      if (e.key === "Enter") {
+                                        savePremium();
+                                      }
+                                    }}
+                                  />
+                                </>
+                              ) : (
+                                currencyFormatterWithCents(item.premium)
+                              )
+                          }
+                          {
+                            <FeatureFlag
+                              roles={["broker_power"]}
+                              fallbackRender={() => <></>}
+                            >
+                              <span className={classes.editPremiumToolbar}>
+                                {
+                                  showEditPremium
+                                    ? (
+                                      <>
+                                        <Tooltip
+                                          title="Save"
+                                          aria-label="Save"
+                                        >
+                                          <IconButton
+                                            color="primary"
+                                            className={classes.editPremiumBtn}
+                                            onClick={savePremium}
+                                            disabled={updatePremiumLoading}
+                                          >
+                                            <Check className={classes.editPremiumBtnIcon} />
+                                          </IconButton>
+                                        </Tooltip>
+
+                                        <Tooltip
+                                          title="Close"
+                                          aria-label="Close"
+                                        >
+                                          <IconButton
+                                            color="secondary"
+                                            className={classes.editPremiumBtn}
+                                            onClick={() => setShowEditPremium(false)}
+                                            disabled={updatePremiumLoading}
+                                          >
+                                            <Close className={classes.editPremiumBtnIcon} />
+                                          </IconButton>
+                                        </Tooltip>
+                                      </>
+                                    )
+                                    : (
+                                      !quoteSelectionMode && <Tooltip
+                                        title="Edit Premium"
+                                        aria-label="Edit Premium"
+                                      >
+                                        <IconButton
+                                          color="primary"
+                                          className={classes.editPremiumBtn}
+                                          onClick={() => setShowEditPremium(true)}
+                                          disabled={artifactLoading}
+                                        >
+                                          {
+                                            updatePremiumLoading ? (
+                                              <CircularProgress className={classes.editPremiumBtnIcon} style={{ marginLeft: 5 }} size={18} />
+                                            ) : (
+                                              <Edit className={classes.editPremiumBtnIcon} />
+                                            )
+                                          }
+                                        </IconButton>
+                                      </Tooltip>
+                                    )
+                                }
+                              </span>
+                            </FeatureFlag>
+                          }
+                        </span>
+                      </td>
+                    </tr>
+
+                    {item?.fees?.items?.map((fee: any) => (
+                      <tr key={`${item.id}-${fee.name}`}>
+                        <td>
+                          <span className={classes.textGrey}>
+                            {fee.name}{" "}
+                            {fee.rate && `(${getPercentage(fee.rate)})`}
+                          </span>
+                        </td>
+                        <td>
+                          <span className={classes.textGrey}>
+                            $
+                            {fee.amount !== undefined &&
+                              currencyFormatterWithCents(fee.amount)
+                            }
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                    {item.taxes?.label !== undefined && (
+                      <tr>
+                        <td>
+                          <span className={classes.textGrey}>
+                            {item.taxes?.label || "Tax"} (
+                            {getPercentage(item.taxes?.rate)})
+                          </span>
+                        </td>
+                        <td>
+                          <span className={classes.textGrey}>
+                            $
+                            {item.taxes?.amount !== undefined &&
+                              //Number(item.taxes?.amount).toFixed(2)
+                              currencyFormatterWithCents(item.taxes?.amount)
+                            }
+                          </span>
+                        </td>
+                      </tr>
+                    )}
+
+                    <tr>
+                      <td>
+                        <span className={classes.textBlack}>Total</span>
+                      </td>
+                      <td>
+                        <span className={classes.textBlack}>{currencyFormatterWithCents(item.total_premium)}</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            ) : (
+              <></>
+            )}
+
+            {
+              (!quoteSelectionMode
+                //&& inPDF
+              ) && <div
+                onClick={() => {
+                  //setSelectedQuote(item.id);
+                  activeQuoteId(item.id);
+                }}
+                className={classes.selectQuoteBtn}
+              >
+                <Tooltip
+                  title={`${selectedQuoteId === item.id ? "Selected quote" : "Select quote"}`}
+                >
+                  <CheckCircleIcon
+                    fontSize="large"
+                    htmlColor={`${selectedQuoteId === item.id ? "#00CF5F" : "#C4C4C4"
+                      }`}
+                  />
+                </Tooltip>
+              </div>
+            }
+            {/* {
             (!quoteSelectionMode && !inPDF) && <div
               className={classes.selectQuoteBtn}
             >
@@ -1225,7 +1244,8 @@ const QuoteList: React.FC<QuoteListDataProps> = ({
               </Tooltip>
             </div>
           } */}
-        </Card>
+          </Card>
+        </GridItem>
       </Grid>
     </>
   );
@@ -1357,14 +1377,17 @@ const ScanStatus = (props: any) => {
           return (
             <>
               <Grid container spacing={1}>
-                <Grid item xs={12} md={8}>
-                  <Alert severity="warning">
-                    Scan not Available
-                  </Alert>
+                <Grid sx={{ xs: 12, md: 8 }}>
+                  <GridItem>
+                    <Alert severity="warning">
+                      Scan not Available
+                    </Alert>
+                  </GridItem>
                 </Grid>
-                <Grid item xs={12} md={4}>
-                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-                    {/* <Button
+                <Grid sx={{ xs: 12, md: 4 }}>
+                  <GridItem>
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                      {/* <Button
                       variant="contained"
                       color="secondary"
                       size="small"
@@ -1384,7 +1407,8 @@ const ScanStatus = (props: any) => {
                           </>)
                       }
                     </Button> */}
-                  </div>
+                    </div>
+                  </GridItem>
                 </Grid>
               </Grid>
             </>

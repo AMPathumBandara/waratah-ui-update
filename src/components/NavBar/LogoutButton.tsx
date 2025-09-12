@@ -1,7 +1,7 @@
 import React from 'react';
 import { ApolloClient, ApolloConsumer } from '@apollo/client';
 import { useSignOut } from "../Auth/CognitoHooks"; 
-import { Button,  } from "@mui/material";
+import { Button } from "@mui/material";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNewRounded";
 
 const Logout = () => {

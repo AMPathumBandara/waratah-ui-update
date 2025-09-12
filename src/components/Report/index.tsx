@@ -1,19 +1,21 @@
 import React from "react";
-import { Theme } from "@mui/material/styles";
-import { makeStyles } from "@mui/styles";
 import Modal from "@mui/material/Modal";
 import Backdrop from "@mui/material/Backdrop";
 import Fade from "@mui/material/Fade";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { Theme } from "@mui/material/styles";
+import { makeStyles } from "@mui/styles";
+import theme from "theme/theme";
+import GridItem from "components/Layout/GridItem";
 
 interface ReportProps {
   open: boolean;
   handleClose: (event: {}, reason: "backdropClick" | "escapeKeyDown") => void;
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   modal: {
     display: "flex",
     alignItems: "center",
@@ -77,39 +79,43 @@ const Report: React.FC<ReportProps> = ({ open, handleClose }) => {
               Select the date range for the report
             </p>
             <Grid container spacing={3} className={classes.gridContainer}>
-              <Grid item xs={6}>
-                <TextField
-                  required
-                  name="from_date"
-                  label="From"
-                  type="date"
-                  // defaultValue={
-                  // data?.insurance_application_by_pk?.effective_date
-                  // }
-                  fullWidth
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
+              <Grid size={{ xs: 6 }}>
+                <GridItem>
+                  <TextField
+                    required
+                    name="from_date"
+                    label="From"
+                    type="date"
+                    // defaultValue={
+                    // data?.insurance_application_by_pk?.effective_date
+                    // }
+                    fullWidth
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
                   // inputRef={register}
                   // onChange={handleOnChangeEffectiveDate}
-                />
+                  />
+                </GridItem>
               </Grid>
-              <Grid item xs={6}>
-                <TextField
-                  required
-                  name="to_date"
-                  label="To"
-                  type="date"
-                  // defaultValue={
-                  // data?.insurance_application_by_pk?.effective_date
-                  // }
-                  fullWidth
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
+              <Grid size={{ xs: 6 }}>
+                <GridItem>
+                  <TextField
+                    required
+                    name="to_date"
+                    label="To"
+                    type="date"
+                    // defaultValue={
+                    // data?.insurance_application_by_pk?.effective_date
+                    // }
+                    fullWidth
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
                   // inputRef={register}
                   // onChange={handleOnChangeEffectiveDate}
-                />
+                  />
+                </GridItem>
               </Grid>
             </Grid>
             <div className={classes.buttonContainer}>
@@ -117,19 +123,19 @@ const Report: React.FC<ReportProps> = ({ open, handleClose }) => {
                 type="submit"
                 // variant="contained"
                 color="primary"
-                // disabled={
-                // !(
-                //     (dateSelected ||
-                //     data?.insurance_application_by_pk?.effective_date !==
-                //         null) &&
-                //     activeQuoteId !== 0
-                // ) ||
-                // updateLoading ||
-                // deleteLoading ||
-                // applicationStage === "declined" ||
-                // riskScore < 0
-                // }
-                // onClick={handleSubmitOnClick}
+              // disabled={
+              // !(
+              //     (dateSelected ||
+              //     data?.insurance_application_by_pk?.effective_date !==
+              //         null) &&
+              //     activeQuoteId !== 0
+              // ) ||
+              // updateLoading ||
+              // deleteLoading ||
+              // applicationStage === "declined" ||
+              // riskScore < 0
+              // }
+              // onClick={handleSubmitOnClick}
               >
                 Close
               </Button>

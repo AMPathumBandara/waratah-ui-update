@@ -11,7 +11,7 @@ import {
   Switch as SwitchBtn,
   Typography,
 } from "@mui/material";
-import { useRouteMatch } from "react-router-dom";
+import { useMatches } from "react-router-dom";
 import { Theme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import { alpha } from "@mui/material/styles";
@@ -42,7 +42,7 @@ import ButtonsContainer from "components/Layout/ButtonsContainer";
 import ButtonLoading from "components/From/ButtonLoading";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ToastMessage from "components/Toast/ToastMessage";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ErrorToast from "components/Toast/ErrorToast";
 import EditIcon from "@mui/icons-material/Edit";
 import Skeleton from "react-loading-skeleton";
@@ -53,7 +53,8 @@ import { tableIcons } from "utils/MaterialTableIcons";
 import CustomTableSearch from "components/Search/CustomTableSearch";
 import { DateTime } from "luxon";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { ExpandMore } from "@material-ui/icons";
+import { ExpandMore } from "@mui/icons-material";
+import GridItem from "components/Layout/GridItem";
 
 const useStyles = makeStyles((theme: Theme) => ({
   searchBtn: {
@@ -137,9 +138,13 @@ interface themeColorProps {
 export default function TenantDetails() {
   const classes = useStyles();
 
-  const params = useParams<number>();
-  const history = useHistory();
-  let { url } = useRouteMatch();
+  const params = useParams<string>();
+  const navigate = useNavigate();
+
+  const matches = useMatches();
+  const current = matches[matches.length - 1];
+  let url = current.pathname;
+  //let { url } = useRouteMatch();
 
   const [themeColor, setThemeColor] = useState<themeColorProps>({});
   const [logo, setLogo] = useState("");
@@ -154,7 +159,7 @@ export default function TenantDetails() {
     error: getTenantError,
   } = useGetTenentQuery({
     variables: {
-      id: getTenantId,
+      id: Number(getTenantId),
     },
     skip: getTenantId ? false : true,
     fetchPolicy: "network-only",
@@ -165,7 +170,7 @@ export default function TenantDetails() {
   const saveBtnDisable = tenantData === null ? true : false;
 
   if (saveBtnDisable) {
-    history.push(`/tenants/`);
+    navigate(`/tenants/`);
   }
 
   const [
@@ -240,7 +245,7 @@ export default function TenantDetails() {
   const handleFormSubmit = async (data: Tenant_Insert_Input) => {
     const { errors, data: tenantId } = await tenantMutation({
       variables: {
-        object: getTenantId ? { ...data, id: getTenantId } : { ...data },
+        object: getTenantId ? { ...data, id: Number(getTenantId) } : { ...data },
       },
       refetchQueries: ["getTenentList"],
     });
@@ -250,11 +255,11 @@ export default function TenantDetails() {
       setTimeout(() => {
         setTenantSuccessMsg(false);
         !getTenantId
-          ? history.push(
+          ? navigate(
             `/tenants/${tenantId?.insert_tenant_one?.id!}/brokers/${tenantId
               ?.insert_tenant_one?.id!}`
           )
-          : history.push(`/tenants/${tenantId?.insert_tenant_one?.id!}`);
+          : navigate(`/tenants/${tenantId?.insert_tenant_one?.id!}`);
       }, 3000);
     }
   };
@@ -290,7 +295,7 @@ export default function TenantDetails() {
                       className={classes.searchBtn}
                       endIcon={<ChevronRightIcon />}
                       onClick={() =>
-                        history.push(`${url}/brokers/${getTenantId}`)
+                        navigate(`${url}/brokers/${getTenantId}`)
                       }
                     >
                       Broker Agencies
@@ -318,168 +323,181 @@ export default function TenantDetails() {
                 <form onSubmit={handleSubmit(handleFormSubmit)}>
                   <fieldset disabled={!isSuperAdmin} style={{ border: 'none', padding: '0', margin: '0' }}>
                     <Grid container spacing={3} alignItems="flex-start">
-                      <Grid item={true} xs={12} md={6}>
-                        {getTenantLoading ? (
-                          <Skeleton height={40} />
-                        ) : (
-                          <InputField name="name" label="Tenant Name" />
-                        )}
+                      <Grid size={{ xs: 12, md: 6 }}>
+                        <GridItem>
+                          {getTenantLoading ? (
+                            <Skeleton height={40} />
+                          ) : (
+                            <InputField name="name" label="Tenant Name" />
+                          )}
+                        </GridItem>
                       </Grid>
-                      <Grid item={true} xs={12} md={6}>
-                        {getTenantLoading ? (
-                          <Skeleton height={40} />
-                        ) : (
-                          <InputField
-                            name="report_template_Id"
-                            label="Policy Template Doc"
-                          />
-                        )}
+                      <Grid size={{ xs: 12, md: 6 }}>
+                        <GridItem>
+                          {getTenantLoading ? (
+                            <Skeleton height={40} />
+                          ) : (
+                            <InputField
+                              name="report_template_Id"
+                              label="Policy Template Doc"
+                            />
+                          )}
+                        </GridItem>
                       </Grid>
-                      <Grid item={true} xs={12} md={6}>
-                        {getTenantLoading ? (
-                          <Skeleton height={40} />
-                        ) : (
-                          <InputField
-                            name="class_of_business"
-                            label="Class of Business"
-                          />
-                        )}
+                      <Grid size={{ xs: 12, md: 6 }}>
+                        <GridItem>
+                          {getTenantLoading ? (
+                            <Skeleton height={40} />
+                          ) : (
+                            <InputField
+                              name="class_of_business"
+                              label="Class of Business"
+                            />
+                          )}
+                        </GridItem>
                       </Grid>
-                      <Grid item={true} xs={12} md={6}>
-                        {getTenantLoading ? (
-                          <Skeleton height={40} width="35%" />
-                        ) : (
-                          <FormControlLabel
-                            control={
-                              <>
-                                <SwitchBtn
-                                  name="scan_required"
-                                  checked={
-                                    form.watch("scan_required") === undefined
-                                      ? Boolean(form.setValue("scan_required", false))
-                                      : Boolean(form.watch("scan_required"))
-                                  }
-                                  onChange={v => {
-                                    form.setValue("scan_required", v.target.checked);
-                                  }}
-                                  {...form.register("scan_required")}
-                                />
-                              </>
-                            }
-                            label="Scan Required"
-                          />
-                        )}
+                      <Grid size={{ xs: 12, md: 6 }}>
+                        <GridItem>
+                          {getTenantLoading ? (
+                            <Skeleton height={40} width="35%" />
+                          ) : (
+                            <FormControlLabel
+                              control={
+                                <>
+                                  <SwitchBtn
+                                    //name="scan_required"
+                                    {...form.register("scan_required")}
+                                    // checked={
+                                    //   form.watch("scan_required") === undefined
+                                    //     ? Boolean(form.setValue("scan_required", false))
+                                    //     : Boolean(form.watch("scan_required"))
+                                    // }
+                                    checked={form.watch("scan_required") ?? false}
+                                    onChange={(v) => {
+                                      form.setValue("scan_required", v.target.checked);
+                                    }}
+                                  />
+                                </>
+                              }
+                              label="Scan Required"
+                            />
+                          )}
+                        </GridItem>
                       </Grid>
-                      <Grid item={true} xs={12} md={6}>
-                        {getTenantLoading ? (
-                          <Skeleton height={200} />
-                        ) : (
-                          <Card legendTitle="Logo">
-                            <Grid
-                              container
-                              spacing={1}
-                              justifyContent="center"
-                              alignItems="center"
-                              direction="column"
-                              className={classes.logoUploader}
-                            >
-                              <div>
-                                <InputField
-                                  name="logo"
-                                  label="logo"
-                                />
-                              </div>
+                      <Grid size={{ xs: 12, md: 6 }}>
+                        <GridItem>
+                          {getTenantLoading ? (
+                            <Skeleton height={200} />
+                          ) : (
+                            <Card legendTitle="Logo">
+                              <Grid
+                                container
+                                spacing={1}
+                                justifyContent="center"
+                                alignItems="center"
+                                direction="column"
+                                className={classes.logoUploader}
+                              >
+                                <div>
+                                  <InputField
+                                    name="logo"
+                                    label="logo"
+                                  />
+                                </div>
 
-                              {logo && <img src={`${logo}`} />}
+                                {logo && <img src={`${logo}`} />}
 
-                              {/* <Button
+                                {/* <Button
                             variant="outlined"
                             size="small"
                             onClick={uploadLogo}
                           >
                             {logo ? `Change Logo` : "Upload Logo"}
                           </Button> */}
-                            </Grid>
-                          </Card>
-                        )}
-                        {!logo && (
-                          <div>
-                            {
-                              //@ts-ignore
-                              form.errors?.logo?.message && (
-                                <FormHelperText error={true}>
-                                  Please upload logo
-                                </FormHelperText>
-                              )
-                            }
-                          </div>
-                        )}
+                              </Grid>
+                            </Card>
+                          )}
+                          {!logo && (
+                            <div>
+                              {
+                                //@ts-ignore
+                                form.errors?.logo?.message && (
+                                  <FormHelperText error={true}>
+                                    Please upload logo
+                                  </FormHelperText>
+                                )
+                              }
+                            </div>
+                          )}
+                        </GridItem>
                       </Grid>
-                      <Grid item={true} xs={12} md={6}>
-                        {getTenantLoading ? (
-                          <Skeleton height={200} />
-                        ) : (
-                          <Card legendTitle="Theme Color">
-                            <Grid
-                              container
-                              spacing={1}
-                              justifyContent="center"
-                              alignItems="center"
-                              className={classes.colorPalatte}
-                            >
-                              <div className={classes.inputHide}>
-                                <InputField
-                                  name="primary_color"
-                                  label="primary color"
-                                  value={themeColor.primary_color || ""}
-                                />
-                                <InputField
-                                  name="secondary_color"
-                                  label="seconday color"
-                                  value={themeColor.secondary_color || ""}
-                                />
-                              </div>
+                      <Grid size={{ xs: 12, md: 6 }}>
+                        <GridItem>
+                          {getTenantLoading ? (
+                            <Skeleton height={200} />
+                          ) : (
+                            <Card legendTitle="Theme Color">
+                              <Grid
+                                container
+                                spacing={1}
+                                justifyContent="center"
+                                alignItems="center"
+                                className={classes.colorPalatte}
+                              >
+                                <div className={classes.inputHide}>
+                                  <InputField
+                                    name="primary_color"
+                                    label="primary color"
+                                    value={themeColor.primary_color || ""}
+                                  />
+                                  <InputField
+                                    name="secondary_color"
+                                    label="seconday color"
+                                    value={themeColor.secondary_color || ""}
+                                  />
+                                </div>
 
-                              <ul>
-                                {ThemeColors.map((c: any, i: any) => (
-                                  <li
-                                    key={i}
-                                    className={`${
-                                      //@ts-ignore
-                                      themeColor?.primary_color === c.primary_color
-                                        ? "active"
-                                        : ""
-                                      }`}
-                                  >
-                                    <span
-                                      style={{ background: `${c.primary_color}` }}
-                                      onClick={() =>
-                                        selectedColorPalatte(
-                                          c.primary_color,
-                                          c.secondary_color
-                                        )
-                                      }
+                                <ul>
+                                  {ThemeColors.map((c: any, i: any) => (
+                                    <li
+                                      key={i}
+                                      className={`${
+                                        //@ts-ignore
+                                        themeColor?.primary_color === c.primary_color
+                                          ? "active"
+                                          : ""
+                                        }`}
                                     >
-                                      <CheckCircleIcon fontSize="small" />
-                                    </span>
-                                  </li>
-                                ))}
-                              </ul>
-                            </Grid>
-                          </Card>
-                        )}
-                        {!themeColor.primary_color && (
-                          <div>
-                            {
-                              //@ts-ignore
-                              form.errors?.primary_color?.message && (
-                                <FormHelperText error={true}>
-                                  Please select color theme
-                                </FormHelperText>
-                              )
-                            }
-                          </div>
-                        )}
+                                      <span
+                                        style={{ background: `${c.primary_color}` }}
+                                        onClick={() =>
+                                          selectedColorPalatte(
+                                            c.primary_color,
+                                            c.secondary_color
+                                          )
+                                        }
+                                      >
+                                        <CheckCircleIcon fontSize="small" />
+                                      </span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </Grid>
+                            </Card>
+                          )}
+                          {!themeColor.primary_color && (
+                            <div>
+                              {
+                                //@ts-ignore
+                                form.errors?.primary_color?.message && (
+                                  <FormHelperText error={true}>
+                                    Please select color theme
+                                  </FormHelperText>
+                                )
+                              }
+                            </div>
+                          )}
+                        </GridItem>
                       </Grid>
                     </Grid>
                     <ButtonsContainer justifyContent="flex-end">
@@ -512,7 +530,7 @@ export default function TenantDetails() {
         <br />
         <br />
 
-        {getTenantId && <TenantUserList tenantId={getTenantId} />}
+        {getTenantId && <TenantUserList tenantId={Number(getTenantId)} />}
       </div>
       {tenantSuccessMsg && (
         <ToastMessage
@@ -580,7 +598,7 @@ interface TenantUserListProps {
   tenantId: number;
 }
 const TenantUserList = ({ tenantId }: TenantUserListProps) => {
-  const tableRef = React.useRef();
+  const tableRef = React.useRef(null);
   const classes = useStyles();
   const [searchValue, setSearchValue] = useState(null);
   const [rowsPerPage, setRowsPerPage] =
@@ -887,35 +905,39 @@ const TenantUserForm = (props: TenantUserFormProps) => {
       <FormProvider {...form}>
         <form onSubmit={handleSubmit(handleFormSubmit)}>
           <Grid container spacing={3}>
-            <Grid item={true} xs={12}>
-              {loading ? (
-                <Skeleton height={40} />
-              ) : (
-                <InputField name="name" label="Name" />
-              )}
+            <Grid size={{ xs: 12 }}>
+              <GridItem>
+                {loading ? (
+                  <Skeleton height={40} />
+                ) : (
+                  <InputField name="name" label="Name" />
+                )}
+              </GridItem>
             </Grid>
-            <Grid item={true} xs={12}>
-              {loading ? (
-                <Skeleton height={40} />
-              ) : (
-                <>
-                  <InputField
-                    name="email"
-                    label="Email"
-                    className={`${tenantUserId !== true ? "input-disabled" : ""
-                      }`}
-                    inputProps={{ readOnly: tenantUserId !== true }}
-                  />
-
-                  <span style={{ display: "none" }}>
+            <Grid size={{ xs: 12 }}>
+              <GridItem>
+                {loading ? (
+                  <Skeleton height={40} />
+                ) : (
+                  <>
                     <InputField
-                      name="edit_form"
-                      label="edit_form"
-                      defaultValue={data?.tenant_admin[0]?.user.email}
+                      name="email"
+                      label="Email"
+                      className={`${tenantUserId !== true ? "input-disabled" : ""
+                        }`}
+                      inputProps={{ readOnly: tenantUserId !== true }}
                     />
-                  </span>
-                </>
-              )}
+
+                    <span style={{ display: "none" }}>
+                      <InputField
+                        name="edit_form"
+                        label="edit_form"
+                        defaultValue={data?.tenant_admin[0]?.user.email}
+                      />
+                    </span>
+                  </>
+                )}
+              </GridItem>
             </Grid>
           </Grid>
           <ButtonsContainer justifyContent="flex-end">
