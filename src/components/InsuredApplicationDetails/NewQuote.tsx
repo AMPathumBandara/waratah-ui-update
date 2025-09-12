@@ -169,7 +169,7 @@ const NewQuote: React.FC<Props> = ({ handleSubmitCallback, quote }) => {
       >
         <ApolloErrorToast error={insertError} />
         <Grid container spacing={3} className={classes.container}>
-          <Grid sx={{ xs: 12, sm: 6 }}>
+          <Grid size={{ xs: 12, sm: 6 }}>
             <GridItem>
               <TextField
                 //name="policy_limit"
@@ -192,7 +192,7 @@ const NewQuote: React.FC<Props> = ({ handleSubmitCallback, quote }) => {
               />
             </GridItem>
           </Grid>
-          <Grid sx={{ xs: 12, sm: 6 }}>
+          <Grid size={{ xs: 12, sm: 6 }}>
             <GridItem>
               <TextField
                 //name="base_premium"
@@ -214,7 +214,7 @@ const NewQuote: React.FC<Props> = ({ handleSubmitCallback, quote }) => {
               />
             </GridItem>
           </Grid>
-          <Grid sx={{ xs: 12, sm: 6 }}>
+          <Grid size={{ xs: 12, sm: 6 }}>
             <GridItem>
               <TextField
                 //name="deductible"
@@ -237,7 +237,7 @@ const NewQuote: React.FC<Props> = ({ handleSubmitCallback, quote }) => {
               />
             </GridItem>
           </Grid>
-          <Grid sx={{ xs: 12, sm: 6 }}>
+          <Grid size={{ xs: 12, sm: 6 }}>
             <GridItem>
               <TextField
                 //name="other_deductibles"
@@ -259,7 +259,7 @@ const NewQuote: React.FC<Props> = ({ handleSubmitCallback, quote }) => {
               />
             </GridItem>
           </Grid>
-          <Grid sx={{ xs: 12, sm: 6 }}>
+          <Grid size={{ xs: 12, sm: 6 }}>
             <GridItem>
               <TextField
                 //name="commission_percentage"
@@ -283,7 +283,7 @@ const NewQuote: React.FC<Props> = ({ handleSubmitCallback, quote }) => {
               />
             </GridItem>
           </Grid>
-          <Grid sx={{ xs: 12, sm: 6 }}>
+          <Grid size={{ xs: 12, sm: 6 }}>
             <GridItem>
               <TextField
                 //name="tax_percentage"
@@ -306,7 +306,7 @@ const NewQuote: React.FC<Props> = ({ handleSubmitCallback, quote }) => {
               />
             </GridItem>
           </Grid>
-          <Grid sx={{ xs: 12, sm: 6 }}>
+          <Grid size={{ xs: 12, sm: 6 }}>
             <GridItem>
               <TextField
                 //name="premium"
@@ -328,7 +328,7 @@ const NewQuote: React.FC<Props> = ({ handleSubmitCallback, quote }) => {
               />
             </GridItem>
           </Grid>
-          <Grid sx={{ xs: 12, sm: 6 }}>
+          <Grid size={{ xs: 12, sm: 6 }}>
             <GridItem>
               <TextField
                 //name="total_premium"

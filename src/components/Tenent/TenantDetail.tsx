@@ -48,7 +48,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import ModalWindow from "components/ModalWindow";
-import MaterialTable, { Query } from "material-table";
+import MaterialTable, { Query } from "@material-table/core";
 import { tableIcons } from "utils/MaterialTableIcons";
 import CustomTableSearch from "components/Search/CustomTableSearch";
 import { DateTime } from "luxon";
