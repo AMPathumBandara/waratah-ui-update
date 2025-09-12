@@ -16,9 +16,9 @@ import ApplicationModal, {
 import InsuredApplicationDetails from "components/InsuredApplicationDetails";
 import {
   Route,
-  Switch,
-  useRouteMatch,
-  useHistory,
+  Routes,
+  useMatches,
+  useNavigate,
   useParams,
 } from "react-router-dom";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
@@ -262,7 +262,7 @@ const SortOptions = [
 const defaultSort = { key: "created_at", orderBy: "Desc" };
 
 export default function ApplicationsNew() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [filterMyApplication, setFilterMyApplication] =
     useState("all-applications");
 
@@ -273,7 +273,10 @@ export default function ApplicationsNew() {
   //     ? meData?.me[0].auth0_id
   //     : undefined;
 
-  const { path } = useRouteMatch();
+  //const { path } = useRouteMatch();
+  const matches = useMatches();
+  const current = matches[matches.length - 1];
+  let path = current.pathname;
 
   if (meLoading) {
     return null;
@@ -287,8 +290,8 @@ export default function ApplicationsNew() {
       <div className="col-layout-wrapper">
         <Sidebar />
 
-        <Switch>
-          <Route exact path={`${path}/`}>
+        <Routes>
+          <Route path={`${path}/`}>
             <div className="content-wrapper">
               <div className="layout-header flex">
                 <div className="change-layout-btn">
@@ -298,7 +301,7 @@ export default function ApplicationsNew() {
                       <ViewColumnIcon
                         color="primary"
                         className="columnIcon"
-                        onClick={() => history.push("/applications")}
+                        onClick={() => navigate("/applications")}
                       />
                     </div>
                   </Tooltip>
@@ -308,7 +311,7 @@ export default function ApplicationsNew() {
               <MemorizedApplicationDetails />
             </div>
           </Route>
-          <Route exact path={`${path}/:id`}>
+          <Route path={`${path}/:id`}>
             <div className="content-wrapper">
               <div className="layout-header flex">
                 <div className="change-layout-btn">
@@ -318,7 +321,7 @@ export default function ApplicationsNew() {
                       <ViewColumnIcon
                         color="primary"
                         className="columnIcon"
-                        onClick={() => history.push("/applications")}
+                        onClick={() => navigate("/applications")}
                       />
                     </div>
                   </Tooltip>
@@ -328,7 +331,7 @@ export default function ApplicationsNew() {
               <MemorizedApplicationDetails />
             </div>
           </Route>
-        </Switch>
+        </Routes>
       </div>
 
       <WatchApplicationUpdate />
@@ -339,7 +342,7 @@ export default function ApplicationsNew() {
 
 const ApplicationHeaderTitle = () => {
   const params = useParams();
-  const history = useHistory();
+  const navigate = useNavigate();
   const classes = useStyles();
 
   return (
@@ -360,7 +363,7 @@ const ApplicationHeaderTitle = () => {
               <Button
                 className={classes.createBtn}
                 endIcon={<AddCircleIcon />}
-                onClick={() => history.push("/applications-list")}
+                onClick={() => navigate("/applications-list")}
               >
                 Create Application
               </Button>
@@ -394,7 +397,7 @@ const ApplicationListItem = React.memo<ApplicationListItemProps>(props => {
 
   const classes = useStyles();
   const params = useParams();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const searchText = searchValue !== "" ? `%${searchValue}%` : "%";
 
@@ -484,10 +487,10 @@ const ApplicationListItem = React.memo<ApplicationListItemProps>(props => {
             className={`application-item grid-layout ${
               //@ts-ignore
               params.id === item.id ? "active" : ""
-            }`}
+              }`}
             key={item.id}
             onClick={() => {
-              history.push(`/applications-list/${item?.id}`);
+              navigate(`/applications-list/${item?.id}`);
             }}
           >
             <div className="circle-wrapper">
@@ -756,10 +759,10 @@ function ShowSignatures(props: any) {
     return !agentSigned
       ? "Agent signature missing"
       : !insuredSigned
-      ? "Insured signature missing"
-      : !paymentCollected
-      ? "Payment not collected"
-      : "";
+        ? "Insured signature missing"
+        : !paymentCollected
+          ? "Payment not collected"
+          : "";
   };
 
   if (signatures?.insurance_quote_selection?.insurance_policy) {
@@ -855,7 +858,7 @@ function Sidebar() {
           searchValue={searchValue}
           stage={stage}
           paramId={paramId}
-          //userId={props.userId}
+        //userId={props.userId}
         />
       </div>
     </div>

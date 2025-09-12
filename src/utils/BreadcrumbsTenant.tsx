@@ -2,12 +2,14 @@
 import React from "react";
 // 3rd Parry
 // Material UI
-import { Theme, makeStyles } from "@mui/material/styles";
+import { Theme } from "@mui/material/styles";
+import { makeStyles } from "@mui/styles";
 
 import { Link, Breadcrumbs, Grid, SvgIcon } from "@mui/material";
 // Local
 import { ReactComponent as BrokerIcon } from "./Broker.svg";
 import { ReactComponent as TenantIcon } from "./Tenant.svg";
+import GridItem from "components/Layout/GridItem";
 // Styles
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -41,17 +43,21 @@ const BreadcrumbsTenant: React.FC<Props> = ({ data }) => {
     <Breadcrumbs aria-label="breadcrumb" className={classes.container}>
       {data.map((link, index) => (
         <Grid container key={index}>
-          <Grid item>
-            {index === 0 ? (
-              <TenantIcon className={classes.icon} />
-            ) : (
-              <BrokerIcon className={classes.icon} />
-            )}
+          <Grid>
+            <GridItem>
+              {index === 0 ? (
+                <TenantIcon className={classes.icon} />
+              ) : (
+                <BrokerIcon className={classes.icon} />
+              )}
+            </GridItem>
           </Grid>
-          <Grid item>
-            <Link color="inherit" href={link.link} className={classes.font}>
-              {link.name}
-            </Link>
+          <Grid>
+            <GridItem>
+              <Link color="inherit" href={link.link} className={classes.font}>
+                {link.name}
+              </Link>
+            </GridItem>
           </Grid>
         </Grid>
       ))}

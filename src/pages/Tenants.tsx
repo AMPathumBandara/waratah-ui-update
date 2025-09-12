@@ -3,10 +3,10 @@ import { Theme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import {
   Route,
-  Switch,
+  Routes,
   useParams,
-  useRouteMatch,
-  useHistory,
+  useMatches,
+  useNavigate,
 } from "react-router-dom";
 import { scroller } from "react-scroll";
 import { TenantHeader } from "components/Application/TenantHeader";
@@ -34,9 +34,11 @@ export default function Tenents() {
   const classes = useStyles();
 
   const [searchValue, setsearchValue] = useState("");
-  let { path, url } = useRouteMatch();
+  const matches = useMatches();
+  const current = matches[matches.length - 1];
+  let path = current.pathname;
   const params = useParams();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     if (params) {
@@ -54,7 +56,7 @@ export default function Tenents() {
       <div className={classes.container}>
         <TenantHeader
           buttonText="Add New Tenant"
-          setButtonClick={() => history.push("/tenants")}
+          setButtonClick={() => navigate("/tenants")}
           title="Tenants"
           setSearchValue={(v: any) => setsearchValue(v)}
         />
@@ -65,23 +67,22 @@ export default function Tenents() {
           </div>
           <div id="focus-tenant">
             <Suspense fallback={<FullScreenLoading />}>
-              <Switch>
-                <Route exact path={`${path}`}>
+              <Routes>
+                <Route path={`${path}`}>
                   <TenantDetails />
                 </Route>
-                <Route exact path={`${path}/:tenant_id`}>
+                <Route path={`${path}/:tenant_id`}>
                   <TenantDetails />
                 </Route>
-                <Route exact path={`${path}/:tenant_id/brokers/:broker_id`}>
+                <Route path={`${path}/:tenant_id/brokers/:broker_id`}>
                   <BrokerList />
                 </Route>
                 <Route
-                  exact
                   path={`${path}/:tenant_id/brokers/:broker_id/broker-producers/:producer_id`}
                 >
                   <BrokerProducerList />
                 </Route>
-              </Switch>
+              </Routes>
             </Suspense>
           </div>
         </div>

@@ -10,7 +10,7 @@ import {
 } from "generated/graphql";
 import ApplicationModal from "components/Application/ApplicationModal";
 import InsuredApplicationDetails from "components/InsuredApplicationDetails";
-import { Route, Switch, useRouteMatch, useHistory } from "react-router-dom";
+import { Route, Routes, useMatches, useNavigate } from "react-router-dom";
 
 import { ApplicationHeader } from "components/Application/ApplicationHeader";
 import { SortComponent } from "components/Filters/Sort";
@@ -285,7 +285,7 @@ export default function Applications() {
   const [filterMyApplication, setFilterMyApplication] =
     useState("all-applications");
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const { data: meData, loading: meLoading } = useMeQuery();
 
@@ -295,10 +295,13 @@ export default function Applications() {
       : undefined;
 
   const onClose = React.useCallback(() => {
-    history.push("/applications");
-  }, [history]);
+    navigate("/applications");
+  }, [navigate]);
 
-  const { path } = useRouteMatch();
+  //const { path } = useRouteMatch();
+  const matches = useMatches();
+  const current = matches[matches.length - 1];
+  let path = current.pathname;
 
   const onSearch = React.useCallback(
     (v: string) => {
@@ -315,8 +318,8 @@ export default function Applications() {
   );
 
   const onCreate = React.useCallback(() => {
-    history.push("/applications/create");
-  }, [history]);
+    navigate("/applications/create");
+  }, [navigate]);
 
   if (meLoading) {
     return null;
@@ -348,8 +351,8 @@ export default function Applications() {
         searchValue={searchValue}
       />
 
-      <Switch>
-        <Route exact path={`${path}/create`}>
+      <Routes>
+        <Route path={`${path}/create`}>
           <ApplicationModal
             showModal={true}
             setShowModal={onClose}
@@ -358,12 +361,12 @@ export default function Applications() {
             <MemorizedApplicationDetails />
           </ApplicationModal>
         </Route>
-        <Route exact path={`${path}/:id`}>
+        <Route path={`${path}/:id`}>
           <ApplicationModal showModal={true} setShowModal={onClose}>
             <MemorizedApplicationDetails />
           </ApplicationModal>
         </Route>
-      </Switch>
+      </Routes>
       <WatchApplicationUpdate />
       <Footer />
     </div>
@@ -390,7 +393,7 @@ const ApplicationListItem: React.FunctionComponent<ApplicationListItemProps> =
 
     const classes = useStyles();
 
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const searchText = searchValue !== "" ? `%${searchValue}%` : "%";
 
@@ -483,7 +486,7 @@ const ApplicationListItem: React.FunctionComponent<ApplicationListItemProps> =
               className="application-item"
               key={item.id}
               onClick={() => {
-                history.push(`/applications/${item?.id}`);
+                navigate(`/applications/${item?.id}`);
               }}
             >
               <div className="circle-wrapper">
@@ -607,7 +610,7 @@ const Filters: React.FunctionComponent<any> = props => {
             }
           }
         ],
-        
+
         created_by_user_id: {
           _eq: userId,
         },
@@ -672,10 +675,10 @@ function ShowSignatures(props: any) {
     return !agentSigned
       ? "Agent signature missing"
       : !insuredSigned
-      ? "Insured signature missing"
-      : !paymentCollected
-      ? "Payment not collected"
-      : "";
+        ? "Insured signature missing"
+        : !paymentCollected
+          ? "Payment not collected"
+          : "";
   };
 
   if (signatures?.insurance_quote_selection?.insurance_policy) {
