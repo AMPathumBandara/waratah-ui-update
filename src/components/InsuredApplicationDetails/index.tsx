@@ -41,7 +41,7 @@ import {
 } from "generated/graphql";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import Tooltip from "@mui/material/Tooltip/Tooltip";
+import Tooltip from "@mui/material/Tooltip";
 import { LoadingApplicationSteps } from "components/ContentLoaders";
 import ErrorToast from "components/Toast/ErrorToast";
 import CircularProgress from "@mui/material/CircularProgress";

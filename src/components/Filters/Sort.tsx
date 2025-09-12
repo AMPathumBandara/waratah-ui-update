@@ -4,7 +4,7 @@ import { makeStyles } from "@mui/styles";
 import CheckIcon from "@mui/icons-material/Check";
 import SortIcon from "@mui/icons-material/Sort";
 import { SortAsc, SortDesc } from "components/ContentLoaders";
-import Tooltip from "@mui/material/Tooltip/Tooltip";
+import Tooltip from "@mui/material/Tooltip";
 
 const useStyles = makeStyles((theme: Theme) => ({
   filterGroup: {

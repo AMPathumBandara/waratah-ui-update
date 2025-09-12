@@ -30,7 +30,7 @@ import {
 } from "components/ContentLoaders";
 import ErrorToast from "components/Toast/ErrorToast";
 import LaunchOutlinedIcon from "@mui/icons-material/LaunchOutlined";
-import Tooltip from "@mui/material/Tooltip/Tooltip";
+import Tooltip from "@mui/material/Tooltip";
 import {
   AgentSignedIcon,
   AgentUnSignedIcon,
