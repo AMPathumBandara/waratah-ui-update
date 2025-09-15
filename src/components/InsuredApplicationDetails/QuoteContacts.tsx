@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import MaterialTable from 'material-table';
+import MaterialTable from '@material-table/core';
 import { tableIcons } from "utils/MaterialTableIcons";
 import { EmailRecipientInput, GetInsuranceQuoteEmailSubscription, Maybe, Recipient, useCreateQuoteEmailContactMutation, useDeleteInsuranceQuoteEmailMutation, useGetArtifactByAppIdAndQuoteNumberQuery, useGetInsuranceQuoteEmailSubscription, useResendQuotePdfEmailMutation, useSendQuotePdfEmailMutation, useUpdateInsuranceQuoteEmailMutation } from 'generated/graphql';
 import { ApplicationParams } from 'components/Application/ApplicationModal';

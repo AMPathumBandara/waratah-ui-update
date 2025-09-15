@@ -7,11 +7,10 @@ import { AuthProvider } from 'components/Auth/CognitoHooks.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    {/* <ApolloAuthWrapper>
-      <App />
-    </ApolloAuthWrapper> */}
     <AuthProvider>
-      <App />
+      <ApolloAuthWrapper>
+        <App />
+      </ApolloAuthWrapper>
     </AuthProvider>
   </React.StrictMode>,
 )

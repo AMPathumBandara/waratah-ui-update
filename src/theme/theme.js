@@ -27,6 +27,9 @@ const theme = createTheme({
     secondary: {
       main: "#36563D",
     },
+    grey: {
+      500: "#9FA8DA", // add grey for convenience
+    },
     contrastThreshold: 1.8,
   },
   shadows: Array(25).fill("none"),
@@ -52,6 +55,34 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           textTransform: "none",
+        },
+      },
+    },
+  },
+  // <-- CUSTOM NESTED STYLES -->
+  custom: {
+    login: {
+      formWrapper: {
+        maxWidth: 320,
+        width: "100%",
+        "& button": {
+          boxShadow: "none",
+          borderRadius: 3,
+          padding: "8px 16px",
+        },
+        "& .MuiInputBase-root": {
+          borderRadius: 3,
+        },
+      },
+      switchFormBtn: {
+        cursor: "pointer",
+        display: "inline-block",
+        fontSize: 14,
+        color: "#9FA8DA",
+        textDecoration: "none",
+        opacity: 0.8,
+        "&:hover": {
+          opacity: 1,
         },
       },
     },

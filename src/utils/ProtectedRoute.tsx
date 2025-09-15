@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Route, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { NavigationAccess } from "utils";
 import { useUser } from "components/Auth/CognitoHooks";
 
@@ -12,35 +12,28 @@ export default function ProtectedRoute({ component: Component, path }: Protected
   const navigate = useNavigate();
   const loggedUser = useUser();
 
-  if (!loggedUser) {
-    navigate("/login");
-    return null;
-  }
+  useEffect(() => {
+    if (!loggedUser) {
+      navigate("/login");
+      return;
+    }
 
-  const authUser =
-    loggedUser?.signInUserSession?.idToken?.payload?.["cognito:groups"][0];
+    const authUser =
+      loggedUser?.signInUserSession?.idToken?.payload?.["cognito:groups"][0];
 
-  //const Component = props.component;
+    const allowUsersPath = NavigationAccess.filter(f => f.path === path);
 
-  const allowUsersPath = NavigationAccess.filter(f => f.path === path);
+    if (
+      path !== "*" &&
+      authUser &&
+      !allowUsersPath[0]?.allowUsers?.includes(`${authUser}`)
+    ) {
+      navigate("/access-denied");
+    }
+  }, [loggedUser, navigate, path]);
 
-  if (
-    path !== "*" &&
-    authUser &&
-    !allowUsersPath[0]?.allowUsers?.includes(`${authUser}`)
-  ) {
-    navigate("/access-denied");
-    return null;
-  }
+  // Render the protected component only if the user exists
+  if (!loggedUser) return null;
 
-  // return (
-  //   <>
-  //     <Route
-  //       //exact={props.exact}
-  //       path={props.path}
-  //       element={<Component />}
-  //     />
-  //   </>
-  // );
-  return <Component />
+  return <Component />;
 }

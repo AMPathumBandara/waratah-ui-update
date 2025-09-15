@@ -74,7 +74,9 @@ const MainNavigation = React.memo(() => {
   const [commitHash, setCommitHash] = useState<string | null>(null);
   const [showRefreshModal, setShowRefreshModal] = useState<boolean>(false);
 
-  const { data: meData, loading: meLoading, error: meError } = useMeQuery();
+  const { data: meData, loading: meLoading, error: meError } = useMeQuery({
+    errorPolicy: "all"
+  });
   
   const currentUser = meData?.me[0];
 

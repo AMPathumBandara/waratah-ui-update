@@ -16,38 +16,37 @@ export const guestRoutes = [
 ];
 
 export default function GuestLayout() {
-  function CreateComponent(props: any) {
-    const Component = props.component;
-
-    return <Route path={props.path} element={<Component />} />;
-  }
-
   return (
     <section id="wrapper" className="login-register">
       <div className="login-box login-sidebar">
         <div className="white-box">
           <div className="form-horizontal form-material">
             <Routes>
-              <Suspense
-                fallback={
-                  <Grid
-                    container
-                    alignItems="center"
-                    justifyContent="center"
-                    style={{ minHeight: "100vh" }}
-                  >
-                    <CircularProgress color="primary" />
-                  </Grid>
-                }
-              >
-                {guestRoutes.map(route => (
-                  <CreateComponent
+              {guestRoutes.map(route => {
+                const Component = route.component;
+                return (
+                  <Route
                     key={route.path}
                     path={route.path}
-                    component={route.component}
+                    element={
+                      <Suspense
+                        fallback={
+                          <Grid
+                            container
+                            alignItems="center"
+                            justifyContent="center"
+                            style={{ minHeight: "100vh" }}
+                          >
+                            <CircularProgress color="primary" />
+                          </Grid>
+                        }
+                      >
+                        <Component />
+                      </Suspense>
+                    }
                   />
-                ))}
-              </Suspense>
+                );
+              })}
             </Routes>
           </div>
         </div>
@@ -55,3 +54,4 @@ export default function GuestLayout() {
     </section>
   );
 }
+

@@ -1,6 +1,8 @@
+// src/components/Auth/CognitoHooks.tsx
 import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
-import Amplify from "aws-amplify";
-import Auth, { CognitoUser } from "@aws-amplify/auth";
+import { Amplify, Auth } from "aws-amplify";
+import { CognitoUser } from "@aws-amplify/auth";
+
 
 Amplify.configure({
   Auth: {
@@ -13,6 +15,7 @@ Amplify.configure({
   },
 });
 
+// ---------------- Types ----------------
 export type AuthChallengeName =
   | "NEW_PASSWORD_REQUIRED"
   | "SMS_MFA"
@@ -37,66 +40,62 @@ export type ForgotPasswordInput = { email: string };
 export type ResetPasswordInput = { email: string; code: string; password: string };
 export type CompletePasswordInput = { user: CognitoUser; password: string };
 
+// ---------------- Context ----------------
 interface AuthState {
   user: AuthUser | null;
   signIn(input: SignInInput): Promise<void>;
-  signOut(cb: SignOutCb): Promise<void>;
+  signOut(cb?: SignOutCb): Promise<void>;
   refreshUserSession(): Promise<AuthUser | null>;
 }
 
-const AuthContext = React.createContext<AuthState | undefined>(undefined);
+const AuthContext = createContext<AuthState | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const auth = useProvideAuth();
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
 }
 
-// ✅ renamed to avoid Fast Refresh confusion
+// ---------------- Hook ----------------
 function useProvideAuth(): AuthState {
-  const [user, setUser] = React.useState<AuthUser | null>(null);
+  const [user, setUser] = useState<AuthUser | null>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     let active = true;
+
     Auth.currentAuthenticatedUser()
       .then((u) => active && setUser(u))
       .catch(() => active && setUser(null));
-    return () => {
-      active = false;
-    };
+
+    return () => { active = false };
   }, []);
 
-  const signIn = React.useCallback(
-    async ({ email, password, onSuccess, onError }: SignInInput) => {
-      try {
-        const user = await Auth.signIn(email, password);
-        setUser(user);
-        onSuccess(user);
-      } catch (err) {
-        onError(err);
-      }
-    },
-    []
-  );
+  const signIn = useCallback(async ({ email, password, onSuccess, onError }: SignInInput) => {
+    try {
+      const u = await Auth.signIn(email, password);
+      setUser(u);
+      onSuccess(u);
+    } catch (err) {
+      onError(err);
+    }
+  }, []);
 
-  const signOut = React.useCallback(async (cb: SignOutCb) => {
+  const signOut = useCallback(async (cb?: SignOutCb) => {
     await Auth.signOut();
     setUser(null);
     cb?.();
   }, []);
 
-  const refreshUserSession = React.useCallback(async () => {
-    const user = await Auth.currentAuthenticatedUser();
+  const refreshUserSession = useCallback(async (): Promise<AuthUser | null> => {
+    const u = await Auth.currentAuthenticatedUser();
     const now = Math.floor(Date.now() / 1000);
-    const issuedAt = user?.getSignInUserSession()?.getIdToken().getIssuedAt();
+    const issuedAt = u?.getSignInUserSession()?.getIdToken().getIssuedAt();
+
     if (issuedAt && now - issuedAt > 300) {
       return new Promise<AuthUser | null>((resolve, reject) => {
-        user?.getSession((err: any, session: any) => {
-          if (err) {
-            reject(err);
-            return;
-          }
+        u?.getSession((err: any, session: any) => {
+          if (err) return reject(err);
           const refreshToken = session.getRefreshToken();
-          user.refreshSession(refreshToken, async (err: any) => {
+          u.refreshSession(refreshToken, async (err: any) => {
             if (err) {
               await Auth.signOut();
               setUser(null);
@@ -109,15 +108,16 @@ function useProvideAuth(): AuthState {
         });
       });
     }
-    return user;
+
+    return u;
   }, []);
 
   return { user, signIn, signOut, refreshUserSession };
 }
 
-// --- Hooks (safe to export) ---
+// ---------------- Exported Hooks ----------------
 export function useAuth() {
-  const ctx = React.useContext(AuthContext);
+  const ctx = useContext(AuthContext);
   if (!ctx) throw new Error("useAuth must be used within AuthProvider");
   return ctx;
 }

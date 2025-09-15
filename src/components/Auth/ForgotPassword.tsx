@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
-import { createStyles } from "@mui/material/styles";
-import { Theme } from "@mui/material/styles";
-import { makeStyles } from "@mui/styles";
-import { Typography } from "@mui/material";
+import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
+import { Box, Link, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import { FormProvider, useForm } from "react-hook-form";
 import InputField from "components/From/InputField";
@@ -12,39 +10,39 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Auth } from "aws-amplify";
 import AuthLayout from "./AuthLayout";
-import { Link, useNavigate } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { useQuery } from "utils/useQueryHook";
 
-const useStyles = makeStyles((theme: Theme) =>
-  ({
-    formWrapper: {
-      maxWidth: 320,
-      width: "100%",
-      "& button": {
-        boxShadow: "none !important",
-        borderRadius: 3,
-        padding: "8px 16px",
-      },
-      "& [class*='MuiInputBase-root']": {
-        borderRadius: 3,
-      },
-    },
-    inputStyle: {
-      marginBottom: 10,
-    },
-    switchFormBtn: {
-      cursor: "pointer",
-      display: "inline-block",
-      fontSize: 14,
-      color: theme.palette.grey[500],
-      textDecoration: "none",
-      opacity: 0.8,
-      "&:hover": {
-        opacity: 1,
-      },
-    },
-  })
-);
+// const useStyles = makeStyles((theme: Theme) =>
+// ({
+//   formWrapper: {
+//     maxWidth: 320,
+//     width: "100%",
+//     "& button": {
+//       boxShadow: "none !important",
+//       borderRadius: 3,
+//       padding: "8px 16px",
+//     },
+//     "& [class*='MuiInputBase-root']": {
+//       borderRadius: 3,
+//     },
+//   },
+//   inputStyle: {
+//     marginBottom: 10,
+//   },
+//   switchFormBtn: {
+//     cursor: "pointer",
+//     display: "inline-block",
+//     fontSize: 14,
+//     color: theme.palette.grey[500],
+//     textDecoration: "none",
+//     opacity: 0.8,
+//     "&:hover": {
+//       opacity: 1,
+//     },
+//   },
+// })
+// );
 
 type error = {
   name?: string;
@@ -79,7 +77,42 @@ const ChangePswSchema = yup.object().shape({
     .oneOf([yup.ref("new_password"), null], "Passwords must match"),
 });
 
+const theme = useTheme();
+
+// extend / override the current theme
+const pageTheme = createTheme(theme, {
+  custom: {
+    formWrapper: {
+      maxWidth: 320,
+      width: "100%",
+      "& button": {
+        boxShadow: "none !important",
+        borderRadius: 3,
+        padding: "8px 16px",
+      },
+      "& [class*='MuiInputBase-root']": {
+        borderRadius: 3,
+      },
+    },
+    inputStyle: {
+      marginBottom: 10,
+    },
+    switchFormBtn: {
+      cursor: "pointer",
+      display: "inline-block",
+      fontSize: 14,
+      color: theme.palette.grey[500],
+      textDecoration: "none",
+      opacity: 0.8,
+      "&:hover": {
+        opacity: 1,
+      },
+    },
+  },
+});
+
 export default function ForgotPassword() {
+
   // const { token, email } = useParams<{ token: string, email: string }>();
   const query = useQuery();
   const [reset, setReset] = React.useState<resetData | null>(null);
@@ -103,7 +136,6 @@ export default function ForgotPassword() {
   }, []);
 
   function Reset() {
-    const classes = useStyles();
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState<error>({});
 
@@ -119,7 +151,7 @@ export default function ForgotPassword() {
 
       await Auth.forgotPassword(username)
         .then(data => {
-          setUsername(form.getValues("username"));
+          setUsername(form.getValues("username") as unknown as string);
           setReset(data);
         })
         .catch(err => {
@@ -130,67 +162,70 @@ export default function ForgotPassword() {
 
     return (
       <>
-        <div className={classes.formWrapper}>
-          <FormProvider {...form}>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <Typography
-                variant="h6"
-                color="textSecondary"
-                gutterBottom={true}
-                style={{ marginBottom: 10 }}
-              >
-                Forgot your password?
-              </Typography>
+        <ThemeProvider theme={pageTheme}>
+          <Box sx={(theme) => theme.custom.formWrapper}>
+            <FormProvider {...form}>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <Typography
+                  variant="h6"
+                  color="textSecondary"
+                  gutterBottom={true}
+                  style={{ marginBottom: 10 }}
+                >
+                  Forgot your password?
+                </Typography>
 
-              <Typography
-                variant="body2"
-                color="textSecondary"
-                gutterBottom={true}
-                className="form-secondary-text"
-                style={{ marginBottom: 20, lineHeight: 1.2 }}
-              >
-                Enter your Username below and we will send a message to reset
-                your password
-              </Typography>
+                <Typography
+                  variant="body2"
+                  color="textSecondary"
+                  gutterBottom={true}
+                  className="form-secondary-text"
+                  style={{ marginBottom: 20, lineHeight: 1.2 }}
+                >
+                  Enter your Username below and we will send a message to reset
+                  your password
+                </Typography>
 
-              <div className={classes.inputStyle}>
-                <InputField name="username" label="Username" />
-              </div>
+                <Box sx={(theme) => theme.custom.inputStyle}>
+                  <InputField name="username" label="Username" />
+                </Box>
 
-              {error?.message && (
-                <Alert severity="error" style={{ marginBottom: 10 }}>
-                  {error?.message}
-                </Alert>
-              )}
+                {error?.message && (
+                  <Alert severity="error" style={{ marginBottom: 10 }}>
+                    {error?.message}
+                  </Alert>
+                )}
 
-              <Button
-                variant="contained"
-                fullWidth={true}
-                type="submit"
-                color="primary"
-                disabled={loading}
-                className="form-action-btn"
-              >
-                {loading ? "Please wait..." : "Reset Password"}
-              </Button>
+                <Button
+                  variant="contained"
+                  fullWidth={true}
+                  type="submit"
+                  color="primary"
+                  disabled={loading}
+                  className="form-action-btn"
+                  sx={{ borderRadius: "3px !important" }}
+                >
+                  {loading ? "Please wait..." : "Reset Password"}
+                </Button>
 
-              <Link
-                to="/login"
-                className={classes.switchFormBtn}
-                style={{ marginTop: 10 }}
-              >
-                Back to login
-              </Link>
-            </form>
-          </FormProvider>
-        </div>
+                <Link
+                  component={RouterLink}
+                  to="/login"
+                  sx={(theme) => theme.custom.switchFormBtn}
+                  style={{ marginTop: 10 }}
+                >
+                  Back to login
+                </Link>
+              </form>
+            </FormProvider>
+          </Box>
+        </ThemeProvider>
       </>
     );
   }
 
   function ResetPassword() {
     const query = useQuery();
-    const classes = useStyles();
     const [loading, setLoading] = React.useState(false);
     const [success, setSuccess] = React.useState(false);
     const [error, setError] = React.useState<error>({});
@@ -224,69 +259,72 @@ export default function ForgotPassword() {
     };
     return (
       <>
-        <div className={classes.formWrapper}>
-          <FormProvider {...form}>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <Typography
-                variant="h6"
-                color="textSecondary"
-                gutterBottom={true}
-                style={{ marginBottom: 10 }}
-              >
-                Change Password
-              </Typography>
+        <ThemeProvider theme={pageTheme}>
+          <Box sx={(theme) => theme.custom.formWrapper}>
+            <FormProvider {...form}>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <Typography
+                  variant="h6"
+                  color="textSecondary"
+                  gutterBottom={true}
+                  style={{ marginBottom: 10 }}
+                >
+                  Change Password
+                </Typography>
 
-              <Typography
-                variant="body2"
-                color="textSecondary"
-                gutterBottom={true}
-                style={{ marginBottom: 20, lineHeight: 1.2 }}
-              >
-                We have sent a password reset code by{" "}
-                {reset?.CodeDeliveryDetails.DeliveryMedium} to{" "}
-                {reset?.CodeDeliveryDetails.Destination}. Enter it below to
-                reset your password.
-              </Typography>
+                <Typography
+                  variant="body2"
+                  color="textSecondary"
+                  gutterBottom={true}
+                  style={{ marginBottom: 20, lineHeight: 1.2 }}
+                >
+                  We have sent a password reset code by{" "}
+                  {reset?.CodeDeliveryDetails.DeliveryMedium} to{" "}
+                  {reset?.CodeDeliveryDetails.Destination}. Enter it below to
+                  reset your password.
+                </Typography>
 
-              <div className={classes.inputStyle}>
-                <InputField name="code" label="Code" defaultValue={token} />
-                <InputField
-                  name="new_password"
-                  label="New Password"
-                  type="password"
-                />
-                <InputField
-                  name="confirm_password"
-                  label="Enter New Password Again"
-                  type="password"
-                />
-              </div>
+                <Box sx={(theme) => theme.custom.inputStyle}>
+                  <InputField name="code" label="Code" defaultValue={token} />
+                  <InputField
+                    name="new_password"
+                    label="New Password"
+                    type="password"
+                  />
+                  <InputField
+                    name="confirm_password"
+                    label="Enter New Password Again"
+                    type="password"
+                  />
+                </Box>
 
-              {error?.message && (
-                <Alert severity="error" style={{ marginBottom: 10 }}>
-                  {error?.message}
-                </Alert>
-              )}
-              {success && (
-                <Alert severity="success" style={{ marginBottom: 10 }}>
-                  Your password has been changed.
-                  <br />
-                  You are being redirected to the login page, please wait…
-                </Alert>
-              )}
-              <Button
-                variant="contained"
-                fullWidth={true}
-                type="submit"
-                color="primary"
-                disabled={loading}
-                className="form-action-btn"
-              >
-                {loading ? "Please wait..." : "Change Password"}
-              </Button>
-            </form>
-          </FormProvider>
-        </div>
+                {error?.message && (
+                  <Alert severity="error" style={{ marginBottom: 10 }}>
+                    {error?.message}
+                  </Alert>
+                )}
+                {success && (
+                  <Alert severity="success" style={{ marginBottom: 10 }}>
+                    Your password has been changed.
+                    <br />
+                    You are being redirected to the login page, please wait…
+                  </Alert>
+                )}
+                <Button
+                  variant="contained"
+                  fullWidth={true}
+                  type="submit"
+                  color="primary"
+                  disabled={loading}
+                  className="form-action-btn"
+                  sx={{ borderRadius: "3px !important" }}
+                >
+                  {loading ? "Please wait..." : "Change Password"}
+                </Button>
+              </form>
+            </FormProvider>
+          </Box>
+        </ThemeProvider>
       </>
     );
   }

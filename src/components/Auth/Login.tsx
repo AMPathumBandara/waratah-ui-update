@@ -1,6 +1,11 @@
-import React, { useContext, useEffect } from "react";
-import { createStyles } from "@mui/material/styles";
-import { Theme } from "@mui/material/styles";
+import React, { } from "react";
+import {
+  createStyles,
+  createTheme,
+  Theme,
+  ThemeProvider,
+  useTheme,
+} from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import Button from "@mui/material/Button";
 import { FormProvider, useForm } from "react-hook-form";
@@ -9,38 +14,39 @@ import Alert from "@mui/material/Alert";
 //@ts-ignore
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Link, useNavigate } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import AuthLayout from "./AuthLayout";
 import { useSignIn, useUser } from "./CognitoHooks";
+import { Box, Link } from "@mui/material";
 
-const useStyles = makeStyles((theme: Theme) =>
-  ({
-    formWrapper: {
-      maxWidth: 320,
-      width: "100%",
-      "& button": {
-        boxShadow: "none !important",
-        borderRadius: 3,
-        padding: "8px 16px",
-      },
-      "& [class*='MuiInputBase-root']": {
-        borderRadius: 3,
-      },
-    },
-    inputStyle: {},
-    switchFormBtn: {
-      cursor: "pointer",
-      display: "inline-block",
-      fontSize: 14,
-      color: theme.palette.grey[500],
-      textDecoration: "none",
-      opacity: 0.8,
-      "&:hover": {
-        opacity: 1,
-      },
-    },
-  })
-);
+// const useStyles = makeStyles((theme: Theme) =>
+//   createStyles({
+//     formWrapper: {
+//       maxWidth: 320,
+//       width: "100%",
+//       "& button": {
+//         boxShadow: "none !important",
+//         borderRadius: 3,
+//         padding: "8px 16px",
+//       },
+//       "& [class*='MuiInputBase-root']": {
+//         borderRadius: 3,
+//       },
+//     },
+//     inputStyle: {},
+//     switchFormBtn: {
+//       cursor: "pointer",
+//       display: "inline-block",
+//       fontSize: 14,
+//       color: theme.palette.grey[500],
+//       textDecoration: "none",
+//       opacity: 0.8,
+//       "&:hover": {
+//         opacity: 1,
+//       },
+//     },
+//   })
+// );
 
 type loginForm = {
   username: string;
@@ -59,8 +65,41 @@ const SignInschema = yup.object().shape({
 });
 
 export default function Login() {
+  const theme = useTheme();
+
+  // extend / override the current theme
+  const pageTheme = createTheme(theme, {
+    custom: {
+      formWrapper: {
+        maxWidth: 320,
+        width: "100%",
+        "& button": {
+          boxShadow: "none !important",
+          borderRadius: 3,
+          padding: "8px 16px",
+        },
+        "& [class*='MuiInputBase-root']": {
+          borderRadius: 3,
+        },
+      },
+      inputStyle: {},
+      switchFormBtn: {
+        cursor: "pointer",
+        display: "inline-block",
+        fontSize: 14,
+        color: theme.palette.grey[500],
+        textDecoration: "none",
+        opacity: 0.8,
+        "&:hover": {
+          opacity: 1,
+          color: theme.palette.grey[500],
+        },
+      },
+    }
+  });
+
   const navigate = useNavigate();
-  const classes = useStyles();
+  //const classes = useStyles();
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<error>({});
   const signIn = useSignIn();
@@ -128,45 +167,49 @@ export default function Login() {
 
   return (
     <AuthLayout>
-      <div className={classes.formWrapper}>
-        <FormProvider {...form}>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <h4 className="form-secondary-title">
-              Sign in with your username and password
-            </h4>
-            <div className={classes.inputStyle}>
-              <InputField name="username" label="Username" />
-            </div>
-            <div className={classes.inputStyle}>
-              <InputField name="password" label="Password" type="password" />
-            </div>
+      <ThemeProvider theme={pageTheme}>
+        <Box sx={(theme) => theme.custom.formWrapper}>
+          <FormProvider {...form}>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <h4 className="form-secondary-title">
+                Sign in with your username and password
+              </h4>
+              <Box sx={(theme) => theme.custom.inputStyle}>
+                <InputField name="username" label="Username" />
+              </Box>
+              <Box sx={(theme) => theme.custom.inputStyle}>
+                <InputField name="password" label="Password" type="password" />
+              </Box>
 
-            <Link
-              to="/forgot-password"
-              className={classes.switchFormBtn}
-              style={{ marginBottom: 10 }}
-            >
-              Forgot your password?
-            </Link>
-            {error?.message && (
-              <Alert severity="error" style={{ marginBottom: 10 }}>
-                {error?.message}
-              </Alert>
-            )}
+              <Link
+                component={RouterLink}
+                to="/forgot-password"
+                sx={(theme) => theme.custom.switchFormBtn}
+                style={{ marginBottom: 10 }}
+              >
+                Forgot your password?
+              </Link>
+              {error?.message && (
+                <Alert severity="error" style={{ marginBottom: 10 }}>
+                  {error?.message}
+                </Alert>
+              )}
 
-            <Button
-              variant="contained"
-              fullWidth={true}
-              type="submit"
-              color="primary"
-              disabled={loading}
-              className="form-action-btn"
-            >
-              {loading ? "Please wait..." : "Login"}
-            </Button>
-          </form>
-        </FormProvider>
-      </div>
+              <Button
+                variant="contained"
+                fullWidth={true}
+                type="submit"
+                color="primary"
+                disabled={loading}
+                className="form-action-btn"
+                //sx={{ borderRadius: "3px !important" }}
+              >
+                {loading ? "Please wait..." : "Login"}
+              </Button>
+            </form>
+          </FormProvider>
+        </Box>
+      </ThemeProvider>
     </AuthLayout>
   );
 }

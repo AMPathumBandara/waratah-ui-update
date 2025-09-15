@@ -1,11 +1,12 @@
 import { colors } from "@mui/material";
 import { Theme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
+import theme from "theme/theme";
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = (() => ({
   footerTheme: {
     backgroundColor: theme.palette.primary.light,
-    color: theme.palette.getContrastText(theme.palette.primary.light),
+    //color: theme.palette.getContrastText(theme.palette.primary.light),
   },
 }));
 

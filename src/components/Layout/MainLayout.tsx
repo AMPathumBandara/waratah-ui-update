@@ -5,7 +5,7 @@ import {
   ThemeProvider,
   createTheme,
 } from "@mui/material/styles";
-import { makeStyles } from "@mui/styles";
+import { makeStyles, StylesProvider } from "@mui/styles";
 import { CssBaseline } from "@mui/material";
 import { Routes, Route } from "react-router-dom";
 import { Grid } from "@mui/material";
@@ -29,10 +29,10 @@ const ApplicationLandingPage = React.lazy(
 const Tenants = React.lazy(() => import("pages/Tenants"));
 
 const useStyles = makeStyles((theme: Theme) => ({
-    spinner: {
-      height: "100vh",
-    },
-  })
+  spinner: {
+    height: "100vh",
+  },
+})
 );
 const protectedLinks = [
   {
@@ -70,9 +70,9 @@ const protectedLinks = [
 export default function PermanentDrawerLeft() {
   const classes = useStyles();
 
-  const { data: meData, loading: meLoading, error: meError } = useMeQuery();
-
-  console.log(meError);
+  const { data: meData, loading: meLoading, error: meError } = useMeQuery({
+    errorPolicy: "all"
+  });
 
   const themeData = meData?.me[0]?.broker_producer?.broker_agency.tenant;
   const [ctheme, setCTheme] = useState(theme);
