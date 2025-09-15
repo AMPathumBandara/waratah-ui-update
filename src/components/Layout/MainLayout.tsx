@@ -72,6 +72,8 @@ export default function PermanentDrawerLeft() {
 
   const { data: meData, loading: meLoading, error: meError } = useMeQuery();
 
+  console.log(meError);
+
   const themeData = meData?.me[0]?.broker_producer?.broker_agency.tenant;
   const [ctheme, setCTheme] = useState(theme);
 

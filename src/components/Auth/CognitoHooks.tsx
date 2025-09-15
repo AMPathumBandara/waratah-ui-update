@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
 import Amplify from "aws-amplify";
 import Auth, { CognitoUser } from "@aws-amplify/auth";
 
@@ -13,6 +13,18 @@ Amplify.configure({
   },
 });
 
+export type AuthChallengeName =
+  | "NEW_PASSWORD_REQUIRED"
+  | "SMS_MFA"
+  | "SOFTWARE_TOKEN_MFA"
+  | "MFA_SETUP";
+
+export type AuthUser = CognitoUser & {
+  challengeName: AuthChallengeName;
+  signInUserSession: any;
+  username: string;
+};
+
 export type SignInInput = {
   email: string;
   password: string;
@@ -21,184 +33,114 @@ export type SignInInput = {
 };
 
 export type SignOutCb = () => void;
-
-export type ResendSignUpInput = {
-  email: string;
-};
-
-export type ForgotPasswordInput = {
-  email: string;
-};
-
-export type ResetPasswordInput = {
-  email: string;
-  code: string;
-  password: string;
-};
-
-export type CompletePasswordInput = {
-  user: CognitoUser;
-  password: string;
-};
-
-export type AuthChallengeName =
-  | "NEW_PASSWORD_REQUIRED"
-  | "SMS_MFA"
-  | "SOFTWARE_TOKEN_MFA"
-  | "MFA_SETUP";
-
-export type AuthUser =  CognitoUser & {
-  challengeName: AuthChallengeName;
-  signInUserSession: any;
-  username: string;
-}
+export type ForgotPasswordInput = { email: string };
+export type ResetPasswordInput = { email: string; code: string; password: string };
+export type CompletePasswordInput = { user: CognitoUser; password: string };
 
 interface AuthState {
   user: AuthUser | null;
-  signIn(input : SignInInput): Promise<void>;
+  signIn(input: SignInInput): Promise<void>;
   signOut(cb: SignOutCb): Promise<void>;
   refreshUserSession(): Promise<AuthUser | null>;
 }
 
-export const AuthContext = React.createContext<AuthState>({
-  user: null,
-  signIn: async (input) => {},
-  signOut: async (cb) => {},
-  refreshUserSession: async () => null
-});
+const AuthContext = React.createContext<AuthState | undefined>(undefined);
 
-interface AuthProps {
-  children: React.ReactNode;
+export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const auth = useProvideAuth();
+  return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
 }
 
-export const AuthProvider = ({ children } : AuthProps) => {
-  const auth = useAuth();
-
-  return (
-    <AuthContext.Provider value={auth}>
-      {children}
-    </AuthContext.Provider>
-  )
-}
-
-export function useAuth() {
+// ✅ renamed to avoid Fast Refresh confusion
+function useProvideAuth(): AuthState {
   const [user, setUser] = React.useState<AuthUser | null>(null);
 
   React.useEffect(() => {
     let active = true;
+    Auth.currentAuthenticatedUser()
+      .then((u) => active && setUser(u))
+      .catch(() => active && setUser(null));
+    return () => {
+      active = false;
+    };
+  }, []);
 
-    const check = async () => {
+  const signIn = React.useCallback(
+    async ({ email, password, onSuccess, onError }: SignInInput) => {
       try {
-        const user = await Auth.currentAuthenticatedUser();
-        if (active) {
-          setUser(user);
-        }
-      } catch (error) {
-        if (active) {
-          setUser(null);
-        }
+        const user = await Auth.signIn(email, password);
+        setUser(user);
+        onSuccess(user);
+      } catch (err) {
+        onError(err);
       }
-    }
-
-    check();
-
-    return () => { active = false }
-  }, [setUser]);
-
-  const signIn = React.useCallback(async ({ email, password, onSuccess, onError } : SignInInput) => {
-    try {
-      const user = await Auth.signIn(email, password);
-      setUser(user);
-      onSuccess(user);
-    } catch(err) {
-      onError(err);
-    }
-  }, [setUser]);
+    },
+    []
+  );
 
   const signOut = React.useCallback(async (cb: SignOutCb) => {
     await Auth.signOut();
     setUser(null);
-    if(cb) {
-      cb();
-    }
-  }, [setUser]);
+    cb?.();
+  }, []);
 
   const refreshUserSession = React.useCallback(async () => {
     const user = await Auth.currentAuthenticatedUser();
     const now = Math.floor(Date.now() / 1000);
     const issuedAt = user?.getSignInUserSession()?.getIdToken().getIssuedAt();
-    const drift = now - issuedAt;
-    //  refresh after 300 seconds
-    if (drift > 300) {
+    if (issuedAt && now - issuedAt > 300) {
       return new Promise<AuthUser | null>((resolve, reject) => {
-        user?.getSession((err:any, session:any) => {
-          if(err) {
+        user?.getSession((err: any, session: any) => {
+          if (err) {
             reject(err);
             return;
           }
           const refreshToken = session.getRefreshToken();
-          user.refreshSession(refreshToken, async (err: any, data: any) => {
-            if(err) {
+          user.refreshSession(refreshToken, async (err: any) => {
+            if (err) {
               await Auth.signOut();
               setUser(null);
               resolve(null);
             } else {
-              const newUser = Auth.currentAuthenticatedUser({bypassCache: true});
+              const newUser = await Auth.currentAuthenticatedUser({ bypassCache: true });
               resolve(newUser);
-              //  don't update state, it could cause full app refresh, since library handles the caching
-              //  we don't need to update user in session, useCurrentUser for token retrievals
             }
           });
         });
-      });     
+      });
     }
-    return Promise.resolve(user);
-  }, [setUser]);
-
+    return user;
+  }, []);
 
   return { user, signIn, signOut, refreshUserSession };
 }
 
-export function useUser() {
-  const { user } = React.useContext(AuthContext);
-  if (!user) {
-    return null;
-  }
-  return user;
+// --- Hooks (safe to export) ---
+export function useAuth() {
+  const ctx = React.useContext(AuthContext);
+  if (!ctx) throw new Error("useAuth must be used within AuthProvider");
+  return ctx;
 }
 
-export function useCurrentUser() {
-  return async function cognitoAuth() {
-    return await Auth.currentAuthenticatedUser();
-  }
-}
-
-export function useSignIn() {
-  return React.useContext(AuthContext).signIn;
-}
-
-export function useSignOut() {
-  return React.useContext(AuthContext).signOut;
-}
-
-export function useRefreshUserSession() {
-  return React.useContext(AuthContext).refreshUserSession;
-}
+export const useUser = () => useAuth().user;
+export const useSignIn = () => useAuth().signIn;
+export const useSignOut = () => useAuth().signOut;
+export const useRefreshUserSession = () => useAuth().refreshUserSession;
 
 export function useForgotPassword() {
-  return async function forgotPassword({ email } : ForgotPasswordInput) {
+  return async ({ email }: ForgotPasswordInput) => {
     await Auth.forgotPassword(email);
-  }
+  };
 }
 
 export function useResetPassword() {
-  return async function resetPassword({ email, code, password } : ResetPasswordInput) {
+  return async ({ email, code, password }: ResetPasswordInput) => {
     await Auth.forgotPasswordSubmit(email, code, password);
-  }
+  };
 }
 
 export function useCompleteNewPassword() {
-  return async function completeNewPassword({ user, password } : CompletePasswordInput) {
+  return async ({ user, password }: CompletePasswordInput) => {
     await Auth.completeNewPassword(user, password);
-  }
+  };
 }
