@@ -65,7 +65,7 @@ export default function AuthLayout(props: any) {
           maxWidth: 320,
           margin: "0 auto",
         },
-        "& > div:first-child": {
+        "& > div:first-of-type": {
           borderRight: "1px solid #e6e6e6",
         },
       },

@@ -1,12 +1,9 @@
 import React, { } from "react";
 import {
-  createStyles,
   createTheme,
-  Theme,
   ThemeProvider,
   useTheme,
 } from "@mui/material/styles";
-import { makeStyles } from "@mui/styles";
 import Button from "@mui/material/Button";
 import { FormProvider, useForm } from "react-hook-form";
 import InputField from "../From/InputField";
@@ -19,39 +16,12 @@ import AuthLayout from "./AuthLayout";
 import { useSignIn, useUser } from "./CognitoHooks";
 import { Box, Link } from "@mui/material";
 
-// const useStyles = makeStyles((theme: Theme) =>
-//   createStyles({
-//     formWrapper: {
-//       maxWidth: 320,
-//       width: "100%",
-//       "& button": {
-//         boxShadow: "none !important",
-//         borderRadius: 3,
-//         padding: "8px 16px",
-//       },
-//       "& [class*='MuiInputBase-root']": {
-//         borderRadius: 3,
-//       },
-//     },
-//     inputStyle: {},
-//     switchFormBtn: {
-//       cursor: "pointer",
-//       display: "inline-block",
-//       fontSize: 14,
-//       color: theme.palette.grey[500],
-//       textDecoration: "none",
-//       opacity: 0.8,
-//       "&:hover": {
-//         opacity: 1,
-//       },
-//     },
-//   })
-// );
+const SignInschema = yup.object({
+  username: yup.string().required("Username is required"),
+  password: yup.string().required("Password is required"),
+});
 
-type loginForm = {
-  username: string;
-  password: string;
-};
+type loginForm = yup.InferType<typeof SignInschema>;
 
 type error = {
   name?: string;
@@ -59,10 +29,6 @@ type error = {
   code?: string;
 };
 
-const SignInschema = yup.object().shape({
-  username: yup.string().required("Username is required"),
-  password: yup.string().required("Password is required"),
-});
 
 export default function Login() {
   const theme = useTheme();
@@ -127,6 +93,9 @@ export default function Login() {
       setLoading(true);
       setError({});
 
+      console.log("data");
+      console.log(data);
+
       try {
         signIn({
           email: data.username,
@@ -177,6 +146,7 @@ export default function Login() {
               <Box sx={(theme) => theme.custom.inputStyle}>
                 <InputField name="username" label="Username" />
               </Box>
+
               <Box sx={(theme) => theme.custom.inputStyle}>
                 <InputField name="password" label="Password" type="password" />
               </Box>

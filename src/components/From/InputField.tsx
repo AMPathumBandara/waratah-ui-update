@@ -77,49 +77,40 @@ export function InputFormItem(props: InputProps) {
   const shrink =
     shrinkLabel === undefined || shrinkLabel === true ? true : false;
 
+  const { ref, ...rest } = register(name, { required });
+
   return (
     <TextField
       id={name}
-      //name={name}
-      type={type}
       label={label}
+      type={type}
       required={required}
-      //inputRef={register({ required })}
-      {...register(name, { required })}
-      onChange={event => {
-        props.onChange && props.onChange(event.target.value);
-      }}
-      onBlur={event => {
-        props.onBlur && props.onBlur(event);
-      }}
       margin="normal"
       fullWidth
       variant={variant || "outlined"}
       size={size || "small"}
-      placeholder={placeholder || undefined}
-      autoFocus={autoFocus || undefined}
-      autoComplete={autoComplete || undefined}
-      //endAdornment={endAdornment || undefined}
-      InputLabelProps={
-        shrink
-          ? {
-            shrink: true,
-          }
-          : undefined
-      }
-      error={Boolean(errorMessage) || error}
-      helperText={errorMessage || hint || helperText}
+      placeholder={placeholder}
+      autoFocus={autoFocus}
+      autoComplete={autoComplete}
+      InputLabelProps={shrink ? { shrink: true } : undefined}
       InputProps={{ startAdornment, endAdornment }}
-      inputProps={{
-        ...inputProps,
-        name,
-        min: min,
-        max: max,
-      }}
+      inputProps={{ ...inputProps, min, max }}
       disabled={disabled}
       value={value}
-      className={className}
       defaultValue={defaultValue}
+      className={className}
+      error={Boolean(errorMessage) || error}
+      helperText={errorMessage || hint || helperText}
+      {...rest} // spread RHF props (includes name, onChange, onBlur)
+      inputRef={ref} // attach ref separately
+      onChange={(e) => {
+        rest.onChange(e); // call RHF onChange
+        props.onChange?.(e.target.value); // call your custom onChange
+      }}
+      onBlur={(e) => {
+        rest.onBlur(e); // call RHF onBlur
+        props.onBlur?.(e); // call your custom onBlur
+      }}
     />
   );
 }
