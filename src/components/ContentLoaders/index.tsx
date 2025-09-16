@@ -119,12 +119,12 @@ export const LoadingScanVirdict = (props: any) => (
 );
 export const LoadingQuoteCard = (props: any) => (
   <>
-    <Grid sx={{ sm: 12, md: 6 }}>
+    <Grid size={{ sm: 12, md: 6 }}>
       <GridItem>
         <Skeleton height={100} borderRadius={5} />
       </GridItem>
     </Grid>
-    <Grid sx={{ sm: 12, md: 6 }}>
+    <Grid size={{ sm: 12, md: 6 }}>
       <GridItem>
         <Skeleton height={100} borderRadius={5} />
       </GridItem>
@@ -133,17 +133,17 @@ export const LoadingQuoteCard = (props: any) => (
 );
 export const LoadingQuoteSelectionsCard = (props: any) => (
   <>
-    <Grid sx={{ sm: 12, md: 4 }}>
+    <Grid size={{ sm: 12, md: 4 }}>
       <GridItem>
         <Skeleton height={100} borderRadius={5} />
       </GridItem>
     </Grid>
-    <Grid sx={{ sm: 12, md: 4 }}>
+    <Grid size={{ sm: 12, md: 4 }}>
       <GridItem>
         <Skeleton height={100} borderRadius={5} />
       </GridItem>
     </Grid>
-    <Grid sx={{ sm: 12, md: 4 }}>
+    <Grid size={{ sm: 12, md: 4 }}>
       <GridItem>
         <Skeleton height={100} borderRadius={5} />
       </GridItem>

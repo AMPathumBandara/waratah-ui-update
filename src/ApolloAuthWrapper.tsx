@@ -25,7 +25,7 @@ const ApolloAuthWrapper: React.FC<ApolloAuthWrapperProps> = ({ children }) => {
   const getToken = async (): Promise<string | null> => {
     try {
       const user = await refreshUserSession();
-      console.log(user);
+      //console.log(user);
       return user?.getSignInUserSession()?.getIdToken()?.getJwtToken() ?? null;
     } catch {
       return null;

@@ -467,7 +467,7 @@ const Quote: React.FC<QuoteProps> = ({
             <ApolloErrorToast error={updateError} />
             <form onSubmit={handleSubmit(handleFormSubmit)}>
               <Grid container spacing={4}>
-                <Grid sx={{ xs: 12, md: 6 }}>
+                <Grid size={{ xs: 12, md: 6 }}>
                   <GridItem>
                     <div
                       className={`date-fields-wrapper ${classes.dateFieldsWrapper}`}
@@ -513,7 +513,7 @@ const Quote: React.FC<QuoteProps> = ({
                     </div>
                   </GridItem>
                 </Grid>
-                <Grid sx={{ xs: 12, md: 6 }}>
+                <Grid size={{ xs: 12, md: 6 }}>
                   <GridItem>
                     {quoteLoading ? (
                       <LoadingScanVirdict />
@@ -544,7 +544,7 @@ const Quote: React.FC<QuoteProps> = ({
               <br />
 
               <Grid container spacing={4}>
-                <Grid sx={{ xs: 12, md: 6 }}>
+                <Grid size={{ xs: 12, md: 6 }}>
                   <GridItem>
                     <div className="scan-verdict-wrapper">
                       <Card shadow={false} legendTitle="Quote PDF">
@@ -589,7 +589,7 @@ const Quote: React.FC<QuoteProps> = ({
                   </GridItem>
                 </Grid>
 
-                <Grid sx={{ xs: 12, md: 6 }}>
+                <Grid size={{ xs: 12, md: 6 }}>
                   <GridItem>
                     <div className="scan-verdict-wrapper">
                       <FeatureFlag
@@ -637,7 +637,7 @@ const Quote: React.FC<QuoteProps> = ({
                       >
                         <Card shadow={false} legendTitle="Quotes">
                           <Grid container spacing={1}>
-                            <Grid sx={{ xs: 12, md: 6 }}>
+                            <Grid size={{ xs: 12, md: 6 }}>
                               <GridItem>
                                 <div className="scan-alert">
                                   <Alert severity="info">
@@ -652,7 +652,7 @@ const Quote: React.FC<QuoteProps> = ({
                                 </div>
                               </GridItem>
                             </Grid>
-                            <Grid sx={{ xs: 12, md: 6 }}>
+                            <Grid size={{ xs: 12, md: 6 }}>
                               <GridItem>
                                 <div className="scan-alert">
                                   <Alert severity="info">
@@ -695,13 +695,13 @@ const Quote: React.FC<QuoteProps> = ({
                   </GridItem>
                 </Grid>
 
-                <Grid sx={{ xs: 12 }}>
+                <Grid size={{ xs: 12 }}>
                   <GridItem>
                     {
                       (quoteCount > maximumQuoteCount) &&
                       <Alert severity="warning">
                         <Grid container spacing={2} alignItems="center">
-                          <Grid sx={{ xs: 12 }}>
+                          <Grid size={{ xs: 12 }}>
                             <GridItem>
                               More than <b>{maximumQuoteCount} quotes</b> found for this application. Quotes that are already in the <b>PDF</b> version are marked with <span style={{ position: "relative", top: "6px" }}><AttachmentOutlined fontSize="small" color="primary" /></span>
                               <br />
@@ -968,7 +968,7 @@ const QuoteList: React.FC<QuoteListDataProps> = ({
   return (
     <>
       {toastMessageComponent}
-      <Grid sx={{ xs: 12, md: 4 }} key={item.id}>
+      <Grid size={{ xs: 12, md: 4 }} key={item.id}>
         <GridItem>
           <Card shadow={false}>
             {
@@ -1377,14 +1377,14 @@ const ScanStatus = (props: any) => {
           return (
             <>
               <Grid container spacing={1}>
-                <Grid sx={{ xs: 12, md: 8 }}>
+                <Grid size={{ xs: 12, md: 8 }}>
                   <GridItem>
                     <Alert severity="warning">
                       Scan not Available
                     </Alert>
                   </GridItem>
                 </Grid>
-                <Grid sx={{ xs: 12, md: 4 }}>
+                <Grid size={{ xs: 12, md: 4 }}>
                   <GridItem>
                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
                       {/* <Button

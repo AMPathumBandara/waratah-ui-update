@@ -1,28 +1,35 @@
-import { colors } from "@mui/material";
-import { Theme } from "@mui/material/styles";
-import { makeStyles } from "@mui/styles";
-import theme from "theme/theme";
-
-const useStyles = (() => ({
-  footerTheme: {
-    backgroundColor: theme.palette.primary.light,
-    //color: theme.palette.getContrastText(theme.palette.primary.light),
-  },
-}));
+import { Box } from "@mui/material";
+import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
 
 const Footer: React.FC = () => {
-  const classes = useStyles();
+  const theme = useTheme();
+
+  console.log(theme.palette.primary.light);
+
+  const pageTheme = createTheme(theme, {
+    custom: {
+      footerTheme: {
+        backgroundColor: theme.palette.primary.light,
+        //color: theme.palette.getContrastText(theme.palette.primary.light),
+      },
+    }
+  });
 
   return (
     <>
-      <div className={`footer ${classes.footerTheme}`}>
-        <div>
-          <span>© {new Date().getFullYear()} VisionX</span>
-        </div>
-        <div>
-          <span>Powered by VisionX</span>
-        </div>
-      </div>
+      <ThemeProvider theme={pageTheme}>
+        <Box 
+          className={`footer`}
+          sx={(theme) => theme.custom.footerTheme}
+        >
+          <div>
+            <span>© {new Date().getFullYear()} VisionX</span>
+          </div>
+          <div>
+            <span>Powered by VisionX</span>
+          </div>
+        </Box>
+      </ThemeProvider>
     </>
   );
 };

@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Button, Tooltip } from "@mui/material";
-import { Theme } from "@mui/material/styles";
-import { makeStyles } from "@mui/styles";
+import { Box, Button, Tooltip } from "@mui/material";
+import {
+  createTheme,
+  ThemeProvider,
+  useTheme,
+} from "@mui/material/styles";
 import { alpha } from "@mui/material/styles";
 import {
   Order_By,
@@ -10,7 +13,7 @@ import {
 } from "generated/graphql";
 import ApplicationModal from "components/Application/ApplicationModal";
 import InsuredApplicationDetails from "components/InsuredApplicationDetails";
-import { Route, Routes, useMatches, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 
 import { ApplicationHeader } from "components/Application/ApplicationHeader";
 import { SortComponent } from "components/Filters/Sort";
@@ -27,92 +30,93 @@ import {
 } from "utils";
 import Footer from "components/Footer";
 import WatchApplicationUpdate from "components/Application/WatchApplicationUpdate";
+import { Theme } from "@mui/material/styles";
 
-const useStyles = makeStyles((theme: Theme) => ({
-  searchBtn: {
-    marginLeft: 10,
-    boxShadow: `0px 5px 10px ${alpha(theme.palette.primary.main, 0.2)}`,
-  },
-  applicationRow: {
-    borderRadius: 4,
-    backgroundColor: theme.palette.grey[100],
-    padding: "8px",
-    paddingBottom: "30px",
-    height: "100%",
-  },
-  applicationItemsWrapper: {
-    overflowY: "auto",
-    height: "calc(100vh - 350px)",
-    "&::-webkit-scrollbar": {
-      width: 6,
-    },
-    "&::-webkit-scrollbar-track": {
-      backgroundColor: theme.palette.grey[300],
-      borderRadius: "10px",
-    },
-    "&::-webkit-scrollbar-thumb": {
-      backgroundColor: theme.palette.grey[400],
-      borderRadius: "10px",
-    },
-  },
-  applicationRowHeader: {
-    backgroundColor: "#FFF",
-    borderRadius: 4,
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: "0.5rem",
-    marginBottom: "1.5rem",
-    position: "relative",
-  },
-  count: {
-    width: 30,
-    height: 30,
-    borderRadius: "50%",
-    backgroundColor: "#FFFFFF",
-    textAlign: "center",
-    lineHeight: "30px",
-    marginLeft: 10,
-  },
-  gridChip: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    borderRadius: 4,
-    fontSize: 14,
-    color: theme.palette.grey[800],
-    fontWeight: 600,
-    backgroundColor: theme.palette.grey[100],
-    padding: "0.25rem 0.5rem",
-    cursor: "default",
-  },
-  applicationItem: {
-    display: "flex",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
-    borderRadius: 4,
-    padding: "0.75rem",
-    backgroundColor: "#FFFFFF",
-    boxShadow: `0px 2px 10px ${alpha(theme.palette.grey[900], 0.15)}`,
-    margin: "0.5rem 0.5rem 1rem 0.5rem",
-    transition: "all 0.5s",
-    cursor: "default",
-    "&:hover": {
-      boxShadow: `0px 10px 25px ${alpha(theme.palette.grey[900], 0.2)}`,
-    },
-  },
-  loadMore: {
-    textAlign: "center",
-    marginBottom: 10,
-    "& button": {
-      fontSize: "0.8rem",
-    },
-  },
-  signatureIndicator: {
-    fontSize: 14,
-    color: theme.palette.warning.light,
-  },
-}));
+// const useStyles = makeStyles((theme: Theme) => ({
+//   searchBtn: {
+//     marginLeft: 10,
+//     boxShadow: `0px 5px 10px ${alpha(theme.palette.primary.main, 0.2)}`,
+//   },
+//   applicationRow: {
+//     borderRadius: 4,
+//     backgroundColor: theme.palette.grey[100],
+//     padding: "8px",
+//     paddingBottom: "30px",
+//     height: "100%",
+//   },
+//   applicationItemsWrapper: {
+//     overflowY: "auto",
+//     height: "calc(100vh - 350px)",
+//     "&::-webkit-scrollbar": {
+//       width: 6,
+//     },
+//     "&::-webkit-scrollbar-track": {
+//       backgroundColor: theme.palette.grey[300],
+//       borderRadius: "10px",
+//     },
+//     "&::-webkit-scrollbar-thumb": {
+//       backgroundColor: theme.palette.grey[400],
+//       borderRadius: "10px",
+//     },
+//   },
+//   applicationRowHeader: {
+//     backgroundColor: "#FFF",
+//     borderRadius: 4,
+//     display: "flex",
+//     justifyContent: "space-between",
+//     alignItems: "center",
+//     padding: "0.5rem",
+//     marginBottom: "1.5rem",
+//     position: "relative",
+//   },
+//   count: {
+//     width: 30,
+//     height: 30,
+//     borderRadius: "50%",
+//     backgroundColor: "#FFFFFF",
+//     textAlign: "center",
+//     lineHeight: "30px",
+//     marginLeft: 10,
+//   },
+//   gridChip: {
+//     display: "flex",
+//     justifyContent: "space-between",
+//     alignItems: "center",
+//     borderRadius: 4,
+//     fontSize: 14,
+//     color: theme.palette.grey[800],
+//     fontWeight: 600,
+//     backgroundColor: theme.palette.grey[100],
+//     padding: "0.25rem 0.5rem",
+//     cursor: "default",
+//   },
+//   applicationItem: {
+//     display: "flex",
+//     justifyContent: "flex-start",
+//     alignItems: "flex-start",
+//     borderRadius: 4,
+//     padding: "0.75rem",
+//     backgroundColor: "#FFFFFF",
+//     boxShadow: `0px 2px 10px ${alpha(theme.palette.grey[900], 0.15)}`,
+//     margin: "0.5rem 0.5rem 1rem 0.5rem",
+//     transition: "all 0.5s",
+//     cursor: "default",
+//     "&:hover": {
+//       boxShadow: `0px 10px 25px ${alpha(theme.palette.grey[900], 0.2)}`,
+//     },
+//   },
+//   loadMore: {
+//     textAlign: "center",
+//     marginBottom: 10,
+//     "& button": {
+//       fontSize: "0.8rem",
+//     },
+//   },
+//   signatureIndicator: {
+//     fontSize: 14,
+//     color: theme.palette.warning.light,
+//   },
+// }));
 
 const ApplicationTheme = [
   { primary: "#326BFF" },
@@ -299,9 +303,11 @@ export default function Applications() {
   }, [navigate]);
 
   //const { path } = useRouteMatch();
-  const matches = useMatches();
-  const current = matches[matches.length - 1];
-  let path = current.pathname;
+  // const matches = useMatches();
+  // const current = matches[matches.length - 1];
+  // let path = current.pathname;
+  const location = useLocation();
+  const path = location.pathname;
 
   const onSearch = React.useCallback(
     (v: string) => {
@@ -352,20 +358,26 @@ export default function Applications() {
       />
 
       <Routes>
-        <Route path={`${path}/create`}>
-          <ApplicationModal
-            showModal={true}
-            setShowModal={onClose}
-            title="Create an Application"
-          >
-            <MemorizedApplicationDetails />
-          </ApplicationModal>
-        </Route>
-        <Route path={`${path}/:id`}>
-          <ApplicationModal showModal={true} setShowModal={onClose}>
-            <MemorizedApplicationDetails />
-          </ApplicationModal>
-        </Route>
+        <Route
+          path={`${path}/create`}
+          element={
+            <ApplicationModal
+              showModal={true}
+              setShowModal={onClose}
+              title="Create an Application"
+            >
+              <MemorizedApplicationDetails />
+            </ApplicationModal>
+          }
+        />
+        <Route
+          path={`${path}/:id`}
+          element={
+            <ApplicationModal showModal={true} setShowModal={onClose}>
+              <MemorizedApplicationDetails />
+            </ApplicationModal>
+          }
+        />
       </Routes>
       <WatchApplicationUpdate />
       <Footer />
@@ -391,7 +403,98 @@ const ApplicationListItem: React.FunctionComponent<ApplicationListItemProps> =
   props => {
     const { applicationType, themeColor, searchValue, userId } = props;
 
-    const classes = useStyles();
+    //const classes = useStyles();
+
+    const theme = useTheme();
+
+    // extend / override the current theme
+    const pageTheme = createTheme(theme, {
+      custom: {
+        searchBtn: {
+          marginLeft: 10,
+          boxShadow: `0px 5px 10px ${alpha(theme.palette.primary.main, 0.2)}`,
+        },
+        applicationRow: {
+          borderRadius: 4,
+          backgroundColor: theme.palette.grey[100],
+          padding: "8px",
+          paddingBottom: "30px",
+          height: "100%",
+        },
+        applicationItemsWrapper: {
+          overflowY: "auto",
+          height: "calc(100vh - 350px)",
+          "&::-webkit-scrollbar": {
+            width: 6,
+          },
+          "&::-webkit-scrollbar-track": {
+            backgroundColor: theme.palette.grey[300],
+            borderRadius: "10px",
+          },
+          "&::-webkit-scrollbar-thumb": {
+            backgroundColor: theme.palette.grey[400],
+            borderRadius: "10px",
+          },
+        },
+        applicationRowHeader: {
+          backgroundColor: "#FFF",
+          borderRadius: 4,
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: "0.5rem",
+          marginBottom: "1.5rem",
+          position: "relative",
+        },
+        count: {
+          width: 30,
+          height: 30,
+          borderRadius: "50%",
+          backgroundColor: "#FFFFFF",
+          textAlign: "center",
+          lineHeight: "30px",
+          marginLeft: "10px",
+        },
+        gridChip: {
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          borderRadius: 4,
+          fontSize: 14,
+          color: theme.palette.grey[800],
+          fontWeight: 600,
+          backgroundColor: theme.palette.grey[100],
+          padding: "0.25rem 0.5rem",
+          cursor: "default",
+        },
+        applicationItem: {
+          display: "flex",
+          justifyContent: "flex-start",
+          alignItems: "flex-start",
+          borderRadius: 4,
+          padding: "0.75rem",
+          backgroundColor: "#FFFFFF",
+          boxShadow: `0px 2px 10px ${alpha(theme.palette.grey[900], 0.15)}`,
+          margin: "0.5rem 0.5rem 1rem 0.5rem",
+          transition: "all 0.5s",
+          cursor: "default",
+          "&:hover": {
+            boxShadow: `0px 10px 25px ${alpha(theme.palette.grey[900], 0.2)}`,
+          },
+        },
+        loadMore: {
+          textAlign: "center",
+          marginBottom: 10,
+          "& button": {
+            fontSize: "0.8rem",
+          },
+        },
+        signatureIndicator: {
+          fontSize: 14,
+          color: theme.palette.warning.light,
+        },
+      }
+    });
 
     const navigate = useNavigate();
 
@@ -454,101 +557,103 @@ const ApplicationListItem: React.FunctionComponent<ApplicationListItemProps> =
       }
     };
     return (
-      <div className={classes.applicationRow}>
-        <div className={classes.applicationRowHeader}>
-          <div
-            className={classes.gridChip}
-            style={{
-              color: `${themeColor.primary}`,
-              background: `${alpha(themeColor.primary, 0.15)}`,
-            }}
-          >
-            <div>
-              <span>{applicationType}</span>
-            </div>
-            <div className={classes.count}>{applicationsCount}</div>
-          </div>
-
-          <Filters
-            search={searchText}
-            userId={userId}
-            refetch={refetch}
-            applicationType={applicationType.toLowerCase()}
-          />
-        </div>
-
-        <div className={classes.applicationItemsWrapper}>
-          {!loading && applicationData?.length === 0 && (
-            <h5 style={{ textAlign: "center" }}>No Applications</h5>
-          )}
-          {applicationData?.map(item => (
-            <div
-              className="application-item"
-              key={item.id}
-              onClick={() => {
-                navigate(`/applications/${item?.id}`);
+      <ThemeProvider theme={pageTheme}>
+        <Box sx={(theme: Theme) => theme.custom.applicationRow}>
+          <Box sx={(theme: Theme) => theme.custom.applicationRowHeader}>
+            <Box
+              sx={(theme: Theme) => theme.custom.gridChip}
+              style={{
+                color: `${themeColor.primary}`,
+                background: `${alpha(themeColor.primary, 0.15)}`,
               }}
             >
-              <div className="circle-wrapper">
-                <div
-                  className="circle"
-                  style={{
-                    color: `${themeColor.primary}`,
-                    background: `${alpha(themeColor.primary, 0.15)}`,
-                  }}
-                >
-                  {applicationType.charAt(0)}
-                </div>
-                {applicationType.toLowerCase() === "bound" ? (
-                  <ShowSignatures signatures={item} />
+              <Box>
+                <span>{applicationType}</span>
+              </Box>
+              <Box sx={(theme: Theme) => theme.custom.count}>{applicationsCount}</Box>
+            </Box>
+
+            <Filters
+              search={searchText}
+              userId={userId}
+              refetch={refetch}
+              applicationType={applicationType.toLowerCase()}
+            />
+          </Box>
+
+          <Box sx={(theme: Theme) => theme.custom.applicationItemsWrapper}>
+            {!loading && applicationData?.length === 0 && (
+              <h5 style={{ textAlign: "center" }}>No Applications</h5>
+            )}
+            {applicationData?.map(item => (
+              <Box
+                className="application-item"
+                key={item.id}
+                onClick={() => {
+                  navigate(`/applications/${item?.id}`);
+                }}
+              >
+                <Box className="circle-wrapper">
+                  <Box
+                    className="circle"
+                    style={{
+                      color: `${themeColor.primary}`,
+                      background: `${alpha(themeColor.primary, 0.15)}`,
+                    }}
+                  >
+                    {applicationType.charAt(0)}
+                  </Box>
+                  {applicationType.toLowerCase() === "bound" ? (
+                    <ShowSignatures signatures={item} />
+                  ) : (
+                    <></>
+                  )}
+                </Box>
+                <Box className="info-wrapper">
+                  <Box className="info">
+                    <Tooltip title={`${item?.insured_organization?.name}`}>
+                      <h3 className="title">
+                        {item?.insured_organization?.name}
+                      </h3>
+                    </Tooltip>
+                    <Tooltip title={getPremium(item)}>
+                      <p className="detail">{getPremium(item)}</p>
+                    </Tooltip>
+                  </Box>
+                  <Box className="date-wrapper">
+                    <Tooltip title="Effective Date">
+                      <span className="date">{item?.effective_date}</span>
+                    </Tooltip>
+                    <Tooltip title="Expiration Date">
+                      <span className="date">{item.expiration_date}</span>
+                    </Tooltip>
+                  </Box>
+                </Box>
+              </Box>
+            ))}
+            {loading ? (
+              <Skeleton wrapper={LoadingApplicationItem} count={3} />
+            ) : (
+              <>
+                {applicationsCount > applicationData?.length ? (
+                  <Box sx={(theme: Theme) => theme.custom.loadMore}>
+                    <Button
+                      variant="outlined"
+                      color="secondary"
+                      size="small"
+                      onClick={() => setLoadMore(applicationData.length)}
+                    >
+                      Load More
+                    </Button>
+                  </Box>
                 ) : (
                   <></>
                 )}
-              </div>
-              <div className="info-wrapper">
-                <div className="info">
-                  <Tooltip title={`${item?.insured_organization?.name}`}>
-                    <h3 className="title">
-                      {item?.insured_organization?.name}
-                    </h3>
-                  </Tooltip>
-                  <Tooltip title={getPremium(item)}>
-                    <p className="detail">{getPremium(item)}</p>
-                  </Tooltip>
-                </div>
-                <div className="date-wrapper">
-                  <Tooltip title="Effective Date">
-                    <span className="date">{item?.effective_date}</span>
-                  </Tooltip>
-                  <Tooltip title="Expiration Date">
-                    <span className="date">{item.expiration_date}</span>
-                  </Tooltip>
-                </div>
-              </div>
-            </div>
-          ))}
-          {loading ? (
-            <Skeleton wrapper={LoadingApplicationItem} count={3} />
-          ) : (
-            <>
-              {applicationsCount > applicationData?.length ? (
-                <div className={classes.loadMore}>
-                  <Button
-                    variant="outlined"
-                    color="secondary"
-                    size="small"
-                    onClick={() => setLoadMore(applicationData.length)}
-                  >
-                    Load More
-                  </Button>
-                </div>
-              ) : (
-                <></>
-              )}
-            </>
-          )}
-        </div>
-      </div>
+              </>
+            )}
+          </Box>
+        </Box>
+      </ThemeProvider>
     );
   };
 
@@ -659,7 +764,7 @@ const Filters: React.FunctionComponent<any> = props => {
 
 function ShowSignatures(props: any) {
   const { signatures } = props;
-  const classes = useStyles();
+  //const classes = useStyles();
 
   const getMissingSignatures = () => {
     const agentSigned =
@@ -691,7 +796,7 @@ function ShowSignatures(props: any) {
     return (
       <Tooltip title="Bind signatures missing">
         <div className="signature-icon">
-          <ErrorIcon className={classes.signatureIndicator} />
+          <ErrorIcon sx={(theme: Theme) => theme.custom.signatureIndicator} />
         </div>
       </Tooltip>
     );

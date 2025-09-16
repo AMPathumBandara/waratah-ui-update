@@ -32,6 +32,7 @@ interface InputProps {
   helperText?: string;
   min?: any;
   max?: any;
+  sx?: any;
 }
 
 export function InputFormItem(props: InputProps) {
@@ -59,6 +60,7 @@ export function InputFormItem(props: InputProps) {
     helperText,
     min,
     max,
+    sx,
   } = props;
 
   const {
@@ -111,6 +113,7 @@ export function InputFormItem(props: InputProps) {
         rest.onBlur(e); // call RHF onBlur
         props.onBlur?.(e); // call your custom onBlur
       }}
+      sx={sx}
     />
   );
 }

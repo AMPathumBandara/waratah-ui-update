@@ -268,7 +268,7 @@ input:-webkit-autofill:active {
 .filter-option-item.active .status svg {
   opacity: 1;
 }
-.filter-option-item .value span:first-child {
+.filter-option-item .value span:first-of-type {
   font-size: 13px;
   font-weight: 600;
 }
@@ -642,8 +642,8 @@ input:-webkit-autofill:active {
   line-height: 25px !important;
 }
 .landing-page-wrapper {
-  margin-top: 76px;
-  min-height: calc(100vh - 76px);
+  margin-top: 60px;
+  min-height: calc(100vh - 60px);
 }
 .landingpageFormWrapper .MuiFormControl-root {
   max-width: 450px;
@@ -889,6 +889,9 @@ button.form-action-btn:hover {
   font-size: 0.65rem;
   text-transform: uppercase;
   font-weight: 600;
+  color: #000;
+  min-width: 0;
+  min-height: 0;
 }
 .application-stage-filter button:hover {
   opacity: 0.75;
@@ -915,6 +918,7 @@ button.form-action-btn:hover {
   height: 34px;
   display: block;
   min-width: auto;
+  margin-left: 10px;
 }
 .application-search .application-search-block .searchBtn svg {
   font-size: 22px;
@@ -1089,7 +1093,7 @@ button.form-action-btn:hover {
   .application-item .info-wrapper .info {
     padding-right: 0px;
   }
-  .application-item .date-wrapper .date:first-child {
+  .application-item .date-wrapper .date:first-of-type {
     padding-right: 10px;
   }
   .application-item .date-wrapper {

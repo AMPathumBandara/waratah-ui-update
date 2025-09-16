@@ -193,7 +193,7 @@ const CustomQuote: React.FC<CustomQuoteProps> = ({
     return (
         <>
             {formOpen &&
-                <Grid sx={{ xs: 12, md: 4 }}>
+                <Grid size={{ xs: 12, md: 4 }}>
                     <GridItem>
                         {/* {!formOpen &&
                         <div className={classes.quoteActionsAdd}>

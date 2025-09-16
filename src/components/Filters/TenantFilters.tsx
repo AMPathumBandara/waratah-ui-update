@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       "& li.active .status svg": {
         color: theme.palette.success.main,
       },
-      "& li.active .value span:first-child": {
+      "& li.active .value span:first-of-type": {
         color: theme.palette.success.main,
       },
       "& li.active svg": {

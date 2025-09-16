@@ -3,32 +3,33 @@ import { Theme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { DateTime } from "luxon";
-import { Button, Input } from "@mui/material";
+import { Box, Button, Input } from "@mui/material";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import { FormProvider, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import InputField from "components/From/InputField";
+import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
 
-const useStyles = makeStyles((theme: Theme) => ({
-  filterGroup: {
-    "& ul": {
-      listStyle: "none",
-      padding: 0,
-      margin: "0",
-      "& li.active .status svg": {
-        color: theme.palette.success.main,
-      },
-      "& li.active .value span:first-child": {
-        color: theme.palette.success.main,
-      },
-      "& li.active svg": {
-        color: theme.palette.success.main,
-      },
-    },
-  },
-}));
+// const useStyles = makeStyles((theme: Theme) => ({
+//   filterGroup: {
+//     "& ul": {
+//       listStyle: "none",
+//       padding: 0,
+//       margin: "0",
+//       "& li.active .status svg": {
+//         color: theme.palette.success.main,
+//       },
+//       "& li.active .value span:first-child": {
+//         color: theme.palette.success.main,
+//       },
+//       "& li.active svg": {
+//         color: theme.palette.success.main,
+//       },
+//     },
+//   },
+// }));
 
 const DateformatFilter = "MMM dd yy";
 
@@ -56,7 +57,30 @@ const schema = yup.object().shape({
 export const FilterComponent: React.FunctionComponent<any> = props => {
   const { active, options, setFiltered, type } = props;
 
-  const classes = useStyles();
+  //const classes = useStyles();
+
+  const theme = useTheme();
+
+  const pageTheme = createTheme(theme, {
+    custom: {
+      filterGroup: {
+        "& ul": {
+          listStyle: "none",
+          padding: 0,
+          margin: "0",
+          "& li.active .status svg": {
+            color: theme.palette.success.main,
+          },
+          "& li.active .value span:first-of-type": {
+            color: theme.palette.success.main,
+          },
+          "& li.active svg": {
+            color: theme.palette.success.main,
+          },
+        },
+      },
+    }
+  });
 
   const [showSort, setShowSort] = useState(false);
   const [activeSort, setActiveSort] = useState<any>([]);
@@ -106,107 +130,110 @@ export const FilterComponent: React.FunctionComponent<any> = props => {
 
   return (
     <>
-      <div>
-        <div
-          className={`filter-handle ${
-            Object.keys(activeSort).length !== 0 ? "filterActive" : ""
-          }`}
-          onClick={toggleFilterDropdown}
-        >
-          <FilterListIcon />
-          <span>Filter</span>
-        </div>
+      <ThemeProvider theme={pageTheme}>
+        <div>
+          <div
+            className={`filter-handle ${Object.keys(activeSort).length !== 0 ? "filterActive" : ""
+              }`}
+            onClick={toggleFilterDropdown}
+          >
+            <FilterListIcon />
+            <span>Filter</span>
+          </div>
 
-        {showSort && (
-          <>
-            <div
-              className="filter-dropdown-overlay"
-              onClick={toggleFilterDropdown}
-            ></div>
-            <div className="filter-dropdown">
-              <div className={`${classes.filterGroup} filter-group`}>
-                <h5>{type} Filter by</h5>
+          {showSort && (
+            <>
+              <div
+                className="filter-dropdown-overlay"
+                onClick={toggleFilterDropdown}
+              ></div>
+              <div className="filter-dropdown">
+                <Box className={`filter-group`}
+                  sx={(theme) => theme.custom.filterGroup}
+                >
+                  <h5>{type} Filter by</h5>
 
-                <ul>
-                  <li
-                    className={`filter-option-item`}
-                    onClick={() => setFilterType("created_at")}
-                  >
-                    <RadioBtnIcon
-                      active={filterType === "created_at" ? true : false}
-                    />
-                    Created Date
-                  </li>
-                  <li
-                    className={`filter-option-item`}
-                    onClick={() => setFilterType("effective_date")}
-                  >
-                    <RadioBtnIcon
-                      active={filterType === "effective_date" ? true : false}
-                    />
-                    Effective Date
-                  </li>
-                  <li
-                    className={`filter-option-item`}
-                    onClick={() => setFilterType("expiration_date")}
-                  >
-                    <RadioBtnIcon
-                      active={filterType === "expiration_date" ? true : false}
-                    />
-                    Expiration Date
-                  </li>
-                </ul>
+                  <ul>
+                    <li
+                      className={`filter-option-item`}
+                      onClick={() => setFilterType("created_at")}
+                    >
+                      <RadioBtnIcon
+                        active={filterType === "created_at" ? true : false}
+                      />
+                      Created Date
+                    </li>
+                    <li
+                      className={`filter-option-item`}
+                      onClick={() => setFilterType("effective_date")}
+                    >
+                      <RadioBtnIcon
+                        active={filterType === "effective_date" ? true : false}
+                      />
+                      Effective Date
+                    </li>
+                    <li
+                      className={`filter-option-item`}
+                      onClick={() => setFilterType("expiration_date")}
+                    >
+                      <RadioBtnIcon
+                        active={filterType === "expiration_date" ? true : false}
+                      />
+                      Expiration Date
+                    </li>
+                  </ul>
+                </Box>
+
+                <FormProvider {...form}>
+                  <form onSubmit={handleSubmit(handleFormSubmit)}>
+                    <div className="flex flex-row">
+                      <div className="date-input">
+                        <label>From</label>
+                        <InputField
+                          name="fromDate"
+                          type="date"
+                          variant="standard"
+                          defaultValue={defaultDates.fromDate}
+                          inputProps={{ "aria-label": "description" }}
+                        />
+                      </div>
+                      <div className="date-input">
+                        <label>To</label>
+                        <InputField
+                          name="toDate"
+                          type="date"
+                          min={form.watch("fromDate")}
+                          variant="standard"
+                          defaultValue={defaultDates.toDate}
+                          inputProps={{ "aria-label": "description" }}
+                        />
+                      </div>
+                    </div>
+                    <div className="flex flex-row justify-between filterBtnGroup">
+                      <Button
+                        variant="outlined"
+                        color="secondary"
+                        size="small"
+                        onClick={resetForm}
+                      >
+                        Clear
+                      </Button>
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        size="small"
+                        type="submit"
+                      >
+                        Apply
+                      </Button>
+                    </div>
+                  </form>
+                </FormProvider>
               </div>
-
-              <FormProvider {...form}>
-                <form onSubmit={handleSubmit(handleFormSubmit)}>
-                  <div className="flex flex-row">
-                    <div className="date-input">
-                      <label>From</label>
-                      <InputField
-                        name="fromDate"
-                        type="date"
-                        variant="standard"
-                        defaultValue={defaultDates.fromDate}
-                        inputProps={{ "aria-label": "description" }}
-                      />
-                    </div>
-                    <div className="date-input">
-                      <label>To</label>
-                      <InputField
-                        name="toDate"
-                        type="date"
-                        min={form.watch("fromDate")}
-                        variant="standard"
-                        defaultValue={defaultDates.toDate}
-                        inputProps={{ "aria-label": "description" }}
-                      />
-                    </div>
-                  </div>
-                  <div className="flex flex-row justify-between filterBtnGroup">
-                    <Button
-                      variant="outlined"
-                      color="secondary"
-                      size="small"
-                      onClick={resetForm}
-                    >
-                      Clear
-                    </Button>
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      size="small"
-                      type="submit"
-                    >
-                      Apply
-                    </Button>
-                  </div>
-                </form>
-              </FormProvider>
-            </div>
-          </>
-        )}
-      </div>
+            </>
+          )}
+        </div>
+      </ThemeProvider>
     </>
   );
 };

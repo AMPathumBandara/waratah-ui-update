@@ -43,7 +43,7 @@ import {
 } from "utils";
 import ScanVerdictDetailModal from "./ScanVerdictDetail";
 import { useUser } from "components/Auth/CognitoHooks";
-import IconButton from "@mui/material/IconButton/IconButton";
+import IconButton from "@mui/material/IconButton";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 import { Theme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
@@ -213,7 +213,7 @@ const GridRow: React.FC<GridRowProps> = ({ name, value }) => {
   const classes = useStyles();
   return (
     <>
-      <Grid sx={{ sm: 6, xs: 12 }}>
+      <Grid size={{ sm: 6, xs: 12 }}>
         <GridItem>
           <Typography
             variant="body2"
@@ -223,7 +223,7 @@ const GridRow: React.FC<GridRowProps> = ({ name, value }) => {
           </Typography>
         </GridItem>
       </Grid>
-      <Grid sx={{ sm: 6, xs: 12 }}>
+      <Grid size={{ sm: 6, xs: 12 }}>
         <GridItem>
           <Typography variant="body2" align="right" className={classes.gridRow}>
             {value}
@@ -431,7 +431,7 @@ const Bind: React.FC<BindProps> = ({
         )}
 
         <Grid container spacing={2}>
-          <Grid sx={{ md: 6, xs: 12, marginTop: "2rem" }}>
+          <Grid size={{ md: 6, xs: 12 }} sx={{ marginTop: "2rem" }}>
             <GridItem>
               {bindStageLoading ? (
                 <LoadingBindTableInfor />
@@ -472,7 +472,7 @@ const Bind: React.FC<BindProps> = ({
                           summaryData?.insurance_application_by_pk?.employees
                         }
                       />
-                      <Grid sx={{ sm: 6, xs: 12 }}>
+                      <Grid size={{ sm: 6, xs: 12 }}>
                         <GridItem>
                           <Typography
                             variant="body2"
@@ -482,7 +482,7 @@ const Bind: React.FC<BindProps> = ({
                           </Typography>
                         </GridItem>
                       </Grid>
-                      <Grid sx={{ sm: 6, xs: 12 }}>
+                      <Grid size={{ sm: 6, xs: 12 }}>
                         <GridItem>
                           <Typography
                             variant="body2"
@@ -512,7 +512,7 @@ const Bind: React.FC<BindProps> = ({
                         </GridItem>
                       </Grid>
 
-                      <Grid sx={{ sm: 6, xs: 12 }}>
+                      <Grid size={{ sm: 6, xs: 12 }}>
                         <GridItem>
                           <Typography
                             variant="body2"
@@ -522,7 +522,7 @@ const Bind: React.FC<BindProps> = ({
                           </Typography>
                         </GridItem>
                       </Grid>
-                      <Grid sx={{ sm: 6, xs: 12 }}>
+                      <Grid size={{ sm: 6, xs: 12 }}>
                         <GridItem>
                           <Typography
                             variant="body2"
@@ -554,7 +554,7 @@ const Bind: React.FC<BindProps> = ({
             </GridItem>
           </Grid>
 
-          <Grid sx={{ md: 6, xs: 12, marginTop: "2rem" }}>
+          <Grid size={{ md: 6, xs: 12 }} sx={{ marginTop: "2rem" }}>
             <GridItem>
               {bindStageLoading ? (
                 <LoadingBindTableInfor />
@@ -566,7 +566,7 @@ const Bind: React.FC<BindProps> = ({
                     fullHeight={true}
                   >
                     <Grid container style={{ padding: "1rem 0rem" }}>
-                      <Grid sx={{ sm: 6, xs: 12 }}>
+                      <Grid size={{ sm: 6, xs: 12 }}>
                         <GridItem>
                           <Typography
                             variant="body2"
@@ -576,7 +576,7 @@ const Bind: React.FC<BindProps> = ({
                           </Typography>
                         </GridItem>
                       </Grid>
-                      <Grid sx={{ sm: 6, xs: 12 }}>
+                      <Grid size={{ sm: 6, xs: 12 }}>
                         <GridItem>
                           <div className="flex justify-flex-end custom-space">
                             <div>
@@ -680,13 +680,13 @@ const Bind: React.FC<BindProps> = ({
                           )
                         }
                       />
-                      <Grid sx={{ xs: 12 }}>
+                      <Grid size={{ xs: 12 }}>
                         <GridItem className={classes.gridRow}>
                           <Divider />
                         </GridItem>
                       </Grid>
 
-                      <Grid sx={{ sm: 6, xs: 12 }}>
+                      <Grid size={{ sm: 6, xs: 12 }}>
                         <GridItem>
                           <Typography
                             variant="body2"
@@ -696,7 +696,7 @@ const Bind: React.FC<BindProps> = ({
                           </Typography>
                         </GridItem>
                       </Grid>
-                      <Grid sx={{ sm: 6, xs: 12 }}>
+                      <Grid size={{ sm: 6, xs: 12 }}>
                         <GridItem>
                           <Typography
                             variant="body2"
@@ -714,7 +714,7 @@ const Bind: React.FC<BindProps> = ({
                         </GridItem>
                       </Grid>
 
-                      <Grid sx={{ xs: 12 }}>
+                      <Grid size={{ xs: 12 }}>
                         <GridItem className={classes.gridRow}>
                           <Divider style={{ marginBottom: "3px" }} />
                           <Divider />
@@ -728,7 +728,7 @@ const Bind: React.FC<BindProps> = ({
           </Grid>
         </Grid>
         <Grid container spacing={2} style={{ marginTop: "2rem" }}>
-          <Grid sx={{ xs: 12 }}>
+          <Grid size={{ xs: 12 }}>
             <GridItem>
               {bindStageLoading ? (
                 <LoadingBindStatus />
@@ -749,7 +749,7 @@ const Bind: React.FC<BindProps> = ({
                             policyData.ipfs_quote_data &&
                             policyData.ipfs_quote_data.ESignResult
                           ) && (
-                              <Grid sx={{ xs: 6 }}>
+                              <Grid size={{ xs: 6 }}>
                                 <GridItem className={classes.paymentContainer}>
                                   <FeatureFlag
                                     roles={["admin", "broker"]}
@@ -806,7 +806,7 @@ const Bind: React.FC<BindProps> = ({
                                       ?.$
                                   }
                                 />
-                                <Grid sx={{ xs: 12 }}>
+                                <Grid size={{ xs: 12 }}>
                                   <GridItem className={classes.paymentContainer}>
                                     <Button
                                       className={`${classes.button} ${classes.paymentButton}`}
@@ -837,7 +837,7 @@ const Bind: React.FC<BindProps> = ({
                             policyData.ipfs_quote_data &&
                             policyData.ipfs_quote_data.ESignResult
                           ) && (
-                              <Grid sx={{ xs: 6 }}>
+                              <Grid size={{ xs: 6 }}>
                                 <GridItem className={classes.paymentContainer}>
                                   <FeatureFlag
                                     roles={["admin", "broker"]}
@@ -894,7 +894,7 @@ const Bind: React.FC<BindProps> = ({
                                       ?.$
                                   }
                                 />
-                                <Grid sx={{ xs: 12 }}>
+                                <Grid size={{ xs: 12 }}>
                                   <GridItem className={classes.paymentContainer}>
                                     <Button
                                       className={`${classes.button} ${classes.paymentButton}`}

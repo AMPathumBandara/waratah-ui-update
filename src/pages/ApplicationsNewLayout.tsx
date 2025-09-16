@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, IconButton, Tooltip } from "@mui/material";
+import { Box, Button, IconButton, Tooltip } from "@mui/material";
 import { Theme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import { alpha } from "@mui/material/styles";
@@ -17,6 +17,7 @@ import InsuredApplicationDetails from "components/InsuredApplicationDetails";
 import {
   Route,
   Routes,
+  useLocation,
   useMatches,
   useNavigate,
   useParams,
@@ -46,109 +47,114 @@ import WatchApplicationUpdate from "components/Application/WatchApplicationUpdat
 import { FormProvider, useForm } from "react-hook-form";
 import InputField from "components/From/InputField";
 import { applicationStages } from "utils/const";
+import {
+  createTheme,
+  ThemeProvider,
+  useTheme,
+} from "@mui/material/styles";
 
-const useStyles = makeStyles((theme: Theme) => ({
-  searchBtn: {
-    marginLeft: 10,
-    boxShadow: `0px 5px 10px ${alpha(theme.palette.primary.main, 0.2)}`,
-  },
-  applicationRow: {
-    borderRadius: 4,
-    backgroundColor: theme.palette.grey[100],
-    padding: "0px",
-    paddingBottom: "30px",
-    height: "100%",
-  },
-  applicationItemsWrapper: {
-    overflowY: "auto",
-    height: "calc(100vh - 280px)",
-    "&::-webkit-scrollbar": {
-      width: 6,
-    },
-    "&::-webkit-scrollbar-track": {
-      backgroundColor: theme.palette.grey[300],
-      borderRadius: "10px",
-    },
-    "&::-webkit-scrollbar-thumb": {
-      backgroundColor: theme.palette.grey[400],
-      borderRadius: "10px",
-    },
-  },
-  applicationRowHeader: {
-    backgroundColor: "#FFF",
-    borderRadius: 4,
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: "0.5rem",
-    marginBottom: "0.5rem",
-    position: "relative",
-  },
-  count: {
-    width: 30,
-    height: 30,
-    borderRadius: "50%",
-    backgroundColor: "#FFFFFF",
-    textAlign: "center",
-    lineHeight: "30px",
-    marginLeft: 10,
-  },
-  gridChip: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    borderRadius: 4,
-    fontSize: 14,
-    color: theme.palette.grey[800],
-    fontWeight: 600,
-    backgroundColor: theme.palette.grey[100],
-    padding: "0.25rem 0.5rem",
-    cursor: "default",
-  },
-  applicationItem: {
-    display: "flex",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
-    borderRadius: 4,
-    padding: "0.75rem",
-    backgroundColor: "#FFFFFF",
-    boxShadow: `0px 2px 10px ${alpha(theme.palette.grey[900], 0.15)}`,
-    margin: "0.5rem 0.5rem 1rem 0.5rem",
-    transition: "all 0.5s",
-    cursor: "default",
-    "&:hover": {
-      boxShadow: `0px 10px 25px ${alpha(theme.palette.grey[900], 0.2)}`,
-    },
-  },
-  loadMore: {
-    textAlign: "center",
-    marginBottom: 10,
-    "& button": {
-      fontSize: "0.8rem",
-    },
-  },
-  signatureIndicator: {
-    fontSize: 14,
-    color: theme.palette.warning.light,
-  },
-  primaryBgColor: {
-    backgroundColor: theme.palette.primary.main,
-  },
-  createBtn: {
-    textTransform: "none",
-    color: theme.palette.primary.main,
-    fontSize: 20,
-    "& svg": {
-      fontSize: "40px !important",
-    },
-  },
-  sidebarHandle: {
-    backgroundColor: theme.palette.primary.main,
-    "& svg": {
-      fill: theme.palette.getContrastText(theme.palette.primary.main),
-    },
-  },
-}));
+// const useStyles = makeStyles((theme: Theme) => ({
+//   searchBtn: {
+//     marginLeft: 10,
+//     boxShadow: `0px 5px 10px ${alpha(theme.palette.primary.main, 0.2)}`,
+//   },
+//   applicationRow: {
+//     borderRadius: 4,
+//     backgroundColor: theme.palette.grey[100],
+//     padding: "0px",
+//     paddingBottom: "30px",
+//     height: "100%",
+//   },
+//   applicationItemsWrapper: {
+//     overflowY: "auto",
+//     height: "calc(100vh - 280px)",
+//     "&::-webkit-scrollbar": {
+//       width: 6,
+//     },
+//     "&::-webkit-scrollbar-track": {
+//       backgroundColor: theme.palette.grey[300],
+//       borderRadius: "10px",
+//     },
+//     "&::-webkit-scrollbar-thumb": {
+//       backgroundColor: theme.palette.grey[400],
+//       borderRadius: "10px",
+//     },
+//   },
+//   applicationRowHeader: {
+//     backgroundColor: "#FFF",
+//     borderRadius: 4,
+//     display: "flex",
+//     justifyContent: "space-between",
+//     alignItems: "center",
+//     padding: "0.5rem",
+//     marginBottom: "0.5rem",
+//     position: "relative",
+//   },
+//   count: {
+//     width: 30,
+//     height: 30,
+//     borderRadius: "50%",
+//     backgroundColor: "#FFFFFF",
+//     textAlign: "center",
+//     lineHeight: "30px",
+//     marginLeft: 10,
+//   },
+//   gridChip: {
+//     display: "flex",
+//     justifyContent: "space-between",
+//     alignItems: "center",
+//     borderRadius: 4,
+//     fontSize: 14,
+//     color: theme.palette.grey[800],
+//     fontWeight: 600,
+//     backgroundColor: theme.palette.grey[100],
+//     padding: "0.25rem 0.5rem",
+//     cursor: "default",
+//   },
+//   applicationItem: {
+//     display: "flex",
+//     justifyContent: "flex-start",
+//     alignItems: "flex-start",
+//     borderRadius: 4,
+//     padding: "0.75rem",
+//     backgroundColor: "#FFFFFF",
+//     boxShadow: `0px 2px 10px ${alpha(theme.palette.grey[900], 0.15)}`,
+//     margin: "0.5rem 0.5rem 1rem 0.5rem",
+//     transition: "all 0.5s",
+//     cursor: "default",
+//     "&:hover": {
+//       boxShadow: `0px 10px 25px ${alpha(theme.palette.grey[900], 0.2)}`,
+//     },
+//   },
+//   loadMore: {
+//     textAlign: "center",
+//     marginBottom: 10,
+//     "& button": {
+//       fontSize: "0.8rem",
+//     },
+//   },
+//   signatureIndicator: {
+//     fontSize: 14,
+//     color: theme.palette.warning.light,
+//   },
+//   primaryBgColor: {
+//     backgroundColor: theme.palette.primary.main,
+//   },
+//   createBtn: {
+//     textTransform: "none",
+//     color: theme.palette.primary.main,
+//     fontSize: 20,
+//     "& svg": {
+//       fontSize: "40px !important",
+//     },
+//   },
+//   sidebarHandle: {
+//     backgroundColor: theme.palette.primary.main,
+//     "& svg": {
+//       fill: theme.palette.getContrastText(theme.palette.primary.main),
+//     },
+//   },
+// }));
 
 const ApplicationTheme = [
   { stage: "all", primary: "#000000" },
@@ -274,9 +280,11 @@ export default function ApplicationsNew() {
   //     : undefined;
 
   //const { path } = useRouteMatch();
-  const matches = useMatches();
-  const current = matches[matches.length - 1];
-  let path = current.pathname;
+  // const matches = useMatches();
+  // const current = matches[matches.length - 1];
+  // let path = current.pathname;
+  const location = useLocation();
+  let path = location.pathname;
 
   if (meLoading) {
     return null;
@@ -285,65 +293,180 @@ export default function ApplicationsNew() {
   //   primary: "#000000",
   // };
 
+  const theme = useTheme();
+
+  // extend / override the current theme
+  const pageTheme = createTheme(theme, {
+    custom: {
+      searchBtn: {
+        marginLeft: 10,
+        boxShadow: `0px 5px 10px ${alpha(theme.palette.primary.main, 0.2)}`,
+      },
+      applicationRow: {
+        borderRadius: 4,
+        backgroundColor: theme.palette.grey[100],
+        padding: "0px",
+        paddingBottom: "30px",
+        height: "100%",
+      },
+      applicationItemsWrapper: {
+        overflowY: "auto",
+        height: "calc(100vh - 280px)",
+        "&::-webkit-scrollbar": {
+          width: 6,
+        },
+        "&::-webkit-scrollbar-track": {
+          backgroundColor: theme.palette.grey[300],
+          borderRadius: "10px",
+        },
+        "&::-webkit-scrollbar-thumb": {
+          backgroundColor: theme.palette.grey[400],
+          borderRadius: "10px",
+        },
+      },
+      applicationRowHeader: {
+        backgroundColor: "#FFF",
+        borderRadius: 4,
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        padding: "0.5rem",
+        marginBottom: "0.5rem",
+        position: "relative",
+      },
+      count: {
+        width: 30,
+        height: 30,
+        borderRadius: "50%",
+        backgroundColor: "#FFFFFF",
+        textAlign: "center",
+        lineHeight: "30px",
+        marginLeft: 10,
+      },
+      gridChip: {
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        borderRadius: 4,
+        fontSize: 14,
+        color: theme.palette.grey[800],
+        fontWeight: 600,
+        backgroundColor: theme.palette.grey[100],
+        padding: "0.25rem 0.5rem",
+        cursor: "default",
+      },
+      applicationItem: {
+        display: "flex",
+        justifyContent: "flex-start",
+        alignItems: "flex-start",
+        borderRadius: 4,
+        padding: "0.75rem",
+        backgroundColor: "#FFFFFF",
+        boxShadow: `0px 2px 10px ${alpha(theme.palette.grey[900], 0.15)}`,
+        margin: "0.5rem 0.5rem 1rem 0.5rem",
+        transition: "all 0.5s",
+        cursor: "default",
+        "&:hover": {
+          boxShadow: `0px 10px 25px ${alpha(theme.palette.grey[900], 0.2)}`,
+        },
+      },
+      loadMore: {
+        textAlign: "center",
+        marginBottom: 10,
+        "& button": {
+          fontSize: "0.8rem",
+        },
+      },
+      signatureIndicator: {
+        fontSize: 14,
+        color: theme.palette.warning.light,
+      },
+      primaryBgColor: {
+        backgroundColor: theme.palette.primary.main,
+      },
+      createBtn: {
+        textTransform: "none",
+        color: theme.palette.primary.main,
+        fontSize: 20,
+        "& svg": {
+          fontSize: "40px !important",
+        },
+      },
+      sidebarHandle: {
+        backgroundColor: theme.palette.primary.main,
+        "& svg": {
+          fill: theme.palette.getContrastText(theme.palette.primary.main),
+        },
+      },
+    }
+  });
+
   return (
-    <div className="main">
-      <div className="col-layout-wrapper">
-        <Sidebar />
+    <ThemeProvider theme={pageTheme}>
+      <div className="main">
+        <div className="col-layout-wrapper">
+          <Sidebar />
 
-        <Routes>
-          <Route path={`${path}/`}>
-            <div className="content-wrapper">
-              <div className="layout-header flex">
-                <div className="change-layout-btn">
-                  <Tooltip title="Change layout">
-                    <div>
-                      <ViewCompactIcon color="disabled" className="disabled" />
-                      <ViewColumnIcon
-                        color="primary"
-                        className="columnIcon"
-                        onClick={() => navigate("/applications")}
-                      />
+          <Routes>
+            <Route 
+              path={`${path}/`}
+              element={
+                <div className="content-wrapper">
+                  <div className="layout-header flex">
+                    <div className="change-layout-btn">
+                      <Tooltip title="Change layout">
+                        <div>
+                          <ViewCompactIcon color="disabled" className="disabled" />
+                          <ViewColumnIcon
+                            color="primary"
+                            className="columnIcon"
+                            onClick={() => navigate("/applications")}
+                          />
+                        </div>
+                      </Tooltip>
                     </div>
-                  </Tooltip>
+                  </div>
+                  <ApplicationHeaderTitle />
+                  <MemorizedApplicationDetails />
                 </div>
-              </div>
-              <ApplicationHeaderTitle />
-              <MemorizedApplicationDetails />
-            </div>
-          </Route>
-          <Route path={`${path}/:id`}>
-            <div className="content-wrapper">
-              <div className="layout-header flex">
-                <div className="change-layout-btn">
-                  <Tooltip title="Change layout">
-                    <div>
-                      <ViewCompactIcon color="disabled" className="disabled" />
-                      <ViewColumnIcon
-                        color="primary"
-                        className="columnIcon"
-                        onClick={() => navigate("/applications")}
-                      />
+              }
+            />
+            <Route 
+              path={`${path}/:id`}
+              element={
+                <div className="content-wrapper">
+                  <div className="layout-header flex">
+                    <div className="change-layout-btn">
+                      <Tooltip title="Change layout">
+                        <div>
+                          <ViewCompactIcon color="disabled" className="disabled" />
+                          <ViewColumnIcon
+                            color="primary"
+                            className="columnIcon"
+                            onClick={() => navigate("/applications")}
+                          />
+                        </div>
+                      </Tooltip>
                     </div>
-                  </Tooltip>
+                  </div>
+                  <ApplicationHeaderTitle />
+                  <MemorizedApplicationDetails />
                 </div>
-              </div>
-              <ApplicationHeaderTitle />
-              <MemorizedApplicationDetails />
-            </div>
-          </Route>
-        </Routes>
+              }
+            />
+          </Routes>
+        </div>
+
+        <WatchApplicationUpdate />
+        <Footer />
       </div>
-
-      <WatchApplicationUpdate />
-      <Footer />
-    </div>
+    </ThemeProvider>
   );
 }
 
 const ApplicationHeaderTitle = () => {
   const params = useParams();
   const navigate = useNavigate();
-  const classes = useStyles();
 
   return (
     <>
@@ -361,7 +484,7 @@ const ApplicationHeaderTitle = () => {
             //@ts-ignore
             params.id ? (
               <Button
-                className={classes.createBtn}
+                sx={(theme: Theme) => theme.custom.createBtn}
                 endIcon={<AddCircleIcon />}
                 onClick={() => navigate("/applications-list")}
               >
@@ -395,7 +518,6 @@ const page_size = 10;
 const ApplicationListItem = React.memo<ApplicationListItemProps>(props => {
   const { searchValue, userId, stage, paramId } = props;
 
-  const classes = useStyles();
   const params = useParams();
   const navigate = useNavigate();
 
@@ -468,17 +590,17 @@ const ApplicationListItem = React.memo<ApplicationListItemProps>(props => {
     }
   };
   return (
-    <div className={classes.applicationRow}>
-      <div className={classes.applicationRowHeader}>
+    <Box sx={(theme: Theme) => theme.custom.applicationRow}>
+      <Box sx={(theme: Theme) => theme.custom.applicationRowHeader}>
         <Filters
           search={searchText}
           userId={userId}
           refetch={refetch}
           applicationType={stage === "All" ? undefined : stage?.toLowerCase()}
         />
-      </div>
+      </Box>
 
-      <div className={classes.applicationItemsWrapper}>
+      <Box sx={(theme: Theme) => theme.custom.applicationItemsWrapper}>
         {!loading && applicationData?.length === 0 && (
           <h5 style={{ textAlign: "center" }}>No Applications</h5>
         )}
@@ -534,7 +656,7 @@ const ApplicationListItem = React.memo<ApplicationListItemProps>(props => {
         ) : (
           <>
             {applicationsCount > applicationData?.length ? (
-              <div className={classes.loadMore}>
+              <Box sx={(theme: Theme) => theme.custom.loadMore}>
                 <Button
                   variant="outlined"
                   color="secondary"
@@ -543,14 +665,14 @@ const ApplicationListItem = React.memo<ApplicationListItemProps>(props => {
                 >
                   Load More
                 </Button>
-              </div>
+              </Box>
             ) : (
               <></>
             )}
           </>
         )}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 });
 
@@ -662,7 +784,6 @@ const Filters: React.FunctionComponent<any> = props => {
 const SidbarHeader = (props: any) => {
   const { setSearch, setStage } = props;
   const form = useForm();
-  const classes = useStyles();
   const [currentStage, setCurrentStage] = useState("All");
   const [searchValue, setSearchValue] = useState("");
 
@@ -688,19 +809,19 @@ const SidbarHeader = (props: any) => {
           className={currentStage === "All" ? "active" : ""}
           onClick={() => selectStageOnlick("All")}
         >
-          <button className={classes.primaryBgColor}>All</button>
+          <Button sx={(theme: Theme) => theme.custom.primaryBgColor}>All</Button>
         </li>
         {applicationStages.map(stage => (
           <li
             key={stage.id}
             className={currentStage === stage.name ? "active" : ""}
           >
-            <button
-              className={classes.primaryBgColor}
+            <Button
+              sx={(theme: Theme) => theme.custom.primaryBgColor}
               onClick={() => selectStageOnlick(stage.name)}
             >
               {stage.name}
-            </button>
+            </Button>
           </li>
         ))}
       </ul>
@@ -728,7 +849,8 @@ const SidbarHeader = (props: any) => {
                 <Button
                   variant="contained"
                   color="primary"
-                  className={`searchBtn ${classes.searchBtn}`}
+                  className={`searchBtn`}
+                  sx={(theme: Theme) => theme.custom.searchBtn}
                   startIcon={<SearchIcon />}
                   type="submit"
                 ></Button>
@@ -743,7 +865,6 @@ const SidbarHeader = (props: any) => {
 
 function ShowSignatures(props: any) {
   const { signatures } = props;
-  const classes = useStyles();
 
   const getMissingSignatures = () => {
     const agentSigned =
@@ -775,7 +896,7 @@ function ShowSignatures(props: any) {
     return (
       <Tooltip title="Bind signatures missing">
         <div className="signature-icon">
-          <ErrorIcon className={classes.signatureIndicator} />
+          <ErrorIcon sx={(theme: Theme) => theme.custom.signatureIndicator} />
         </div>
       </Tooltip>
     );
@@ -819,7 +940,7 @@ function Sidebar() {
   const [searchValue, setsearchValue] = useState("");
   const [stage, setStage] = useState("All");
   const [toggle_sidebar, setToggle_sidebar] = useState(false);
-  const classes = useStyles();
+
   const onSearch = React.useCallback(
     (v: string) => {
       setsearchValue(v);
@@ -843,12 +964,13 @@ function Sidebar() {
   }, [toggle_sidebar]);
   return (
     <div className={`sidebar ${toggle_sidebar ? "active" : ""}`}>
-      <div
-        className={`sidebar-handle ${classes.sidebarHandle}`}
+      <Box
+        className={`sidebar-handle`}
+        sx={(theme: Theme) => theme.custom.sidebarHandle}
         onClick={onToggleSidebar}
       >
         {toggle_sidebar ? <CloseIcon /> : <MenuIcon />}
-      </div>
+      </Box>
       <SidbarHeader setSearch={onSearch} setStage={onStageChange} />
       <div className="sidebar-item-list">
         <ApplicationListItem

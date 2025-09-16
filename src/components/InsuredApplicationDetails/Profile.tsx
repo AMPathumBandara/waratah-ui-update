@@ -731,7 +731,7 @@ const ProfilePageComponent: React.FC<ProfileProps> = ({
         <FormProvider {...form}>
           <form onSubmit={handleSubmit(handleFormSubmit)} onKeyDown={(e) => checkKeyDown(e)}>
             <Grid container spacing={3}>
-              <Grid sx={{ xs: 12, sm: 12 }}>
+              <Grid size={{ xs: 12, sm: 12 }}>
                 <GridItem>
                   {loading ? (
                     <LoadingInput />
@@ -744,7 +744,7 @@ const ProfilePageComponent: React.FC<ProfileProps> = ({
                   )}
                 </GridItem>
               </Grid>
-              <Grid sx={{ xs: 12, sm: 6 }}>
+              <Grid size={{ xs: 12, sm: 6 }}>
                 <GridItem>
                   {formLoading ? (
                     <LoadingInput />
@@ -769,7 +769,7 @@ const ProfilePageComponent: React.FC<ProfileProps> = ({
                   )}
                 </GridItem>
               </Grid>
-              <Grid sx={{ xs: 12, md: 6 }}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <GridItem>
                   <InputField
                     name="rentals_data[date_of_birth]"
@@ -779,7 +779,7 @@ const ProfilePageComponent: React.FC<ProfileProps> = ({
                   />
                 </GridItem>
               </Grid>
-              <Grid sx={{ xs: 12 }}>
+              <Grid size={{ xs: 12 }}>
                 <GridItem>
                   {formLoading ? (
                     <LoadingInput />
@@ -805,7 +805,7 @@ const ProfilePageComponent: React.FC<ProfileProps> = ({
                   )}
                 </GridItem>
               </Grid>
-              <Grid sx={{ xs: 12, sm: 4 }}>
+              <Grid size={{ xs: 12, sm: 4 }}>
                 <GridItem>
                   {formLoading ? (
                     <LoadingInput />
@@ -818,7 +818,7 @@ const ProfilePageComponent: React.FC<ProfileProps> = ({
                   )}
                 </GridItem>
               </Grid>
-              <Grid sx={{ xs: 12, sm: 4 }}>
+              <Grid size={{ xs: 12, sm: 4 }}>
                 <GridItem>
                   {formLoading ? (
                     <LoadingInput />
@@ -836,7 +836,7 @@ const ProfilePageComponent: React.FC<ProfileProps> = ({
                   )}
                 </GridItem>
               </Grid>
-              <Grid sx={{ xs: 12, sm: 4 }}>
+              <Grid size={{ xs: 12, sm: 4 }}>
                 <GridItem>
                   {formLoading ? (
                     <LoadingInput />
@@ -853,7 +853,7 @@ const ProfilePageComponent: React.FC<ProfileProps> = ({
                 <span>Occupation Details</span>
               </div>
               <Grid>
-                <Grid sx={{ xs: 12, sm: 6 }}>
+                <Grid size={{ xs: 12, sm: 6 }}>
                   <GridItem>
                     {formLoading ? (
                       <LoadingInput />
@@ -878,7 +878,7 @@ const ProfilePageComponent: React.FC<ProfileProps> = ({
                     )}
                   </GridItem>
                 </Grid>
-                <Grid sx={{ xs: 12, sm: 6 }}>
+                <Grid size={{ xs: 12, sm: 6 }}>
                   <GridItem>
                     {formLoading ? (
                       <LoadingInput />
@@ -910,7 +910,7 @@ const ProfilePageComponent: React.FC<ProfileProps> = ({
                 <div className="contact-group-label">
                   <span>Porperty Details</span>
                 </div>
-                <Grid sx={{ xs: 12, sm: 4 }}>
+                <Grid size={{ xs: 12, sm: 4 }}>
                   <GridItem>
                     {formLoading ? (
                       <LoadingInput />
@@ -932,7 +932,7 @@ const ProfilePageComponent: React.FC<ProfileProps> = ({
                     )}
                   </GridItem>
                 </Grid>
-                <Grid sx={{ xs: 12, sm: 4 }}>
+                <Grid size={{ xs: 12, sm: 4 }}>
                   <GridItem>
                     {formLoading ? (
                       <LoadingInput />
@@ -953,7 +953,7 @@ const ProfilePageComponent: React.FC<ProfileProps> = ({
                     )}
                   </GridItem>
                 </Grid>
-                <Grid sx={{ xs: 12, sm: 4 }}>
+                <Grid size={{ xs: 12, sm: 4 }}>
                   <GridItem>
                     <InputField
                       name="rentals_data[propertyInfo][year_built]"
@@ -965,7 +965,7 @@ const ProfilePageComponent: React.FC<ProfileProps> = ({
                 <div className="contact-group-label">
                   <span>Safety Features</span>
                 </div>
-                <Grid sx={{ xs: 12, sm: 4 }}>
+                <Grid size={{ xs: 12, sm: 4 }}>
                   <GridItem>
                     {formLoading ? (
                       <LoadingInput />
@@ -983,7 +983,7 @@ const ProfilePageComponent: React.FC<ProfileProps> = ({
                     )}
                   </GridItem>
                 </Grid>
-                <Grid sx={{ xs: 12, sm: 4 }}>
+                <Grid size={{ xs: 12, sm: 4 }}>
                   <GridItem>
                     {formLoading ? (
                       <LoadingInput />
@@ -1001,7 +1001,7 @@ const ProfilePageComponent: React.FC<ProfileProps> = ({
                     )}
                   </GridItem>
                 </Grid>
-                <Grid sx={{ xs: 12, sm: 4 }}>
+                <Grid size={{ xs: 12, sm: 4 }}>
                   <GridItem>
                     {formLoading ? (
                       <LoadingInput />
@@ -1081,7 +1081,7 @@ const ProfilePageComponent: React.FC<ProfileProps> = ({
                 Add New Security contact
               </Button> */}
 
-                <Grid sx={{ xs: 12, sm: 12 }}>
+                <Grid size={{ xs: 12, sm: 12 }}>
                   <GridItem>
                     {/* {!allVerified && (
                   <Alert severity="warning" className="tnc-alert-warning">
@@ -1263,7 +1263,7 @@ const InsuranceContactDetails = (props: any) => {
 
   return (
     <div className="profile-contact-details-row">
-      <Grid sx={{ xs: 12, sm: 6 }}>
+      <Grid size={{ xs: 12, sm: 6 }}>
         <GridItem>
           <InputField
             defaultValue={field.name}
@@ -1275,7 +1275,7 @@ const InsuranceContactDetails = (props: any) => {
         </GridItem>
       </Grid>
 
-      <Grid sx={{ xs: 12, sm: 6 }}>
+      <Grid size={{ xs: 12, sm: 6 }}>
         <GridItem>
           <InputField
             defaultValue={field.email}
@@ -1308,7 +1308,7 @@ const SecurityContactDetails = (props: any) => {
   const error = errors?.security_contacts || [];
   return (
     <div className="profile-contact-details-row">
-      <Grid sx={{ xs: 12, sm: 6 }}>
+      <Grid size={{ xs: 12, sm: 6 }}>
         <GridItem>
           <InputField
             defaultValue={field.name}
@@ -1320,7 +1320,7 @@ const SecurityContactDetails = (props: any) => {
         </GridItem>
       </Grid>
 
-      <Grid sx={{ xs: 12, sm: 6 }}>
+      <Grid size={{ xs: 12, sm: 6 }}>
         <GridItem>
           <InputField
             defaultValue={field.email}
