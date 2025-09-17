@@ -103,7 +103,7 @@ export const NavigationAccess = [
   },
   {
     name: "Tennats",
-    path: "/tenants",
+    path: "/tenants/*",
     isParent: true,
     allowUsers: ["super_admin", "tenant_admin"],
   },

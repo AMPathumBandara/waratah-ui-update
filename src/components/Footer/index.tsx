@@ -4,8 +4,6 @@ import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
 const Footer: React.FC = () => {
   const theme = useTheme();
 
-  console.log(theme.palette.primary.light);
-
   const pageTheme = createTheme(theme, {
     custom: {
       footerTheme: {

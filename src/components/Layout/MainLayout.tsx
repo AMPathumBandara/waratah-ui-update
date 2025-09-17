@@ -7,7 +7,7 @@ import {
 } from "@mui/material/styles";
 import { makeStyles, StylesProvider } from "@mui/styles";
 import { CssBaseline } from "@mui/material";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { Grid } from "@mui/material";
 import ProtectedRoute from "utils/ProtectedRoute";
 import MainNavigation from "components/NavBar/MainNavigation";
@@ -16,6 +16,7 @@ import Logout from "components/Auth/Logout";
 import theme from "theme/theme";
 import { useMeQuery } from "generated/graphql";
 import ErrorToast from "components/Toast/ErrorToast";
+import ApplicationModal from "components/Application/ApplicationModal";
 
 const Page404 = React.lazy(() => import("pages/Page404"));
 const AccessDenied = React.lazy(() => import("pages/PageUnAuthorized"));
@@ -51,7 +52,7 @@ const protectedLinks = [
     exact: false,
   },
   {
-    path: "/tenants",
+    path: "/tenants/*",
     component: Tenants,
     exact: false,
   },
@@ -69,6 +70,8 @@ const protectedLinks = [
 
 export default function PermanentDrawerLeft() {
   const classes = useStyles();
+  const location = useLocation();
+  const state = location.state as { backgroundLocation?: Location };
 
   const { data: meData, loading: meLoading, error: meError } = useMeQuery({
     errorPolicy: "all"
@@ -123,7 +126,8 @@ export default function PermanentDrawerLeft() {
             </Grid>
           }
         >
-          <Routes>
+          {/* Main routes */}
+          <Routes location={state?.backgroundLocation || location}>
             <Route
               path="/access-denied"
               element={<AccessDenied />}

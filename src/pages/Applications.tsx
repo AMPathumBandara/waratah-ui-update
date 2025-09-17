@@ -11,7 +11,6 @@ import {
   useLatestInsuranceApplicationsQuery,
   useMeQuery,
 } from "generated/graphql";
-import ApplicationModal from "components/Application/ApplicationModal";
 import InsuredApplicationDetails from "components/InsuredApplicationDetails";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 
@@ -31,6 +30,7 @@ import {
 import Footer from "components/Footer";
 import WatchApplicationUpdate from "components/Application/WatchApplicationUpdate";
 import { Theme } from "@mui/material/styles";
+import ApplicationModal from "components/Application/ApplicationModal";
 
 // const useStyles = makeStyles((theme: Theme) => ({
 //   searchBtn: {
@@ -308,6 +308,7 @@ export default function Applications() {
   // let path = current.pathname;
   const location = useLocation();
   const path = location.pathname;
+  const backgroundLocation = location.state?.backgroundLocation || location;
 
   const onSearch = React.useCallback(
     (v: string) => {
@@ -324,7 +325,8 @@ export default function Applications() {
   );
 
   const onCreate = React.useCallback(() => {
-    navigate("/applications/create");
+    console.log("aaaa");
+    navigate("/applications/create", { state: { backgroundLocation: location } });
   }, [navigate]);
 
   if (meLoading) {
@@ -357,7 +359,11 @@ export default function Applications() {
         searchValue={searchValue}
       />
 
-      <Routes>
+      {console.log(backgroundLocation)}
+      {console.log(location)}
+
+
+      <Routes location={backgroundLocation}>
         <Route
           path={`${path}/create`}
           element={
@@ -379,6 +385,7 @@ export default function Applications() {
           }
         />
       </Routes>
+
       <WatchApplicationUpdate />
       <Footer />
     </div>

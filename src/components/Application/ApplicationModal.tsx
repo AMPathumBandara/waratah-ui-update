@@ -1,32 +1,36 @@
 import React from "react";
 import { Grid, IconButton } from "@mui/material";
-import Dialog from "@mui/material/Dialog";
-import DialogContent from "@mui/material/DialogContent";
+import { Dialog, DialogContent } from "@mui/material";
 import { Theme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import CloseIcon from "@mui/icons-material/Close";
 import { useParams, useNavigate } from "react-router-dom";
 import { useApplicationStageQuery } from "generated/graphql";
 import GridItem from "components/Layout/GridItem";
+import {
+  createTheme,
+  ThemeProvider,
+  useTheme,
+} from "@mui/material/styles";
 
-const useStyles = makeStyles((theme: Theme) => ({
-  modalWrapper: {
-    "& .MuiDialogContent-root": {
-      minHeight: "60vh",
-      "&::-webkit-scrollbar": {
-        width: 10,
-      },
-      "&::-webkit-scrollbar-track": {
-        backgroundColor: theme.palette.grey[300],
-        borderRadius: "10px",
-      },
-      "&::-webkit-scrollbar-thumb": {
-        backgroundColor: theme.palette.grey[400],
-        borderRadius: "10px",
-      },
-    },
-  },
-}));
+// const useStyles = makeStyles((theme: Theme) => ({
+//   modalWrapper: {
+//     "& .MuiDialogContent-root": {
+//       minHeight: "60vh",
+//       "&::-webkit-scrollbar": {
+//         width: 10,
+//       },
+//       "&::-webkit-scrollbar-track": {
+//         backgroundColor: theme.palette.grey[300],
+//         borderRadius: "10px",
+//       },
+//       "&::-webkit-scrollbar-thumb": {
+//         backgroundColor: theme.palette.grey[400],
+//         borderRadius: "10px",
+//       },
+//     },
+//   },
+// }));
 
 interface ApplicationModalProps {
   showModal: boolean;
@@ -37,28 +41,54 @@ interface ApplicationModalProps {
 
 function ApplicationModal(props: ApplicationModalProps) {
   const { showModal, children } = props;
+  console.log(showModal);
 
   const navigate = useNavigate();
+
+  const theme = useTheme();
+
+  const pageTheme = createTheme(theme, {
+    custom: {
+      modalWrapper: {
+        "& .MuiDialogContent-root": {
+          minHeight: "60vh",
+          "&::-webkit-scrollbar": {
+            width: 10,
+          },
+          "&::-webkit-scrollbar-track": {
+            backgroundColor: theme.palette.grey[300],
+            borderRadius: "10px",
+          },
+          "&::-webkit-scrollbar-thumb": {
+            backgroundColor: theme.palette.grey[400],
+            borderRadius: "10px",
+          },
+        },
+      },
+    }
+  });
 
   const onClose = React.useCallback(() => {
     navigate("/applications");
   }, [history]);
 
   return (
-    <div>
-      <Dialog
-        open={showModal}
-        aria-describedby="dialog-description"
-        fullWidth={true}
-        disableEnforceFocus // This prevents focus trapping
-        disableAutoFocus // Optional: Prevents automatic focus on MUI modal
-        maxWidth="lg"
-        className="modalWrapper"
-      >
-        <ApplicationModalHeader headerClose={true} setClose={onClose} />
-        <DialogContent>{children}</DialogContent>
-      </Dialog>
-    </div>
+    <ThemeProvider theme={pageTheme}>
+      <div>
+        <Dialog
+          open={showModal}
+          aria-describedby="dialog-description"
+          fullWidth={true}
+          disableEnforceFocus // This prevents focus trapping
+          disableAutoFocus // Optional: Prevents automatic focus on MUI modal
+          maxWidth="lg"
+          className="modalWrapper"
+        >
+          <ApplicationModalHeader headerClose={true} setClose={onClose} />
+          <DialogContent>{children}</DialogContent>
+        </Dialog>
+      </div>
+    </ThemeProvider>
   );
 }
 export default React.memo(ApplicationModal);
@@ -91,7 +121,6 @@ export const ApplicationTitle = (props: ApplicationModalHeaderProps) => {
 };
 
 const ApplicationModalHeader: React.FC<ApplicationModalHeaderProps> = props => {
-  const classes = useStyles();
   const params = useParams<ApplicationParams>();
 
   return (
