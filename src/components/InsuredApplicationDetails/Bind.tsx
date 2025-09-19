@@ -1,6 +1,6 @@
 // React Imports
 import React, { createRef, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 // Material UI
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";

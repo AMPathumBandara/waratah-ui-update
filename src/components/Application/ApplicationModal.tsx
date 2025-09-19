@@ -4,7 +4,7 @@ import { Dialog, DialogContent } from "@mui/material";
 import { Theme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import CloseIcon from "@mui/icons-material/Close";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router";
 import { useApplicationStageQuery } from "generated/graphql";
 import GridItem from "components/Layout/GridItem";
 import {
@@ -41,7 +41,6 @@ interface ApplicationModalProps {
 
 function ApplicationModal(props: ApplicationModalProps) {
   const { showModal, children } = props;
-  console.log(showModal);
 
   const navigate = useNavigate();
 

@@ -11,7 +11,7 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import CheckIcon from "@mui/icons-material/Check";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ViewCompactIcon from "@mui/icons-material/ViewCompact";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import ViewColumnIcon from "@mui/icons-material/ViewColumn";
 import {
   createTheme,

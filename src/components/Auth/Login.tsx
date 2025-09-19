@@ -11,7 +11,7 @@ import Alert from "@mui/material/Alert";
 //@ts-ignore
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router";
 import AuthLayout from "./AuthLayout";
 import { useSignIn, useUser } from "./CognitoHooks";
 import { Box, Link } from "@mui/material";

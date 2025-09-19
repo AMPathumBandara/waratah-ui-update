@@ -2,7 +2,7 @@ import { Box, Button, Card, Collapse, FormControl, Grid, IconButton, NativeSelec
 import { Add, AddCircle, Close, PlusOneRounded, Save } from "@mui/icons-material";
 import { useCreateCustomQuoteMutation, useGetCustomPolicyLimitsQuery, useGetUnusedRetentionsMutation } from "generated/graphql";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import { ApplicationParams } from ".";
 import { Theme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";

@@ -24,7 +24,7 @@ import * as yup from "yup";
 import ButtonsContainer from "components/Layout/ButtonsContainer";
 import ButtonLoading from "components/From/ButtonLoading";
 import ToastMessage from "components/Toast/ToastMessage";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
 import MaterialTable, { Query } from "@material-table/core";
 import { DateTime } from "luxon";
 import ModalWindow from "components/ModalWindow";

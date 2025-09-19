@@ -7,7 +7,7 @@ import { useMeQuery, useReleseVersionSubscription } from "generated/graphql";
 import DefaultLogo from "../../visionxlogo.jpg";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router";
 import FeatureFlag from "utils/FeatureFlag";
 import ErrorToast from "components/Toast/ErrorToast";
 import "react-loading-skeleton/dist/skeleton.css";

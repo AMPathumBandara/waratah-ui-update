@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import FullScreenLoading from "./FullScreenLoading";
 import GuestLayout from "./GuestLayout";
 import MainLayout from "./MainLayout";

@@ -11,7 +11,7 @@ import Alert from "@mui/material/Alert";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { CognitoUser } from "@aws-amplify/auth";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import AuthLayout from "./AuthLayout";
 import { useCompleteNewPassword, useUser } from "./CognitoHooks";
 

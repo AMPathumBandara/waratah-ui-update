@@ -1,7 +1,7 @@
 // React Imports
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import Grid from "@mui/material/Grid";
 import { Theme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";

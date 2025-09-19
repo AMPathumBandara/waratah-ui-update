@@ -11,7 +11,7 @@ import {
   Switch as SwitchBtn,
   Typography,
 } from "@mui/material";
-import { useMatches } from "react-router-dom";
+import { useMatches } from "react-router";
 import { Theme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import { alpha } from "@mui/material/styles";
@@ -42,7 +42,7 @@ import ButtonsContainer from "components/Layout/ButtonsContainer";
 import ButtonLoading from "components/From/ButtonLoading";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ToastMessage from "components/Toast/ToastMessage";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
 import ErrorToast from "components/Toast/ErrorToast";
 import EditIcon from "@mui/icons-material/Edit";
 import Skeleton from "react-loading-skeleton";

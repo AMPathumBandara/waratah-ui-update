@@ -21,7 +21,7 @@ import {
   useMatches,
   useNavigate,
   useParams,
-} from "react-router-dom";
+} from "react-router";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { ApplicationHeader } from "components/Application/ApplicationHeader";
 import { SortComponent } from "components/Filters/Sort";
@@ -409,7 +409,7 @@ export default function ApplicationsNew() {
 
           <Routes>
             <Route 
-              path={`${path}/`}
+              path={`${path}/create`}
               element={
                 <div className="content-wrapper">
                   <div className="layout-header flex">

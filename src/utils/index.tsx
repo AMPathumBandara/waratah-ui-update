@@ -21,7 +21,7 @@ export function currencyFormatter(amount: any) {
     return amount.toLocaleString("en-US", {
       style: "currency",
       currency: "USD",
-      minimumFractionDigits: 0, 
+      minimumFractionDigits: 0,
       maximumFractionDigits: 0
     });
   }
@@ -40,7 +40,7 @@ export function currencyFormatterWithCents(amount: any) {
     return amount.toLocaleString("en-US", {
       style: "currency",
       currency: "USD",
-      minimumFractionDigits: 2, 
+      minimumFractionDigits: 2,
       maximumFractionDigits: 2
     });
   }
@@ -85,16 +85,16 @@ export const NavigationAccess = [
   },
   {
     name: "Applications",
-    path: "/applications",
+    path: "/applications/*",
     isParent: true,
     allowUsers: ["broker", "super_admin", "tenant_admin", "broker_power"],
   },
-  {
-    name: "Applications",
-    path: "/applications/:id",
-    isParent: false,
-    allowUsers: ["broker", "super_admin", "tenant_admin", "broker_power"],
-  },
+  // {
+  //   name: "Applications",
+  //   path: "/applications/:id",
+  //   isParent: false,
+  //   allowUsers: ["broker", "super_admin", "tenant_admin", "broker_power"],
+  // },
   {
     name: "ApplicationsNewLayout",
     path: "/applications-list",
@@ -103,7 +103,7 @@ export const NavigationAccess = [
   },
   {
     name: "Tennats",
-    path: "/tenants/*",
+    path: "/tenants",
     isParent: true,
     allowUsers: ["super_admin", "tenant_admin"],
   },

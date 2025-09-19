@@ -8,7 +8,7 @@ import theme from "theme/theme";
 import { Order_By, useGetAllTenantsQuery } from "generated/graphql";
 
 import ToastMessage from "components/Toast/ToastMessage";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router";
 import { DateTime } from "luxon";
 import { SortComponent } from "components/Filters/Sort";
 import { FilterComponent } from "components/Filters";

@@ -2,7 +2,7 @@ import { Button, Card, Grid } from "@mui/material";
 import { Close, Save } from "@mui/icons-material";
 import { maximumQuoteCount } from "./Quote";
 import { useCreatePdfQuoteSelectionMutation } from "generated/graphql";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import { ApplicationParams } from ".";
 import ToastMessage from "components/Toast/ToastMessage";
 import { useState } from "react";

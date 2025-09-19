@@ -7,7 +7,7 @@ import {
 } from "@mui/material/styles";
 import { makeStyles, StylesProvider } from "@mui/styles";
 import { CssBaseline } from "@mui/material";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router";
 import { Grid } from "@mui/material";
 import ProtectedRoute from "utils/ProtectedRoute";
 import MainNavigation from "components/NavBar/MainNavigation";
@@ -42,7 +42,7 @@ const protectedLinks = [
     exact: true,
   },
   {
-    path: "/applications",
+    path: "/applications/*",
     component: Applications,
     exact: false,
   },
@@ -52,7 +52,7 @@ const protectedLinks = [
     exact: false,
   },
   {
-    path: "/tenants/*",
+    path: "/tenants",
     component: Tenants,
     exact: false,
   },
@@ -71,7 +71,7 @@ const protectedLinks = [
 export default function PermanentDrawerLeft() {
   const classes = useStyles();
   const location = useLocation();
-  const state = location.state as { backgroundLocation?: Location };
+  const state = location.state as { background?: Location };
 
   const { data: meData, loading: meLoading, error: meError } = useMeQuery({
     errorPolicy: "all"
@@ -127,7 +127,7 @@ export default function PermanentDrawerLeft() {
           }
         >
           {/* Main routes */}
-          <Routes location={state?.backgroundLocation || location}>
+          <Routes>
             <Route
               path="/access-denied"
               element={<AccessDenied />}

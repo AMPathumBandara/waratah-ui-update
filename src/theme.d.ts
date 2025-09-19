@@ -4,6 +4,13 @@ import "@mui/material/styles";
 declare module "@mui/material/styles" {
   interface Theme {
     custom: {
+      alertPadding: SystemStyleObject<Theme>;
+      container: SystemStyleObject<Theme>;
+      layout: SystemStyleObject<Theme>;
+      stepper: SystemStyleObject<Theme>;
+      stepIcon: SystemStyleObject<Theme>;
+      stepLabel: string | undefined;
+      btnBox: SystemStyleObject<Theme>;
       primaryBgColor: SystemStyleObject<Theme>;
       sidebarHandle: SystemStyleObject<Theme>;
       footerTheme: SystemStyleObject<Theme>;

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { NavigationAccess } from "utils";
 import { useUser } from "components/Auth/CognitoHooks";
+import { useNavigate } from "react-router";
 
 interface ProtectedRouteProps {
   component: React.ComponentType<any>;
@@ -18,10 +18,14 @@ export default function ProtectedRoute({ component: Component, path }: Protected
       return;
     }
 
+    console.log(path);
+
     const authUser =
       loggedUser?.signInUserSession?.idToken?.payload?.["cognito:groups"][0];
 
     const allowUsersPath = NavigationAccess.filter(f => f.path === path);
+
+    console.log(allowUsersPath);
 
     if (
       path !== "*" &&

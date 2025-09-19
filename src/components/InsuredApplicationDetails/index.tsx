@@ -7,7 +7,7 @@ import {
   useNavigate,
   useLocation,
   useMatch,
-} from "react-router-dom";
+} from "react-router";
 import { Theme } from "@mui/material/styles";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -51,133 +51,138 @@ import Slide, { SlideProps } from "@mui/material/Slide";
 import { Chat, Close, Send } from "@mui/icons-material";
 import { TransitionProps } from "@mui/material/transitions/transition";
 import { withStyles, makeStyles } from "@mui/styles";
+import {
+  createTheme,
+  ThemeProvider,
+  useTheme,
+} from "@mui/material/styles";
 
-const useStyles = makeStyles((theme: Theme) => ({
-  container: {
-    // width: "auto",
-    // height: "calc(100vh - 70px)",
-    // display: "grid",
-    // gridTemplateColumns: "1fr",
-    // gridTemplateRows: "80px 1fr",
-    // backgroundColor: theme.palette.background.paper,
-    // overflowY: "auto",
-  },
+// const useStyles = makeStyles((theme: Theme) => ({
+//   container: {
+//     // width: "auto",
+//     // height: "calc(100vh - 70px)",
+//     // display: "grid",
+//     // gridTemplateColumns: "1fr",
+//     // gridTemplateRows: "80px 1fr",
+//     // backgroundColor: theme.palette.background.paper,
+//     // overflowY: "auto",
+//   },
 
-  layout: {
-    width: "100%",
-    //maxWidth: "1220px",
-    padding: theme.spacing(2, 0, 4, 0),
-    margin: "0 auto",
-    //paddingTop: theme.spacing(4),
-    //height: "calc(100vh - 150px)",
-    display: "flex",
-    flexDirection: "column",
-    backgroundColor: theme.palette.background.paper,
-  },
-  stepper: {
-    width: "100%",
-    maxWidth: 350,
-    marginLeft: "auto",
-    marginRight: "auto",
-    padding: theme.spacing(0, 0, 1),
-    marginBottom: 25,
-  },
-  buttons: {
-    display: "flex",
-    justifyContent: "space-between",
-  },
-  button: {
-    marginTop: theme.spacing(3),
-    marginLeft: theme.spacing(1),
-  },
-  stepIcon: {
-    display: "flex",
-    justifyContent: "center",
-    height: 50,
-    width: 50,
-    cursor: "pointer",
-  },
-  stepLabel: {
-    marginTop: "8px !important",
-    fontSize: "0.8rem",
-    fontWeight: 600,
-    "&.MuiStepLabel-active": {
-      fontWeight: "600 !important",
-    },
-  },
-  actionBar: {
-    display: "flex",
-    height: 80,
-    width: "calc(100vw - 400px)",
-    alignItems: "center",
-    justifyContent: "center",
-    borderBottom: "1px solid rgba(0, 0, 0, 0.12)",
-    position: "fixed",
-    background: "white",
-    zIndex: 2,
-  },
-  alert: {
-    marginTop: 10,
-  },
-  applicationNavigator: {
-    position: "absolute",
-    left: 100,
-    width: 250,
-  },
-  applicationNavigatorRoot: {
-    fontSize: "0.5rem",
-    "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-      border: "none",
-    },
-  },
-  capitalize: {
-    textTransform: "capitalize",
-  },
-  headerContainer: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-around",
-    alignItems: "center",
-  },
-  primaryText: {
-    fontSize: "1.2em",
-    textTransform: "uppercase",
-    fontWeight: 600,
-  },
-  alertContainer: {
-    width: "100%",
-    paddingLeft: 100,
-    paddingRight: 100,
-    paddingTop: 10,
-  },
-  alertPadding: {
-    paddingTop: 1,
-    paddingBottom: 1,
-  },
-  downloadContainer: {
-    position: "absolute",
-    right: 135,
-    cursor: "pointer",
-  },
-  searchboxLabel: {
-    "& .MuiFormLabel-root": {
-      color: "lightgray",
-      "& .Mui-focused": {
-        color: theme.palette.primary.main,
-      },
-    },
-    "& .MuiFormLabel-root.Mui-focused": {
-      color: theme.palette.primary.main,
-    },
-  },
-  hidden: {
-    display: "none",
-  },
-  btnBox: {
-    display: "flex",
-    gap: "5px",
-  },
-}));
+//   layout: {
+//     width: "100%",
+//     //maxWidth: "1220px",
+//     padding: theme.spacing(2, 0, 4, 0),
+//     margin: "0 auto",
+//     //paddingTop: theme.spacing(4),
+//     //height: "calc(100vh - 150px)",
+//     display: "flex",
+//     flexDirection: "column",
+//     backgroundColor: theme.palette.background.paper,
+//   },
+//   stepper: {
+//     width: "100%",
+//     maxWidth: 350,
+//     marginLeft: "auto",
+//     marginRight: "auto",
+//     padding: theme.spacing(0, 0, 1),
+//     marginBottom: 25,
+//   },
+//   buttons: {
+//     display: "flex",
+//     justifyContent: "space-between",
+//   },
+//   button: {
+//     marginTop: theme.spacing(3),
+//     marginLeft: theme.spacing(1),
+//   },
+//   stepIcon: {
+//     display: "flex",
+//     justifyContent: "center",
+//     height: 50,
+//     width: 50,
+//     cursor: "pointer",
+//   },
+//   stepLabel: {
+//     marginTop: "8px !important",
+//     fontSize: "0.8rem",
+//     fontWeight: 600,
+//     "&.MuiStepLabel-active": {
+//       fontWeight: "600 !important",
+//     },
+//   },
+//   actionBar: {
+//     display: "flex",
+//     height: 80,
+//     width: "calc(100vw - 400px)",
+//     alignItems: "center",
+//     justifyContent: "center",
+//     borderBottom: "1px solid rgba(0, 0, 0, 0.12)",
+//     position: "fixed",
+//     background: "white",
+//     zIndex: 2,
+//   },
+//   alert: {
+//     marginTop: 10,
+//   },
+//   applicationNavigator: {
+//     position: "absolute",
+//     left: 100,
+//     width: 250,
+//   },
+//   applicationNavigatorRoot: {
+//     fontSize: "0.5rem",
+//     "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+//       border: "none",
+//     },
+//   },
+//   capitalize: {
+//     textTransform: "capitalize",
+//   },
+//   headerContainer: {
+//     display: "flex",
+//     flexDirection: "column",
+//     justifyContent: "space-around",
+//     alignItems: "center",
+//   },
+//   primaryText: {
+//     fontSize: "1.2em",
+//     textTransform: "uppercase",
+//     fontWeight: 600,
+//   },
+//   alertContainer: {
+//     width: "100%",
+//     paddingLeft: 100,
+//     paddingRight: 100,
+//     paddingTop: 10,
+//   },
+//   alertPadding: {
+//     paddingTop: 1,
+//     paddingBottom: 1,
+//   },
+//   downloadContainer: {
+//     position: "absolute",
+//     right: 135,
+//     cursor: "pointer",
+//   },
+//   searchboxLabel: {
+//     "& .MuiFormLabel-root": {
+//       color: "lightgray",
+//       "& .Mui-focused": {
+//         color: theme.palette.primary.main,
+//       },
+//     },
+//     "& .MuiFormLabel-root.Mui-focused": {
+//       color: theme.palette.primary.main,
+//     },
+//   },
+//   hidden: {
+//     display: "none",
+//   },
+//   btnBox: {
+//     display: "flex",
+//     gap: "5px",
+//   },
+// }));
 
 const capitalize = (str: string) => {
   if (!str) return str;
@@ -330,8 +335,8 @@ export function InsuredDetails(props: InsuredDetailsProps) {
 }
 
 function BaseAlert(props: AlertProps) {
-  const classes = useStyles();
-  return <Alert className={classes.alertPadding} elevation={6} {...props} />;
+  //const classes = useStyles();
+  return <Alert sx={(theme: Theme) => theme.custom.alertPadding} elevation={6} {...props} />;
 }
 
 const ScanAlert: React.FC<ScanAlertProps> = ({ status }) => {
@@ -368,7 +373,139 @@ const InsuredDetailsComponent: React.FC<InsuredDetailsProps> = ({
   applicationData,
   applicationList,
 }) => {
-  const classes = useStyles();
+  //const classes = useStyles();
+
+  const theme = useTheme();
+
+  const pageTheme = createTheme(theme, {
+    custom: {
+      container: {
+        // width: "auto",
+        // height: "calc(100vh - 70px)",
+        // display: "grid",
+        // gridTemplateColumns: "1fr",
+        // gridTemplateRows: "80px 1fr",
+        // backgroundColor: theme.palette.background.paper,
+        // overflowY: "auto",
+      },
+
+      layout: {
+        width: "100%",
+        //maxWidth: "1220px",
+        padding: theme.spacing(2, 0, 4, 0),
+        margin: "0 auto",
+        //paddingTop: theme.spacing(4),
+        //height: "calc(100vh - 150px)",
+        display: "flex",
+        flexDirection: "column",
+        backgroundColor: theme.palette.background.paper,
+      },
+      stepper: {
+        width: "100%",
+        maxWidth: 350,
+        marginLeft: "auto",
+        marginRight: "auto",
+        padding: theme.spacing(0, 0, 1),
+        marginBottom: 25,
+      },
+      buttons: {
+        display: "flex",
+        justifyContent: "space-between",
+      },
+      button: {
+        marginTop: theme.spacing(3),
+        marginLeft: theme.spacing(1),
+      },
+      stepIcon: {
+        display: "flex",
+        justifyContent: "center",
+        height: 50,
+        width: 50,
+        cursor: "pointer",
+      },
+      stepLabel: {
+        marginTop: "8px !important",
+        fontSize: "0.8rem",
+        fontWeight: 600,
+        "&.MuiStepLabel-active": {
+          fontWeight: "600 !important",
+        },
+      },
+      actionBar: {
+        display: "flex",
+        height: 80,
+        width: "calc(100vw - 400px)",
+        alignItems: "center",
+        justifyContent: "center",
+        borderBottom: "1px solid rgba(0, 0, 0, 0.12)",
+        position: "fixed",
+        background: "white",
+        zIndex: 2,
+      },
+      alert: {
+        marginTop: 10,
+      },
+      applicationNavigator: {
+        position: "absolute",
+        left: 100,
+        width: 250,
+      },
+      applicationNavigatorRoot: {
+        fontSize: "0.5rem",
+        "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+          border: "none",
+        },
+      },
+      capitalize: {
+        textTransform: "capitalize",
+      },
+      headerContainer: {
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-around",
+        alignItems: "center",
+      },
+      primaryText: {
+        fontSize: "1.2em",
+        textTransform: "uppercase",
+        fontWeight: 600,
+      },
+      alertContainer: {
+        width: "100%",
+        paddingLeft: 100,
+        paddingRight: 100,
+        paddingTop: 10,
+      },
+      alertPadding: {
+        paddingTop: 1,
+        paddingBottom: 1,
+      },
+      downloadContainer: {
+        position: "absolute",
+        right: 135,
+        cursor: "pointer",
+      },
+      searchboxLabel: {
+        "& .MuiFormLabel-root": {
+          color: "lightgray",
+          "& .Mui-focused": {
+            color: theme.palette.primary.main,
+          },
+        },
+        "& .MuiFormLabel-root.Mui-focused": {
+          color: theme.palette.primary.main,
+        },
+      },
+      hidden: {
+        display: "none",
+      },
+      btnBox: {
+        display: "flex",
+        gap: "5px",
+      },
+    }
+  });
+
   const navigate = useNavigate();
   const params = useParams<ApplicationParams>();
   const [quoteDownloadLoading, setQuoteDownloadLoading] = useState(false);
@@ -554,62 +691,63 @@ const InsuredDetailsComponent: React.FC<InsuredDetailsProps> = ({
   }
   return (
     <>
-      <ErrorToast
-        error={fileError}
-        processCustomError={() =>
-          `Scan report download - ${fileError?.message}`
-        }
-      />
-      <ErrorToast
-        error={applicationPaymentError}
-        processCustomError={() =>
-          `Application payment Data - ${applicationPaymentError?.message}`
-        }
-      />
-      <ErrorToast
-        error={scanDataError}
-        processCustomError={() => `Scan Error - ${scanDataError?.message}`}
-      />
-      <ErrorToast
-        error={ipfsError}
-        processCustomError={() => `IPFS - ${ipfsError?.message}`}
-      />
-      <MachineContext.Provider value={machine}>
-        <div className={classes.container}>
-          <div className={classes.layout}>
-            {!hideStateMachine && (
-              <Stepper
-                activeStep={currentStepData?.index}
-                className={classes.stepper}
-                alternativeLabel
-                connector={<QontoConnector />}
-              >
-                {steps.map(label => (
-                  <Step
-                    key={label}
-                    onClick={handleStepChange}
-                    className={classes.stepIcon}
-                    data-label={label}
-                  >
-                    <StepLabel
-                      StepIconComponent={CustomStepIcon}
-                      StepIconProps={{
-                        classes: { root: classes.stepIcon },
-                      }}
-                      classes={{
-                        label: classes.stepLabel,
-                      }}
+      <ThemeProvider theme={pageTheme}>
+        <ErrorToast
+          error={fileError}
+          processCustomError={() =>
+            `Scan report download - ${fileError?.message}`
+          }
+        />
+        <ErrorToast
+          error={applicationPaymentError}
+          processCustomError={() =>
+            `Application payment Data - ${applicationPaymentError?.message}`
+          }
+        />
+        <ErrorToast
+          error={scanDataError}
+          processCustomError={() => `Scan Error - ${scanDataError?.message}`}
+        />
+        <ErrorToast
+          error={ipfsError}
+          processCustomError={() => `IPFS - ${ipfsError?.message}`}
+        />
+        <MachineContext.Provider value={machine}>
+          <Box sx={(theme: Theme) => theme.custom.container}>
+            <Box sx={(theme: Theme) => theme.custom.layout}>
+              {!hideStateMachine && (
+                <Stepper
+                  activeStep={currentStepData?.index}
+                  sx={(theme: Theme) => theme.custom.stepper}
+                  alternativeLabel
+                  connector={<QontoConnector />}
+                >
+                  {steps.map(label => (
+                    <Step
+                      key={label}
+                      onClick={handleStepChange}
+                      sx={(theme: Theme) => theme.custom.stepIcon}
+                      data-label={label}
                     >
-                      {label}
-                    </StepLabel>
-                  </Step>
-                ))}
-              </Stepper>
-            )}
+                      <StepLabel
+                        StepIconComponent={CustomStepIcon}
+                        StepIconProps={{
+                          classes: { root: theme.custom.stepIcon },
+                        }}
+                        classes={{
+                          label: theme.custom.stepLabel,
+                        }}
+                      >
+                        {label}
+                      </StepLabel>
+                    </Step>
+                  ))}
+                </Stepper>
+              )}
 
-            <div className="alerts-bar">
-              <DisplayScanAlert stage={ipfsData?.insurance_policy[0]} />
-              {/* {ipfsData?.insurance_policy[0] &&
+              <div className="alerts-bar">
+                <DisplayScanAlert stage={ipfsData?.insurance_policy[0]} />
+                {/* {ipfsData?.insurance_policy[0] &&
                 (currentStage === "bound" || currentStage === "issued") &&
                 ipfsData?.insurance_policy[0].stage !== "error" &&
                 (currentStage === "bound" ? (
@@ -617,106 +755,107 @@ const InsuredDetailsComponent: React.FC<InsuredDetailsProps> = ({
                 ) : (
                   <ScanAlert status={"IPFS_ISSUED"} />
                 ))} */}
-              {/* {currentStage === "quote" && scanData?.external_scan[0] && (
-              <ScanAlert status={scanData?.external_scan[0].status!} />
-            )} */}
-              {applicationData?.insurance_application_by_pk?.stage ===
-                "declined" ? (
-                <Alert severity="error">This Application Declined!</Alert>
-              ) : (
-                <></>
-              )}
-            </div>
-
-            <div className="application-action-bar">
-              <div className="related-quotes">
-                <Tooltip
-                  title={
-                    disableRelatedQuote ? "Not available" : "Related Quotes"
-                  }
-                  aria-label="add"
-                >
-                  <div className="downloads">
-                    <IconButton
-                      aria-label="related-quote"
-                      size="medium"
-                      disabled={disableRelatedQuote}
-                      onClick={quotesHandleClick}
-                    >
-                      Related Quotes
-                    </IconButton>
-
-                    <Menu
-                      className="downloads-options"
-                      id="related-quote"
-                      anchorEl={showQuotesList}
-                      open={Boolean(showQuotesList)}
-                      onClose={quotesHandleClose}
-                      transformOrigin={{
-                        vertical: "top",
-                        horizontal: "right",
-                      }}
-                      MenuListProps={{
-                        "aria-labelledby": "related-quote",
-                      }}
-                    >
-                      {applicationList?.insurance_application?.map(q => (
-                        <MenuItem
-                          key={q.id}
-                          onClick={() => changeApplication(q.id)}
-                        >
-                          {q.effective_date} - {q.expiration_date}
-                        </MenuItem>
-                      ))}
-                    </Menu>
-                  </div>
-                </Tooltip>
+                {/* {currentStage === "quote" && scanData?.external_scan[0] && (
+                  <ScanAlert status={scanData?.external_scan[0].status!} />
+                )} */}
+                {applicationData?.insurance_application_by_pk?.stage ===
+                  "declined" ? (
+                  <Alert severity="error">This Application Declined!</Alert>
+                ) : (
+                  <></>
+                )}
               </div>
-              <div className={classes.btnBox}>
-                <ChatWindow
-                />
-                <DownloadOptions
-                  fileRefetch={fileRefetch}
-                  waratahReportPath={waratahReportPath}
-                  artifactDataSubscription={artifactDataSubscription}
-                  watchScanResultSubscription={watchScanResultSubscription}
-                  quoteDownloadLoading={quoteDownloadLoading}
-                />
-              </div>
-            </div>
 
-            <CurrentComponent
-              handleStageChange={handleStageChange}
-              selectedQuoteId={
-                applicationData?.insurance_application_by_pk
-                  ?.insurance_quote_selection?.quote_id
-              }
-              applicationStage={
-                applicationData?.insurance_application_by_pk?.stage
-              }
-              brokerName={
-                applicationData?.insurance_application_by_pk
-                  ?.insured_organization?.broker_agency?.name
-              }
-              riskScore={
-                scanData?.external_scan[0]
-                  ? scanData?.external_scan[0].risk_score
+              <div className="application-action-bar">
+                <div className="related-quotes">
+                  <Tooltip
+                    title={
+                      disableRelatedQuote ? "Not available" : "Related Quotes"
+                    }
+                    aria-label="add"
+                  >
+                    <div className="downloads">
+                      <IconButton
+                        aria-label="related-quote"
+                        size="medium"
+                        disabled={disableRelatedQuote}
+                        onClick={quotesHandleClick}
+                      >
+                        Related Quotes
+                      </IconButton>
+
+                      <Menu
+                        className="downloads-options"
+                        id="related-quote"
+                        anchorEl={showQuotesList}
+                        open={Boolean(showQuotesList)}
+                        onClose={quotesHandleClose}
+                        transformOrigin={{
+                          vertical: "top",
+                          horizontal: "right",
+                        }}
+                        MenuListProps={{
+                          "aria-labelledby": "related-quote",
+                        }}
+                      >
+                        {applicationList?.insurance_application?.map(q => (
+                          <MenuItem
+                            key={q.id}
+                            onClick={() => changeApplication(q.id)}
+                          >
+                            {q.effective_date} - {q.expiration_date}
+                          </MenuItem>
+                        ))}
+                      </Menu>
+                    </div>
+                  </Tooltip>
+                </div>
+                <Box sx={(theme: Theme) => theme.custom.btnBox}>
+                  <ChatWindow
+                  />
+                  <DownloadOptions
+                    fileRefetch={fileRefetch}
+                    waratahReportPath={waratahReportPath}
+                    artifactDataSubscription={artifactDataSubscription}
+                    watchScanResultSubscription={watchScanResultSubscription}
+                    quoteDownloadLoading={quoteDownloadLoading}
+                  />
+                </Box>
+              </div>
+
+              <CurrentComponent
+                handleStageChange={handleStageChange}
+                selectedQuoteId={
+                  applicationData?.insurance_application_by_pk
+                    ?.insurance_quote_selection?.quote_id
+                }
+                applicationStage={
+                  applicationData?.insurance_application_by_pk?.stage
+                }
+                brokerName={
+                  applicationData?.insurance_application_by_pk
+                    ?.insured_organization?.broker_agency?.name
+                }
+                riskScore={
+                  scanData?.external_scan[0]
                     ? scanData?.external_scan[0].risk_score
+                      ? scanData?.external_scan[0].risk_score
+                      : -1
                     : -1
-                  : -1
-              }
-              scanData={scanData}
-              scanLoading={scanLoading}
-              policyData={ipfsData?.insurance_policy[0]}
-              domainData={domainData}
-              applicationPaymentData={applicationPaymentData}
-              artifactDataSubscription={artifactDataSubscription}
-              fileRefetch={fileRefetch}
-              setQuoteDownloadLoading={setQuoteDownloadLoading}
-            />
-          </div>
-        </div>
-      </MachineContext.Provider>
+                }
+                scanData={scanData}
+                scanLoading={scanLoading}
+                policyData={ipfsData?.insurance_policy[0]}
+                domainData={domainData}
+                applicationPaymentData={applicationPaymentData}
+                artifactDataSubscription={artifactDataSubscription}
+                fileRefetch={fileRefetch}
+                setQuoteDownloadLoading={setQuoteDownloadLoading}
+              />
+            </Box>
+          </Box>
+        </MachineContext.Provider>
+      </ThemeProvider>
     </>
   );
 };

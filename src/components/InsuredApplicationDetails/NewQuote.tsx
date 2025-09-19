@@ -1,7 +1,7 @@
 // React Imports
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 // Material UI
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";

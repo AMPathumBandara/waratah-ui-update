@@ -12,7 +12,7 @@ import {
   useMeQuery,
 } from "generated/graphql";
 import InsuredApplicationDetails from "components/InsuredApplicationDetails";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router";
 
 import { ApplicationHeader } from "components/Application/ApplicationHeader";
 import { SortComponent } from "components/Filters/Sort";
@@ -308,7 +308,7 @@ export default function Applications() {
   // let path = current.pathname;
   const location = useLocation();
   const path = location.pathname;
-  const backgroundLocation = location.state?.backgroundLocation || location;
+  const state = location.state as { background?: Location };
 
   const onSearch = React.useCallback(
     (v: string) => {
@@ -326,7 +326,11 @@ export default function Applications() {
 
   const onCreate = React.useCallback(() => {
     console.log("aaaa");
-    navigate("/applications/create", { state: { backgroundLocation: location } });
+    navigate(
+      "/applications/create", {
+      state: { background: location }
+    }
+    );
   }, [navigate]);
 
   if (meLoading) {
@@ -359,33 +363,30 @@ export default function Applications() {
         searchValue={searchValue}
       />
 
-      {console.log(backgroundLocation)}
-      {console.log(location)}
-
-
-      <Routes location={backgroundLocation}>
-        <Route
-          path={`${path}/create`}
-          element={
-            <ApplicationModal
-              showModal={true}
-              setShowModal={onClose}
-              title="Create an Application"
-            >
-              <MemorizedApplicationDetails />
-            </ApplicationModal>
-          }
-        />
-        <Route
-          path={`${path}/:id`}
-          element={
-            <ApplicationModal showModal={true} setShowModal={onClose}>
-              <MemorizedApplicationDetails />
-            </ApplicationModal>
-          }
-        />
-      </Routes>
-
+      {state?.background && (
+        <Routes>
+          <Route
+            path="create"
+            element={
+              <ApplicationModal
+                showModal={true}
+                setShowModal={onClose}
+                title="Create an Application"
+              >
+                <MemorizedApplicationDetails />
+              </ApplicationModal>
+            }
+          />
+          <Route
+            path=":id"
+            element={
+              <ApplicationModal showModal={true} setShowModal={onClose}>
+                <MemorizedApplicationDetails />
+              </ApplicationModal>
+            }
+          />
+        </Routes>
+      )}
       <WatchApplicationUpdate />
       <Footer />
     </div>

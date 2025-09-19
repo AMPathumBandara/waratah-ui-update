@@ -10,7 +10,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import CancelIcon from "@mui/icons-material/Cancel";
 import CheckIcon from "@mui/icons-material/Check";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import FeatureFlag from "utils/FeatureFlag";
 const useStyles = makeStyles((theme: Theme) => ({
   applicationHeader: {
