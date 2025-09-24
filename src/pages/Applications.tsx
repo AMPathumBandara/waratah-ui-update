@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Outlet } from "react-router";
 import { Box, Button, Tooltip } from "@mui/material";
 import {
   createTheme,
@@ -282,7 +283,7 @@ function ApplicationKanBanLayout(props: ApplicationKanBanLayoutProps) {
   );
 }
 
-const MemoizedApplicationKanBanLayout = React.memo(ApplicationKanBanLayout);
+export const MemoizedApplicationKanBanLayout = React.memo(ApplicationKanBanLayout);
 
 export default function Applications() {
   const [searchValue, setsearchValue] = useState("");
@@ -364,28 +365,29 @@ export default function Applications() {
       />
 
       {state?.background && (
-        <Routes>
-          <Route
-            path="create"
-            element={
-              <ApplicationModal
-                showModal={true}
-                setShowModal={onClose}
-                title="Create an Application"
-              >
-                <MemorizedApplicationDetails />
-              </ApplicationModal>
-            }
-          />
-          <Route
-            path=":id"
-            element={
-              <ApplicationModal showModal={true} setShowModal={onClose}>
-                <MemorizedApplicationDetails />
-              </ApplicationModal>
-            }
-          />
-        </Routes>
+        <Outlet />
+        // <Routes>
+        //   <Route
+        //     path="create"
+        //     element={
+        //       <ApplicationModal
+        //         showModal={true}
+        //         setShowModal={onClose}
+        //         title="Create an Application"
+        //       >
+        //         <MemorizedApplicationDetails />
+        //       </ApplicationModal>
+        //     }
+        //   />
+        //   <Route
+        //     path=":id"
+        //     element={
+        //       <ApplicationModal showModal={true} setShowModal={onClose}>
+        //         <MemorizedApplicationDetails />
+        //       </ApplicationModal>
+        //     }
+        //   />
+        // </Routes>
       )}
       <WatchApplicationUpdate />
       <Footer />
@@ -393,8 +395,22 @@ export default function Applications() {
   );
 }
 
-const MemorizedApplicationHeader = React.memo(ApplicationHeader);
-const MemorizedApplicationDetails = React.memo(InsuredApplicationDetails);
+export const CreateApplicationModal: React.FunctionComponent<{ onClose: () => void }> = (props) => {
+  const { onClose } = props;
+
+  return (
+    <ApplicationModal
+      showModal={true}
+      setShowModal={onClose}
+      title="Create an Application"
+    >
+      <MemorizedApplicationDetails />
+    </ApplicationModal>
+  );
+};
+
+export const MemorizedApplicationHeader = React.memo(ApplicationHeader);
+export const MemorizedApplicationDetails = React.memo(InsuredApplicationDetails);
 
 interface ApplicationListItemProps {
   themeColor: any;

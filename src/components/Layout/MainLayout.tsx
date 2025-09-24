@@ -7,7 +7,7 @@ import {
 } from "@mui/material/styles";
 import { makeStyles, StylesProvider } from "@mui/styles";
 import { CssBaseline } from "@mui/material";
-import { Routes, Route, useLocation } from "react-router";
+import { Routes, Route, useLocation, createBrowserRouter } from "react-router";
 import { Grid } from "@mui/material";
 import ProtectedRoute from "utils/ProtectedRoute";
 import MainNavigation from "components/NavBar/MainNavigation";
@@ -35,6 +35,47 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 })
 );
+
+export const router = createBrowserRouter([
+  {
+    index: true,
+    element: <ProtectedRoute component={ApplicationLandingPage} path={'/'} />
+  },
+  {
+    path: "/applications",
+    element: <ProtectedRoute component={Applications} path={'/applications'} />,
+    children: [
+      {
+        path: "create",
+        element: (
+          <ApplicationModal
+            showModal={true}
+            setShowModal={onClose}
+            title="Create an Application"
+          >
+            <MemorizedApplicationDetails />
+          </ApplicationModal>
+        )
+      }
+    ]
+  },
+  {
+    path: "/applications-list",
+    element: <ProtectedRoute component={ApplicationsNewLayout} path={'/applications-list'} />,
+  },
+  {
+    path: "/tenants",
+    element: <ProtectedRoute component={Tenants} path={'/tenants'} />,
+  },
+  {
+    path: "*",
+    element: <ProtectedRoute component={Page404} path={'*'} />,
+  },
+  {
+    path: "/page-not-found",
+    element: <ProtectedRoute component={Page404} path={'/page-not-found'} />,
+  },
+]);
 const protectedLinks = [
   {
     path: "/",
@@ -42,7 +83,7 @@ const protectedLinks = [
     exact: true,
   },
   {
-    path: "/applications/*",
+    path: "/applications",
     component: Applications,
     exact: false,
   },
