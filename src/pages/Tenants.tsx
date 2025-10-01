@@ -7,7 +7,7 @@ import {
   useParams,
   useMatches,
   useNavigate,
-} from "react-router";
+} from "react-router-dom";
 import { scroller } from "react-scroll";
 import { TenantHeader } from "components/Application/TenantHeader";
 import Footer from "components/Footer";

@@ -21,7 +21,7 @@ import {
   useMatches,
   useNavigate,
   useParams,
-} from "react-router";
+} from "react-router-dom";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { ApplicationHeader } from "components/Application/ApplicationHeader";
 import { SortComponent } from "components/Filters/Sort";

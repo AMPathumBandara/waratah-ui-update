@@ -7,7 +7,7 @@ import {
   useNavigate,
   useLocation,
   useMatch,
-} from "react-router";
+} from "react-router-dom";
 import { Theme } from "@mui/material/styles";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -506,193 +506,194 @@ const InsuredDetailsComponent: React.FC<InsuredDetailsProps> = ({
     }
   });
 
-  const navigate = useNavigate();
-  const params = useParams<ApplicationParams>();
-  const [quoteDownloadLoading, setQuoteDownloadLoading] = useState(false);
+  // const navigate = useNavigate();
+  // const params = useParams<ApplicationParams>();
+  // const [quoteDownloadLoading, setQuoteDownloadLoading] = useState(false);
 
-  const [currentStage, setCurrentStage] = useState(
-    applicationData?.insurance_application_by_pk?.stage || "profile"
-  );
+  // const [currentStage, setCurrentStage] = useState(
+  //   applicationData?.insurance_application_by_pk?.stage || "profile"
+  // );
 
-  const location = useLocation();
-  //let { path } = useRouteMatch();
+  // const location = useLocation();
+  // //let { path } = useRouteMatch();
 
-  if (applicationData?.insurance_application_by_pk === null) {
-    navigate("/page-not-found");
-  }
-  const domainData = location ? { ...location.state } : {};
+  // if (applicationData?.insurance_application_by_pk === null) {
+  //   navigate("/page-not-found");
+  // }
+  // const domainData = location ? { ...location.state } : {};
 
-  const applicationId =
-    applicationData?.insurance_application_by_pk?.id || undefined;
+  // const applicationId =
+  //   applicationData?.insurance_application_by_pk?.id || undefined;
 
-  const scanQuery = useGetScanStatusQQuery({
-    variables: {
-      id: applicationId,
-    },
-    skip: !applicationId,
-  });
-  const scanSubscription = useGetScanStatusSubscription({
-    variables: {
-      id: applicationId,
-    },
-    skip: scanQuery.data?.external_scan[0]
-      ? scanQuery.data?.external_scan[0].status === "SUCCESS"
-      : false,
-  });
+  // const scanQuery = useGetScanStatusQQuery({
+  //   variables: {
+  //     id: applicationId,
+  //   },
+  //   skip: !applicationId,
+  // });
+  // const scanSubscription = useGetScanStatusSubscription({
+  //   variables: {
+  //     id: applicationId,
+  //   },
+  //   skip: scanQuery.data?.external_scan[0]
+  //     ? scanQuery.data?.external_scan[0].status === "SUCCESS"
+  //     : false,
+  // });
 
-  const {
-    data: scanData,
-    loading: scanLoading,
-    error: scanDataError,
-  } = scanSubscription.data ? scanSubscription : scanQuery;
+  // const {
+  //   data: scanData,
+  //   loading: scanLoading,
+  //   error: scanDataError,
+  // } = scanSubscription.data ? scanSubscription : scanQuery;
 
-  // Ipfs policy
+  // // Ipfs policy
 
-  const ipfsQuery = useGetIpfsStatusSubscription({
-    variables: {
-      applicationId: applicationId,
-    },
-    skip: !applicationId,
-  });
+  // const ipfsQuery = useGetIpfsStatusSubscription({
+  //   variables: {
+  //     applicationId: applicationId,
+  //   },
+  //   skip: !applicationId,
+  // });
 
-  const ipfsSubscription = useGetIpfsStatusQQuery({
-    variables: {
-      applicationId: applicationId,
-    },
-    skip: !applicationId || ipfsQuery.data?.insurance_policy[0] ? true : false,
-  });
+  // const ipfsSubscription = useGetIpfsStatusQQuery({
+  //   variables: {
+  //     applicationId: applicationId,
+  //   },
+  //   skip: !applicationId || ipfsQuery.data?.insurance_policy[0] ? true : false,
+  // });
 
-  const {
-    data: ipfsData,
-    loading: ipfsLoading,
-    error: ipfsError,
-  } = ipfsSubscription.data ? ipfsSubscription : ipfsQuery;
+  // const {
+  //   data: ipfsData,
+  //   loading: ipfsLoading,
+  //   error: ipfsError,
+  // } = ipfsSubscription.data ? ipfsSubscription : ipfsQuery;
 
-  const report =
-    applicationData?.insurance_application_by_pk?.insurance_quote_selection
-      ?.insurance_policy?.waratah_report;
+  // const report =
+  //   applicationData?.insurance_application_by_pk?.insurance_quote_selection
+  //     ?.insurance_policy?.waratah_report;
 
-  const {
-    data: fileData,
-    loading: fileLoading,
-    error: fileError,
-    refetch: fileRefetch,
-  } = useGetIpfsFileQuery({
-    variables: {
-      filename: report ? `${report}.pdf` : "",
-    },
-    //skip: report ? false : true,
-    skip: true,
-  });
+  // const {
+  //   data: fileData,
+  //   loading: fileLoading,
+  //   error: fileError,
+  //   refetch: fileRefetch,
+  // } = useGetIpfsFileQuery({
+  //   variables: {
+  //     filename: report ? `${report}.pdf` : "",
+  //   },
+  //   //skip: report ? false : true,
+  //   skip: true,
+  // });
 
-  const paymentDataQuery = useGetApplicationPaymentDataQQuery({
-    variables: {
-      id: params.id,
-    },
-    skip: !params.id,
-  });
+  // const paymentDataQuery = useGetApplicationPaymentDataQQuery({
+  //   variables: {
+  //     id: params.id,
+  //   },
+  //   skip: !params.id,
+  // });
 
-  const paymentDataSubscription = useGetApplicationPaymentDataSubscription({
-    variables: {
-      id: params.id,
-    },
-    skip: paymentDataQuery?.data?.insurance_policy[0]
-      ? paymentDataQuery?.data?.insurance_policy[0].agent_signed &&
-        paymentDataQuery?.data?.insurance_policy[0].insured_signed &&
-        paymentDataQuery?.data?.insurance_policy[0].payment_collected
-        ? true
-        : false
-      : false,
-  });
+  // const paymentDataSubscription = useGetApplicationPaymentDataSubscription({
+  //   variables: {
+  //     id: params.id,
+  //   },
+  //   skip: paymentDataQuery?.data?.insurance_policy[0]
+  //     ? paymentDataQuery?.data?.insurance_policy[0].agent_signed &&
+  //       paymentDataQuery?.data?.insurance_policy[0].insured_signed &&
+  //       paymentDataQuery?.data?.insurance_policy[0].payment_collected
+  //       ? true
+  //       : false
+  //     : false,
+  // });
 
-  const artifactDataSubscription = useInsuranceArtifactSubscription({
-    variables: {
-      applicationId: params.id,
-    },
-    skip: !params.id
-  });
+  // const artifactDataSubscription = useInsuranceArtifactSubscription({
+  //   variables: {
+  //     applicationId: params.id,
+  //   },
+  //   skip: !params.id
+  // });
 
-  const watchScanResultSubscription = useWatchScanResultSubscription({
-    variables: {
-      applicationId: params.id
-    },
-    skip: !params.id
-  });
+  // const watchScanResultSubscription = useWatchScanResultSubscription({
+  //   variables: {
+  //     applicationId: params.id
+  //   },
+  //   skip: !params.id
+  // });
 
-  const { data: applicationPaymentData, error: applicationPaymentError } =
-    paymentDataSubscription?.data ? paymentDataSubscription : paymentDataQuery;
+  // const { data: applicationPaymentData, error: applicationPaymentError } =
+  //   paymentDataSubscription?.data ? paymentDataSubscription : paymentDataQuery;
 
-  const waratahReportPath =
-    applicationPaymentData?.insurance_policy[0]?.waratah_report || undefined;
+  // const waratahReportPath =
+  //   applicationPaymentData?.insurance_policy[0]?.waratah_report || undefined;
 
-  const applicationStageMachine = applicationStateMachine(currentStage);
-  const machine = useMachine(applicationStageMachine, {});
+  // const applicationStageMachine = applicationStateMachine(currentStage);
+  // const machine = useMachine(applicationStageMachine, {});
 
-  const currentStepData = applicationStageMachine.states[currentStage]?.meta;
-  const CurrentComponent = currentStepData?.component || React.Fragment;
+  // const currentStepData = applicationStageMachine.states[currentStage]?.meta;
+  // const CurrentComponent = currentStepData?.component || React.Fragment;
 
-  //  TODO : We should leverage the state machine as oppose to local state for transitions
+  // //  TODO : We should leverage the state machine as oppose to local state for transitions
 
-  const handleStageChange = (stage: string) => {
-    setCurrentStage(stage);
-  };
+  // const handleStageChange = (stage: string) => {
+  //   setCurrentStage(stage);
+  // };
 
-  const [showQuotesList, setShowQuotesLists] =
-    React.useState<null | HTMLElement>(null);
-  const quotesHandleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setShowQuotesLists(event.currentTarget);
-  };
-  const quotesHandleClose = () => {
-    setShowQuotesLists(null);
-  };
+  // const [showQuotesList, setShowQuotesLists] =
+  //   React.useState<null | HTMLElement>(null);
+  // const quotesHandleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  //   setShowQuotesLists(event.currentTarget);
+  // };
+  // const quotesHandleClose = () => {
+  //   setShowQuotesLists(null);
+  // };
 
-  const handleStepChange = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
-    if (
-      currentStage ===
-      event.currentTarget.getAttribute("data-label")?.toLowerCase()
-    ) {
-      return false;
-    }
-    if (currentStage === "bound") {
-      setCurrentStage(
-        event.currentTarget.getAttribute("data-label")?.toLowerCase()!
-      );
-    } else if (currentStage === "quote" || currentStage === "declined") {
-      const newState = event.currentTarget
-        .getAttribute("data-label")
-        ?.toLowerCase()!;
-      if (newState === "profile") setCurrentStage(newState);
-    }
-  };
+  // const handleStepChange = (
+  //   event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  // ) => {
+  //   if (
+  //     currentStage ===
+  //     event.currentTarget.getAttribute("data-label")?.toLowerCase()
+  //   ) {
+  //     return false;
+  //   }
+  //   if (currentStage === "bound") {
+  //     setCurrentStage(
+  //       event.currentTarget.getAttribute("data-label")?.toLowerCase()!
+  //     );
+  //   } else if (currentStage === "quote" || currentStage === "declined") {
+  //     const newState = event.currentTarget
+  //       .getAttribute("data-label")
+  //       ?.toLowerCase()!;
+  //     if (newState === "profile") setCurrentStage(newState);
+  //   }
+  // };
 
-  const changeApplication = (id: any) => {
-    navigate(`/applications/${id}`);
-  };
-  const disableRelatedQuote =
-    applicationList?.insurance_application === undefined ||
-      applicationList?.insurance_application?.length <= 1
-      ? true
-      : false;
+  // const changeApplication = (id: any) => {
+  //   navigate(`/applications/${id}`);
+  // };
+  // const disableRelatedQuote =
+  //   applicationList?.insurance_application === undefined ||
+  //     applicationList?.insurance_application?.length <= 1
+  //     ? true
+  //     : false;
 
-  const hideStateMachine =
-    ipfsData?.insurance_policy[0]?.stage === "issued" ||
-      ipfsData?.insurance_policy[0]?.stage === "error"
-      ? true
-      : false;
+  // const hideStateMachine =
+  //   ipfsData?.insurance_policy[0]?.stage === "issued" ||
+  //     ipfsData?.insurance_policy[0]?.stage === "error"
+  //     ? true
+  //     : false;
 
-  if (
-    applicationPaymentError?.message.includes(
-      "invalid input syntax for type uuid"
-    )
-  ) {
-    navigate("/page-not-found");
-  }
+  // if (
+  //   applicationPaymentError?.message.includes(
+  //     "invalid input syntax for type uuid"
+  //   )
+  // ) {
+  //   navigate("/page-not-found");
+  // }
+  
   return (
     <>
       <ThemeProvider theme={pageTheme}>
-        <ErrorToast
+        {/* <ErrorToast
           error={fileError}
           processCustomError={() =>
             `Scan report download - ${fileError?.message}`
@@ -711,8 +712,8 @@ const InsuredDetailsComponent: React.FC<InsuredDetailsProps> = ({
         <ErrorToast
           error={ipfsError}
           processCustomError={() => `IPFS - ${ipfsError?.message}`}
-        />
-        <MachineContext.Provider value={machine}>
+        /> */}
+        {/* <MachineContext.Provider value={machine}>
           <Box sx={(theme: Theme) => theme.custom.container}>
             <Box sx={(theme: Theme) => theme.custom.layout}>
               {!hideStateMachine && (
@@ -747,17 +748,7 @@ const InsuredDetailsComponent: React.FC<InsuredDetailsProps> = ({
 
               <div className="alerts-bar">
                 <DisplayScanAlert stage={ipfsData?.insurance_policy[0]} />
-                {/* {ipfsData?.insurance_policy[0] &&
-                (currentStage === "bound" || currentStage === "issued") &&
-                ipfsData?.insurance_policy[0].stage !== "error" &&
-                (currentStage === "bound" ? (
-                  <ScanAlert status={"IPFS_DONE"} />
-                ) : (
-                  <ScanAlert status={"IPFS_ISSUED"} />
-                ))} */}
-                {/* {currentStage === "quote" && scanData?.external_scan[0] && (
-                  <ScanAlert status={scanData?.external_scan[0].status!} />
-                )} */}
+                
                 {applicationData?.insurance_application_by_pk?.stage ===
                   "declined" ? (
                   <Alert severity="error">This Application Declined!</Alert>
@@ -811,8 +802,6 @@ const InsuredDetailsComponent: React.FC<InsuredDetailsProps> = ({
                   </Tooltip>
                 </div>
                 <Box sx={(theme: Theme) => theme.custom.btnBox}>
-                  <ChatWindow
-                  />
                   <DownloadOptions
                     fileRefetch={fileRefetch}
                     waratahReportPath={waratahReportPath}
@@ -854,7 +843,7 @@ const InsuredDetailsComponent: React.FC<InsuredDetailsProps> = ({
               />
             </Box>
           </Box>
-        </MachineContext.Provider>
+        </MachineContext.Provider> */}
       </ThemeProvider>
     </>
   );
@@ -1043,119 +1032,119 @@ const Transition = React.forwardRef<HTMLDivElement, SlideProps>(function Transit
   return <Slide direction="left" ref={ref} {...props} />;
 });
 
-const ChatWindow = (props: chatWindowOptions) => {
-  const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState<{ user: string; text: string }[]>([
-    { user: "Broker", text: "Hi, can you check this quote?" },
-    { user: "Underwriter", text: "Sure, let me take a look." }
-  ]);
-  const [newMessage, setNewMessage] = useState("");
+// const ChatWindow = (props: chatWindowOptions) => {
+//   const [open, setOpen] = useState(false);
+//   const [messages, setMessages] = useState<{ user: string; text: string }[]>([
+//     { user: "Broker", text: "Hi, can you check this quote?" },
+//     { user: "Underwriter", text: "Sure, let me take a look." }
+//   ]);
+//   const [newMessage, setNewMessage] = useState("");
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+//   const handleOpen = () => setOpen(true);
+//   const handleClose = () => setOpen(false);
 
-  const handleSend = () => {
-    if (newMessage.trim() === "") return;
-    setMessages([...messages, { user: "Me", text: newMessage }]);
-    setNewMessage("");
-  };
+//   const handleSend = () => {
+//     if (newMessage.trim() === "") return;
+//     setMessages([...messages, { user: "Me", text: newMessage }]);
+//     setNewMessage("");
+//   };
 
-  return (
-    <>
-      <Tooltip
-        title={(open ? "Close" : "Open") + " Chat"}
-        aria-label="Chat"
-      >
-        <div className="downloads">
-          <IconButton
-            aria-label="Chat"
-            size="medium"
-            onClick={handleOpen}
-          >
-            <Chat fontSize="small" />
-          </IconButton>
-        </div>
-      </Tooltip>
+//   return (
+//     <>
+//       <Tooltip
+//         title={(open ? "Close" : "Open") + " Chat"}
+//         aria-label="Chat"
+//       >
+//         <div className="downloads">
+//           <IconButton
+//             aria-label="Chat"
+//             size="medium"
+//             onClick={handleOpen}
+//           >
+//             <Chat fontSize="small" />
+//           </IconButton>
+//         </div>
+//       </Tooltip>
 
-      <Dialog
-        open={open}
-        onClose={(event, reason) => {
-          if (reason === "backdropClick" || reason === "escapeKeyDown") {
-            return; // ignore
-          }
-          handleClose();
-        }}
-        disableEscapeKeyDown
-        TransitionComponent={Transition}
-        keepMounted
-        hideBackdrop
-        PaperProps={{
-          style: {
-            position: "fixed",
-            margin: 0,
-            bottom: 80, // above FAB
-            right: 20,
-            width: 350,
-            height: "60vh",
-            borderRadius: 12,
-            boxShadow: "0 4px 12px rgba(0,0,0,0.3)"
-          }
-        }}
-        BackdropProps={{ invisible: true }}
-      >
-        <AppBar
-          position="static"
-          color="primary"
-          style={{ borderTopLeftRadius: 12, borderTopRightRadius: 12 }}
-        >
-          <Toolbar>
-            <Typography variant="h6" style={{ flexGrow: 1 }}>
-              Chat
-            </Typography>
-            <IconButton edge="end" color="inherit" onClick={handleClose}>
-              <Close />
-            </IconButton>
-          </Toolbar>
-        </AppBar>
+//       <Dialog
+//         open={open}
+//         onClose={(event, reason) => {
+//           if (reason === "backdropClick" || reason === "escapeKeyDown") {
+//             return; // ignore
+//           }
+//           handleClose();
+//         }}
+//         disableEscapeKeyDown
+//         TransitionComponent={Transition}
+//         keepMounted
+//         hideBackdrop
+//         PaperProps={{
+//           style: {
+//             position: "fixed",
+//             margin: 0,
+//             bottom: 80, // above FAB
+//             right: 20,
+//             width: 350,
+//             height: "60vh",
+//             borderRadius: 12,
+//             boxShadow: "0 4px 12px rgba(0,0,0,0.3)"
+//           }
+//         }}
+//         BackdropProps={{ invisible: true }}
+//       >
+//         <AppBar
+//           position="static"
+//           color="primary"
+//           style={{ borderTopLeftRadius: 12, borderTopRightRadius: 12 }}
+//         >
+//           <Toolbar>
+//             <Typography variant="h6" style={{ flexGrow: 1 }}>
+//               Chat
+//             </Typography>
+//             <IconButton edge="end" color="inherit" onClick={handleClose}>
+//               <Close />
+//             </IconButton>
+//           </Toolbar>
+//         </AppBar>
 
-        <Box style={{ flex: 1, overflowY: "auto" }}>
-          <List>
-            {
-              messages.map((msg, index) => (
-                <React.Fragment key={index}>
-                  <ListItem alignItems="flex-start">
-                    <ListItemAvatar>
-                      <Avatar>{msg.user.charAt(0)}</Avatar>
-                    </ListItemAvatar>
-                    <ListItemText primary={msg.user} secondary={msg.text} />
-                  </ListItem>
-                  <Divider component="li" />
-                </React.Fragment>
-              ))
-            }
-          </List>
-        </Box>
+//         <Box style={{ flex: 1, overflowY: "auto" }}>
+//           <List>
+//             {
+//               messages.map((msg, index) => (
+//                 <React.Fragment key={index}>
+//                   <ListItem alignItems="flex-start">
+//                     <ListItemAvatar>
+//                       <Avatar>{msg.user.charAt(0)}</Avatar>
+//                     </ListItemAvatar>
+//                     <ListItemText primary={msg.user} secondary={msg.text} />
+//                   </ListItem>
+//                   <Divider component="li" />
+//                 </React.Fragment>
+//               ))
+//             }
+//           </List>
+//         </Box>
 
-        <Box display="flex" p={2}>
-          <TextField
-            fullWidth
-            variant="outlined"
-            size="small"
-            placeholder="Type a message..."
-            value={newMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
-            onKeyPress={(e) => {
-              if (e.key === "Enter") {
-                e.preventDefault();
-                handleSend();
-              }
-            }}
-          />
-          <IconButton color="primary" onClick={handleSend}>
-            <Send />
-          </IconButton>
-        </Box>
-      </Dialog>
-    </>
-  );
-};
+//         <Box display="flex" p={2}>
+//           <TextField
+//             fullWidth
+//             variant="outlined"
+//             size="small"
+//             placeholder="Type a message..."
+//             value={newMessage}
+//             onChange={(e) => setNewMessage(e.target.value)}
+//             onKeyPress={(e) => {
+//               if (e.key === "Enter") {
+//                 e.preventDefault();
+//                 handleSend();
+//               }
+//             }}
+//           />
+//           <IconButton color="primary" onClick={handleSend}>
+//             <Send />
+//           </IconButton>
+//         </Box>
+//       </Dialog>
+//     </>
+//   );
+// };

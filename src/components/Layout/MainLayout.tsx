@@ -1,13 +1,12 @@
 import React, { Suspense, useEffect, useState } from "react";
 import {
-  createStyles,
   Theme,
   ThemeProvider,
   createTheme,
 } from "@mui/material/styles";
-import { makeStyles, StylesProvider } from "@mui/styles";
+import { makeStyles } from "@mui/styles";
 import { CssBaseline } from "@mui/material";
-import { Routes, Route, useLocation, createBrowserRouter } from "react-router";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { Grid } from "@mui/material";
 import ProtectedRoute from "utils/ProtectedRoute";
 import MainNavigation from "components/NavBar/MainNavigation";
@@ -21,6 +20,7 @@ import ApplicationModal from "components/Application/ApplicationModal";
 const Page404 = React.lazy(() => import("pages/Page404"));
 const AccessDenied = React.lazy(() => import("pages/PageUnAuthorized"));
 const Applications = React.lazy(() => import("pages/Applications"));
+const ApplicationModal2 = React.lazy(() => import("components/Application/ApplicationModal2"));
 const ApplicationsNewLayout = React.lazy(
   () => import("pages/ApplicationsNewLayout")
 );
@@ -36,46 +36,54 @@ const useStyles = makeStyles((theme: Theme) => ({
 })
 );
 
-export const router = createBrowserRouter([
-  {
-    index: true,
-    element: <ProtectedRoute component={ApplicationLandingPage} path={'/'} />
-  },
-  {
-    path: "/applications",
-    element: <ProtectedRoute component={Applications} path={'/applications'} />,
-    children: [
-      {
-        path: "create",
-        element: (
-          <ApplicationModal
-            showModal={true}
-            setShowModal={onClose}
-            title="Create an Application"
-          >
-            <MemorizedApplicationDetails />
-          </ApplicationModal>
-        )
-      }
-    ]
-  },
-  {
-    path: "/applications-list",
-    element: <ProtectedRoute component={ApplicationsNewLayout} path={'/applications-list'} />,
-  },
-  {
-    path: "/tenants",
-    element: <ProtectedRoute component={Tenants} path={'/tenants'} />,
-  },
-  {
-    path: "*",
-    element: <ProtectedRoute component={Page404} path={'*'} />,
-  },
-  {
-    path: "/page-not-found",
-    element: <ProtectedRoute component={Page404} path={'/page-not-found'} />,
-  },
-]);
+// export const router = createBrowserRouter([
+//   {
+//     index: true,
+//     element: <ProtectedRoute component={AccessDenied} path={'/access-denied'} />
+//   },
+//   {
+//     index: true,
+//     element: <ProtectedRoute component={Logout} path={'/logout'} />
+//   },
+//   {
+//     index: true,
+//     element: <ProtectedRoute component={ApplicationLandingPage} path={'/'} />
+//   },
+//   {
+//     path: "/applications",
+//     element: <ProtectedRoute component={Applications} path={'/applications'} />,
+//     children: [
+//       {
+//         path: "create",
+//         element: (
+//           <ApplicationModal
+//             showModal={true}
+//             //setShowModal={onClose}
+//             title="Create an Application"
+//           >
+//             <MemorizedApplicationDetails />
+//           </ApplicationModal>
+//         )
+//       }
+//     ]
+//   },
+//   {
+//     path: "/applications-list",
+//     element: <ProtectedRoute component={ApplicationsNewLayout} path={'/applications-list'} />,
+//   },
+//   {
+//     path: "/tenants",
+//     element: <ProtectedRoute component={Tenants} path={'/tenants'} />,
+//   },
+//   {
+//     path: "*",
+//     element: <ProtectedRoute component={Page404} path={'*'} />,
+//   },
+//   {
+//     path: "/page-not-found",
+//     element: <ProtectedRoute component={Page404} path={'/page-not-found'} />,
+//   },
+// ]);
 const protectedLinks = [
   {
     path: "/",
@@ -108,11 +116,24 @@ const protectedLinks = [
     exact: true,
   },
 ];
+const protectedModalLinks = [
+  {
+    path: "/applications/create",
+    component: ApplicationModal2,
+    exact: false,
+  },
+  {
+    path: "/applications/:id",
+    component: ApplicationModal2,
+    exact: false,
+  },
+];
 
 export default function PermanentDrawerLeft() {
   const classes = useStyles();
   const location = useLocation();
-  const state = location.state as { background?: Location };
+  const state = location.state as { backgroundLocation?: Location };
+  const background = state?.backgroundLocation;
 
   const { data: meData, loading: meLoading, error: meError } = useMeQuery({
     errorPolicy: "all"
@@ -168,7 +189,7 @@ export default function PermanentDrawerLeft() {
           }
         >
           {/* Main routes */}
-          <Routes>
+          <Routes location={background || location}>
             <Route
               path="/access-denied"
               element={<AccessDenied />}
@@ -183,8 +204,25 @@ export default function PermanentDrawerLeft() {
               />
             ))}
           </Routes>
+
+          {/* render modal on top if background exists */}
+          {
+            background && (
+              <Routes>
+                {
+                  protectedModalLinks.map(link => (
+                    <Route
+                      key={link.path}
+                      path={`${link.path}`}
+                      element={<ProtectedRoute component={link.component} path={link.path} />}
+                    />
+                  ))
+                }
+              </Routes>
+            )
+          }
         </Suspense>
-      </ThemeProvider>
+      </ThemeProvider >
     </>
   );
 }

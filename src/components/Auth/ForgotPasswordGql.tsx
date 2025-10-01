@@ -10,7 +10,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Auth } from "aws-amplify";
 import AuthLayout from "./AuthLayout";
-import { Link as RouterLink, useNavigate } from "react-router";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { useForgotPasswordMutation } from "generated/graphql";
 
 // const useStyles = makeStyles((theme: Theme) =>

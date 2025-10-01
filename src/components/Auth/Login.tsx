@@ -11,7 +11,7 @@ import Alert from "@mui/material/Alert";
 //@ts-ignore
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Link as RouterLink, useNavigate } from "react-router";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import AuthLayout from "./AuthLayout";
 import { useSignIn, useUser } from "./CognitoHooks";
 import { Box, Link } from "@mui/material";
@@ -92,9 +92,6 @@ export default function Login() {
     async (data: loginForm) => {
       setLoading(true);
       setError({});
-
-      console.log("data");
-      console.log(data);
 
       try {
         signIn({

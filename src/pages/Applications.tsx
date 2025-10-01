@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Outlet } from "react-router";
+import { Outlet } from "react-router-dom";
 import { Box, Button, Tooltip } from "@mui/material";
 import {
   createTheme,
@@ -13,7 +13,7 @@ import {
   useMeQuery,
 } from "generated/graphql";
 import InsuredApplicationDetails from "components/InsuredApplicationDetails";
-import { Route, Routes, useLocation, useNavigate } from "react-router";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 
 import { ApplicationHeader } from "components/Application/ApplicationHeader";
 import { SortComponent } from "components/Filters/Sort";
@@ -291,6 +291,7 @@ export default function Applications() {
     useState("all-applications");
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const { data: meData, loading: meLoading } = useMeQuery();
 
@@ -302,14 +303,6 @@ export default function Applications() {
   const onClose = React.useCallback(() => {
     navigate("/applications");
   }, [navigate]);
-
-  //const { path } = useRouteMatch();
-  // const matches = useMatches();
-  // const current = matches[matches.length - 1];
-  // let path = current.pathname;
-  const location = useLocation();
-  const path = location.pathname;
-  const state = location.state as { background?: Location };
 
   const onSearch = React.useCallback(
     (v: string) => {
@@ -326,12 +319,13 @@ export default function Applications() {
   );
 
   const onCreate = React.useCallback(() => {
-    console.log("aaaa");
-    navigate(
-      "/applications/create", {
-      state: { background: location }
-    }
-    );
+    navigate("/applications/create",
+      {
+        state: { 
+          backgroundLocation: location,
+          modalTitle: "Create an Application"
+         },
+      });
   }, [navigate]);
 
   if (meLoading) {
@@ -364,7 +358,11 @@ export default function Applications() {
         searchValue={searchValue}
       />
 
-      {state?.background && (
+      {/* <CreateApplicationModal
+        onClose={onClose} 
+      /> */}
+
+      {/* {state?.background && (
         <Outlet />
         // <Routes>
         //   <Route
@@ -388,7 +386,7 @@ export default function Applications() {
         //     }
         //   />
         // </Routes>
-      )}
+      )} */}
       <WatchApplicationUpdate />
       <Footer />
     </div>
@@ -397,6 +395,8 @@ export default function Applications() {
 
 export const CreateApplicationModal: React.FunctionComponent<{ onClose: () => void }> = (props) => {
   const { onClose } = props;
+
+  console.log(onClose);
 
   return (
     <ApplicationModal
@@ -521,6 +521,7 @@ const ApplicationListItem: React.FunctionComponent<ApplicationListItemProps> =
     });
 
     const navigate = useNavigate();
+    const location = useLocation();
 
     const searchText = searchValue !== "" ? `%${searchValue}%` : "%";
 
@@ -614,7 +615,10 @@ const ApplicationListItem: React.FunctionComponent<ApplicationListItemProps> =
                 className="application-item"
                 key={item.id}
                 onClick={() => {
-                  navigate(`/applications/${item?.id}`);
+                  navigate(`/applications/${item?.id}`,
+                    {
+                      state: { backgroundLocation: location }, // preserve students page
+                    });
                 }}
               >
                 <Box className="circle-wrapper">

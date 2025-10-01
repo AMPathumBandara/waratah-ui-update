@@ -85,16 +85,22 @@ export const NavigationAccess = [
   },
   {
     name: "Applications",
-    path: "/applications/*",
+    path: "/applications",
     isParent: true,
     allowUsers: ["broker", "super_admin", "tenant_admin", "broker_power"],
   },
-  // {
-  //   name: "Applications",
-  //   path: "/applications/:id",
-  //   isParent: false,
-  //   allowUsers: ["broker", "super_admin", "tenant_admin", "broker_power"],
-  // },
+  {
+    name: "Application Create",
+    path: "/applications/create",
+    isParent: false,
+    allowUsers: ["broker", "super_admin", "tenant_admin", "broker_power"],
+  },
+  {
+    name: "Application Information",
+    path: "/applications/:id",
+    isParent: false,
+    allowUsers: ["broker", "super_admin", "tenant_admin", "broker_power"],
+  },
   {
     name: "ApplicationsNewLayout",
     path: "/applications-list",
